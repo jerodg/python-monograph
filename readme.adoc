@@ -1,0 +1,76 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ./images
+:iconsdir: ./icons
+:stylesdir: ./styles
+:scriptsdir: ./js
+:stylesheet: ./styles.css
+:description: Monograph: A learned treatise for [Javascript, Python, Rust, Typescript]
+:keywords: python, typescript, javascript, rust
+
+= README: Monograph
+
+
+== About
+[.text-center]
+**{description}**
+
+image::/books_on_shelf.jpg[]
+
+=== Built With
+- Pycharm
+- RustRover
+- WebStorm
+
+== Getting Started
+=== Installation
+==== Prerequisites
+
+== Usage
+
+== Roadmap
+
+== Contributing
+
+Contributions are what make the open source community such an amazing place to be, learn, inspire, and create.
+Any contributions you make are *greatly appreciated*.
+
+. Fork the project
+. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+. Commit your changes (`git commit -m &#39;Add some AmazingFeature&#39;`)
+. Push to the branch (`git push origin feature/AmazingFeature`)
+. Open a pull request == License This program is free software: you can redistribute it and/or modify it under the terms of the Server Side Public License (SSPL) as published by MongoDB, Inc., either version 1 of the License, or (at your option) any later version.
+
+== Contact
+== Acknowledgments
+- https://github.com/othneildrew[Othneil Drew] For the base markdown template.
+
+- image:https://img.shields.io/badge/Shields.IO-green[100,link="https://shields.io"] For graciously providing the hosting for the
+badges.
+
+- https://www.jetbrains.com/[JetBrains] For providing the tools to make this project possible.
+
+== Copyright
+
+Copyright ©2019-2024 Jerod Gawne <https://github.com/jerodg/>
+
+This program is free software: you can redistribute it and/or modify it under the terms of the Server Side Public License (SSPL) as published by MongoDB, Inc., either version 1 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the SSPL for more details.
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+You should have received a copy of the SSPL along with this program.
+If not, see <https://www.mongodb.com/licensing/server-side-public-license>.

@@ -1,0 +1,56 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../images
+:iconsdir: ../../icons
+:stylesdir: ../../styles
+:scriptsdir: ../../js
+:stylesheet: styles.css
+
+:description: Solutions
+:keywords: solution, python
+
+= {description}
+
+== Approaches
+
+== Performance Optimizations
+
+== Solutions
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+== Tests
+
+===  Test Solution 00
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[lines=21..]
+----

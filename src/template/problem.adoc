@@ -1,0 +1,110 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../images
+:iconsdir: ../../icons
+:stylesdir: ../../styles
+:scriptsdir: ../../js
+:stylesheet: styles.css
+
+:description: Problem
+:keywords: problem, python
+
+= {description}
+
+== Constraints
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+== Use-Cases
+
+== Common Mistakes
+
+== Best Practices
+
+== Follow-up
+
+== Related Topics
+
+== References
