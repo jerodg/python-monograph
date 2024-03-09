@@ -3,6 +3,7 @@
 @import url("//fonts.googleapis.com/css?family=Noto+Sans:300,600italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700");
 @import url(https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css); /* Default asciidoc style framework - important */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 /* CUSTOMIZATIONS */
 /* Change the values in root for quick customisation. If you want even more fine grain... venture further. */

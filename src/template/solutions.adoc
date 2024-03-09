@@ -12,10 +12,10 @@
 :toc: left
 :toclevels: 5
 :icons: font
-:imagesdir: ../../images
-:iconsdir: ../../icons
-:stylesdir: ../../styles
-:scriptsdir: ../../js
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
 :stylesheet: styles.css
 
 :description: Solutions
@@ -40,9 +40,9 @@ include::./solution_00.py[lines=21..]
 
 ==== Explanation
 
-==== Advantages
+==== Code Review
 
-==== Disadvantages
+==== Advantages & Disadvantages
 
 ==== Complexity Analysis
 
