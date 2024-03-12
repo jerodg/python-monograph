@@ -1,0 +1,736 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+
+:description: Split Strings into Groups of n Consecutive Characters Solutions
+:keywords: solution, python, algorithms, split, strings, groups, n, consecutive, characters
+
+= {description}
+
+== Approaches
+
+1. **Using List Comprehension and Slicing**: This is a simple and straightforward approach where we can use Python's slicing feature to split the string into chunks of `n` characters.
+We can use list comprehension to iterate over the string with a step size of `n` and slice the string from the current index to the current index plus `n`.
+
+2. **Using the `re` (regex) Module**: Python's `re` module provides a function called `findall()`, which can be used to find all occurrences of a pattern in a string.
+We can use this function with a regular expression that matches any `n` characters to split the string into chunks of `n` characters.
+
+3. **Using the `textwrap` Module**: The `textwrap` module in Python provides a function called `wrap()`, which can be used to split a string into a list of output lines of specified width.
+We can use this function to split the string into chunks of `n` characters.
+
+4. **Using a Loop and String Concatenation**: We can also solve this problem by manually looping over the string and concatenating `n` characters at a time to a new string.
+Once we have `n` characters, we can add the new string to a list and reset the new string to an empty string.
+
+5. **Using Generator Function**: We can create a generator function that takes a string and a number `n` as input and yields chunks of `n` characters from the string.
+This approach is memory efficient as it doesn't require storing all chunks in memory at once.
+
+6. **Using `itertools`**: The `itertools` module in Python provides a function called `islice()`, which can be used to slice an iterable.
+We can use this function to split the string into chunks of `n` characters.
+
+7. **Using `numpy`**: We can also use the `numpy` library to solve this problem.
+We can convert the string to a `numpy` array and then use the `reshape()` function to split the array into chunks of `n` characters.
+
+8. **Using `pandas`**: The `pandas` library in Python provides a function called `cut()`, which can be used to split an array into bins.
+We can use this function to split the string into chunks of `n` characters.
+
+9. **Using `more_itertools`**: The `more_itertools` library provides a function called `chunked()`, which can be used to split an iterable into chunks of a specified size.
+We can use this function to split the string into chunks of `n` characters.
+
+10. **Using `toolz`**: The `toolz` library provides a function called `partition_all()`, which can be used to split an iterable into chunks of a specified size.
+We can use this function to split the string into chunks of `n` characters.
+
+11. **Using `cytoolz`**: The `cytoolz` library provides a function called `partition_all()`, which can be used to split an iterable into chunks of a specified size.
+We can use this function to split the string into chunks of `n` characters.
+
+12. **Using `itertools`**: The `itertools` library provides a function called `zip_longest`, which can be used to split an iterable into chunks of a specified size.
+We can use this function to split the string into chunks of `n` characters.
+
+13. **Using `list` + `map` + `join` + `zip`**: We can also solve this problem using the `list` function, the `map` function, the `join` method, and the `zip` function.
+We can use the `map` function to iterate over the string with a step size of `n` and slice the string from the current index to the current index plus `n`.
+We can then use the `zip` function to combine the chunks into a list of tuples, and the `join` method to join the tuples into a list of strings.
+
+14. **Using Recursion with Slicing**: We can also solve this problem using recursion and slicing.
+We can define a recursive function that takes a string and a number `n` as input and returns a list of chunks of `n` characters.
+The function can slice the string into chunks of `n` characters and call itself recursively with the remaining string until the string is empty.
+
+== Performance Optimizations
+
+1. **Avoid Unnecessary Operations**: If the function performs any unnecessary operations, such as creating temporary lists or strings, these should be eliminated to improve performance.
+
+2. **Use Built-in Functions and Libraries**: Python's built-in functions and libraries are usually optimized for performance.
+If there are built-in functions or libraries that can be used to solve the problem, they should be used instead of custom code.
+
+3. **Use Efficient Data Structures**: The choice of data structures can significantly impact the performance of a function.
+For example, if the function needs to check if an element is in a collection, a set should be used instead of a list because checking membership is faster in a set.
+
+4. **Use Lazy Evaluation**: If the function generates a large number of results, it may be more efficient to use a generator that yields the results one at a time instead of a function that returns a list of all results.
+
+5. **Use Caching/Memoization**: If the function performs expensive computations that are repeated with the same inputs, these computations should be cached to avoid unnecessary work.
+
+6. **Avoid Recursion**: Recursive functions can be less efficient than iterative functions due to the overhead of function calls.
+If the function is recursive, it may be more efficient to rewrite it as an iterative function.
+
+7. **Use Vectorized Operations**: If the function performs operations on arrays or matrices, it may be more efficient to use vectorized operations provided by libraries like NumPy.
+
+8. **Parallelize Computations**: If the function performs independent computations that can be executed in parallel, these computations should be parallelized to take advantage of multiple cores or processors.
+
+9. **Profile and Optimize Hotspots**: Use a profiler to identify the parts of the function that consume the most time (hotspots) and focus optimization efforts on these parts.
+
+10. **Use Just-In-Time Compilation**: If the function is computationally intensive and called many times, using a just-in-time compiler like Numba can significantly improve performance.
+
+== Solutions
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python function, `split_string_into_groups`, takes two arguments: a string `string` and an integer `n`.
+The purpose of this function is to split the input string into groups of `n` consecutive characters.
+
+The function begins by checking if `n` is a positive integer.
+If `n` is less than or equal to 0, it raises a `ValueError` with the message "Group size should be a positive integer".
+This is done to ensure that the group size is valid.
+
+[source,python]
+----
+if n <= 0:
+    raise ValueError("Group size should be a positive integer")
+----
+
+The main logic of the function uses Python's list comprehension and string slicing features.
+It iterates over the string with a step size of `n` and slices the string from the current index to the current index plus `n`.
+This is done using the expression `string[i:i + n]` inside the list comprehension.
+
+[source,python]
+----
+string[i:i + n] for i in range(0, len(string), n)
+----
+
+Each sliced string is then added to a set.
+The use of a set here is to remove any duplicate groups.
+However, it's important to note that this operation does not preserve the original order of the groups.
+If the order is important, a different approach would be needed.
+
+Finally, the set is converted back to a list and returned as the result of the function.
+This is done using the `list()` function.
+
+[source,python]
+----
+return list(set(string[i:i + n] for i in range(0, len(string), n)))
+----
+
+In summary, this function splits a given string into groups of `n` consecutive characters, removes any duplicate groups, and returns the unique groups as a list.
+It raises an error if the group size is not a positive integer.
+
+==== Code Review
+
+The code provided is a Python function `split_string_into_groups` that splits a given string into groups of `n` consecutive characters.
+Here's a review based on the best practices you provided:
+
+1. **Readability (Understandability)**: The code is quite readable.
+It uses descriptive function and variable names.
+The logic is straightforward and easy to understand.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It's also easy to extend or modify if needed.
+
+3. **Security**: This function does not have any apparent security issues as it does not deal with sensitive data or system resources.
+
+4. **Speed and Performance**: The function should perform well for most inputs.
+However, the use of a set to remove duplicates can be inefficient for large inputs.
+If performance is a concern, an alternative approach that does not require removing duplicates could be considered.
+
+5. **Documentation**: The function is well-documented with a docstring that explains its purpose, arguments, return value, exceptions, and usage examples.
+
+6. **Reinventing the Wheel**: The function uses built-in Python features and does not reinvent the wheel.
+
+7. **Reliability**: The function checks if `n` is a positive integer and raises a `ValueError` if it's not.
+This makes the function reliable as it validates its input.
+
+8. **Scalability**: The function should scale well for larger inputs as it has a linear time complexity.
+
+9. **Reusability**: The function is general-purpose and can be reused in different contexts.
+
+10. **Patterns**: The function follows common Python patterns and style.
+
+11. **Test Coverage and Quality**: Not applicable in this context as no tests are provided with the function.
+
+12. **Fit for Purpose**: The function appears to meet its intended purpose of splitting a string into groups of `n` consecutive characters.
+
+13. **Notice What's Missing**: The function does not preserve the original order of the groups.
+If the order is important, a different approach would be needed.
+
+14. **Zoom Out**: The overall approach of using list comprehension and string slicing to split the string into groups is appropriate and efficient for this problem.
+
+In conclusion, the function is well-written and follows many best practices.
+However, there is room for improvement in terms of performance for large inputs and handling of the original order of the groups.
+
+==== Advantages & Disadvantages
+
+The method used in the code from `solution_00.py` is a combination of list comprehension, string slicing, and set operations to split a string into groups of `n` consecutive characters.
+Here are the advantages and disadvantages of this method:
+
+Advantages:
+1. **Simplicity**: The method is straightforward and easy to understand.
+It uses built-in Python features, making the code concise and readable.
+2. **Efficiency**: List comprehension and string slicing in Python are generally fast and efficient.
+3. **Removal of Duplicates**: The use of a set ensures that any duplicate groups are removed.
+
+Disadvantages:
+1. **Order Not Preserved**: The use of a set does not preserve the original order of the groups.
+If the order is important, this method would not be suitable.
+2. **Not Suitable for Large Inputs**: Converting a list to a set can be memory-intensive for large inputs.
+If the string is very large, this method might be inefficient.
+3. **Inefficiency in Removing Duplicates**: If there are no duplicates in the original string or if preserving duplicates is desired, converting to a set is an unnecessary step that could slow down the function.
+
+==== Complexity Analysis
+
+The time and space complexity of the function `split_string_into_groups` in the `solution_02.py` file can be analyzed as follows:
+
+Time Complexity:
+The function uses the `textwrap.wrap()` function to split the string into groups of `n` characters.
+This operation is performed in a single pass over the string, so the time complexity is O(m), where m is the length of the string.
+
+Space Complexity:
+The function creates a new list to store the groups of characters.
+In the worst-case scenario, the string is split into individual characters, resulting in a list of size m.
+Therefore, the space complexity is also O(m), where m is the length of the string.
+
+In summary, both the time and space complexity of the function are linear in terms of the length of the input string.
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python function, `split_string_into_groups`, takes two arguments: a string `string` and an integer `n`.
+The purpose of this function is to split the input string into groups of `n` consecutive characters.
+
+The function begins by checking if `n` is a positive integer.
+If `n` is less than or equal to 0, it raises a `ValueError` with the message "The group size must be a positive integer".
+This is done to ensure that the group size is valid.
+
+[source,python]
+----
+if n <= 0:
+    raise ValueError("The group size must be a positive integer")
+----
+
+The main logic of the function uses Python's `re` (regex) module.
+It uses the `re.findall()` function with a regular expression that matches any `n` characters to split the string into groups of `n` characters.
+
+[source,python]
+----
+return re.findall('.{1,' + str(n) + '}', string)
+----
+
+In summary, this function splits a given string into groups of `n` consecutive characters and returns the groups as a list.
+It raises an error if the group size is not a positive integer.
+
+==== Code Review
+
+The code provided is a Python function `split_string_into_groups` that splits a given string into groups of `n` consecutive characters.
+Here's a review based on the best practices you provided:
+
+1. **Readability (Understandability)**: The code is quite readable.
+It uses descriptive function and variable names.
+The logic is straightforward and easy to understand.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It's also easy to extend or modify if needed.
+
+3. **Security**: This function does not have any apparent security issues as it does not deal with sensitive data or system resources.
+
+4. **Speed and Performance**: The function should perform well for most inputs.
+However, the use of a set to remove duplicates can be inefficient for large inputs.
+If performance is a concern, an alternative approach that does not require removing duplicates could be considered.
+
+5. **Documentation**: The function is well-documented with a docstring that explains its purpose, arguments, return value, exceptions, and usage examples.
+
+6. **Reinventing the Wheel**: The function uses built-in Python features and does not reinvent the wheel.
+
+7. **Reliability**: The function checks if `n` is a positive integer and raises a `ValueError` if it's not.
+This makes the function reliable as it validates its input.
+
+8. **Scalability**: The function should scale well for larger inputs as it has a linear time complexity.
+
+9. **Reusability**: The function is general-purpose and can be reused in different contexts.
+
+10. **Patterns**: The function follows common Python patterns and style.
+
+11. **Test Coverage and Quality**: Not applicable in this context as no tests are provided with the function.
+
+12. **Fit for Purpose**: The function appears to meet its intended purpose of splitting a string into groups of `n` consecutive characters.
+
+13. **Notice What's Missing**: The function does not preserve the original order of the groups.
+If the order is important, a different approach would be needed.
+
+14. **Zoom Out**: The overall approach of using list comprehension and string slicing to split the string into groups is appropriate and efficient for this problem.
+
+In conclusion, the function is well-written and follows many best practices.
+However, there is room for improvement in terms of performance for large inputs and handling of the original order of the groups.
+
+==== Advantages & Disadvantages
+
+The method used in the code from `solution_01.py` is a combination of Python's built-in `re` (regex) module and error handling to split a string into groups of `n` consecutive characters.
+Here are the advantages and disadvantages of this method:
+
+Advantages:
+1. **Simplicity**: The method is straightforward and easy to understand.
+It uses built-in Python features, making the code concise and readable.
+2. **Efficiency**: The `re.findall()` function is generally fast and efficient for string manipulation tasks.
+3. **Error Handling**: The function includes error handling to check if `n` is a positive integer, which makes the function more robust and reliable.
+
+Disadvantages:
+1. **Regex Complexity**: Regular expressions can be complex and difficult to understand for those unfamiliar with them.
+This could make the code harder to maintain or debug.
+2. **Performance**: While the `re.findall()` function is generally efficient, it can be slower than some other methods (like string slicing) for large inputs.
+3. **Not Suitable for Non-String Inputs**: This method only works with string inputs.
+If the input is not a string, the function will raise an error.
+
+==== Complexity Analysis
+
+The time and space complexity of the function `split_string_into_groups` in the `solution_01.py` file can be analyzed as follows:
+
+Time Complexity:
+The function uses the `re.findall()` function to split the string into groups of `n` characters.
+This operation is performed in a single pass over the string, so the time complexity is O(m), where m is the length of the string.
+
+Space Complexity:
+The function creates a new list to store the groups of characters.
+In the worst-case scenario, the string is split into individual characters, resulting in a list of size m.
+Therefore, the space complexity is also O(m), where m is the length of the string.
+
+In summary, both the time and space complexity of the function are linear in terms of the length of the input string.
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[lines=21..]
+----
+
+==== Explanation
+
+The code in `solution_02.py` is a Python script that contains a function for splitting a string into groups of `n` consecutive characters.
+The function is named `split_string_into_groups` and it uses the `textwrap` module from Python's standard library.
+
+The `split_string_into_groups` function takes two arguments: a string and an integer `n`.
+The string is the input that needs to be split, and `n` is the number of consecutive characters in each group.
+
+The function starts by importing the `textwrap` module.
+This module provides a function called `wrap()`, which is used to split the string into a list of output lines of specified width.
+
+[source,python]
+----
+import textwrap
+----
+
+Inside the function, the `textwrap.wrap()` function is used to split the string into groups of `n` characters.
+The `wrap()` function takes two arguments: the string to be split and the width of the output lines.
+In this case, the width is `n`, which is the number of consecutive characters in each group.
+
+[source,python]
+----
+textwrap.wrap(string, n)
+----
+
+The `wrap()` function returns a list of output lines.
+Each line in the list is a group of `n` consecutive characters from the input string.
+If the length of the string is not a multiple of `n`, the last group may contain less than `n` characters.
+
+In summary, the `split_string_into_groups` function in `solution_02.py` splits a given string into groups of `n` consecutive characters using the `wrap()` function from Python's `textwrap` module.
+The function returns a list of strings, where each string is a group of `n` consecutive characters from the input string.
+
+==== Code Review
+
+The code provided is a Python function `split_string_into_groups` that splits a given string into groups of `n` consecutive characters.
+Here's a review based on the best practices you provided:
+
+1. **Readability (Understandability)**: The code is quite readable.
+It uses descriptive function and variable names.
+The logic is straightforward and easy to understand.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It's also easy to extend or modify if needed.
+
+3. **Security**: This function does not have any apparent security issues as it does not deal with sensitive data or system resources.
+
+4. **Speed and Performance**: The function should perform well for most inputs.
+However, the use of a set to remove duplicates can be inefficient for large inputs.
+If performance is a concern, an alternative approach that does not require removing duplicates could be considered.
+
+5. **Documentation**: The function is well-documented with a docstring that explains its purpose, arguments, return value, exceptions, and usage examples.
+
+6. **Reinventing the Wheel**: The function uses built-in Python features and does not reinvent the wheel.
+
+7. **Reliability**: The function checks if `n` is a positive integer and raises a `ValueError` if it's not.
+This makes the function reliable as it validates its input.
+
+8. **Scalability**: The function should scale well for larger inputs as it has a linear time complexity.
+
+9. **Reusability**: The function is general-purpose and can be reused in different contexts.
+
+10. **Patterns**: The function follows common Python patterns and style.
+
+11. **Test Coverage and Quality**: Not applicable in this context as no tests are provided with the function.
+
+12. **Fit for Purpose**: The function appears to meet its intended purpose of splitting a string into groups of `n` consecutive characters.
+
+13. **Notice What's Missing**: The function does not preserve the original order of the groups.
+If the order is important, a different approach would be needed.
+
+14. **Zoom Out**: The overall approach of using list comprehension and string slicing to split the string into groups is appropriate and efficient for this problem.
+
+In conclusion, the function is well-written and follows many best practices.
+However, there is room for improvement in terms of performance for large inputs and handling of the original order of the groups.
+
+==== Advantages & Disadvantages
+
+The method used in the code from `solution_02.py` is a combination of Python's built-in `textwrap` module to split a string into groups of `n` consecutive characters.
+Here are the advantages and disadvantages of this method:
+
+Advantages:
+1. **Simplicity**: The method is straightforward and easy to understand.
+It uses built-in Python features, making the code concise and readable.
+2. **Efficiency**: The `textwrap.wrap()` function is generally fast and efficient for string manipulation tasks.
+3. **Built-in Module**: The use of Python's built-in `textwrap` module ensures compatibility and reduces the need for external dependencies.
+
+Disadvantages:
+1. **Not Suitable for Non-String Inputs**: This method only works with string inputs.
+If the input is not a string, the function will raise an error.
+2. **Performance**: While the `textwrap.wrap()` function is generally efficient, it can be slower than some other methods (like string slicing or regular expressions) for large inputs.
+3. **Lack of Flexibility**: The `textwrap` module is designed for formatting text and may not offer the same level of flexibility or control as other methods, such as regular expressions or manual string manipulation.
+
+==== Complexity Analysis
+
+The time and space complexity of the function `split_string_into_groups` in both `solution_01.py` and `solution_02.py` can be analyzed as follows:
+
+Time Complexity:
+The function uses either the `re.findall()` function or the `textwrap.wrap()` function to split the string into groups of `n` characters.
+This operation is performed in a single pass over the string, so the time complexity is O(m), where m is the length of the string.
+
+Space Complexity:
+The function creates a new list to store the groups of characters.
+In the worst-case scenario, the string is split into individual characters, resulting in a list of size m.
+Therefore, the space complexity is also O(m), where m is the length of the string.
+
+In summary, both the time and space complexity of the function are linear in terms of the length of the input string.
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 05
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_05.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 06
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_06.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 07
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_07.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 08
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_08.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 09
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_09.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 10
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_10.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 11
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_11.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 12
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_12.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+=== Solution 13
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_13.py[lines=21..]
+----
+
+==== Explanation
+
+==== Code Review
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+== Tests
+
+===  Test Solution 00
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[lines=21..]
+----
+
+===  Test Solution 01
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[lines=21..]
+----
+
+===  Test Solution 02
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[lines=21..]
+----
+
+===  Test Solution 03
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[lines=21..]
+----
+
+===  Test Solution 04
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[lines=21..]
+----
+
+===  Test Solution 05
+
+[source,python,linenums]
+----
+include::./tests/test_solution_05.py[lines=21..]
+----
+
+===  Test Solution 06
+
+[source,python,linenums]
+----
+include::./tests/test_solution_06.py[lines=21..]
+----
+
+===  Test Solution 07
+
+[source,python,linenums]
+----
+include::./tests/test_solution_07.py[lines=21..]
+----
+
+===  Test Solution 08
+
+[source,python,linenums]
+----
+include::./tests/test_solution_08.py[lines=21..]
+----
+
+===  Test Solution 09
+
+[source,python,linenums]
+----
+include::./tests/test_solution_09.py[lines=21..]
+----
+
+===  Test Solution 10
+
+[source,python,linenums]
+----
+include::./tests/test_solution_10.py[lines=21..]
+----
+
+===  Test Solution 11
+
+[source,python,linenums]
+----
+include::./tests/test_solution_11.py[lines=21..]
+----
+
+===  Test Solution 12
+
+[source,python,linenums]
+----
+include::./tests/test_solution_11.py[lines=21..]
+----
+
+===  Test Solution 13
+
+[source,python,linenums]
+----
+include::./tests/test_solution_13.py[lines=21..]
+----

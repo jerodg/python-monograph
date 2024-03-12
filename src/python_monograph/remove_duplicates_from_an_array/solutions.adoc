@@ -19,7 +19,7 @@
 :stylesheet: styles.css
 
 :description: Remove Duplicates from an Array Solutions
-:keywords: solution, python
+:keywords: solution, python, remove, duplicates, array
 
 = {description}
 

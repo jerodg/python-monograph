@@ -1,0 +1,283 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+
+:description: Split Strings into Groups of n Consecutive Characters Problem
+:keywords: problem, python, algorithm, split, string, group, n, consecutive, characters
+
+= {description}
+
+[.lead]
+In this problem, we are given a string and a number `n`.
+The task is to write a Python program that splits the given string into groups of `n` consecutive characters.
+
+'''
+
+The input to the problem is a string and a positive integer `n`.
+The string can be of any length and can contain any printable ASCII characters.
+The integer `n` represents the size of the groups in which the string should be split.
+
+The output of the problem should be a list of strings, where each string in the list is a group of `n` consecutive characters from the input string.
+The groups should be formed from left to right.
+If the length of the string is not a multiple of `n`, the last group may contain less than `n` characters.
+
+For example, if the input string is "HelloWorld" and `n` is 3, the output should be ["Hel", "loW", "orl", "d"].
+If the input string is "Python" and `n` is 2, the output should be ["Py", "th", "on"].
+
+The goal of the problem is to implement a function `split_string_into_groups(string: str, n: int) -> List[str]` that takes a string and an integer as input and returns a list of strings as output.
+
+The function should be efficient and should handle edge cases, such as an empty string or a string with less than `n` characters.
+The function should also handle large inputs efficiently.
+
+The problem does not require any specific knowledge of algorithms or data structures and can be solved using basic string manipulation techniques in Python.
+However, different approaches may have different time and space complexities, and the choice of approach may depend on the specific requirements of the problem.
+
+== Constraints
+
+The constraints for the problem "Split Strings into Groups of n Consecutive Characters" could be as follows:
+
+1. The input string can be of any length, from empty to very large strings.
+2. The string can contain any printable ASCII characters.
+3. The integer `n` is a positive integer and represents the size of the groups in which the string should be split.
+4. If the length of the string is not a multiple of `n`, the last group may contain less than `n` characters.
+5. The function should handle edge cases, such as an empty string or a string with less than `n` characters.
+6. The function should be able to handle large inputs efficiently, implying a need for a time complexity that is linear or better.
+7. The function should return a list of strings, where each string in the list is a group of `n` consecutive characters from the input string.
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+split_string_into_groups("HelloWorld", 3)
+----
+
+.Output
+[source,python,linenums]
+----
+["Hel", "loW", "orl", "d"]
+----
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+split_string_into_groups("Python", 2)
+----
+
+.Output
+[source,python,linenums]
+----
+["Py", "th", "on"]
+----
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+split_string_into_groups("1234567890", 4)
+----
+
+.Output
+[source,python,linenums]
+----
+["1234", "5678", "90"]
+----
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+split_string_into_groups("abc", 1)
+----
+
+.Output
+[source,python,linenums]
+----
+["a", "b", "c"]
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+split_string_into_groups("abc", 5)
+----
+
+.Output
+[source,python,linenums]
+----
+["abc"]
+----
+
+== Use-Cases
+
+The solutions to the problem of splitting a string into groups of `n` consecutive characters can have several real-world applications:
+
+1. **Text Processing and Analysis**: This problem is common in natural language processing and computational linguistics where text data needs to be split into chunks for further analysis.
+For example, splitting a document into sentences or words for tokenization.
+
+2. **Data Transformation**: In data preprocessing, it might be necessary to split strings into smaller parts for further processing or analysis.
+For example, splitting a DNA sequence into codons for genetic analysis.
+
+3. **Network Protocols**: In network communication, messages are often split into packets of a certain size before they are transmitted over a network.
+The receiver then reassembles the packets to retrieve the original message.
+
+4. **Cryptography**: In cryptography, plaintext is often split into blocks of a certain size before it is encrypted.
+The encrypted blocks are then transmitted, and the receiver decrypts the blocks and reassembles them to retrieve the original plaintext.
+
+5. **Data Compression**: In data compression algorithms, data is often split into chunks of a certain size.
+These chunks are then compressed individually, which can result in more efficient compression than compressing the entire data as a whole.
+
+6. **File Systems**: In file systems, files are often split into blocks of a certain size for storage.
+This makes it easier to manage and retrieve files from the file system.
+
+7. **Parallel Computing**: In parallel computing, data is often split into chunks that can be processed independently.
+This allows the workload to be distributed across multiple processors, improving performance and efficiency.
+
+== Common Mistakes
+
+When solving the problem of splitting a string into groups of `n` consecutive characters, here are some common mistakes to avoid:
+
+1. **Ignoring Edge Cases**: Not handling edge cases such as an empty string or a string with less than `n` characters can lead to incorrect results or runtime errors.
+Always ensure your solution handles these cases correctly.
+
+2. **Not Considering String Length**: If the length of the string is not a multiple of `n`, the last group may contain less than `n` characters.
+Your solution should account for this scenario.
+
+3. **Inefficient Slicing**: Python's string slicing is efficient, but if used incorrectly, it can lead to performance issues.
+For example, repeatedly slicing large strings in a loop can be inefficient.
+
+4. **Ignoring Large Inputs**: If the function does not handle large inputs efficiently, it may result in performance issues or even exceed the maximum recursion depth for recursive solutions.
+Always consider the time and space complexity of your solution.
+
+5. **Not Preserving Order**: The problem statement specifies that the groups should be formed from left to right.
+Not preserving the original order of characters in the string can lead to incorrect results.
+
+6. **Incorrect Group Size**: The groups should contain `n` characters, but a common mistake is to off-by-one errors where groups contain `n-1` or `n+1` characters.
+Always ensure your solution correctly calculates the group size.
+
+7. **Not Returning Correct Data Type**: The function should return a list of strings.
+Returning a different data type can lead to unexpected results or errors in the code that uses the function.
+
+== Best Practices
+
+When solving the problem of splitting a string into groups of `n` consecutive characters, here are some best practices to consider:
+
+1. **Understand the Problem**: Make sure you fully understand the problem before you start coding.
+This includes understanding the input, output, and any constraints.
+
+2. **Plan Your Solution**: Before you start coding, plan your solution.
+This could involve writing pseudocode or drawing a flowchart.
+A good plan will help you write clean and efficient code.
+
+3. **Choose the Right Data Structures**: The choice of data structures can significantly impact the performance of your solution.
+For this problem, using a list to store the groups of characters is a good choice.
+
+4. **Handle Edge Cases**: Make sure your solution handles edge cases, such as an empty string or a string with less than `n` characters.
+
+5. **Use Built-in Functions**: Python has many built-in functions that can help you solve this problem.
+For example, you can use the slicing feature of strings to split the string into groups of `n` characters.
+
+6. **Write Clean Code**: Write your code in a clean and organized manner.
+Use meaningful variable names, keep your functions small and focused, and include comments to explain what your code is doing.
+
+7. **Test Your Code**: After you have written your solution, test it with a variety of test cases to make sure it works as expected.
+This should include both normal cases and edge cases.
+
+8. **Analyze Time and Space Complexity**: Analyze the time and space complexity of your solution to ensure it meets the performance requirements.
+For this problem, a solution with a time complexity of O(n) would be ideal.
+
+9. **Continuous Learning and Improvement**: Always be open to learning new ways to solve problems and improve your code.
+This could involve learning new algorithms, data structures, or coding techniques.
+
+== Follow-up
+
+After solving the problem of splitting a string into groups of `n` consecutive characters, here are some follow-up actions you could consider:
+
+1. **Code Review**: Have your code reviewed by peers for feedback on code quality, efficiency, and adherence to best practices.
+This can help you identify areas for improvement that you might have missed.
+
+2. **Performance Testing**: Test your solution with large inputs to ensure it can handle them within acceptable time limits.
+This can help you identify any potential performance bottlenecks.
+
+3. **Refactoring**: Look for opportunities to refactor your code to make it cleaner, more efficient, or more readable.
+This could involve using different data structures, algorithms, or Python built-in functions.
+
+4. **Expand Functionality**: Consider expanding the functionality of your solution.
+For example, you could modify the function to handle different types of input, such as lists or arrays of characters, instead of just strings.
+
+5. **Error Handling**: Improve the error handling in your solution.
+For example, you could add checks to ensure the input is valid and throw meaningful error messages if it's not.
+
+6. **Documentation**: Document your code thoroughly, including the function's purpose, inputs, outputs, and any edge cases or assumptions it makes.
+Good documentation makes your code easier to understand and maintain.
+
+7. **Learning**: Use this problem as a learning opportunity.
+Research how others have solved this problem and learn from their approaches.
+This can help you improve your problem-solving and coding skills.
+
+== Related Topics
+
+Related topics for the problem of splitting a string into groups of `n` consecutive characters include:
+
+1. **String Manipulation**: This is a fundamental topic in many programming languages, including Python.
+Understanding how to manipulate strings is crucial to solving this problem.
+You can refer to the Python documentation on string methods for more information: [Python String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
+
+2. **List Comprehension**: This is a concise way to create lists in Python.
+It can be used to solve this problem efficiently.
+Here is a tutorial on list comprehension in Python: [Python List Comprehension](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)
+
+3. **Regular Expressions**: Regular expressions can be used to split a string into groups of `n` characters.
+The `re` module in Python provides functions to work with regular expressions.
+Here is the Python documentation on the `re` module: [Python re Module](https://docs.python.org/3/library/re.html)
+
+4. **Itertools**: The `itertools` module in Python provides various functions that can be used to solve this problem.
+Here is the Python documentation on the `itertools` module: [Python Itertools](https://docs.python.org/3/library/itertools.html)
+
+5. **Textwrap**: The `textwrap` module in Python provides a function to split a string into a list of output lines of specified width.
+Here is the Python documentation on the `textwrap` module: [Python Textwrap](https://docs.python.org/3/library/textwrap.html)
+
+6. **Numpy**: The `numpy` library in Python provides functions to work with arrays, which can be used to solve this problem.
+Here is the official Numpy documentation: [Numpy Documentation](https://numpy.org/doc/stable/)
+
+7. **Pandas**: The `pandas` library in Python provides functions to work with data structures and data analysis, which can be used to solve this problem.
+Here is the official Pandas documentation: [Pandas Documentation](https://pandas.pydata.org/docs/)
+
+8. **More Itertools**: The `more_itertools` library in Python provides additional functions that can be used to solve this problem.
+Here is the official More Itertools documentation: [More Itertools Documentation](https://more-itertools.readthedocs.io/en/stable/)
+
+9. **Toolz**: The `toolz` library in Python provides functions for functional programming, which can be used to solve this problem.
+Here is the official Toolz documentation: [Toolz Documentation](https://toolz.readthedocs.io/en/latest/)
+
+10. **Cytoolz**: The `cytoolz` library in Python provides functions for functional programming, which can be used to solve this problem.
+Here is the official Cytoolz documentation: [Cytoolz Documentation](https://cytoolz.readthedocs.io/en/latest/)
+
+11. **Recursion**: Recursion is a method where the solution to a problem depends on solutions to smaller instances of the same problem.
+It can be used to solve this problem.
+Here is a tutorial on recursion in Python: [Python Recursion](https://realpython.com/python-thinking-recursively/)
+
+== References

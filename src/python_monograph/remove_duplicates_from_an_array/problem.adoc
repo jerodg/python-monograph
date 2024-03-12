@@ -19,7 +19,7 @@
 :stylesheet: styles.css
 
 :description: Remove Duplicates from an Array Problem
-:keywords: problem, python
+:keywords: problem, python, array, set, data structure, time complexity, space complexity, data types, error handling, testing, debugging, best practices, common mistakes, follow-up, constraints, examples, use-cases, references
 
 = {description}
 
