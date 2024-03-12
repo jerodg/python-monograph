@@ -21,21 +21,22 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 import textwrap
 
 
-def split_string_into_groups(string: str, n: int) -> list[str]:
+def split_string_into_groups(s: str, n: int) -> list[str]:
     """
-    Splits a given string into groups of `n` consecutive characters.
+    Splits a string into groups of `n` consecutive characters.
 
-    This function uses Python's `textwrap` module to solve the problem.
-    It uses the `textwrap.wrap()` function which wraps an input paragraph such that each line contains at most `n` characters.
+    This function uses the `textwrap.wrap()` function from the `textwrap` module to solve the problem.
+    It includes error handling to check if `n` is a positive integer.
 
     Args:
-        string (str): The input string to be split.
-        n (int): The size of the groups in which the string should be split.
+        s (str): The input string to be split.
+        n (int): The size of the groups.
 
     Returns:
-        list: A list of strings, where each string in the list is a group of `n` consecutive characters
-        from the input string. The groups are formed from left to right. If the length of the string
-        is not a multiple of `n`, the last group may contain less than `n` characters.
+        List[str]: A list of strings, where each string is a group of `n` consecutive characters from the input string.
+
+    Raises:
+        ValueError: If `n` is not a positive integer.
 
     Examples:
         >>> split_string_into_groups("HelloWorld", 3)
@@ -43,5 +44,17 @@ def split_string_into_groups(string: str, n: int) -> list[str]:
 
         >>> split_string_into_groups("Python", 2)
         ['Py', 'th', 'on']
+
+    Doctest:
+        >>> split_string_into_groups("1234567890", 4)
+        ['1234', '5678', '90']
+
+        >>> split_string_into_groups("abc", 1)
+        ['a', 'b', 'c']
     """
-    return textwrap.wrap(string, n)
+    # Check if `n` is a positive integer.
+    if n <= 0:
+        raise ValueError("The group size must be a positive integer")
+
+    # Use `textwrap.wrap()` to split the string into groups of `n` characters.
+    return textwrap.wrap(s, n)

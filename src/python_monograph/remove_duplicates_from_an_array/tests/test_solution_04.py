@@ -58,7 +58,8 @@ def test_remove_duplicates_with_random_input():
 
 
 def test_remove_duplicates_with_special_characters():
-    assert sorted(remove_duplicates(['!', '@', '@', '#', '$', '$', '%', '^', '^'])) == sorted(['!', '@', '#', '$', '%', '^'])
+    assert sorted(remove_duplicates(['!', '@', '@', '#', '$', '$', '%', '^', '^'])) == sorted(
+        ['!', '@', '#', '$', '%', '^'])
 
 
 def test_remove_duplicates_does_not_preserve_order():

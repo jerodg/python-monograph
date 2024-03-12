@@ -40,9 +40,9 @@ include::./solution_00.py[lines=21..]
 
 ==== Explanation
 
-==== Code Review
-
 ==== Advantages & Disadvantages
+
+==== Code Review
 
 ==== Complexity Analysis
 

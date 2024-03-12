@@ -21,25 +21,22 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 import re
 
 
-def split_string_into_groups(string: str, n: int) -> list:
+def split_string_into_groups(s: str, n: int) -> list[str]:
     """
-    Splits a given string into groups of `n` consecutive characters.
+    Splits a string into groups of `n` consecutive characters.
 
-    This function uses Python's `re` (regex) module to solve the problem.
-    It uses the `re.findall()` function with a regular expression that matches any `n` characters
-    to split the string into groups of `n` characters.
+    This function uses the `re.findall()` function from the `re` (regex) module to solve the problem.
+    It includes error handling to check if `n` is a positive integer.
 
     Args:
-        string (str): The input string to be split.
-        n (int): The size of the groups in which the string should be split.
+        s (str): The input string to be split.
+        n (int): The size of the groups.
 
     Returns:
-        list: A list of strings, where each string in the list is a group of `n` consecutive characters
-        from the input string. The groups are formed from left to right. If the length of the string
-        is not a multiple of `n`, the last group may contain less than `n` characters.
+        list[str]: A list of strings, where each string is a group of `n` consecutive characters from the input string.
 
     Raises:
-        ValueError: If the group size `n` is not a positive integer.
+        ValueError: If `n` is not a positive integer.
 
     Examples:
         >>> split_string_into_groups("HelloWorld", 3)
@@ -48,14 +45,16 @@ def split_string_into_groups(string: str, n: int) -> list:
         >>> split_string_into_groups("Python", 2)
         ['Py', 'th', 'on']
 
-        >>> split_string_into_groups("abcdef", 0)
-        Traceback (most recent call last):
-        ...
-        ValueError: The group size must be a positive integer
+    Doctest:
+        >>> split_string_into_groups("1234567890", 4)
+        ['1234', '5678', '90']
+
+        >>> split_string_into_groups("abc", 1)
+        ['a', 'b', 'c']
     """
-    # Check if the group size is a positive integer
+    # Check if `n` is a positive integer.
     if n <= 0:
         raise ValueError("The group size must be a positive integer")
 
-    # Use regex to split the string into groups of `n` characters
-    return re.findall('.{1,' + str(n) + '}', string)
+    # Use `re.findall()` to split the string into groups of `n` characters.
+    return re.findall(f'.{{1,{n}}}', s)

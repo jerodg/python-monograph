@@ -1,5 +1,5 @@
 """
-Python Monograph -> Split Strings into Groups of n Consecutive Characters  -> Solution 09
+Python Monograph -> Split Strings into Groups of n Consecutive Characters  -> Solution 14
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 
@@ -18,12 +18,13 @@ copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
-import toolz
+import pandas as pd
 
 
+# fixme: This isn't grouping correctly
 def split_string_into_groups(s: str, n: int) -> list[str]:
     """
-    Splits a string into groups of `n` consecutive characters using toolz.partition_all().
+    Splits a string into groups of `n` consecutive characters using pandas cut() function.
 
     Args:
         s (str): The input string to be split.
@@ -35,7 +36,7 @@ def split_string_into_groups(s: str, n: int) -> list[str]:
     Raises:
         ValueError: If `n` is not a positive integer.
 
-    Examples:
+    Doctest:
         >>> split_string_into_groups("HelloWorld", 3)
         ['Hel', 'loW', 'orl', 'd']
         >>> split_string_into_groups("Python", 2)
@@ -51,10 +52,16 @@ def split_string_into_groups(s: str, n: int) -> list[str]:
     if n <= 0:
         raise ValueError("The group size must be a positive integer")
 
-    # Use toolz.partition_all() to split the string into chunks of `n` characters.
-    chunks = toolz.partition_all(n, s)
+    # Convert the string to a list of characters.
+    chars = list(s)
 
-    # Convert each chunk to a string and add it to the result list.
-    result = [''.join(chunk) for chunk in chunks]
+    # Calculate the number of bins.
+    bins = len(chars) // n if len(chars) % n == 0 else len(chars) // n + 1
 
-    return result
+    # Use `pandas.cut()` to split the array into bins.
+    cut = pd.cut(range(len(chars)), bins, labels=False)
+
+    # Group the array by the cut and join each group into a string.
+    groups = [''.join(chars[i] for i in range(len(chars)) if cut[i] == bin) for bin in range(bins)]
+
+    return groups

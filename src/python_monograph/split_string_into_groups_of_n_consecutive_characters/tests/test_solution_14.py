@@ -1,5 +1,5 @@
 """
-Python Monograph -> Split Strings into Groups of n Consecutive Characters -> Solution 02 -> Tests
+Python Monograph -> Split Strings into Groups of n Consecutive Characters -> Solution 14 -> Tests
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 
@@ -20,7 +20,7 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
 import pytest
 
-from python_monograph.split_string_into_groups_of_n_consecutive_characters.solution_01 import split_string_into_groups
+from python_monograph.split_string_into_groups_of_n_consecutive_characters.solution_14 import split_string_into_groups
 
 
 def test_split_string_into_groups_with_valid_input():

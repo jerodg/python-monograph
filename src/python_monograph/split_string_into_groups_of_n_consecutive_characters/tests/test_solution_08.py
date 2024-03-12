@@ -1,5 +1,5 @@
 """
-Python Monograph -> Split Strings into Groups of n Consecutive Characters -> Solution 00 -> Tests
+Python Monograph -> Split Strings into Groups of n Consecutive Characters -> Solution 08 -> Tests
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 
@@ -18,3 +18,63 @@ copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
+import pytest
+
+from python_monograph.split_string_into_groups_of_n_consecutive_characters.solution_08 import split_string_into_groups
+
+
+def test_split_string_into_groups_with_valid_input():
+    assert split_string_into_groups("HelloWorld", 3) == ['Hel', 'loW', 'orl', 'd']
+
+
+def test_split_string_into_groups_with_boundary_input():
+    assert split_string_into_groups("Python", 2) == ['Py', 'th', 'on']
+
+
+def test_split_string_into_groups_with_edge_case_input():
+    assert split_string_into_groups("1234567890", 4) == ['1234', '5678', '90']
+
+
+def test_split_string_into_groups_with_performance_input():
+    assert split_string_into_groups("a" * 10 ** 6, 10 ** 5) == ["a" * 10 ** 5] * 10
+
+
+def test_split_string_into_groups_with_random_input():
+    assert split_string_into_groups("abc", 1) == ['a', 'b', 'c']
+
+
+def test_split_string_into_groups_with_special_case_input():
+    assert split_string_into_groups("abc", 5) == ['abc']
+
+
+def test_split_string_into_groups_with_validation_input():
+    with pytest.raises(ValueError):
+        split_string_into_groups("abc", 0)
+
+
+def test_split_string_into_groups_with_regression_input():
+    assert split_string_into_groups("HelloWorld", 3) == ['Hel', 'loW', 'orl', 'd']
+
+
+def test_split_string_into_groups_with_equivalence_partitioning_input():
+    assert split_string_into_groups("abcabc", 3) == ['abc', 'abc']
+
+
+def test_split_string_into_groups_with_security_input():
+    assert split_string_into_groups("<script>alert('xss')</script>", 8) == ['<script>', "alert('x", "ss')</sc", 'ript>']
+
+
+def test_split_string_into_groups_with_functional_input():
+    assert split_string_into_groups("functional", 4) == ['func', 'tion', 'al']
+
+
+def test_split_string_into_groups_with_duplicates_input():
+    assert split_string_into_groups("aabbcc", 2) == ['aa', 'bb', 'cc']
+
+
+def test_split_string_into_groups_with_no_duplicates_input():
+    assert split_string_into_groups("abc", 1) == ['a', 'b', 'c']
+
+
+def test_split_string_into_groups_with_order_preservation_input():
+    assert split_string_into_groups("abcdef", 2) == ['ab', 'cd', 'ef']
