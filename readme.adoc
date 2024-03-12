@@ -17,10 +17,10 @@
 :stylesdir: ./styles
 :scriptsdir: ./js
 :stylesheet: ./styles.css
-:description: Monograph: A learned treatise for [Javascript, Python, Rust, Typescript]
-:keywords: python, typescript, javascript, rust
+:description: Monograph: A learned treatise for Python
+:keywords: python, monograph, treatise, learned, book, documentation, guide, manual, reference, tutorial, how-to, explanation, exposition, instruction, interpretation, clarification, demonstration, illustration, presentation, description, explanation, exposition, interpretation, presentation, report, specification, statement, story, summary, version, account, commentary, details, information, narrative, picture, portrayal, recital, tale, version, chronicle, history, narration, record, report, story, description, explanation, exposition, interpretation, presentation, report, specification, statement, story, summary, version, account, commentary, details, information, narrative, picture, portrayal, recital, tale, version, chronicle, history, narration, record, report, story
 
-= README: Monograph
+= README: Python-Monograph
 
 == About
 
@@ -31,9 +31,8 @@ image::/books_on_shelf.jpg[]
 
 === Built With
 
-- Pycharm
-- RustRover
-- WebStorm
+- https://www.jetbrains.com/pycharm/[Pycharm]
+- https://asciidoctor.org/[Asciidoctor]
 
 == Getting Started
 
@@ -54,21 +53,23 @@ Any contributions you make are *greatly appreciated*.
 . Create your feature branch (`git checkout -b feature/AmazingFeature`)
 . Commit your changes (`git commit -m &#39;Add some AmazingFeature&#39;`)
 . Push to the branch (`git push origin feature/AmazingFeature`)
-. Open a pull request == License This program is free software: you can redistribute it and/or modify it under the terms of the Server Side Public License (SSPL) as published by MongoDB, Inc., either version 1 of the License, or (at your option) any later version.
+. Open a pull request
 
 == Contact
 
 == Acknowledgments
 
-- https://github.com/othneildrew[Othneil Drew] For the base markdown template.
-
 - image:https://img.shields.io/badge/Shields.IO-green[100,link="https://shields.io"] For graciously providing the hosting for the badges.
 
 - https://www.jetbrains.com/[JetBrains] For providing the tools to make this project possible.
 
+== License
+
+This program is free software: you can redistribute it and/or modify it under the terms of the Server Side Public License (SSPL) as published by MongoDB, Inc., either version 1 of the License, or (at your option) any later version.
+
 == Copyright
 
-Copyright ©2019-2024 Jerod Gawne <https://github.com/jerodg/>
+Copyright ©2010-2024 Jerod Gawne <https://github.com/jerodg/>
 
 This program is free software: you can redistribute it and/or modify it under the terms of the Server Side Public License (SSPL) as published by MongoDB, Inc., either version 1 of the License, or (at your option) any later version.
 
