@@ -235,3 +235,35 @@ Here is a link to the Python documentation on testing and debugging: [Python Tes
 Remember to explore these topics to gain a deeper understanding of the problem and how to solve it.
 
 == References
+
+Here are the references to the official documentation for the methods used in the provided Python code:
+
+1. `set`: A built-in Python data type that can be used to create a collection of unique elements. [Python Official Documentation - set](https://docs.python.org/3/tutorial/datastructures.html#sets)
+
+2. `list`: A built-in Python data type that can be used to create a collection of elements. [Python Official Documentation - list](https://docs.python.org/3/tutorial/introduction.html#lists)
+
+3. `enumerate`: A built-in Python function that allows you to loop over a list and have an automatic counter. [Python Official Documentation - enumerate](https://docs.python.org/3/library/functions.html#enumerate)
+
+4. `dict.fromkeys`: A method in Python's dict class that creates a new dictionary with keys from an iterable and values set to a value. [Python Official Documentation - dict.fromkeys](https://docs.python.org/3/library/stdtypes.html#dict.fromkeys)
+
+5. `itertools.groupby`: A function in Python's itertools module that makes an iterator that returns consecutive keys and groups from the input iterable. [Python Official Documentation - itertools.groupby](https://docs.python.org/3/library/itertools.html#itertools.groupby)
+
+6. `itertools.filterfalse`: A function in Python's itertools module that makes an iterator that filters elements from iterable returning only those for which the predicate is False. [Python Official Documentation - itertools.filterfalse](https://docs.python.org/3/library/itertools.html#itertools.filterfalse)
+
+7. `itertools.islice`: A function in Python's itertools module that makes an iterator that returns selected elements from the iterable. [Python Official Documentation - itertools.islice](https://docs.python.org/3/library/itertools.html#itertools.islice)
+
+8. `collections.Counter`: A dict subclass in Python's collections module for counting hashable objects. [Python Official Documentation - collections.Counter](https://docs.python.org/3/library/collections.html#collections.Counter)
+
+9. `numpy.unique`: A function in Python's numpy module that finds the unique elements of an array. [Numpy Official Documentation - numpy.unique](https://numpy.org/doc/stable/reference/generated/numpy.unique.html)
+
+10. `pandas.cut`: A function in Python's pandas module that bins values into discrete intervals. [Pandas Official Documentation - pandas.cut](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.cut.html)
+
+11. `pandas.unique`: A function in Python's pandas module that returns unique values of Series object. [Pandas Official Documentation - pandas.unique](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.unique.html)
+
+12. `index`: A built-in Python function that returns the first index of a value in a list. [Python Official Documentation - list.index](https://docs.python.org/3/tutorial/datastructures.html)
+
+13. `pandas.Series`: A one-dimensional labeled array capable of holding any data type in pandas. [Pandas Official Documentation - pandas.Series](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html)
+
+14. `pandas.drop_duplicates`: A function in Python's pandas module that returns a Series with duplicate values removed. [Pandas Official Documentation - pandas.drop_duplicates](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.drop_duplicates.html)
+
+15. `tolist`: A function in Python's pandas module that converts a pandas Series to a list. [Pandas Official Documentation - pandas.tolist](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.tolist.html)

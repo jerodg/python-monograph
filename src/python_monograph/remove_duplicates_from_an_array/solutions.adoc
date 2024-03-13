@@ -117,106 +117,115 @@ include::./solution_00.py[lines=21..]
 ==== Explanation
 
 The provided Python code defines a function named `remove_duplicates` that takes a list as an input and returns a new list with all the duplicate elements removed.
-However, it's important to note that this function does not preserve the original order of elements in the list.
+The function uses the `set` data type in Python, which is an unordered collection of unique elements.
 
-The function signature is `remove_duplicates(arr: list) -> list:`.
-Here, `arr` is the input list from which duplicates need to be removed.
-The function returns a list.
+The function starts by converting the input list to a set with the line `set(arr)`.
+This operation automatically removes all duplicate elements because a set in Python cannot contain duplicate elements.
+However, since sets are unordered, this operation does not preserve the original order of elements in the list.
 
-Inside the function, the code `list(set(arr))` is used to remove duplicates.
-This line of code works by converting the input list `arr` into a set using the `set()` function.
-Since a set in Python is an unordered collection of unique elements, this effectively removes any duplicates from `arr`.
+After the duplicates are removed, the function converts the set back to a list with the line `list(set(arr))`.
+This is done because the function is expected to return a list.
+The `list()` function in Python creates a new list from an iterable (like a set).
 
-After the set is created, it is converted back into a list using the `list()` function, and this new list is returned by the function.
+The function then returns this new list, which contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is not the same as the input list.
 
-The function also includes a docstring with a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-The note in the docstring explicitly mentions that the function does not preserve the original order of elements in the list.
+The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
 
-==== Code Review
-
-Here's a code review of the `remove_duplicates` function from `solution_00.py` and its corresponding tests in `test_solution_00.py` based on the provided topics:
-
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of the `set` function to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_security` checks for a TypeError when the function is called with `None` as an argument, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n) due to the use of the `set` function.
-This is a significant improvement over the previous solution.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_performance` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about not preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function scales well for large lists due to its O(n) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using the `set` function to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-However, it's important to note that it does not preserve the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is present.
-The function will raise a TypeError if it is called with an argument that is not a list.
-This scenario is tested in the `test_remove_duplicates_security` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+In summary, the `remove_duplicates` function provides a simple and efficient way to remove duplicates from a list in Python, but it does not preserve the original order of elements.
 
 ==== Advantages & Disadvantages
 
-**Advantages**
+The method used in the provided Python code is to remove duplicates from a list by converting the list to a set and then back to a list.
+This approach leverages the properties of the set data type in Python, which is an unordered collection of unique elements.
 
-1. **Efficiency**: Converting a list to a set is a very efficient way to remove duplicates.
-This is because sets in Python are implemented as hash tables, which allows for constant time average complexity for most operations.
-This means that the time it takes to check if an item is in the set does not increase with the size of the set.
+**Advantages:**
+
+1. **Efficiency**: Converting a list to a set is a quick operation in Python.
+It automatically removes all duplicate elements because a set cannot contain duplicate elements.
+This makes it a very efficient way to remove duplicates from a list.
 
 2. **Simplicity**: The code is straightforward and easy to understand.
-It involves just one line of code (`return list(set(arr))`), which makes it very readable and maintainable.
+It involves only two operations (converting the list to a set and then back to a list), making it a simple solution to the problem.
 
-**Disadvantages**
+3. **Scalability**: This method can handle large lists efficiently.
+The time complexity of converting a list to a set in Python is O(n), where n is the number of elements in the list.
+This makes it a scalable solution for large inputs.
 
-1. **Order Not Preserved**: The main disadvantage of this method is that it does not preserve the original order of elements.
-This is because sets in Python are unordered collections.
+**Disadvantages:**
+
+1. **Order Not Preserved**: Since sets are unordered, converting a list to a set does not preserve the original order of elements.
 If the order of elements is important, this method would not be suitable.
 
-2. **Not Suitable for Lists of Unhashable Items**: This method will not work if the list contains unhashable items (like lists or dictionaries), because such items cannot be added to a set.
-In such cases, a different method would need to be used.
+2. **Not Suitable for Lists with Unhashable Items**: Sets in Python can only contain hashable items.
+Therefore, this method would not work for lists that contain unhashable items, such as lists or dictionaries.
+
+3. **Additional Memory Usage**: This method creates a new list and a new set, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
 ==== Complexity Analysis
 
-The time and space complexity for the selected code are as follows:
+The provided Python code in `src/python_monograph/remove_duplicates_from_an_array/solution_00.py` defines a function `remove_duplicates` that removes duplicates from a list by converting the list to a set and then back to a list.
 
-**Time Complexity:**
-
-The time complexity of the function is O(n), where n is the number of elements in the input list.
-This is because the function needs to iterate over each element in the list once when converting the list to a set.
-The conversion from a set back to a list also takes O(n) time.
+Time Complexity:
+The time complexity of this function is O(n), where n is the number of elements in the list.
+This is because the function performs a single pass over the list to convert it to a set, which is an O(n) operation.
+The conversion of the set back to a list is also an O(n) operation.
 Therefore, the overall time complexity is O(n).
 
-**Space Complexity:**
+Space Complexity:
+The space complexity of this function is also O(n).
+This is because the function creates a new set and a new list, both of which can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is also O(n), where n is the number of unique elements in the input list.
-This is because a set is created to store the unique elements from the list.
-In the worst-case scenario, all elements in the list are unique, so the space complexity is O(n).
+Please note that this analysis assumes that the hash operations (used by the set) are O(1) on average.
+If the hash operations are not O(1), the time complexity could be worse.
+
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `src/python_monograph/remove_duplicates_from_an_array/solution_00.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses a set to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by removing duplicates in-place instead of creating a new list.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in set and list data types to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of converting a list to a set in Python is O(n), where n is the number of elements in the list.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not preserve the original order of elements in the list, which may or may not be a requirement.
+
+14. **Zoom Out**: The overall approach of using a set to remove duplicates is appropriate and efficient for this problem.
+However, if preserving the original order of elements is a requirement, a different approach would be needed.
 
 === Solution 01
 
@@ -229,109 +238,110 @@ include::./solution_01.py[lines=21..]
 
 ==== Explanation
 
-The provided Python code defines a function named `remove_duplicates` that is designed to remove duplicate elements from a given list while preserving the original order of elements.
+The selected Python code defines a function named `remove_duplicates`.
+This function is designed to remove duplicate elements from a list while preserving the original order of elements.
+The function takes a list as an argument, as indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-The function signature is `remove_duplicates(arr: list) -> list:`.
-The function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The function uses a list comprehension to create a new list that contains only the first occurrence of each element in the input list.
+This is done with the line `return [x for i, x in enumerate(arr) if arr.index(x) == i]`.
+Here, `enumerate(arr)` generates a sequence of tuples, each containing an index and the corresponding element from the list.
+The `if arr.index(x) == i` condition ensures that only the first occurrence of each element is included in the new list.
 
-The core logic of the function is implemented using a list comprehension: `[x for i, x in enumerate(arr) if arr.index(x) == i]`.
-This line of code iterates over the input list `arr` and for each element `x`, it checks if the index of the first occurrence of `x` in `arr` is equal to the current index `i`.
-If it is, `x` is included in the new list.
-This effectively removes any duplicate elements from `arr` while preserving the original order of elements.
+The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+The doctests show that the function correctly removes duplicates from a list of integers and a list of strings while preserving the original order of elements.
 
-The function also includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-The note in the docstring explicitly mentions that the function preserves the original order of elements in the list.
-
-==== Code Review
-
-Here's a code review of the `remove_duplicates` function from `solution_01.py` and its corresponding tests in `test_solution_01.py` based on the provided topics:
-
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of list comprehension and the `index` method to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_security` checks for a TypeError when the function is called with `None` as an argument, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n^2) due to the use of the `index` method within a loop.
-This could be a performance issue for large lists.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_performance` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function may not scale well for large lists due to its O(n^2) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using list comprehension and the `index` method to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-It's important to note that it preserves the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is present.
-The function will raise a TypeError if it is called with an argument that is not a list.
-This scenario is tested in the `test_remove_duplicates_security` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+In summary, the `remove_duplicates` function provides an efficient way to remove duplicates from a list in Python while preserving the original order of elements.
+It does this by using a list comprehension to create a new list that includes only the first occurrence of each element in the input list.
 
 ==== Advantages & Disadvantages
 
-The method used in the selected code to remove duplicates from a list has several advantages and disadvantages:
+The method used in the provided Python code is to remove duplicates from a list by using a list comprehension with the `enumerate()` function and the `index()` method.
+This approach leverages the properties of list comprehensions in Python, which are a concise way to create lists based on existing lists.
 
 **Advantages:**
 
-1. **Readability**: The code is quite readable and easy to understand.
-It uses list comprehension, which is a common Python idiom.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because it includes elements in the new list based on their first occurrence in the original list.
 
-2. **Preserving Order**: Unlike some other methods for removing duplicates, this method preserves the original order of elements in the list.
+2. **Readability**: The code is quite readable and easy to understand.
+List comprehensions in Python are a common idiom that many Python developers are familiar with.
 
-3. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-4. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+3. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Performance**: The function has a time complexity of O(n^2) due to the use of the `list.index()` method inside the list comprehension.
-This could be a performance issue for large lists.
+1. **Efficiency**: The use of the `index()` method inside the list comprehension results in a time complexity of O(n^2), where n is the number of elements in the list.
+This is because for each element in the list, the `index()` method performs a linear search to find its first occurrence.
+This makes the method less efficient for large lists.
 
-2. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will raise a TypeError.
+2. **No Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
 
-3. **Scalability**: The function may not scale well for large lists due to its O(n^2) time complexity.
-
-In conclusion, while this method is simple and preserves the order of elements, its performance and scalability could be an issue for large lists.
+3. **Additional Memory Usage**: This method creates a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
 ==== Complexity Analysis
 
-**Time Complexity:**
+The provided Python code in `src/python_monograph/remove_duplicates_from_an_array/solution_01.py` defines a function `remove_duplicates` that removes duplicates from a list while preserving the original order of elements.
 
-The time complexity of the function is O(n^2).
-This is because for each element in the list, the function performs a linear search using the `index()` method to find the index of the first occurrence of the element.
-This operation is O(n), and since it's done for each of the n elements in the list, the overall time complexity is O(n^2).
+**Time Complexity:**
+The time complexity of this function is O(n^2), where n is the number of elements in the list.
+This is because the function uses the `index()` method inside the list comprehension.
+For each element in the list, the `index()` method performs a linear search to find its first occurrence.
+Therefore, the overall time complexity is O(n^2).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new list that can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new list that can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_01.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses a list comprehension to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by removing duplicates in-place instead of creating a new list.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list and set data types to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of converting a list to a set in Python is O(n), where n is the number of elements in the list.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not preserve the original order of elements in the list, which may or may not be a requirement.
+
+14. **Zoom Out**: The overall approach of using a set to remove duplicates is appropriate and efficient for this problem.
+However, if preserving the original order of elements is a requirement, a different approach would be needed.
 
 === Solution 02
 
@@ -344,106 +354,123 @@ include::./solution_02.py[lines=21..]
 
 ==== Explanation
 
-The provided Python code defines a function named `remove_duplicates` that is designed to remove duplicate elements from a given list while preserving the original order of elements.
+The provided Python code defines a function named `remove_duplicates`.
+This function is designed to remove duplicate elements from a list while preserving the original order of elements.
+The function takes a list as an argument, as indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-The function signature is `remove_duplicates(arr: list) -> list:`.
-The function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The function uses Python's built-in `dict` data type to remove duplicates.
+A dictionary in Python is an unordered collection of unique key-value pairs.
+By converting the list to a dictionary with `dict.fromkeys(arr)`, all duplicate elements are automatically removed.
+This is because in a dictionary, keys must be unique.
+The `fromkeys()` method creates a new dictionary with keys from the input list and values set to None.
 
-The core logic of the function is implemented using the dictionary approach: `dict.fromkeys(arr).keys()`.
-This line of code creates a dictionary where the keys are the elements from the input list `arr`.
-Since dictionary keys are unique, this effectively removes any duplicate elements from `arr`.
-The keys of the dictionary are then converted back to a list using the `list()` function.
+However, unlike a set, a dictionary in Python preserves the order of elements as of Python 3.7. This means that the order in which elements are inserted into the dictionary is the order in which they are returned.
+Therefore, this operation does preserve the original order of elements in the list.
 
-The function also includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-The note in the docstring explicitly mentions that the function preserves the original order of elements in the list.
+After removing the duplicates, the function converts the dictionary back to a list with `list(dict.fromkeys(arr).keys())`.
+This is done because the function is expected to return a list, not a dictionary.
+The `keys()` method in Python returns a view object that displays a list of all the keys in the dictionary.
 
-==== Code Review
+The function then returns this new list, which contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as noted in the function's docstring.
 
-Here's a code review of the `remove_duplicates` function from `solution_02.py` and its corresponding tests in `test_solution_02.py` based on the provided topics:
+The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+The doctests show that the function correctly removes duplicates from a list of integers and a list of strings while preserving the original order of elements.
 
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of the `dict.fromkeys` method to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_security` checks for a TypeError when the function is called with `None` as an argument, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n) due to the use of the `dict.fromkeys` method.
-This is a significant improvement over the previous solutions.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_performance` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function scales well for large lists due to its O(n) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using the `dict.fromkeys` method to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-It's important to note that it preserves the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is present.
-The function will raise a TypeError if it is called with an argument that is not a list.
-This scenario is tested in the `test_remove_duplicates_security` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+In summary, the `remove_duplicates` function provides an efficient way to remove duplicates from a list in Python while preserving the original order of elements.
+It does this by using a dictionary to create a new list that includes only the first occurrence of each element in the input list.
 
 ==== Advantages & Disadvantages
 
+The method used in the provided Python code is to remove duplicates from a list by using Python's built-in `dict` data type.
+This approach leverages the properties of dictionaries in Python, which are an unordered collection of unique key-value pairs.
+
 **Advantages:**
 
-1. **Readability**: The code is quite readable and easy to understand.
-It uses the dictionary approach, which is a common Python idiom.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because as of Python 3.7, dictionaries maintain the insertion order of keys.
 
-2. **Preserving Order**: Unlike some other methods for removing duplicates, this method preserves the original order of elements in the list.
+2. **Efficiency**: The time complexity of this method is O(n), where n is the number of elements in the list.
+This is because converting a list to a dictionary and extracting keys from a dictionary are both linear operations in Python.
 
-3. **Performance**: The function has a time complexity of O(n) due to the use of the `dict.fromkeys()` method.
-This is a significant improvement over methods with a higher time complexity.
+3. **Readability**: The code is quite readable and easy to understand.
+The use of Python's built-in `dict` data type and the `fromkeys()` method is a common idiom that many Python developers are familiar with.
 
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+4. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will raise a TypeError.
+1. **No Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
 
-In conclusion, while this method is simple, preserves the order of elements, and has good performance, it lacks error handling for non-list inputs.
+2. **Additional Memory Usage**: This method creates a new dictionary and a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
+
+3. **Type Limitation**: This method works well for lists containing immutable types (like integers, strings, and tuples) because such types can be used as dictionary keys.
+However, it would fail for lists containing mutable types (like lists or dictionaries) because such types cannot be used as dictionary keys in Python.
 
 ==== Complexity Analysis
 
-**Time Complexity:**
+The provided Python code in `src/python_monograph/remove_duplicates_from_an_array/solution_02.py` defines a function `remove_duplicates` that removes duplicates from a list while preserving the original order of elements.
 
-The time complexity of the function is O(n).
-This is because the function creates a dictionary from the list, which is an operation that runs in linear time.
-The keys of the dictionary are then converted back to a list, which is also a linear time operation.
+**Time Complexity:**
+The time complexity of this function is O(n), where n is the number of elements in the list.
+This is because the function performs a single pass over the list to convert it to a dictionary, which is an O(n) operation.
+The conversion of the dictionary back to a list is also an O(n) operation.
 Therefore, the overall time complexity is O(n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new dictionary and a new list, both of which can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new dictionary and a new list, both of which can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_02.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses a list comprehension to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by removing duplicates in-place instead of creating a new list.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list and set data types to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of converting a list to a set in Python is O(n), where n is the number of elements in the list.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not preserve the original order of elements in the list, which may or may not be a requirement.
+
+14. **Zoom Out**: The overall approach of using a set to remove duplicates is appropriate and efficient for this problem.
+However, if preserving the original order of elements is a requirement, a different approach would be needed.
 
 === Solution 03
 
@@ -456,111 +483,116 @@ include::./solution_03.py[lines=21..]
 
 ==== Explanation
 
-The provided Python code defines a function named `remove_duplicates` that is designed to remove duplicate elements from a given list while preserving the original order of elements.
+The provided Python code defines a function named `remove_duplicates`.
+This function is designed to remove duplicate elements from a list while preserving the original order of elements.
+The function takes a list as an argument, as indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-The function signature is `remove_duplicates(arr: list) -> list:`.
-The function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The function uses a loop and the `not in` operator to remove duplicates.
+It starts by initializing an empty list named `result` with the line `result = []`.
+This list will be used to store the unique elements from the input list.
 
-The core logic of the function is implemented using a loop and the `not in` operator.
-The function initializes an empty list `result = []`.
-Then, it iterates over each element in the input list `arr`.
-For each element, it checks if the element is not already in the `result` list using the `not in` operator: `if element not in result:`.
-If the element is not in the `result` list, it appends the element to the `result` list: `result.append(element)`.
-This way, the `result` list will contain all the unique elements from the `arr` list in their original order.
+Next, the function enters a loop with `for element in arr:`.
+In each iteration of the loop, it checks if the current element is already in the `result` list with `if element not in result:`.
+If the element is not in the `result` list, it means this is the first occurrence of the element, so it is added to the `result` list with `result.append(element)`.
+If the element is already in the `result` list, it means this is a duplicate, so it is skipped.
 
-The function also includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-The note in the docstring explicitly mentions that the function preserves the original order of elements in the list.
+Finally, after the loop has processed all elements in the input list, the function returns the `result` list with `return result`.
+This list contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as the function preserves the original order of elements.
 
-==== Code Review
-
-Here's a code review of the `remove_duplicates` function from `solution_03.py` and its corresponding tests in `test_solution_03.py` based on the provided topics:
-
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of the `not in` operator and a loop to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_security` checks for a TypeError when the function is called with `None` as an argument, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n^2) due to the use of the `not in` operator within a loop.
-This could be a performance issue for large lists.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_performance` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions and operators to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function may not scale well for large lists due to its O(n^2) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using a loop and the `not in` operator to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-It's important to note that it preserves the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is missing.
-The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will raise a TypeError.
-However, this scenario is tested in the `test_remove_duplicates_security` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-However, its time complexity makes it less suitable for use with large lists.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+The doctests show that the function correctly removes duplicates from a list of integers and a list of strings while preserving the original order of elements.
 
 ==== Advantages & Disadvantages
 
+The method used in the provided Python code is to remove duplicates from a list by using a loop and the "not in" operator.
+This approach leverages the properties of lists in Python, which are ordered collections of elements.
+
 **Advantages:**
 
-1. **Readability**: The code is quite readable and easy to understand.
-It uses the loop and `not in` operator approach, which is a common Python idiom.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because it includes elements in the new list based on their occurrence in the original list.
 
-2. **Preserving Order**: Unlike some other methods for removing duplicates, this method preserves the original order of elements in the list.
+2. **Readability**: The code is quite readable and easy to understand.
+The use of a loop and the "not in" operator is a common idiom that many Python developers are familiar with.
 
-3. **Performance**: The function has a time complexity of O(n^2) due to the use of the `not in` operator within a loop.
-This could be a performance issue for large lists, but for small to medium-sized lists, it should perform adequately.
-
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+3. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will raise a TypeError.
+1. **Efficiency**: The use of the "not in" operator inside the loop results in a time complexity of O(n^2), where n is the number of elements in the list.
+This is because for each element in the list, the "not in" operator performs a linear search to check if it is in the new list.
+This makes the method less efficient for large lists.
 
-In conclusion, while this method is simple, preserves the order of elements, and has good performance for small to medium-sized lists, it lacks error handling for non-list inputs and may not perform well for large lists.
+2. **No Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
+
+3. **Additional Memory Usage**: This method creates a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
 ==== Complexity Analysis
 
-The time and space complexity for the `remove_duplicates` function in the `solution_03.py` file are as follows:
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n^2).
-This is because for each element in the list, the function performs a linear search using the `not in` operator to check if the element is already in the result list.
-This operation is O(n), and since it's done for each of the n elements in the list, the overall time complexity is O(n^2).
+The time complexity of this function is O(n^2), where n is the number of elements in the list.
+This is because the function uses a loop to iterate over the list and the `not in` operator inside the loop to check if an element is already in the `result` list.
+The `not in` operator performs a linear search on the `result` list, which takes O(n) time.
+Since this operation is performed for each of the n elements in the input list, the overall time complexity is O(n^2).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new list named `result` that can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new list that can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_03.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses a loop and the "not in" operator to remove duplicates, which is a straightforward operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the "not in" operator to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n^2), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the "not in" operator.
+
+14. **Zoom Out**: The overall approach of using a loop and the "not in" operator to remove duplicates is appropriate for this problem.
+However, if efficiency is a concern, especially for large lists, a different approach might be more suitable.
 
 === Solution 04
 
@@ -573,122 +605,114 @@ include::./solution_04.py[lines=21..]
 
 ==== Explanation
 
-The Python code provided is part of a solution to remove duplicate elements from a list.
-The function `remove_duplicates(arr: list) -> list:` is the main function in the file `solution_04.py`.
-This function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list.
+The function uses the `itertools.groupby()` function to achieve this.
 
-The function begins by checking if the input is a list and if it's not empty.
-If the input is not a list or is empty, it raises a TypeError.
-This is done with the following code:
+The function takes a list as an argument, as indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-[source,python,linenums]
-----
-if not isinstance(arr, list) or len(arr) == 0:
-    raise TypeError('Input list is empty or nonexistent.')
-----
+The function starts by checking if the input is a valid list and is not empty.
+If the input is not a list or is an empty list, it raises a `TypeError` with the line `if not isinstance(arr, list) or len(arr) == 0: raise TypeError('Input list is empty or nonexistent.')`.
 
-After validating the input, the function sorts the list and uses the `itertools.groupby()` function to group consecutive duplicate elements together.
-The `groupby()` function returns an iterator that produces pairs of a key and groups.
-The key is the element in the list, and the group is an iterator that produces all occurrences of the key.
-The function only keeps the keys, effectively removing duplicates.
-This is done with the following code:
+Next, the function sorts the input list with the line `arr.sort()`.
+This is necessary because the `itertools.groupby()` function groups consecutive elements that are the same.
+By sorting the list, all duplicate elements are grouped together.
 
-[source,python,linenums]
-----
-arr.sort()
-return [key for key, group in itertools.groupby(arr)]
-----
+The function then uses a list comprehension with the `itertools.groupby()` function to create a new list that contains only one instance of each group of duplicate elements.
+This is done with the line `return [key for key, group in itertools.groupby(arr)]`.
+Here, `itertools.groupby(arr)` generates a sequence of tuples, each containing a unique element from the sorted list (the key) and an iterator that generates all instances of the element (the group).
+The list comprehension includes only the key in the new list, effectively removing duplicates.
 
-In summary, the `remove_duplicates` function in `solution_04.py` provides a Python solution to remove duplicates from a list using the `itertools.groupby()` function.
-It first validates the input, then sorts the list, and finally uses the `groupby()` function to remove duplicates.
-
-==== Code Review
-
-Here's a code review of the `remove_duplicates` function from `solution_04.py` and its corresponding tests in `test_solution_04.py` based on the provided topics:
-
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of the `itertools.groupby()` function to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_with_empty_list` checks for a TypeError when the function is called with an empty list, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n log n) due to the use of the `sort()` method and `itertools.groupby()`.
-This could be a performance issue for large lists.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_with_large_input` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about not preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function scales well for large lists due to its O(n log n) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using the `itertools.groupby()` function to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-However, it's important to note that it does not preserve the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is present.
-The function will raise a TypeError if it is called with an argument that is not a list.
-This scenario is tested in the `test_remove_duplicates_with_empty_list` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+Finally, the function returns the new list, which contains the same elements as the input list but with all duplicates removed.
+However, the order of elements in the returned list is not the same as the input list, as the function does not preserve the original order of elements.
 
 ==== Advantages & Disadvantages
 
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list using the `itertools.groupby()` function.
+
 **Advantages:**
 
-1. **Efficiency**: The `itertools.groupby()` function is a built-in Python function that is highly optimized for performance.
-It groups consecutive duplicate elements together, which can be more efficient than methods that need to check the entire list for each element.
+1. **Efficiency**: The `itertools.groupby()` function is a built-in Python function that is optimized for performance.
+It groups consecutive equal elements together in a single pass, making it an efficient solution for removing duplicates from a list.
 
 2. **Simplicity**: The code is straightforward and easy to understand.
-It uses built-in Python functions, which are familiar to most Python developers.
+It uses built-in Python functions and does not require any additional libraries or complex data structures.
 
-3. **Readability**: The use of built-in functions like `itertools.groupby()` and `list.sort()` makes the code more readable and maintainable.
+3. **Generality**: The function can handle lists containing any type of elements that can be compared for equality and sorted, not just integers or strings.
 
 **Disadvantages:**
 
-1. **Order of Elements**: This method sorts the list before removing duplicates, which changes the original order of elements.
-If the order of elements is important, this method would not be suitable.
+1. **Order Preservation**: The function does not preserve the original order of elements in the list.
+This is because it sorts the list before applying the `itertools.groupby()` function.
+If preserving the original order is a requirement, this function would not be suitable.
 
-2. **Not In-Place**: This method creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **Error Handling**: The function raises a `TypeError` if the input is not a list or is an empty list.
+However, it does not handle other potential errors, such as elements that cannot be compared for equality or sorted.
 
-3. **TypeError for Empty List**: The function raises a TypeError if the input list is empty.
-Depending on the use case, it might be more appropriate to simply return an empty list when the input list is empty.
+3. **In-place Operation**: The function does not remove duplicates in-place.
+Instead, it creates a new list that contains the unique elements.
+This could lead to increased memory usage if the input list is large.
 
 ==== Complexity Analysis
 
-The time and space complexity for the `remove_duplicates` function in the `solution_04.py` file are as follows:
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list using the `itertools.groupby()` function.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n log n).
-This is because the function sorts the list, which has a time complexity of O(n log n) in Python.
-The `itertools.groupby()` function then iterates over the sorted list once, which is an O(n) operation.
-However, the dominant term here is O(n log n), so that's the overall time complexity.
+The time complexity of this function is O(n log n), where n is the number of elements in the list.
+This is because the function sorts the list, which is an O(n log n) operation in Python.
+The `itertools.groupby()` function and the list comprehension both have a time complexity of O(n), but these are dominated by the sorting operation.
+Therefore, the overall time complexity is O(n log n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new list that can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new list that can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_04.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `itertools.groupby()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `itertools.groupby()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n log n), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `itertools.groupby()` function.
+
+14. **Zoom Out**: The overall approach of using the `itertools.groupby()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 05
 
@@ -701,144 +725,113 @@ include::./solution_05.py[lines=21..]
 
 ==== Explanation
 
-The provided Python code is part of a solution to remove duplicate elements from a list.
-The main function in the file `solution_05.py` is `remove_duplicates(arr: list) -> list:`.
-This function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `itertools.filterfalse()` function from Python's built-in `itertools` module to achieve this.
 
-The function begins by initializing an empty list `result = []`.
-This list will be used to store the unique elements from the input list.
+The function `remove_duplicates` takes a list `arr` as an argument.
+It initializes an empty list `result` to store the unique elements from the input list.
 
-[source,python,linenums]
-----
-result = []
-----
+Inside the `remove_duplicates` function, there is a nested function `already_in_result(x)`.
+This function checks if an element `x` is already in the `result` list.
+If `x` is in `result`, it returns `True`.
+Otherwise, it appends `x` to `result` and returns `False`.
 
-The function then defines a nested function `already_in_result(x)`.
-This function takes an element `x` as an argument and checks if `x` is already in the `result` list.
-If `x` is in the `result` list, it returns `True`.
-Otherwise, it appends `x` to the `result` list and returns `False`.
+The `remove_duplicates` function then uses the `itertools.filterfalse()` function to filter out the elements from the input list `arr` that are already in the `result` list.
+The `itertools.filterfalse()` function takes two arguments: a function and an iterable.
+It applies the function to every item of the iterable and returns an iterator for the items for which the function returns `False`.
+In this case, the function is `already_in_result` and the iterable is `arr`.
 
-[source,python,linenums]
-----
-def already_in_result(x):
-    if x in result:
-        return True
-    else:
-        result.append(x)
-        return False
-----
-
-After defining the nested function, the main function uses the `itertools.filterfalse()` function to filter out the elements from the input list that are already in the `result` list.
-The `filterfalse()` function takes two arguments: a function and an iterable.
-It applies the function to every item of the iterable and returns an iterator that produces only the items for which the function returned `False`.
-
-[source,python,linenums]
-----
-list(itertools.filterfalse(already_in_result, arr))
-----
-
-Finally, the function returns the `result` list, which now contains all the unique elements from the input list.
-
-[source,python,linenums]
-----
-return result
-----
-
-In summary, the `remove_duplicates` function in `solution_05.py` provides a Python solution to remove duplicates from a list using the `itertools.filterfalse()` function.
-It first initializes an empty list to store the unique elements, then defines a nested function to check if an element is already in the result list, and finally uses the `filterfalse()` function to filter out the duplicates.
-The function preserves the original order of elements in the list.
-
-==== Code Review
-
-Here's a code review of the `remove_duplicates` function from `solution_05.py` and its corresponding tests in `test_solution_05.py` based on the provided topics:
-
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of the `itertools.filterfalse()` function to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_security` checks for a TypeError when the function is called with `None`, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n^2) due to the use of the `in` operator within a loop.
-This could be a performance issue for large lists.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_performance` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function may not scale well for large lists due to its O(n^2) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using the `itertools.filterfalse()` function to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-However, it's important to note that it does preserve the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is present.
-The function will raise a TypeError if it is called with `None`.
-This scenario is tested in the `test_remove_duplicates_security` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+Finally, the `remove_duplicates` function returns the `result` list, which contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as the function preserves the original order of elements.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_05.py` is to use the `itertools.filterfalse()` function to filter out duplicate elements from the list.
-Here are the advantages and disadvantages of this method:
+The method used in the code from `solution_05.py` is to remove duplicates from a list by using the `itertools.filterfalse()` function.
+This approach leverages the properties of lists in Python and the built-in `itertools` module.
 
 **Advantages:**
 
-1. **Preserving Order**: This method preserves the original order of elements in the list, which could be a requirement in some cases.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because it includes elements in the new list based on their occurrence in the original list.
 
 2. **Readability**: The code is quite readable and easy to understand.
-It uses the `itertools.filterfalse()` function, which is a common Python idiom.
+The use of `itertools.filterfalse()` is a common idiom that many Python developers are familiar with.
 
-3. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-4. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+3. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Performance**: The function has a time complexity of O(n^2) due to the use of the `in` operator within a loop.
-This could be a performance issue for large lists.
+1. **Efficiency**: The use of the `itertools.filterfalse()` function inside the loop results in a time complexity of O(n^2), where n is the number of elements in the list.
+This is because for each element in the list, the `itertools.filterfalse()` function performs a linear search to check if it is in the new list.
+This makes the method less efficient for large lists.
 
-2. **Space Complexity**: The function creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **No Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
 
-3. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
+3. **Additional Memory Usage**: This method creates a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
 ==== Complexity Analysis
 
-The time and space complexity for the `remove_duplicates` function in the `solution_05.py` file are as follows:
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `itertools.filterfalse()` function from Python's built-in `itertools` module to achieve this.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n^2).
-This is because for each element in the list, the function performs a linear search using the `in` operator to check if the element is already in the `result` list.
-This operation is O(n), and since it's done for each of the n elements in the list, the overall time complexity is O(n^2).
+The time complexity of this function is O(n^2), where n is the number of elements in the list.
+This is because for each element in the list, the `itertools.filterfalse()` function performs a linear search to check if it is in the new list.
+This makes the method less efficient for large lists.
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
-The space complexity of the function is O(n).
-This is because the function creates a new list that can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_05.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable names `arr`, `result`, and `already_in_result` are descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list operations and uses built-in Python functions, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `itertools.filterfalse()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `itertools.filterfalse()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n^2), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `itertools.filterfalse()` function.
+
+14. **Zoom Out**: The overall approach of using the `itertools.filterfalse()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 06
 
@@ -851,128 +844,114 @@ include::./solution_06.py[lines=21..]
 
 ==== Explanation
 
-The provided Python code is part of a solution to remove duplicate elements from a list.
-The main function in the file `solution_06.py` is `remove_duplicates(arr: list) -> list:`.
-This function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list.
+The function uses the `itertools.groupby()` function from Python's built-in `itertools` module to achieve this.
 
-The function begins by sorting the input list with `arr.sort()`.
-This is necessary for the next step, which uses the `itertools.groupby()` function.
-The `groupby()` function groups consecutive duplicate elements together, but it requires the input to be sorted.
+The function `remove_duplicates` takes a list `arr` as an argument.
+It starts by sorting the input list with the line `arr.sort()`.
+This is necessary because the `itertools.groupby()` function groups consecutive elements that are the same.
+By sorting the list, all duplicate elements are grouped together.
 
-[source,python,linenums]
-----
-arr.sort()
-----
+Next, the function uses a list comprehension with the `itertools.groupby()` function to create a new list that contains only one instance of each group of duplicate elements.
+This is done with the line `return [next(group) for key, group in itertools.groupby(arr)]`.
+Here, `itertools.groupby(arr)` generates a sequence of tuples, each containing a unique element from the sorted list (the key) and an iterator that generates all instances of the element (the group).
+The list comprehension includes only the first element of each group in the new list, effectively removing duplicates.
 
-Next, the function uses a list comprehension with the `itertools.groupby()` function to create a new list with duplicates removed.
-The `groupby()` function returns an iterator that produces pairs of a key and groups.
-The key is the element in the list, and the group is an iterator that produces all occurrences of the key.
-By using a list comprehension with `groupby()`, the function only keeps the keys, effectively removing duplicates.
+Finally, the function returns the new list, which contains the same elements as the input list but with all duplicates removed.
+However, the order of elements in the returned list is not the same as the input list, as the function does not preserve the original order of elements.
+This is noted in the function's docstring.
 
-[source,python,linenums]
-----
-return [next(group) for key, group in itertools.groupby(arr)]
-----
-
-The function also includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-The note in the docstring explicitly mentions that the function does not preserve the original order of elements in the list.
-
-In summary, the `remove_duplicates` function in `solution_06.py` provides a Python solution to remove duplicates from a list using the `itertools.groupby()` function.
-It first sorts the input list, then uses the `groupby()` function to remove duplicates.
-The function does not preserve the original order of elements in the list.
-
-==== Code Review
-
-Here's a code review of the `remove_duplicates` function from `solution_06.py` and its corresponding tests in `test_solution_06.py` based on the provided topics:
-
-1. **Readability**: The code is very readable.
-The function name is descriptive, and the logic is simple and straightforward.
-The use of the `itertools.groupby()` function to remove duplicates is a common Python idiom, which should be familiar to most Python developers.
-
-2. **Maintainability**: The function is easy to maintain due to its simplicity.
-There are no complex dependencies or side effects, which makes it easy to modify if needed.
-
-3. **Security**: There are no apparent security issues with this function.
-It doesn't use any insecure functions or methods, and it doesn't handle any sensitive data.
-The test `test_remove_duplicates_security` checks for a TypeError when the function is called with `None`, which is a good practice.
-
-4. **Speed and Performance**: The function has a time complexity of O(n log n) due to the use of the `sort()` method and `itertools.groupby()`.
-This could be a performance issue for large lists.
-The performance of the function is also tested with a large input in the `test_remove_duplicates_performance` test.
-
-5. **Documentation**: The function is well-documented with a docstring that explains what the function does, its parameters, return value, and a note about preserving the order of elements.
-It also includes doctest examples that can be used to test the function.
-
-6. **Reinventing the Wheel**: The function uses built-in Python functions to achieve its goal, so it's not reinventing the wheel.
-
-7. **Reliability**: The function seems reliable as it uses built-in Python functions which are well-tested and reliable.
-The reliability of the function is also tested in various scenarios in the test file.
-
-8. **Scalability**: The function may not scale well for large lists due to its O(n log n) time complexity.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python idiom of using the `itertools.groupby()` function to remove duplicates from a list, which is a good practice.
-
-11. **Test Coverage and Test Quality**: The function includes doctest examples, which provide some test coverage.
-The test file also includes a comprehensive set of tests that cover various scenarios, including edge cases, large inputs, and random inputs.
-This indicates a high quality of test coverage.
-
-12. **Fit for Purpose**: The function fits its purpose of removing duplicates from a list.
-However, it's important to note that it does not preserve the original order of elements, which could be a requirement in some cases.
-
-13. **Notice What’s Missing**: Error handling is present.
-The function will raise a TypeError if it is called with `None`.
-This scenario is tested in the `test_remove_duplicates_security` test.
-
-14. **Zoom Out**: Looking at the bigger picture, this function fits well in a utility module where it can be imported and used in different parts of the application.
-The tests are well-organized and cover a wide range of scenarios, which helps ensure the reliability of the function.
+In summary, the `remove_duplicates` function provides an efficient way to remove duplicates from a list in Python, but it does not preserve the original order of elements.
+It does this by sorting the list and then using a list comprehension with the `itertools.groupby()` function to create a new list that includes only the first occurrence of each element in the input list.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_06.py` is to use the `itertools.groupby()` function to remove duplicate elements from the list.
-Here are the advantages and disadvantages of this method:
+The method used in the provided Python code is to remove duplicates from a list by using Python's built-in `itertools.groupby()` function.
+This approach leverages the properties of lists in Python and the built-in `itertools` module.
 
 **Advantages:**
 
-1. **Efficiency**: The `itertools.groupby()` function is a built-in Python function that is highly optimized for performance.
-It groups consecutive duplicate elements together, which can be more efficient than methods that need to check the entire list for each element.
+1. **Efficiency**: The `itertools.groupby()` function is a built-in Python function that is optimized for performance.
+It groups consecutive equal elements together in a single pass, making it an efficient solution for removing duplicates from a list.
 
 2. **Simplicity**: The code is straightforward and easy to understand.
-It uses built-in Python functions, which are familiar to most Python developers.
+It uses built-in Python functions and does not require any additional libraries or complex data structures.
 
-3. **Readability**: The use of built-in functions like `itertools.groupby()` and `list.sort()` makes the code more readable and maintainable.
+3. **Generality**: The function can handle lists containing any type of elements that can be compared for equality and sorted, not just integers or strings.
 
 **Disadvantages:**
 
-1. **Order of Elements**: This method sorts the list before removing duplicates, which changes the original order of elements.
-If the order of elements is important, this method would not be suitable.
+1. **Order Preservation**: The function does not preserve the original order of elements in the list.
+This is because it sorts the list before applying the `itertools.groupby()` function.
+If preserving the original order is a requirement, this function would not be suitable.
 
-2. **Not In-Place**: This method creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
 
-3. **Performance**: The function has a time complexity of O(n log n) due to the use of the `sort()` method and `itertools.groupby()`.
-This could be a performance issue for large lists.
+3. **Additional Memory Usage**: This method creates a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
 ==== Complexity Analysis
 
-The time and space complexity for the `remove_duplicates` function in the `solution_05.py` file are as follows:
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list using the `itertools.groupby()` function.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n^2).
-This is because for each element in the list, the function performs a linear search using the `in` operator to check if the element is already in the `result` list.
-This operation is O(n), and since it's done for each of the n elements in the list, the overall time complexity is O(n^2).
+The time complexity of this function is O(n log n), where n is the number of elements in the list.
+This is because the function sorts the list, which is an O(n log n) operation in Python.
+The `itertools.groupby()` function and the list comprehension both have a time complexity of O(n), but these are dominated by the sorting operation.
+Therefore, the overall time complexity is O(n log n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new list that can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new list that can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
 
-The time and space complexity for the `remove_duplicates` function in the `solution_06.py` file are as follows:
+The code in question is a Python function `remove_duplicates` from the file `solution_06.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `itertools.groupby()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `itertools.groupby()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n log n), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `itertools.groupby()` function.
+
+14. **Zoom Out**: The overall approach of using the `itertools.groupby()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 07
 
@@ -985,132 +964,117 @@ include::./solution_07.py[lines=21..]
 
 ==== Explanation
 
-The provided Python code is part of a solution to remove duplicate elements from a list.
-The main function in the file `solution_07.py` is `remove_duplicates(arr: list) -> list:`.
-This function takes a list `arr` as an argument and returns a new list with duplicates removed.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `collections.Counter()` function from Python's built-in `collections` module to achieve this.
 
-The function uses the `collections.Counter()` function to count the occurrences of each element in the list.
-The `Counter()` function returns a dictionary where the keys are the elements in the list and the values are their counts.
+The function `remove_duplicates` takes a list `arr` as an argument.
+It starts by checking if the input list is empty or `None` with the line `if not arr:`.
+If the input list is empty or `None`, it raises a `TypeError` with the message 'Input list cannot be empty or None'.
 
-[source,python,linenums]
-----
-Counter(arr)
-----
+Next, the function uses the `collections.Counter()` function to count the occurrences of each element in the list.
+The `collections.Counter()` function returns a dictionary where the keys are the unique elements in the list and the values are the counts of their occurrences.
+This is done with the line `Counter(arr)`.
 
-The function then uses the `keys()` method on the `Counter` object to get a list of the unique elements in the list.
+The function then uses the `keys()` method on the `Counter` object to get a list of the unique elements.
 The `keys()` method returns a view object that displays a list of all the keys in the dictionary.
+This is done with the line `Counter(arr).keys()`.
 
-[source,python,linenums]
-----
-Counter(arr).keys()
-----
-
-Finally, the function converts this view object to a list and returns it.
-This list contains the unique elements from the input list, effectively removing duplicates.
-
-[source,python,linenums]
-----
-return list(Counter(arr).keys())
-----
-
-The function also includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-The note in the docstring explicitly mentions that the function preserves the original order of elements in the list.
-
-In summary, the `remove_duplicates` function in `solution_07.py` provides a Python solution to remove duplicates from a list using the `collections.Counter()` function.
-It counts the occurrences of each element in the list, gets the unique elements, and returns them as a list.
-The function preserves the original order of elements in the list.
-
-==== Code Review
-
-**1. Readability (Understandability):** The code is highly readable.
-It uses clear variable names (`arr`) and function names (`remove_duplicates`).
-The function is broken down into small, manageable chunks, and the logic is easy to follow.
-
-**2. Maintainability:** The code is easy to maintain.
-It is simple and does not have any complex dependencies or side effects.
-The function is a pure function, which makes it easy to modify if needed.
-
-**3. Security:** The function checks if the input list is empty or None and raises a TypeError if it is.
-This is a good practice as it prevents potential errors from propagating through the rest of the code.
-
-**4. Speed and Performance:** The function is efficient.
-It uses the `collections.Counter()` function to count the occurrences of each element in the list in one pass, which is more efficient than methods that need to check the entire list for each element.
-
-**5. Documentation:** The function includes a comprehensive docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-**6. Reinventing the Wheel:** The function does not reinvent the wheel.
-It uses the built-in `collections.Counter()` function to count the occurrences of each element in the list.
-
-**7. Reliability:** The function is reliable.
-It has been tested with various inputs, including edge cases, and has been found to work correctly in all cases.
-
-**8. Scalability:** The function scales well with the size of the input list.
-Its time and space complexity are both O(n), which means it can handle large inputs efficiently.
-
-**9. Reusability:** The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-**10. Patterns:** The function follows the common Python pattern of using the `collections.Counter()` function to count the occurrences of each element in a list.
-
-**11. Test Coverage and Quality:** The test coverage is comprehensive.
-The tests cover various scenarios, including edge cases, and use both positive and negative testing.
-The tests are well-structured and easy to understand.
-
-**12. Fit for Purpose:** The function is fit for its purpose of removing duplicates from a list.
-It does this efficiently and correctly.
-
-**13. Notice What’s Missing:** There doesn't seem to be anything missing from the code.
-It handles all expected inputs and edge cases, and it includes comprehensive tests and documentation.
-
-**14. Zoom Out:** Looking at the bigger picture, the function fits well into the overall project.
-It provides a solution to a common problem and does so in a way that is efficient, readable, and maintainable.
+Finally, the function converts the keys view object to a list and returns it.
+This is done with the line `return list(Counter(arr).keys())`.
+The returned list contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as the `collections.Counter()` function preserves the original order of elements.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_07.py` is to use the `collections.Counter()` function to remove duplicate elements from the list.
-Here are the advantages and disadvantages of this method:
+The method used in the provided Python code is to remove duplicates from a list by using Python's built-in `collections.Counter` function.
+This approach leverages the properties of dictionaries in Python, which are an unordered collection of unique key-value pairs.
 
 **Advantages:**
 
-1. **Efficiency**: The `collections.Counter()` function is a built-in Python function that is highly optimized for performance.
-It counts the occurrences of each element in the list in one pass, which can be more efficient than methods that need to check the entire list for each element.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because as of Python 3.7, dictionaries maintain the insertion order of keys.
 
-2. **Preserving Order**: This method preserves the original order of elements in the list, which could be a requirement in some cases.
+2. **Efficiency**: The time complexity of this method is O(n), where n is the number of elements in the list.
+This is because converting a list to a `Counter` and extracting keys from a `Counter` are both linear operations in Python.
 
 3. **Readability**: The code is quite readable and easy to understand.
-It uses the `collections.Counter()` function, which is a common Python idiom.
+The use of Python's built-in `collections.Counter` function is a common idiom that many Python developers are familiar with.
 
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+4. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Space Complexity**: The function creates a new dictionary and a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+1. **No Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
 
-2. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will raise a TypeError.
+2. **Additional Memory Usage**: This method creates a new `Counter` and a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
+
+3. **Type Limitation**: This method works well for lists containing immutable types (like integers, strings, and tuples) because such types can be used as dictionary keys.
+However, it would fail for lists containing mutable types (like lists or dictionaries) because such types cannot be used as dictionary keys in Python.
 
 ==== Complexity Analysis
 
-The time and space complexity for the `remove_duplicates` function in the `solution_07.py` file are as follows:
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `collections.Counter()` function from Python's built-in `collections` module to achieve this.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n).
-This is because the function iterates over the list once to count the occurrences of each element using the `collections.Counter()` function.
-The `keys()` method and the conversion of the keys view to a list are both O(1) operations, so they do not affect the overall time complexity.
+The time complexity of this function is O(n), where n is the number of elements in the list.
+This is because the function iterates over the list once to create the `Counter` object, which is an O(n) operation.
+The `keys()` method and the list conversion are also O(n) operations.
+Therefore, the overall time complexity is O(n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a `Counter` object and a new list, both of which can contain up to n elements.
+Therefore, the overall space complexity is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new dictionary to store the counts of each element, which can potentially contain all n elements from the input list.
-The function also creates a new list to store the unique elements, which can also potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_07.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `collections.Counter()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `collections.Counter()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `collections.Counter()` function.
+
+14. **Zoom Out**: The overall approach of using the `collections.Counter()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 08
 
@@ -1123,136 +1087,117 @@ include::./solution_08.py[lines=21..]
 
 ==== Explanation
 
-The Python code provided is a function named `remove_duplicates` that takes a list as an argument and returns a new list with all duplicate elements removed.
-The function is defined in the file `solution_08.py`.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list.
+The function uses the `numpy.unique()` function to achieve this.
 
-The function uses the `numpy.unique()` function to remove duplicates.
-The `numpy.unique()` function is a built-in function in the NumPy library, which is a powerful library for numerical computations in Python.
-This function returns an array of unique elements in the input array, in the order of their appearance if the `return_index` argument is not provided.
+The function `remove_duplicates` takes a list `arr` as an argument.
+This is indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-Here is the function signature:
+The function uses the `numpy.unique()` function to find the unique elements in the input list.
+The `numpy.unique()` function returns a sorted array of unique elements from the input array.
+This is done with the line `np.unique(arr)`.
 
-[source,python,linenums]
-----
-def remove_duplicates(arr: list) -> list:
-----
+However, the `numpy.unique()` function returns a numpy array, not a list.
+Therefore, the function converts the numpy array back to a list using the `list()` function.
+This is done with the line `return list(np.unique(arr))`.
 
-The function takes one argument, `arr`, which is the list from which duplicates need to be removed.
-The function returns a new list with duplicates removed.
+Finally, the function returns the new list, which contains the same elements as the input list but with all duplicates removed.
+However, the order of elements in the returned list is not the same as the input list, as the `numpy.unique()` function does not preserve the original order of elements.
+This is noted in the function's docstring.
 
-Inside the function, the `numpy.unique()` function is called with `arr` as the argument.
-The result is a NumPy array with unique elements from `arr`.
-This array is then converted back to a list using the `list()` function, and this list is returned as the result.
-
-Here is the main line of code inside the function:
-
-[source,python,linenums]
-----
-return list(np.unique(arr))
-----
-
-The function includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-The function preserves the original order of elements in the list, which could be a requirement in some cases.
-This is mentioned in the note in the docstring.
-
-==== Code Review
-
-**1. Readability (Understandability):** The code in `solution_08.py` is highly readable.
-It uses clear variable names (`arr`) and function names (`remove_duplicates`).
-The function is broken down into small, manageable chunks, and the logic is easy to follow.
-
-**2. Maintainability:** The code is easy to maintain.
-It is simple and does not have any complex dependencies or side effects.
-The function is a pure function, which makes it easy to modify if needed.
-
-**3. Security:** The function does not have any apparent security issues.
-However, it assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
-This could be improved by adding a check at the beginning of the function to ensure that the input is a list.
-
-**4. Speed and Performance:** The function is efficient.
-It uses the `numpy.unique()` function to remove duplicates from the list, which is a built-in function in the NumPy library that is highly optimized for performance.
-
-**5. Documentation:** The function includes a comprehensive docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-**6. Reinventing the Wheel:** The function does not reinvent the wheel.
-It uses the built-in `numpy.unique()` function to remove duplicates from the list.
-
-**7. Reliability:** The function is reliable.
-It has been tested with various inputs, including edge cases, and has been found to work correctly in all cases.
-
-**8. Scalability:** The function scales well with the size of the input list.
-Its time and space complexity are both O(n log n), which means it can handle large inputs efficiently.
-
-**9. Reusability:** The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-**10. Patterns:** The function follows the common Python pattern of using the `numpy.unique()` function to remove duplicates from a list.
-
-**11. Test Coverage and Quality:** The test coverage is comprehensive.
-The tests cover various scenarios, including edge cases, and use both positive and negative testing.
-The tests are well-structured and easy to understand.
-
-**12. Fit for Purpose:** The function is fit for its purpose of removing duplicates from a list.
-It does this efficiently and correctly.
-
-**13. Notice What’s Missing:** There doesn't seem to be anything missing from the code.
-It handles all expected inputs and edge cases, and it includes comprehensive tests and documentation.
-
-**14. Zoom Out:** Looking at the bigger picture, the function fits well into the overall project.
-It provides a solution to a common problem and does so in a way that is efficient, readable, and maintainable.
+In summary, the `remove_duplicates` function provides an efficient way to remove duplicates from a list in Python, but it does not preserve the original order of elements.
+It does this by converting the list to a numpy array, finding the unique elements using the `numpy.unique()` function, and then converting the numpy array back to a list.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_08.py` is to use the `numpy.unique()` function to remove duplicate elements from the list.
-Here are the advantages and disadvantages of this method:
+The method used in the provided Python code is to remove duplicates from a list by using the `numpy.unique()` function.
+This approach leverages the properties of numpy arrays, which are a type of data structure that comes with the numpy library in Python.
 
 **Advantages:**
 
-1. **Efficiency**: The `numpy.unique()` function is a built-in NumPy function that is highly optimized for performance.
-It identifies all unique elements in the input array in one pass, which can be more efficient than methods that need to check the entire list for each element.
+1. **Efficiency**: The `numpy.unique()` function is a built-in numpy function that is optimized for performance.
+It can be faster than equivalent Python built-in functions, especially for large arrays.
 
-2. **Preserving Order**: This method preserves the original order of elements in the list, which could be a requirement in some cases.
+2. **Simplicity**: The code is straightforward and easy to understand.
+It uses built-in numpy functions and does not require any additional libraries or complex data structures.
 
-3. **Readability**: The code is quite readable and easy to understand.
-It uses the `numpy.unique()` function, which is a common idiom in numerical computations in Python.
-
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+3. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Dependency on NumPy**: This method relies on the NumPy library.
-While NumPy is a common library in Python, especially for numerical computations, it might not be available in all environments.
-If the code needs to be run in an environment where NumPy is not available, this method would not be suitable.
+1. **Dependency**: This method relies on the numpy library, which is an external library in Python.
+This means that the numpy library must be installed and imported for this function to work.
 
-2. **Not In-Place**: This method creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **Type Limitation**: The `numpy.unique()` function works well for lists containing numbers and strings, but it may not work as expected for lists containing other types of objects.
 
-3. **Performance with Large Lists**: While `numpy.unique()` is efficient, it may not perform well with extremely large lists due to the need to sort the list first.
+3. **Order Preservation**: The `numpy.unique()` function does not preserve the original order of elements in the list.
+It returns the unique elements in sorted order.
+If preserving the original order is a requirement, this function would not be suitable.
 
-4. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
+4. **Additional Memory Usage**: This method converts the list to a numpy array, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new array might be more suitable.
 
 ==== Complexity Analysis
 
-The time and space complexity for the `remove_duplicates` function in the `solution_08.py` file are as follows:
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list using the `numpy.unique()` function.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n log n).
-This is because the `numpy.unique()` function sorts the array before finding unique elements, and sorting an array has a time complexity of O(n log n) in the average case.
+The time complexity of this function is primarily determined by the `numpy.unique()` function.
+The `numpy.unique()` function sorts the array and then removes duplicates, which has a time complexity of O(n log n), where n is the number of elements in the list.
+Therefore, the overall time complexity of the function is O(n log n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new numpy array with the `numpy.unique()` function, which can contain up to n elements.
+The function then converts this numpy array back to a list, which also has a space complexity of O(n).
+Therefore, the overall space complexity of the function is O(n).
 
-The space complexity of the function is O(n).
-This is because the `numpy.unique()` function returns a new array that can potentially contain all n elements from the input array.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_08.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `numpy.unique()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `numpy.unique()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n log n), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `numpy.unique()` function.
+
+14. **Zoom Out**: The overall approach of using the `numpy.unique()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 09
 
@@ -1265,137 +1210,117 @@ include::./solution_09.py[lines=21..]
 
 ==== Explanation
 
-The Python code provided is a function named `remove_duplicates` that takes a list as an argument and returns a new list with all duplicate elements removed.
-The function is defined in the file `solution_09.py`.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `pandas.unique()` function from the pandas library to achieve this.
 
-The function uses the `pandas.unique()` function to remove duplicates.
-The `pandas.unique()` function is a built-in function in the pandas library, which is a powerful library for data manipulation and analysis in Python.
-This function returns an array of unique elements in the input array, in the order of their appearance.
+The function `remove_duplicates` takes a list `arr` as an argument.
+This is indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-Here is the function signature:
+The function uses the `pandas.unique()` function to find the unique elements in the input list.
+The `pandas.unique()` function returns a numpy array of unique elements from the input array.
+This is done with the line `pd.unique(arr)`.
 
-[source,python,linenums]
-----
-def remove_duplicates(arr: list) -> list:
-----
+However, the `pandas.unique()` function returns a numpy array, not a list.
+Therefore, the function converts the numpy array back to a list using the `tolist()` method.
+This is done with the line `return pd.unique(arr).tolist()`.
 
-The function takes one argument, `arr`, which is the list from which duplicates need to be removed.
-The function returns a new list with duplicates removed.
+Finally, the function returns the new list, which contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as the `pandas.unique()` function preserves the original order of elements.
+This is noted in the function's docstring.
 
-Inside the function, the `pandas.unique()` function is called with `arr` as the argument.
-The result is a pandas Series with unique elements from `arr`.
-This Series is then converted back to a list using the `tolist()` method, and this list is returned as the result.
-
-Here is the main line of code inside the function:
-
-[source,python,linenums]
-----
-return pd.unique(arr).tolist()
-----
-
-The function includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-The function preserves the original order of elements in the list, which could be a requirement in some cases.
-This is mentioned in the note in the docstring.
-
-==== Code Review
-
-**1. Readability (Understandability):** The code in `solution_09.py` is highly readable.
-It uses clear variable names (`arr`) and function names (`remove_duplicates`).
-The function is broken down into small, manageable chunks, and the logic is easy to follow.
-
-**2. Maintainability:** The code is easy to maintain.
-It is simple and does not have any complex dependencies or side effects.
-The function is a pure function, which makes it easy to modify if needed.
-
-**3. Security:** The function does not have any apparent security issues.
-However, it assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
-This could be improved by adding a check at the beginning of the function to ensure that the input is a list.
-
-**4. Speed and Performance:** The function is efficient.
-It uses the `pandas.unique()` function to remove duplicates from the list, which is a built-in function in the pandas library that is highly optimized for performance.
-
-**5. Documentation:** The function includes a comprehensive docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-**6. Reinventing the Wheel:** The function does not reinvent the wheel.
-It uses the built-in `pandas.unique()` function to remove duplicates from the list.
-
-**7. Reliability:** The function is reliable.
-It has been tested with various inputs, including edge cases, and has been found to work correctly in all cases.
-
-**8. Scalability:** The function scales well with the size of the input list.
-Its time and space complexity are both O(n), which means it can handle large inputs efficiently.
-
-**9. Reusability:** The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-**10. Patterns:** The function follows the common Python pattern of using the `pandas.unique()` function to remove duplicates from a list.
-
-**11. Test Coverage and Quality:** The test coverage is comprehensive.
-The tests cover various scenarios, including edge cases, and use both positive and negative testing.
-The tests are well-structured and easy to understand.
-
-**12. Fit for Purpose:** The function is fit for its purpose of removing duplicates from a list.
-It does this efficiently and correctly.
-
-**13. Notice What’s Missing:** There doesn't seem to be anything missing from the code.
-It handles all expected inputs and edge cases, and it includes comprehensive tests and documentation.
-
-**14. Zoom Out:** Looking at the bigger picture, the function fits well into the overall project.
-It provides a solution to a common problem and does so in a way that is efficient, readable, and maintainable.
+In summary, the `remove_duplicates` function provides an efficient way to remove duplicates from a list in Python, and it preserves the original order of elements.
+It does this by converting the list to a numpy array using the `pandas.unique()` function, and then converting the numpy array back to a list.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_09.py` is to use the `pandas.unique()` function to remove duplicate elements from a list.
-Here are the advantages and disadvantages of this method:
+The method used in the provided Python code is to remove duplicates from a list by using the `pandas.unique()` function.
+This approach leverages the properties of pandas Series, which is a one-dimensional labeled array capable of holding any data type.
 
 **Advantages:**
 
-1. **Efficiency**: The `pandas.unique()` function is a built-in pandas function that is highly optimized for performance.
-It identifies all unique elements in the input array in one pass, which can be more efficient than methods that need to check the entire list for each element.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because `pandas.unique()` returns unique elements in the order of their occurrence in the input.
 
-2. **Preserving Order**: This method preserves the original order of elements in the list, which could be a requirement in some cases.
+2. **Efficiency**: The `pandas.unique()` function is a built-in pandas function that is optimized for performance.
+It can be faster than equivalent Python built-in functions, especially for large arrays.
 
 3. **Readability**: The code is quite readable and easy to understand.
-It uses the `pandas.unique()` function, which is a common idiom in data analysis in Python.
+The use of Python's built-in pandas function is a common idiom that many Python developers are familiar with.
 
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+4. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Dependency on pandas**: This method relies on the pandas library.
-While pandas is a common library in Python, especially for data analysis, it might not be available in all environments.
-If the code needs to be run in an environment where pandas is not available, this method would not be suitable.
+1. **Dependency**: This method relies on the pandas library, which is an external library in Python.
+This means that the pandas library must be installed and imported for this function to work.
 
-2. **Not In-Place**: This method creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **Type Limitation**: The `pandas.unique()` function works well for lists containing numbers and strings, but it may not work as expected for lists containing other types of objects.
 
-3. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
+3. **Additional Memory Usage**: This method converts the list to a pandas Series, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new array might be more suitable.
 
 ==== Complexity Analysis
 
-The code in question is the `remove_duplicates` function from `solution_09.py`, which uses the `pandas.unique()` function to remove duplicate elements from a list.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `pandas.unique()` function from the pandas library to achieve this.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n).
-This is because the `pandas.unique()` function iterates over the list once to identify all unique elements.
-The `tolist()` method, which converts the pandas Series to a list, also has a time complexity of O(n).
+The time complexity of this function is primarily determined by the `pandas.unique()` function.
+The `pandas.unique()` function internally uses a hash-based algorithm, which has a time complexity of O(n), where n is the number of elements in the list.
 Therefore, the overall time complexity of the function is O(n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new numpy array with the `pandas.unique()` function, which can contain up to n elements.
+The function then converts this numpy array back to a list, which also has a space complexity of O(n).
+Therefore, the overall space complexity of the function is O(n).
 
-The space complexity of the function is O(n).
-This is because the `pandas.unique()` function returns a new pandas Series that can potentially contain all n elements from the input list.
-The `tolist()` method then creates a new list from this Series, which can also potentially contain all n elements.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_09.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `pandas.unique()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `pandas.unique()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `pandas.unique()` function.
+
+14. **Zoom Out**: The overall approach of using the `pandas.unique()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 10
 
@@ -1408,140 +1333,121 @@ include::./solution_10.py[lines=21..]
 
 ==== Explanation
 
-The Python code provided is a function named `remove_duplicates` that takes a list as an argument and returns a new list with all duplicate elements removed.
-The function is defined in the file `solution_10.py`.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `pandas.drop_duplicates()` function to achieve this.
 
-The function uses the `pandas.Series` constructor and the `drop_duplicates()` method to remove duplicates.
-The `pandas.Series` constructor is used to convert the input list into a pandas Series, and the `drop_duplicates()` method is a built-in pandas method that removes duplicate values from a Series.
+The function `remove_duplicates` takes a list `arr` as an argument.
+This is indicated by the line `def remove_duplicates(arr: list) -> list:`.
+Here, `arr` is the input list that may contain duplicate elements.
 
-Here is the function signature:
+The function uses the `pandas.Series()` function to convert the input list into a pandas Series.
+A pandas Series is a one-dimensional labeled array capable of holding any data type.
+This is done with the line `pd.Series(arr)`.
 
-[source,python,linenums]
-----
-def remove_duplicates(arr: list) -> list:
-----
+Next, the function uses the `drop_duplicates()` method on the pandas Series to remove duplicate elements.
+The `drop_duplicates()` method returns a new Series with duplicate values removed, keeping only the first occurrence of each value.
+This is done with the line `pd.Series(arr).drop_duplicates()`.
 
-The function takes one argument, `arr`, which is the list from which duplicates need to be removed.
-The function returns a new list with duplicates removed.
+However, the `drop_duplicates()` method returns a pandas Series, not a list.
+Therefore, the function converts the pandas Series back to a list using the `tolist()` method.
+This is done with the line `return pd.Series(arr).drop_duplicates().tolist()`.
 
-Inside the function, the `pandas.Series` constructor is called with `arr` as the argument to convert the list into a pandas Series.
-The `drop_duplicates()` method is then called on this Series to remove duplicate values.
-The result is a pandas Series with unique elements from `arr`.
-This Series is then converted back to a list using the `tolist()` method, and this list is returned as the result.
+Finally, the function returns the new list, which contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as the `drop_duplicates()` method preserves the original order of elements.
+This is noted in the function's docstring.
 
-Here is the main line of code inside the function:
-
-[source,python,linenums]
-----
-return pd.Series(arr).drop_duplicates().tolist()
-----
-
-The function includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-The function preserves the original order of elements in the list, which could be a requirement in some cases.
-This is mentioned in the note in the docstring.
-
-==== Code Review
-
-**Code Review of `remove_duplicates` function in `solution_10.py`**
-
-1. **Readability (Understandability)**: The code is highly readable.
-It uses clear variable names (`arr`) and function names (`remove_duplicates`).
-The function is broken down into small, manageable chunks, and the logic is easy to follow.
-
-2. **Maintainability**: The code is easy to maintain.
-It is simple and does not have any complex dependencies or side effects.
-The function is a pure function, which makes it easy to modify if needed.
-
-3. **Security**: The function does not have any apparent security issues.
-However, it assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
-This could be improved by adding a check at the beginning of the function to ensure that the input is a list.
-
-4. **Speed and Performance**: The function is efficient.
-It uses the `pandas.Series` constructor and the `drop_duplicates()` method to remove duplicates from the list, which are built-in pandas functions that are highly optimized for performance.
-
-5. **Documentation**: The function includes a comprehensive docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-6. **Reinventing the Wheel**: The function does not reinvent the wheel.
-It uses the built-in `pandas.Series` constructor and `drop_duplicates()` method to remove duplicates from the list.
-
-7. **Reliability**: The function is reliable.
-It has been tested with various inputs, including edge cases, and has been found to work correctly in all cases.
-
-8. **Scalability**: The function scales well with the size of the input list.
-Its time and space complexity are both O(n), which means it can handle large inputs efficiently.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python pattern of using the `pandas.Series` constructor and `drop_duplicates()` method to remove duplicates from a list.
-
-11. **Test Coverage and Quality**: The test coverage is comprehensive.
-The tests cover various scenarios, including edge cases, and use both positive and negative testing.
-The tests are well-structured and easy to understand.
-
-12. **Fit for Purpose**: The function is fit for its purpose of removing duplicates from a list.
-It does this efficiently and correctly.
-
-13. **Notice What's Missing**: There doesn't seem to be anything missing from the code.
-It handles all expected inputs and edge cases, and it includes comprehensive tests and documentation.
-
-14. **Zoom Out**: Looking at the bigger picture, the function fits well into the overall project.
-It provides a solution to a common problem and does so in a way that is efficient, readable, and maintainable.
+In summary, the `remove_duplicates` function provides an efficient way to remove duplicates from a list in Python, and it preserves the original order of elements.
+It does this by converting the list to a pandas Series, removing duplicates using the `drop_duplicates()` method, and then converting the pandas Series back to a list.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_10.py` is to use the `pandas.Series` constructor and the `drop_duplicates()` method to remove duplicate elements from a list.
-Here are the advantages and disadvantages of this method:
+The method used in the provided Python code is to remove duplicates from a list by using the `pandas.drop_duplicates()` function.
+This approach leverages the properties of pandas Series, which is a one-dimensional labeled array capable of holding any data type.
 
 **Advantages:**
 
-1. **Efficiency**: The `pandas.Series` constructor and `drop_duplicates()` method are built-in pandas functions that are highly optimized for performance.
-They identify all unique elements in the input array in one pass, which can be more efficient than methods that need to check the entire list for each element.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because `pandas.drop_duplicates()` returns unique elements in the order of their occurrence in the input.
 
-2. **Preserving Order**: This method preserves the original order of elements in the list, which could be a requirement in some cases.
+2. **Efficiency**: The `pandas.drop_duplicates()` function is a built-in pandas function that is optimized for performance.
+It can be faster than equivalent Python built-in functions, especially for large arrays.
 
 3. **Readability**: The code is quite readable and easy to understand.
-It uses the `pandas.Series` constructor and `drop_duplicates()` method, which are common idioms in data analysis in Python.
+The use of Python's built-in pandas function is a common idiom that many Python developers are familiar with.
 
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+4. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Dependency on pandas**: This method relies on the pandas library.
-While pandas is a common library in Python, especially for data analysis, it might not be available in all environments.
-If the code needs to be run in an environment where pandas is not available, this method would not be suitable.
+1. **Dependency**: This method relies on the pandas library, which is an external library in Python.
+This means that the pandas library must be installed and imported for this function to work.
 
-2. **Not In-Place**: This method creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **Type Limitation**: The `pandas.drop_duplicates()` function works well for lists containing numbers and strings, but it may not work as expected for lists containing other types of objects.
 
-3. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
+3. **Additional Memory Usage**: This method converts the list to a pandas Series, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new array might be more suitable.
 
 ==== Complexity Analysis
 
-The code in question is the `remove_duplicates` function from `solution_10.py`, which uses the `pandas.Series` constructor and the `drop_duplicates()` method to remove duplicate elements from a list.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a list while preserving the original order of elements.
+The function uses the `pandas.drop_duplicates()` function to achieve this.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n).
-This is because the `pandas.Series` constructor iterates over the list once to convert it into a pandas Series, and the `drop_duplicates()` method also iterates over the Series once to identify all unique elements.
-The `tolist()` method, which converts the pandas Series to a list, also has a time complexity of O(n).
+The time complexity of this function is primarily determined by the `pandas.drop_duplicates()` function.
+The `pandas.drop_duplicates()` function internally uses a hash-based algorithm, which has a time complexity of O(n), where n is the number of elements in the list.
 Therefore, the overall time complexity of the function is O(n).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new pandas Series with the `pandas.Series()` function, which can contain up to n elements.
+The function then converts this pandas Series back to a list, which also has a space complexity of O(n).
+Therefore, the overall space complexity of the function is O(n).
 
-The space complexity of the function is O(n).
-This is because the `pandas.Series` constructor creates a new pandas Series that can potentially contain all n elements from the input list.
-The `drop_duplicates()` method returns a new pandas Series that contains the unique elements from the input Series, which can also potentially contain all n elements.
-The `tolist()` method then creates a new list from this Series, which can also potentially contain all n elements.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_10.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses the `pandas.drop_duplicates()` function to remove duplicates, which is an efficient operation in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `pandas.drop_duplicates()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `pandas.drop_duplicates()` function.
+
+14. **Zoom Out**: The overall approach of using the `pandas.drop_duplicates()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 === Solution 11
 
@@ -1554,138 +1460,112 @@ include::./solution_11.py[lines=21..]
 
 ==== Explanation
 
-The Python code provided is a function named `remove_duplicates` that takes a list as an argument and returns a new list with all duplicate elements removed.
-The function is defined in the file `solution_11.py`.
+The provided Python code defines a function named `remove_duplicates`.
+This function is designed to remove duplicate elements from a given list while preserving the original order of the elements.
+The function takes a list `arr` as an argument.
 
-The function uses list comprehension in combination with the `enumerate()` function to remove duplicates.
+The function uses a list comprehension in combination with the `enumerate()` function to achieve this.
 The `enumerate()` function is a built-in Python function that adds a counter to an iterable and returns it as an enumerate object.
-This object can then be used in a for loop, which is what the list comprehension does.
+This object contains pairs of index and value for each item in the original list.
 
-Here is the function signature:
+The list comprehension iterates over the enumerated list with `for i, v in enumerate(arr)`.
+Here, `i` is the index and `v` is the value of each item in the list.
 
-[source,python,linenums]
-----
-def remove_duplicates(arr: list) -> list:
-----
+The list comprehension includes a condition `if arr.index(v) == i`.
+This condition checks if the first occurrence of the value `v` in the list is at the current index `i`.
+If it is, the value `v` is included in the new list.
+If it's not, this means that the value `v` has already occurred earlier in the list, so it's a duplicate and is not included in the new list.
 
-The function takes one argument, `arr`, which is the list from which duplicates need to be removed.
-The function returns a new list with duplicates removed.
-
-Inside the function, a list comprehension is used to iterate over the enumerated input list.
-For each element in the list, the list comprehension checks if the index of the first occurrence of the element in the list is equal to the current index.
-If it is, the element is included in the new list.
-If it's not, the element is a duplicate and is not included in the new list.
-
-Here is the main line of code inside the function:
-
-[source,python,linenums]
-----
-return [v for i, v in enumerate(arr) if arr.index(v) == i]
-----
-
-The function includes a docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-The function preserves the original order of elements in the list, which could be a requirement in some cases.
-This is mentioned in the note in the docstring.
-
-==== Code Review
-
-**Code Review of `remove_duplicates` function in `solution_11.py`**
-
-1. **Readability (Understandability)**: The code is highly readable.
-It uses clear variable names (`arr`) and function names (`remove_duplicates`).
-The function is broken down into small, manageable chunks, and the logic is easy to follow.
-
-2. **Maintainability**: The code is easy to maintain.
-It is simple and does not have any complex dependencies or side effects.
-The function is a pure function, which makes it easy to modify if needed.
-
-3. **Security**: The function does not have any apparent security issues.
-However, it assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
-This could be improved by adding a check at the beginning of the function to ensure that the input is a list.
-
-4. **Speed and Performance**: The function is efficient for small to medium-sized lists.
-However, for large lists, the function's performance could be improved.
-The function uses the `index()` method inside the list comprehension, which is an O(n) operation as it searches for the first occurrence of an element in the list.
-Since this operation is performed for each element in the list (also an O(n) operation), the overall time complexity is O(n^2).
-
-5. **Documentation**: The function includes a comprehensive docstring that provides a brief description of what the function does, its arguments, its return value, some doctest examples, and a note.
-The doctest examples can be used to test the function by running the file with the `-v` option in the Python interpreter.
-
-6. **Reinventing the Wheel**: The function does not reinvent the wheel.
-It uses the built-in `enumerate()` function and list comprehension to remove duplicates from a list.
-
-7. **Reliability**: The function is reliable.
-It has been tested with various inputs, including edge cases, and has been found to work correctly in all cases.
-
-8. **Scalability**: The function scales well with the size of the input list for small to medium-sized lists.
-However, for large lists, the function's performance could be improved.
-
-9. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
-
-10. **Patterns**: The function follows the common Python pattern of using list comprehension and the `enumerate()` function to remove duplicates from a list.
-
-11. **Test Coverage and Quality**: The test coverage is comprehensive.
-The tests cover various scenarios, including edge cases, and use both positive and negative testing.
-The tests are well-structured and easy to understand.
-
-12. **Fit for Purpose**: The function is fit for its purpose of removing duplicates from a list.
-It does this efficiently and correctly.
-
-13. **Notice What's Missing**: There doesn't seem to be anything missing from the code.
-It handles all expected inputs and edge cases, and it includes comprehensive tests and documentation.
-
-14. **Zoom Out**: Looking at the bigger picture, the function fits well into the overall project.
-It provides a solution to a common problem and does so in a way that is efficient, readable, and maintainable.
+Finally, the function returns the new list, which contains the same elements as the input list but with all duplicates removed.
+The order of elements in the returned list is the same as the input list, as the list comprehension preserves the original order of elements.
 
 ==== Advantages & Disadvantages
 
-The method used in the `remove_duplicates` function from `solution_11.py` is to use list comprehension in combination with the `enumerate()` function to remove duplicate elements from a list.
-Here are the advantages and disadvantages of this method:
+The method used in the provided Python code is to remove duplicates from a list by using list comprehension with the `enumerate()` function.
+This approach leverages the properties of lists in Python and the built-in `enumerate()` function.
 
 **Advantages:**
 
-1. **Efficiency**: The `enumerate()` function and list comprehension are built-in Python features that are highly optimized for performance.
-They identify all unique elements in the input list in one pass, which can be more efficient than methods that need to check the entire list for each element.
+1. **Order Preservation**: This method preserves the original order of elements in the list.
+This is because it iterates over the list in order and includes an element in the new list only if its first occurrence is at the current index.
 
-2. **Preserving Order**: This method preserves the original order of elements in the list, which could be a requirement in some cases.
+2. **Readability**: The code is quite readable and easy to understand.
+The use of list comprehension is a common idiom that many Python developers are familiar with.
 
-3. **Readability**: The code is quite readable and easy to understand.
-It uses list comprehension and the `enumerate()` function, which are common idioms in Python.
-
-4. **Simplicity**: The function is simple and does not have any complex dependencies or side effects, which makes it easy to maintain and modify if needed.
-
-5. **Reusability**: The function is highly reusable.
-It's a pure function that doesn't have any side effects or dependencies, so it can be easily reused in other parts of the code.
+3. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
 
 **Disadvantages:**
 
-1. **Performance with Large Lists**: While `enumerate()` and list comprehension are efficient, they may not perform well with extremely large lists due to the need to iterate over the list for each element.
+1. **Efficiency**: The `arr.index(v)` operation inside the list comprehension has a time complexity of O(n), where n is the number of elements in the list.
+Since this operation is performed for each element in the list, the overall time complexity of the function is O(n^2), which is not efficient for large lists.
 
-2. **Not In-Place**: This method creates a new list to store the result, which increases the space complexity.
-If memory usage is a concern, an in-place method would be more suitable.
+2. **No Error Handling**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more robust.
 
-3. **Error Handling**: The function assumes that the input is always a list.
-If the function is called with an argument that is not a list, it will not raise an error but will not work as expected.
+3. **Additional Memory Usage**: This method creates a new list, which can lead to additional memory usage.
+If memory usage is a concern, an in-place solution that removes duplicates without creating a new list might be more suitable.
 
 ==== Complexity Analysis
 
-The code in question is the `remove_duplicates` function from `solution_11.py`, which uses list comprehension in combination with the `enumerate()` function to remove duplicate elements from a list.
+The provided Python code defines a function named `remove_duplicates` that removes duplicate elements from a given list while preserving the original order of the elements.
+The function uses a list comprehension in combination with the `enumerate()` function and the `index()` method of the list.
 
 **Time Complexity:**
-
-The time complexity of the function is O(n^2).
-This is because the function uses the `index()` method inside the list comprehension, which is an O(n) operation as it searches for the first occurrence of an element in the list.
-Since this operation is performed for each element in the list (also an O(n) operation), the overall time complexity is O(n^2).
+The time complexity of this function is primarily determined by the `index()` method inside the list comprehension.
+The `index()` method has a time complexity of O(n), where n is the number of elements in the list.
+Since this operation is performed for each element in the list, the overall time complexity of the function is O(n^2).
 
 **Space Complexity:**
+The space complexity of this function is O(n).
+This is because the function creates a new list with the list comprehension, which can contain up to n elements.
+Therefore, the overall space complexity of the function is O(n).
 
-The space complexity of the function is O(n).
-This is because the function creates a new list that can potentially contain all n elements from the input list.
-The space used by the rest of the code (variables, etc.) is constant, so the overall space complexity is O(n).
+==== Code Review
+
+The code in question is a Python function `remove_duplicates` from the file `solution_11.py`.
+This function takes a list as an input and returns a new list with all the duplicate elements removed.
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand.
+The function name `remove_duplicates` clearly indicates its purpose.
+The code is broken down into small, manageable chunks, and the variable name `arr` is descriptive enough in this context.
+
+2. **Maintainability**: The function is simple and does not have any dependencies, which makes it easy to maintain.
+It does not rely on any external configuration or systems.
+
+3. **Security**: As the function only performs basic list and set operations, there are no apparent security concerns or vulnerabilities.
+
+4. **Speed and Performance**: The function uses list comprehension and the `enumerate()` function to remove duplicates, which are efficient operations in Python.
+However, the function could be optimized for large lists by using a more efficient method to remove duplicates, such as using a set or a dictionary.
+
+5. **Documentation**: The function includes a docstring that explains its purpose, arguments, return value, and usage.
+The docstring also includes doctests, which are simple tests included in the docstring that can be run to test the function.
+However, more detailed comments could be added to explain the logic of the code.
+
+6. **Reinventing the Wheel**: The function leverages Python's built-in list data type and the `enumerate()` function to remove duplicates, avoiding unnecessary complexity and duplication.
+
+7. **Reliability**: The function does not include any error handling.
+It assumes that the input is always a list, which may not always be the case.
+Adding error handling to check the input type could make the function more reliable.
+
+8. **Scalability**: The function should scale well for large inputs as the time complexity of the function is O(n^2), where n is the number of elements in the list.
+However, for very large lists, the time complexity could become a bottleneck.
+
+9. **Reusability**: The function is general-purpose and can be used to remove duplicates from any list in Python.
+
+10. **Patterns**: The code follows standard Python conventions and does not appear to violate any common patterns or style guides.
+
+11. **Test Coverage and Quality**: The function includes doctests in the docstring, which is a good start.
+However, more comprehensive tests could be added to a separate test file to cover edge cases and error scenarios.
+
+12. **Fit for Purpose**: The function appears to provide the intended functionality of removing duplicates from a list.
+However, without knowing the exact requirements or use cases, it's hard to say if it meets all expectations.
+
+13. **Notice What's Missing**: The function does not handle the case where the input is not a list.
+It also does not handle the case where the list contains mutable types, which cannot be compared for equality using the `index()` function.
+
+14. **Zoom Out**: The overall approach of using list comprehension and the `enumerate()` function to remove duplicates is appropriate for this problem.
+However, if preserving the original order of elements is a requirement, a different approach might be more suitable.
 
 == Tests
 
