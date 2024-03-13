@@ -123,7 +123,7 @@ If `n` is not a positive integer, the function raises a `ValueError`.
 This is done to ensure that the group size is valid.
 Here is the code snippet that performs this check:
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -134,7 +134,7 @@ The list comprehension iterates over the string from the start to the end with a
 For each iteration, it slices the string from the current index to the current index plus `n` and adds the resulting substring to the list.
 Here is the code snippet that performs this operation:
 
-[source,python]
+[source,python,linenums]
 ----
 return [s[i:i + n] for i in range(0, len(s), n)]
 ----
@@ -257,7 +257,7 @@ If `n` is not a positive integer, the function raises a `ValueError`.
 This is done to ensure that the group size is valid.
 Here is the code snippet that performs this check:
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -267,7 +267,7 @@ After validating the input, the function uses the `re.findall()` function from t
 The `re.findall()` function is used with a regular expression that matches any `n` characters to split the string into chunks of `n` characters.
 Here is the code snippet that performs this operation:
 
-[source,python]
+[source,python,linenums]
 ----
 return re.findall(f'.{{1,{n}}}', s)
 ----
@@ -383,7 +383,7 @@ This function is designed to split a given string into groups of a specified num
 The function `split_string_into_groups` is defined with two parameters: `s` and `n`.
 Here, `s` is the input string that needs to be split, and `n` is the number of consecutive characters each split group should contain.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -392,7 +392,7 @@ The function starts by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with an appropriate error message.
 This is a form of input validation to ensure that the function behaves as expected.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -402,7 +402,7 @@ The core functionality of the function is implemented using the `textwrap.wrap()
 This function wraps the input string such that each line contains at most `n` characters.
 The result is a list of output lines, each of which is a group of `n` consecutive characters from the input string.
 
-[source,python]
+[source,python,linenums]
 ----
 return textwrap.wrap(s, n)
 ----
@@ -519,7 +519,7 @@ include::./solution_03.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_03.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -528,7 +528,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -537,7 +537,7 @@ if n <= 0:
 The function then initializes an empty list `result` to store the groups and an empty string `group` to store the current group.
 It iterates over each character in the string `s`, adding the current character to the current group.
 
-[source,python]
+[source,python,linenums]
 ----
 for c in s:
     group += c
@@ -546,7 +546,7 @@ for c in s:
 If the current group has `n` characters, it adds the group to the `result` list and resets the `group` string.
 After the loop, if there are any remaining characters in the `group` string, it adds the group to the `result` list.
 
-[source,python]
+[source,python,linenums]
 ----
 if len(group) == n:
     result.append(group)
@@ -664,7 +664,7 @@ include::./solution_04.py[lines=21..]
 The provided Python code is a generator function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_04.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(string: str, n: int) -> Generator[str, None, None]:
 ----
@@ -673,7 +673,7 @@ The function takes two parameters: `string`, the input string to be split, and `
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -682,7 +682,7 @@ if n <= 0:
 The function then uses a loop to iterate over the string with a step size of `n`.
 In each iteration, it yields the next group of `n` characters from the string.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(0, len(string), n):
     yield string[i:i + n]
@@ -808,7 +808,7 @@ include::./solution_05.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_05.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> Iterator[str]:
 ----
@@ -817,7 +817,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -825,7 +825,7 @@ if n <= 0:
 
 The function then creates an iterator from the input string and uses the `islice` function from the `itertools` module to yield groups of `n` characters from the iterator.
 
-[source,python]
+[source,python,linenums]
 ----
 it = iter(s)
 while True:
@@ -836,7 +836,7 @@ The `islice` function returns an iterator that yields the next `n` items from th
 The `join` method is used to concatenate the characters into a string.
 If the `islice` function returns no items (which happens when all characters from the input string have been consumed), the function breaks out of the loop.
 
-[source,python]
+[source,python,linenums]
 ----
 if not group:
     break
@@ -959,7 +959,7 @@ include::./solution_06.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_06.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -968,7 +968,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -977,7 +977,7 @@ if n <= 0:
 The function then converts the input string into a list of characters.
 If the length of the string is not a multiple of `n`, it adds extra empty strings to the list to make its length a multiple of `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 chars = list(s)
 if len(s) % n != 0:
@@ -986,7 +986,7 @@ if len(s) % n != 0:
 
 Next, the function uses the `numpy.reshape()` function to reshape the list of characters into a 2D array, where each row contains `n` characters.
 
-[source,python]
+[source,python,linenums]
 ----
 arr = np.array(chars).reshape(-1, n)
 ----
@@ -994,7 +994,7 @@ arr = np.array(chars).reshape(-1, n)
 Finally, the function converts each row of the 2D array back into a string and adds it to the result list.
 The `rstrip()` method is used to remove any trailing empty strings that were added earlier.
 
-[source,python]
+[source,python,linenums]
 ----
 result = [''.join(row).rstrip() for row in arr]
 ----
@@ -1114,7 +1114,7 @@ include::./solution_07.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_07.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -1123,7 +1123,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -1133,7 +1133,7 @@ The function then converts the input string into a pandas Series.
 A pandas Series is a one-dimensional labeled array capable of holding any data type.
 It is primarily used for data manipulation and analysis.
 
-[source,python]
+[source,python,linenums]
 ----
 s = pd.Series(list(s))
 ----
@@ -1141,7 +1141,7 @@ s = pd.Series(list(s))
 Next, the function uses the `groupby` method from pandas to group the characters into groups of `n` characters.
 The `groupby` method is a powerful and flexible method in pandas that allows you to group your data based on some criteria.
 
-[source,python]
+[source,python,linenums]
 ----
 groups = s.groupby(s.index // n).agg(''.join)
 ----
@@ -1149,7 +1149,7 @@ groups = s.groupby(s.index // n).agg(''.join)
 Finally, the function converts the groups back into a list of strings and returns it.
 The `tolist` method is used to convert the pandas Series back into a list.
 
-[source,python]
+[source,python,linenums]
 ----
 return groups.tolist()
 ----
@@ -1267,7 +1267,7 @@ include::./solution_08.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_08.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -1276,7 +1276,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -1285,7 +1285,7 @@ if n <= 0:
 The function then uses the `chunked` method from the `more_itertools` library to split the string into chunks of `n` characters.
 The `chunked` method is a utility function that splits an iterable into chunks of a specified size.
 
-[source,python]
+[source,python,linenums]
 ----
 chunks = more_itertools.chunked(s, n)
 ----
@@ -1293,7 +1293,7 @@ chunks = more_itertools.chunked(s, n)
 Next, the function converts each chunk into a string and adds it to the result list.
 This is done using a list comprehension, which is a concise way to create lists in Python.
 
-[source,python]
+[source,python,linenums]
 ----
 result = [''.join(chunk) for chunk in chunks]
 ----
@@ -1413,7 +1413,7 @@ include::./solution_09.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_09.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -1422,7 +1422,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -1431,7 +1431,7 @@ if n <= 0:
 The function then uses the `toolz.partition_all()` method to split the string into chunks of `n` characters.
 The `partition_all()` method is a utility function that splits an iterable into chunks of a specified size.
 
-[source,python]
+[source,python,linenums]
 ----
 chunks = toolz.partition_all(n, s)
 ----
@@ -1439,7 +1439,7 @@ chunks = toolz.partition_all(n, s)
 Next, the function converts each chunk into a string and adds it to the result list.
 This is done using a list comprehension, which is a concise way to create lists in Python.
 
-[source,python]
+[source,python,linenums]
 ----
 result = [''.join(chunk) for chunk in chunks]
 ----
@@ -1559,7 +1559,7 @@ include::./solution_10.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_10.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -1568,7 +1568,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -1577,7 +1577,7 @@ if n <= 0:
 The function then uses the `cytoolz.partition_all()` method to split the string into chunks of `n` characters.
 The `partition_all()` method is a utility function that splits an iterable into chunks of a specified size.
 
-[source,python]
+[source,python,linenums]
 ----
 chunks = partition_all(n, s)
 ----
@@ -1585,7 +1585,7 @@ chunks = partition_all(n, s)
 Next, the function converts each chunk into a string and adds it to the result list.
 This is done using a list comprehension, which is a concise way to create lists in Python.
 
-[source,python]
+[source,python,linenums]
 ----
 result = [''.join(chunk) for chunk in chunks]
 ----
@@ -1705,7 +1705,7 @@ include::./solution_11.py[lines=21..]
 The provided Python code is a function named `split_string_into_groups` that splits a string into groups of `n` consecutive characters.
 This function is part of a module in a file named `solution_11.py`.
 
-[source,python]
+[source,python,linenums]
 ----
 def split_string_into_groups(s: str, n: int) -> list[str]:
 ----
@@ -1714,7 +1714,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -1725,7 +1725,7 @@ The `zip_longest()` method is a utility function that groups elements from multi
 The function creates `n` copies of the same iterator and groups them together.
 The `fillvalue` parameter is used to fill in for missing values when the input string's length is not a multiple of `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 args = [iter(s)] * n
 chunks = zip_longest(*args, fillvalue='')
@@ -1734,7 +1734,7 @@ chunks = zip_longest(*args, fillvalue='')
 Next, the function converts each chunk into a string and adds it to the result list.
 This is done using a list comprehension, which is a concise way to create lists in Python.
 
-[source,python]
+[source,python,linenums]
 ----
 result = [''.join(chunk) for chunk in chunks]
 ----
@@ -1858,7 +1858,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -1867,7 +1867,7 @@ if n <= 0:
 The function then uses list comprehension, `map`, `join`, and `zip` to split the string into chunks of `n` characters.
 It creates `n` copies of the same iterator and groups them together.
 
-[source,python]
+[source,python,linenums]
 ----
 result = [''.join(chunk) for chunk in zip(*[iter(s)] * n)]
 ----
@@ -1875,7 +1875,7 @@ result = [''.join(chunk) for chunk in zip(*[iter(s)] * n)]
 If the string length is not a multiple of `n`, it adds the remaining characters to the result.
 This is done by calculating the remainder of the string length divided by `n` and appending the last `remainder` characters of the string to the result.
 
-[source,python]
+[source,python,linenums]
 ----
 remainder = len(s) % n
 if remainder != 0:
@@ -2000,7 +2000,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -2010,7 +2010,7 @@ The function then uses recursion to split the string into chunks of `n` characte
 It checks if the length of the string is less than or equal to `n`.
 If it is, it returns a list containing the string `s`.
 
-[source,python]
+[source,python,linenums]
 ----
 if len(s) <= n:
     return [s]
@@ -2019,7 +2019,7 @@ if len(s) <= n:
 If the length of the string is greater than `n`, it splits the string into two parts: the first `n` characters and the rest of the string.
 It then recursively calls `split_string_into_groups` on the rest of the string.
 
-[source,python]
+[source,python,linenums]
 ----
 return [s[:n]] + split_string_into_groups(s[n:], n)
 ----
@@ -2148,7 +2148,7 @@ The function takes two parameters: `s`, the input string to be split, and `n`, t
 It begins by checking if `n` is a positive integer.
 If `n` is less than or equal to 0, it raises a `ValueError` with a message indicating that the group size must be a positive integer.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 0:
     raise ValueError("The group size must be a positive integer")
@@ -2157,7 +2157,7 @@ if n <= 0:
 The function then converts the string into a list of characters.
 This is done using the built-in `list` function in Python.
 
-[source,python]
+[source,python,linenums]
 ----
 chars = list(s)
 ----
@@ -2166,7 +2166,7 @@ Next, the function calculates the number of bins or groups that will be created.
 This is done by integer division of the length of the characters list by `n`.
 If the length of the characters list is not a multiple of `n`, an additional bin is added to account for the remaining characters.
 
-[source,python]
+[source,python,linenums]
 ----
 bins = len(chars) // n if len(chars) % n == 0 else len(chars) // n + 1
 ----
@@ -2174,7 +2174,7 @@ bins = len(chars) // n if len(chars) % n == 0 else len(chars) // n + 1
 The function then uses the `pandas.cut()` function to split the range of indices of the characters list into bins.
 The `labels=False` argument is used to return integer indicators of the bins.
 
-[source,python]
+[source,python,linenums]
 ----
 cut = pd.cut(range(len(chars)), bins, labels=False)
 ----
@@ -2183,7 +2183,7 @@ Finally, the function groups the characters by the cut and joins each group into
 This is done using a list comprehension, which is a concise way to create lists in Python.
 The function then returns the list of groups.
 
-[source,python]
+[source,python,linenums]
 ----
 groups = [''.join(chars[i] for i in range(len(chars)) if cut[i] == bin) for bin in range(bins)]
 return groups

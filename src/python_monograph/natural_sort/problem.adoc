@@ -1,0 +1,281 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+
+:description: Sorting for Humans (Natural Sort) Problem
+:keywords: problem, python, sorting, natural sort, human sort, sorting algorithm, string sorting, lexicographical order, numerical order, sorting numbers, sorting strings, sorting lists, sorting algorithms, programming, coding, software development, computer science, algorithms, data structures, python programming, python functions, python libraries, python modules
+
+= {description}
+
+[.lead]
+The task is to create a Python function named `natural_sort` that sorts a list of strings in a way that is intuitive to humans.
+The function should take a list of strings as an input and return a new list with the strings sorted in "natural" order.
+
+In most programming languages, the default sort function sorts strings in lexicographical order.
+This works well for sorting a list of words, but it can produce unexpected results when sorting a list of strings that contain numbers.
+For example, if you use the default sort function to sort the list `['file1.txt', 'file10.txt', 'file2.txt']`, you will get `['file1.txt', 'file10.txt', 'file2.txt']`.
+However, most people would expect the sorted list to be `['file1.txt', 'file2.txt', 'file10.txt']`.
+
+The goal of this task is to create a Python function that sorts a list of strings in a way that is intuitive to humans.
+This is often referred to as "natural" sorting.
+In natural sorting, strings containing numbers are sorted based on the numerical value of the number, not its lexicographical order.
+This means that '10' comes after '2' when sorting a list of strings.
+
+The function should be named `natural_sort` and should take a list of strings as an input.
+The function should return a new list with the strings sorted in natural order.
+The function should not modify the original list.
+
+The function should handle strings that contain any combination of letters, numbers, and special characters.
+The function should also handle strings of different lengths and strings that contain numbers of different lengths.
+
+The function should be efficient and should be able to sort large lists of strings in a reasonable amount of time.
+The function should also be robust and should not crash or produce incorrect results when given invalid input.
+
+The function should be written in Python and should not use any external libraries or modules.
+The function should be compatible with Python 3.10 and later.
+
+The function should be well-documented with comments explaining what the code does.
+The function should also include a docstring that explains what the function does, what its input and output are, and any important details about its implementation.
+
+== Constraints
+
+The constraints for the `natural_sort` function are as follows:
+
+1. The input to the function is a list of strings.
+Each string can contain any combination of letters, numbers, and special characters.
+
+2. The length of the list and the length of the strings in the list can vary.
+However, for practical purposes, you can assume that the length of the list and the length of the strings are within the limits of what can be handled by a Python list on your machine.
+
+3. The function should not modify the original list.
+It should return a new list with the strings sorted in natural order.
+
+4. The function should be efficient and should be able to sort large lists of strings in a reasonable amount of time.
+
+5. The function should be robust and should not crash or produce incorrect results when given invalid input.
+It should handle edge cases gracefully.
+
+6. The function should be written in Python and should not use any external libraries or modules.
+It should only use built-in Python functions and data types.
+
+7. The function should be compatible with Python 3.10 and later.
+
+8. The function should be well-documented with comments explaining what the code does.
+It should also include a docstring that explains what the function does, what its input and output are, and any important details about its implementation.
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+natural_sort(['file1.txt', 'file10.txt', 'file2.txt'])
+----
+
+.Output
+[source,python,linenums]
+----
+['file1.txt', 'file2.txt', 'file10.txt']
+----
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+natural_sort(['image99.png', 'image100.png', 'image101.png', 'image1.png', 'image10.png'])
+----
+
+.Output
+[source,python,linenums]
+----
+['image1.png', 'image10.png', 'image99.png', 'image100.png', 'image101.png']
+----
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+natural_sort(['version1.10', 'version1.2', 'version1.1'])
+----
+
+.Output
+[source,python,linenums]
+----
+['version1.1', 'version1.2', 'version1.10']
+----
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+natural_sort(['task11', 'task111', 'task2', 'task22'])
+----
+
+.Output
+[source,python,linenums]
+----
+['task2', 'task11', 'task22', 'task111']
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+natural_sort(['item1', 'item12', 'item2', 'item22', 'item3', 'item33'])
+----
+
+.Output
+[source,python,linenums]
+----
+['item1', 'item2', 'item3', 'item12', 'item22', 'item33']
+----
+
+== Use-Cases
+
+The `natural_sort` function can be used in a variety of real-world scenarios where sorting of strings in a way that is intuitive to humans is required.
+Here are a few examples:
+
+1. **File Management Systems**: In file management systems, files are often named with a combination of text and numbers (e.g., 'file1.txt', 'file2.txt', 'file10.txt').
+Using `natural_sort` can help display the files in an order that makes sense to the users.
+
+2. **Version Control**: Software versions are often denoted with numbers separated by periods (e.g., 'version1.1', 'version1.2', 'version1.10'). `natural_sort` can be used to display these versions in the correct order.
+
+3. **E-commerce Platforms**: On e-commerce platforms, products might be named with a combination of text and numbers (e.g., 'item1', 'item10', 'item2'). `natural_sort` can help sort these product names in a way that is intuitive to the customers.
+
+4. **Photo Management Applications**: In photo management applications, photos are often named with a combination of text and numbers (e.g., 'image1.png', 'image10.png', 'image2.png').
+Using `natural_sort` can help display the photos in an order that makes sense to the users.
+
+5. **Task Management Systems**: In task management systems, tasks might be named with a combination of text and numbers (e.g., 'task1', 'task10', 'task2'). `natural_sort` can help sort these task names in a way that is intuitive to the users.
+
+== Common Mistakes
+
+When solving the problem of implementing a natural sort function in Python, there are several common mistakes that developers often make:
+
+1. **Ignoring Non-Numeric Characters**: One common mistake is to focus only on the numeric parts of the strings and ignore the non-numeric characters.
+This can lead to incorrect results when sorting strings that contain both numbers and letters.
+
+2. **Not Handling Edge Cases**: Another common mistake is not handling edge cases, such as empty strings, strings with special characters, or strings with leading zeros.
+It's important to consider these cases when implementing the function.
+
+3. **Modifying the Original List**: The problem statement specifies that the function should not modify the original list.
+However, some developers might overlook this requirement and implement a function that sorts the list in-place.
+
+4. **Inefficient Sorting Algorithm**: Implementing an inefficient sorting algorithm can lead to performance issues, especially when sorting large lists.
+It's important to choose a sorting algorithm that is efficient for the specific requirements of natural sorting.
+
+5. **Not Considering Different Lengths of Numbers**: When sorting strings that contain numbers, it's important to consider that the numbers can have different lengths.
+For example, '10' should come after '2' when sorting a list of strings.
+Some developers might overlook this and implement a function that sorts the numbers based on their lexicographical order.
+
+6. **Not Testing with Various Inputs**: It's crucial to test the function with a variety of inputs to ensure it works correctly in all scenarios.
+Some developers might only test the function with a few simple inputs and overlook potential edge cases or unusual inputs.
+
+== Best Practices
+
+When solving the problem of implementing a natural sort function in Python, here are some best practices to consider:
+
+1. **Understand the Problem**: Before you start coding, make sure you fully understand the problem.
+This includes understanding the requirements, constraints, and expected output.
+
+2. **Plan Your Solution**: Don't jump straight into coding.
+Instead, take some time to plan your solution.
+This could involve writing pseudocode, drawing diagrams, or discussing your approach with a colleague.
+
+3. **Choose the Right Data Structures**: The choice of data structures can greatly affect the efficiency of your solution.
+In this case, you might need to use a custom comparator for the sort function, which requires understanding of how Python's sort function works with custom comparators.
+
+4. **Write Clean and Readable Code**: Your code should be easy to read and understand.
+Use meaningful variable names, keep your functions small and focused, and include comments to explain what your code does.
+
+5. **Handle Edge Cases**: Make sure your solution handles edge cases, such as empty strings, strings with special characters, or strings with leading zeros.
+
+6. **Test Your Solution**: After you've implemented your solution, test it with a variety of inputs to make sure it works correctly in all scenarios.
+This includes both normal cases and edge cases.
+
+7. **Optimize Your Solution**: Once you have a working solution, consider whether it can be optimized.
+In this case, you might be able to improve the efficiency of your solution by using a more efficient sorting algorithm or by optimizing the way you extract numbers from the strings.
+
+8. **Document Your Code**: Include a docstring for your function that explains what it does, what its input and output are, and any important details about its implementation.
+This will make it easier for others (and your future self) to understand your code.
+
+9. **Stay Updated with Python Versions**: The problem statement specifies that the function should be compatible with Python 3.6 and later.
+Make sure to stay updated with the latest Python versions and their features, as they might provide new tools or functions that can help you solve the problem more efficiently.
+
+10. **Follow Python's Style Guide (PEP 8)**: Following PEP 8, Python's official style guide, can make your code more readable and consistent.
+This includes rules about indentation, variable naming, line length, and more.
+
+== Follow-up
+
+After implementing the `natural_sort` function, I would recommend the following follow-up steps:
+
+1. **Code Review**: Have your code reviewed by a peer.
+They might spot potential issues or areas for improvement that you may have missed.
+
+2. **Performance Testing**: Test the function with large lists of strings to ensure that it performs well even with large inputs.
+This will help you identify any potential performance bottlenecks.
+
+3. **Edge Case Testing**: Test the function with a variety of edge cases, such as empty strings, strings with special characters, or strings with leading zeros.
+This will help ensure that your function handles all possible inputs correctly.
+
+4. **Documentation**: Ensure that your function is well-documented.
+This includes a clear and concise docstring that explains what the function does, what its inputs and outputs are, and any important details about its implementation.
+
+5. **Refactoring**: After testing and reviewing your code, you might identify areas that could be refactored for improved readability, efficiency, or robustness.
+
+6. **Integration**: Once you're confident in the correctness and performance of your function, integrate it into your larger project or system and test it in that context.
+
+7. **Continuous Learning**: Stay updated with the latest Python versions and their features, as they might provide new tools or functions that can help you solve the problem more efficiently.
+
+Remember, writing the initial implementation of a function is often just the first step.
+Reviewing, testing, and refining your code are all important parts of the development process.
+
+== Related Topics
+
+Related topics for the problem of implementing a natural sort function in Python include:
+
+1. **Python Sorting Algorithms**: Understanding different sorting algorithms in Python can be helpful in implementing the `natural_sort` function efficiently.
+Here is the Python's official documentation on sorting: [How to Sort](https://docs.python.org/3/howto/sorting.html)
+
+2. **Regular Expressions in Python**: Regular expressions can be used to extract numbers from the strings for the purpose of natural sorting.
+Here is the Python's official documentation on regular expressions: [re - Regular expression operations](https://docs.python.org/3/library/re.html)
+
+3. **Python's Built-in Functions**: Understanding Python's built-in functions, especially those related to strings and lists, can be beneficial.
+Here is the Python's official documentation on built-in functions: [Built-in Functions](https://docs.python.org/3/library/functions.html)
+
+4. **Python's String Methods**: Python's string methods can be used to manipulate and process the strings for natural sorting.
+Here is the Python's official documentation on string methods: [String Methods](https://docs.python.org/3/library/stdtypes.html#string-methods)
+
+5. **Python's List Methods**: Python's list methods can be used to sort the list of strings.
+Here is the Python's official documentation on list methods: [List Methods](https://docs.python.org/3/tutorial/datastructures.html)
+
+6. **Python's Style Guide (PEP 8)**: Following PEP 8, Python's official style guide, can make your code more readable and consistent.
+Here is the link to PEP 8: [PEP 8 -- Style Guide for Python Code](https://peps.python.org/pep-0008/)
+
+7. **Python Docstrings**: Understanding how to write good docstrings can be beneficial for documenting your function.
+Here is the Python's official documentation on docstrings: [Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
+
+8. **Unit Testing in Python**: Unit testing can be used to test your function with a variety of inputs to ensure it works correctly in all scenarios.
+Here is the Python's official documentation on unit testing: [unittest — Unit testing framework](https://docs.python.org/3/library/unittest.html)
+
+== References
