@@ -1,5 +1,5 @@
 """
-Python Monograph -> Module -> Init
+Python Monograph -> Sorting for Humans (Natural Sort) -> Init
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 

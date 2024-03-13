@@ -1,5 +1,5 @@
 """
-Python Monograph -> Template -> Tests -> Init
+Python Monograph -> Remove Duplicates from an Array -> Tests -> Init
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 

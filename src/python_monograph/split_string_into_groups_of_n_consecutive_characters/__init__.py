@@ -1,5 +1,5 @@
 """
-Python Monograph -> Template -> Init
+Python Monograph -> Split Strings into Groups of n Consecutive Characters -> Init
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 
