@@ -73,6 +73,8 @@ When optimizing the performance of a Python function that implements a natural s
 
 Remember, it's important to have a working solution before you start optimizing. Also, make sure to measure the performance of your function before and after optimization to ensure that your changes have the desired effect.
 
+// todo: Fill this in
+
 == Solutions
 
 === Solution 00
@@ -82,6 +84,176 @@ Remember, it's important to have a working solution before you start optimizing.
 [source,python,linenums]
 ----
 include::./solution_00.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 05
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_05.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 06
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_06.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 07
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_07.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 08
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_08.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 09
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_09.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+=== Solution 10
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_10.py[lines=21..]
 ----
 
 ==== Explanation

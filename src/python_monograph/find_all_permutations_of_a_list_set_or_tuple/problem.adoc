@@ -1,0 +1,233 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Find All Permutations of a List, Set, or Tuple Problem
+:keywords: problem, python
+
+= {description}
+
+[.lead]
+Permutations and combinations are concepts in combinatorics, a branch of mathematics dealing with counting, arrangements, and combinations of objects. While they are related, they refer to different ways of selecting elements from a set. This problem focuses on permutations, however, it is important to understand the differences.
+
+**Permutations:**
+Permutations refer to arrangements of elements in a specific order. In other words, a permutation is a selection of items from a set where the order matters.
+
+Example: If you have the set stem:[{A, B, C}], the permutations of selecting 2 items from this set would include AB, BA, AC, CA, BC, and CB. Notice how the order of the elements matters in each permutation.
+
+The formula for calculating permutations is often denoted as nPr, where n is the total number of items in the set and r is the number of items being selected. The formula is:
+
+stem:[nPr = n! / (n - r)!]
+
+**Combinations:**
+Combinations, on the other hand, refer to selections of items from a set where the order does not matter. In other words, a combination is a selection of items from a set without considering the arrangement.
+
+Example: Using the same set stem:[{A, B, C}], the combinations of selecting 2 items from this set would include AB, AC, and BC. Notice how the order of the elements is not considered in combinations.
+
+The formula for calculating combinations is often denoted as stem:[nCr] or stem:[C(n, r)], where n is the total number of items in the set and r is the number of items being selected. The formula is:
+
+stem:[nCr = n! / (r! * (n - r)!)]
+
+Alternatively, you can think of it as the number of permutations divided by the number of ways to arrange the selected items, which eliminates the consideration of order.
+
+In summary, permutations involve arrangements where the order matters, while combinations involve selections where the order does not matter.
+
+== Constraints
+
+The constraints for the problem "Find All Permutations of a List of n Lists" could be as follows:
+
+1. The input is a list of n lists, where 1 <= n <= 6. Each list contains unique elements.
+2. The total number of elements across all lists does not exceed 12.
+3. The elements in the lists can be of any data type.
+4. The order of the permutations in the output does not matter.
+5. The function should return an empty list if the input list is empty.
+6. The function should handle the case where some of the lists in the input list are empty.
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+lists = [[1, 2], [3, 4]]
+----
+
+.Output
+[source,python,linenums]
+----
+[[1, 2, 3, 4], [1, 3, 2, 4], [1, 3, 4, 2], [1, 4, 2, 3], [1, 4, 3, 2], [2, 1, 3, 4], [2, 3, 1, 4], [2, 3, 4, 1], [2, 4, 1, 3], [2, 4, 3, 1], [3, 4, 1, 2], [3, 4, 2, 1], [4, 3, 1, 2], [4, 3, 2, 1]]
+----
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+lists = [['a', 'b'], ['c', 'd']]
+----
+
+.Output
+[source,python,linenums]
+----
+[['a', 'b', 'c', 'd'], ['a', 'c', 'b', 'd'], ['a', 'c', 'd', 'b'], ['a', 'd', 'b', 'c'], ['a', 'd', 'c', 'b'], ['b', 'a', 'c', 'd'], ['b', 'c', 'a', 'd'], ['b', 'c', 'd', 'a'], ['b', 'd', 'a', 'c'], ['b', 'd', 'c', 'a'], ['c', 'd', 'a', 'b'], ['c', 'd', 'b', 'a'], ['d', 'c', 'a', 'b'], ['d', 'c', 'b', 'a']]
+----
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+lists = [[1, 2, 3], [4, 5, 6]]
+----
+
+.Output
+[source,python,linenums]
+----
+[[1, 2, 3, 4, 5, 6], [1, 2, 4, 3, 5, 6], [1, 2, 4, 5, 3, 6], [1, 2, 4, 5, 6, 3], [1, 2, 5, 4, 3, 6], [1, 2, 5, 4, 6, 3], [1, 2, 5, 6, 4, 3], [1, 2, 6, 4, 5, 3], [1, 2, 6, 5, 4, 3], ...]
+----
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+lists = [[1], [2], [3]]
+----
+
+.Output
+[source,python,linenums]
+----
+[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+lists = [[1, 2], [], [3, 4]]
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+== Use-Cases
+
+The problem of finding all permutations of a list of n lists has several real-world applications:
+
+1. **Scheduling and Planning**: This problem is similar to scheduling tasks or events. For example, if you have different tasks that can be performed in different orders, you might want to find all possible orders to evaluate which one is the most efficient or meets certain criteria.
+
+2. **Game Theory**: In game theory and decision making, it's often necessary to consider all possible outcomes of a series of events. This problem is similar to finding all possible outcomes.
+
+3. **Genetic Algorithms**: In genetic algorithms, permutations are used to represent possible solutions to a problem. The algorithm then iterates over these permutations to find the best solution.
+
+4. **Cryptography**: In cryptography, permutations are used in the process of encryption and decryption. For example, a simple transposition cipher works by permuting the letters in a message.
+
+5. **Data Analysis**: In data analysis, permutations are used to generate all possible combinations of a dataset for exhaustive search algorithms, Monte Carlo simulations, or to calculate statistical significance.
+
+6. **Software Testing**: In software testing, especially in the case of integration testing, it's often necessary to test all possible sequences of function calls or user actions to ensure the software behaves correctly in all scenarios.
+
+== Common Mistakes
+
+When solving the problem of finding all permutations of a list of n lists, here are some common mistakes to avoid:
+
+1. **Not Handling Empty Lists**: One common mistake is not properly handling the case where some of the lists in the input list are empty. The function should be able to handle this case correctly.
+
+2. **Not Considering All Permutations**: Another common mistake is not considering all possible permutations. It's important to ensure that your solution generates all possible permutations and doesn't miss any.
+
+3. **Not Maintaining Element Order**: The order of elements in each list should be maintained in the permutations. A common mistake is to ignore the order of elements in the original lists.
+
+4. **Inefficient Algorithm**: Generating all permutations can be computationally expensive, especially for large lists. Using an inefficient algorithm can lead to performance issues. It's important to use an efficient algorithm to solve this problem.
+
+5. **Not Handling Different Data Types**: The elements in the lists can be of any data type. A common mistake is to assume that the elements are of a specific type, such as integers.
+
+6. **Not Returning an Empty List for an Empty Input**: If the input list is empty, the function should return an empty list. A common mistake is to not handle this case correctly.
+
+== Best Practices
+
+When solving the problem of finding all permutations of a list of n lists, here are some best practices to consider:
+
+1. **Understand the Problem**: Make sure you understand the problem statement and requirements thoroughly before starting to code. This includes understanding what a permutation is and how it should be applied in this context.
+
+2. **Plan Your Solution**: Before jumping into coding, plan your solution. Write down the steps you need to take and the data structures you need to use. This will help you avoid mistakes and make your code more efficient.
+
+3. **Use Built-in Functions**: Python has built-in functions like `itertools.permutations` that can generate permutations. Using these can make your code more concise and efficient.
+
+4. **Handle Edge Cases**: Make sure your solution handles edge cases, such as when some of the lists in the input list are empty or when the input list itself is empty.
+
+5. **Write Clean Code**: Write your code in a clean and organized manner. Use meaningful variable names, keep your functions small and focused on a single task, and add comments to explain your logic.
+
+6. **Test Your Solution**: After implementing your solution, test it with various test cases to ensure it works as expected. This includes both normal cases and edge cases.
+
+7. **Analyze Time and Space Complexity**: Analyze the time and space complexity of your solution. This will help you understand its efficiency and scalability.
+
+8. **Continuous Learning**: Always be open to learning new ways to solve the problem. There might be more efficient algorithms or data structures that you can learn and apply.
+
+== Follow-up
+
+After solving the problem of finding all permutations of a list of n lists, here are some follow-up actions you could consider:
+
+1. **Optimize Your Solution**: If your initial solution is not efficient, consider ways to optimize it. This could involve using a different algorithm or data structure, or making improvements to your existing code.
+
+2. **Expand Your Test Cases**: Add more test cases to ensure your solution works for all edge cases. This could include cases where the input list is empty, where some of the lists in the input list are empty, or where the lists contain different data types.
+
+3. **Handle Larger Inputs**: The current problem constraints limit the total number of elements across all lists to 12. You could modify your solution to handle larger inputs and analyze its performance.
+
+4. **Parallelize Your Solution**: If the problem size is large, you could consider parallelizing your solution to improve performance. This could involve using multi-threading or distributed computing techniques.
+
+5. **Apply Your Solution to Real-World Problems**: As discussed earlier, this problem has several real-world applications. You could try applying your solution to a real-world problem, such as scheduling tasks, analyzing data, or testing software.
+
+6. **Learn More About Permutations and Combinations**: This problem involves permutations, which is a key concept in combinatorics. You could learn more about permutations, combinations, and other combinatorics topics to improve your problem-solving skills.
+
+7. **Review Python's itertools Module**: Python's `itertools` module provides several functions that can be used to solve this problem. If you haven't used this module before, you could review its documentation and learn how to use its functions.
+
+Remember, the key to becoming a better problem solver is continuous learning and practice.
+
+== Related Topics
+
+Here are some related topics for the problem of finding all permutations of a list of n lists:
+
+1. **Combinatorics**: This is the study of counting, arrangement, and combination. It includes the study of permutations and combinations. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Combinatorics).
+
+2. **Permutations and Combinations**: These are fundamental concepts in combinatorics and are directly related to this problem. You can learn more about them on [Wikipedia](https://en.wikipedia.org/wiki/Permutation) and [Wikipedia](https://en.wikipedia.org/wiki/Combination).
+
+3. **Python's itertools Module**: Python's `itertools` module provides several functions that can be used to solve this problem. You can learn more about it in the [Python documentation](https://docs.python.org/3/library/itertools.html).
+
+4. **Algorithmic Complexity**: Understanding the time and space complexity of your solution is important. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Time_complexity).
+
+5. **Recursion and Backtracking**: These are common techniques used to solve permutation problems. You can learn more about them on [Wikipedia](https://en.wikipedia.org/wiki/Recursion_(computer_science)) and [Wikipedia](https://en.wikipedia.org/wiki/Backtracking).
+
+6. **Parallel Computing**: If the problem size is large, you could consider parallelizing your solution to improve performance. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Parallel_computing).
+
+7. **Scheduling (Operations Research)**: This problem is similar to scheduling tasks or events. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Scheduling_(production_processes)).
+
+8. **Game Theory**: In game theory and decision making, it's often necessary to consider all possible outcomes of a series of events. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Game_theory).
+
+9. **Genetic Algorithms**: In genetic algorithms, permutations are used to represent possible solutions to a problem. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Genetic_algorithm).
+
+10. **Cryptography**: In cryptography, permutations are used in the process of encryption and decryption. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Cryptography).
+
+11. **Data Analysis**: In data analysis, permutations are used to generate all possible combinations of a dataset for exhaustive search algorithms, Monte Carlo simulations, or to calculate statistical significance. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Data_analysis).
+
+12. **Software Testing**: In software testing, especially in the case of integration testing, it's often necessary to test all possible sequences of function calls or user actions to ensure the software behaves correctly in all scenarios. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Software_testing).
+
+== References

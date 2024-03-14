@@ -11,7 +11,7 @@ dependencies = [
     "cytoolz>=0.12.3",
 ]
 readme = "README.md"
-requires-python = ">= 3.10"
+requires-python = ">= 3.12"
 
 [build-system]
 requires = ["hatchling"]
