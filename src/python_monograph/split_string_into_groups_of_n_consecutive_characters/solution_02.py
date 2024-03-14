@@ -41,16 +41,14 @@ def split_string_into_groups(s: str, n: int) -> list[str]:
     Examples:
         >>> split_string_into_groups("HelloWorld", 3)
         ['Hel', 'loW', 'orl', 'd']
-
         >>> split_string_into_groups("Python", 2)
         ['Py', 'th', 'on']
-
-    Doctest:
         >>> split_string_into_groups("1234567890", 4)
         ['1234', '5678', '90']
-
         >>> split_string_into_groups("abc", 1)
         ['a', 'b', 'c']
+        >>> split_string_into_groups("abc", 5)
+        ['abc']
     """
     # Check if `n` is a positive integer.
     if n <= 0:

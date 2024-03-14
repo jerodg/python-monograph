@@ -36,7 +36,7 @@ def split_string_into_groups(s: str, n: int) -> list[str]:
     Raises:
         ValueError: If `n` is not a positive integer.
 
-    Doctest:
+    Examples:
         >>> split_string_into_groups("HelloWorld", 3)
         ['Hel', 'loW', 'orl', 'd']
         >>> split_string_into_groups("Python", 2)
