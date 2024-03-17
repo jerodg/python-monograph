@@ -19,9 +19,11 @@ You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
 from itertools import permutations, product
+from typing import Any, List, Tuple
+
 
 # fixme: This is a WIP
-def find_all_permutations(data: [list | set | tuple]) -> list[list]:
+def find_all_permutations(data: [list | set | tuple]) -> list[tuple[Any, ...]]:
     """
     Generate all possible permutations of the elements across all lists, sets, or tuples using a brute-force approach.
 
@@ -45,10 +47,12 @@ def find_all_permutations(data: [list | set | tuple]) -> list[list]:
     if not all(isinstance(lst, list) for lst in data):
         raise TypeError("Input must be a list of lists")
 
-    # Generate all combinations of elements across all lists
-    combinations = product(*data)
-
-    # Generate all permutations for each combination
-    permutations_list = [list(permutation) for combination in combinations for permutation in permutations(combination)]
-
-    return permutations_list
+    # # Generate all combinations of elements across all lists
+    # combinations = product(*data)
+    #
+    # # Generate all permutations for each combination
+    # permutations_list = [list(permutation) for combination in combinations for permutation in permutations(combination)]
+    #
+    # return permutations_list
+    print(list(permutations(data)), sep='\n')
+    return list(permutations(data))
