@@ -1,0 +1,225 @@
+:doctitle: Two Sum Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python, sum, list, array, hash, hashtable, dictionary
+
+== Solutions
+
+[.lead]
+=== Method 0: Brute Force
+
+The brute force approach is an inelegant approach that gets the job done.
+Loop through each element i and find if there is another value that equals to target−i.
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(nums: list[int], target: int) -> list[int]:
+    """Brute Force
+
+    Args:
+        nums: list[int]
+        target: int
+
+    Returns:
+        list[int]
+    """
+    for i, n in enumerate(nums):
+        for j, m in enumerate(nums[i + 1:]):
+            if n + m == target:
+                return [i, j + i + 1]
+----
+
+==== Explanation
+
+==== Complexity Analysis
+
+===== Time
+
+The time complexity of method_0 is O(n^2^).
+This is because there are two nested loops in the function.
+The outer loop runs n times, where n is the length of the input list nums.
+For each iteration of the outer loop, the inner loop runs n - i times, where i is the current index of the outer loop.
+Therefore, in the worst-case scenario, the total number of iterations is proportional to n^2^, hence the time complexity is O(n^2^).
+===== Space The space complexity of method_0 is O(1).
+This is because the space required by the function does not increase with the size of the input list nums.
+The function only uses a constant amount of space to store the variables i, j, nums, and target, regardless of the length of nums.
+Therefore, the space complexity is O(1), which means constant space complexity.
+=== Method 1: Two-pass Hash Table To improve our runtime complexity, we need a more efficient way to check if the complement exists in the array.
+If the complement exists, we need to get its index.
+What is the best way to maintain a mapping of each element in the array to its index?
+A hash table.
+
+We can reduce the lookup time from O(n) to O(1) by trading space for speed.
+A hash table is well suited for this purpose because it supports fast lookup in near constant time.
+I say "near" because if a collision occurred, a lookup could degenerate to O(n) time.
+However, lookup in a hash table should be amortized O(1) time as long as the hash function was chosen carefully.
+
+A simple implementation uses two iterations.
+In the first iteration, we add each element's value as a key and its index as a value to the hash table.
+Then, in the second iteration, we check if each element's complement (target−nums[i]) exists in the hash table.
+If it does exist, we return current element's index and its complement's index.
+Beware that the complement must not be nums[i] itself!
+==== Implementation
+
+[source,python,linenums]
+----
+def method_1(nums: list[int], target: int) -> list[int]:
+    """Two-pass Hash Table
+
+    Args:
+        nums: list[int]
+        target: int
+
+    Returns:
+        list[int]
+    """
+    d = {}
+    for i, n in enumerate(nums):
+        d[n] = i
+
+    for i, n in enumerate(nums):
+        if target - n in d and i != d[target - n]:
+            return [i, d[target - n]]
+----
+
+==== Explanation
+
+The provided code is a Python function named `method_1` that solves the Two Sum problem.
+The Two Sum problem is a common coding problem where given an array of integers `nums` and an integer `target`, you need to find two numbers such that they add up to `target`.
+
+The function `method_1` takes two arguments: `nums`, a list of integers, and `target`, an integer.
+It returns a list of two integers that are the indices of the two numbers in `nums` that add up to `target`.
+
+[source,python,linenums]
+----
+def method_1(nums: list[int], target: int) -> list[int]:
+----
+
+The function uses a dictionary `d` to store the elements of `nums` as it iterates over them.
+The dictionary `d` is used to map each number to its index in the list.
+This is done in the first loop.
+
+[source,python,linenums]
+----
+d = {}
+for i, n in enumerate(nums):
+    d[n] = i
+----
+
+In the second loop, the function checks if the complement of the current number (i.e., `target - n`) exists in the dictionary `d` and that it's not the same element.
+If it does, it means we have found two numbers that add up to `target`, and we return their indices.
+
+[source,python]
+----
+for i, n in enumerate(nums):
+    if target - n in d and i != d[target - n]:
+        return [i, d[target - n]]
+----
+
+This approach is known as the two-pass hash table approach because it requires two passes over the input list `nums`.
+It is an efficient solution to the Two Sum problem with a time complexity of O(n) and a space complexity of O(n), where n is the length of the input list `nums`.
+==== Complexity Analysis ===== Time The time complexity of method_1 is O(n).
+This is because there are two separate loops that iterate over the list nums.
+Each loop runs n times, where n is the length of the input list nums.
+However, these loops are not nested, so the total number of iterations is 2n, which simplifies to O(n) in Big O notation.
+===== Space The space complexity of method_1 is O(n).
+This is because a dictionary d is used to store the elements of the list nums.
+In the worst-case scenario, every element from nums is stored in the dictionary, resulting in a space complexity of O(n).
+=== Method 2: One-pass Hash Table It turns out we can do it in one-pass.
+While we are iterating and inserting elements into the hash table, we also look back to check if the current element's complement already exists in the hash table.
+If it exists, we have found a solution and return the indices immediately.
+==== Implementation
+
+[source,python,linenums]
+def method_2(nums: list[int], target: int) -> list[int]:
+    """One-pass Hash Table
+
+    Args:
+        nums: list[int]
+        target: int
+
+    Returns:
+        list[int]
+    """
+    d = {}
+    for i, n in enumerate(nums):
+        if target - n in d:
+            return [d[target - n], i]
+        d[n] = i
+==== Explanation
+The provided code is a Python function named `method_2` that solves the Two Sum problem.
+The Two Sum problem is a common coding problem where given an array of integers `nums` and an integer `target`, you need to find two numbers such that they add up to `target`.
+
+The function `method_2` takes two arguments: `nums`, a list of integers, and `target`, an integer.
+It returns a list of two integers that are the indices of the two numbers in `nums` that add up to `target`.
+
+[source,python,linenums]
+----
+def method_2(nums: list[int], target: int) -> list[int]:
+----
+
+The function uses a dictionary `d` to store the elements of `nums` as it iterates over them.
+The dictionary `d` is used to check if the complement of the current number (i.e., `target - n`) exists in the dictionary.
+If it does, it means we have found two numbers that add up to `target`, and we return their indices.
+If it doesn't, we add the current number and its index to the dictionary and continue to the next number.
+
+[source,python,linenums]
+----
+d = {}
+for i, n in enumerate(nums):
+    if target - n in d:
+        return [d[target - n], i]
+    d[n] = i
+----
+
+This approach is known as the one-pass hash table approach because it only requires a single pass over the input list `nums`.
+It is an efficient solution to the Two Sum problem with a time complexity of O(n) and a space complexity of O(n), where n is the length of the input list `nums`.
+==== Complexity Analysis ===== Time The time complexity of method_2 is O(n).
+This is because there is a single loop that iterates over the list nums.
+The loop runs n times, where n is the length of the input list nums.
+In each iteration, it performs a constant time operation of checking if target - n is in the dictionary d and adding an element to the dictionary.
+Therefore, the overall time complexity is O(n).
+===== Space The space complexity of method_2 is also O(n).
+This is because a dictionary d is used to store the elements of the list nums.
+In the worst-case scenario, every element from nums is stored in the dictionary, resulting in a space complexity of O(n).
+== Additional Learning Hash tables are a powerful data structure that can be used to solve a variety of common coding problems.
+Here are a few examples:
+
+Counting Frequencies:
+
+- Hash tables can be used to count the frequency of elements in a list.
+This is useful in problems where you need to find the most common element, or elements that appear more than a certain number of times.
+
+Subarray Sum Equals K:
+
+- Given an array of integers and an integer K, find the total number of continuous subarrays whose sum equals to K. This can be solved using a hash table to store the cumulative sum of elements and their counts.
+
+Longest Substring Without Repeating Characters:
+
+- Given a string, find the length of the longest substring without repeating characters.
+This can be solved using a hash table to store the last index of each character encountered.
+
+Group Anagrams:
+
+- Given an array of strings, group anagrams together.
+This can be solved using a hash table to categorize strings by their sorted character sequences.
+
+First Unique Character in a String:
+
+- Given a string, find the first non-repeating character in it and return its index.
+This can be solved using a hash table to count the occurrences of each character.
+
+Intersection of Two Arrays:
+
+- Given two arrays, write a function to compute their intersection.
+This can be solved using a hash table to store the elements of one array, and then check the elements of the other array against it.

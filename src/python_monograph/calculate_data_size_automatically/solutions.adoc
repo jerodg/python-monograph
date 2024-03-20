@@ -1,0 +1,112 @@
+:doctitle: Calculate Data Size Automatically Solution(s)
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::solution_00.py[]
+----
+
+==== Explanation
+
+The unit names for binary notation are as follows:
+B: Byte KiB: Kibibyte MiB: Mebibyte GiB: Gibibyte TiB: Tebibyte PiB: Pebibyte EiB: Exbibyte ZiB: Zebibyte YiB: Yobibyte Each unit represents a power of 1024 (which is 2^10), starting from Byte (B) which is 2^0.
+
+The unit names for decimal notation are as follows:
+B: Byte kB: Kilobyte MB: Megabyte GB: Gigabyte TB: Terabyte PB: Petabyte EB: Exabyte ZB: Zettabyte YB: Yottabyte Each unit represents a power of 1000, starting from Byte (B) which is 10^0.
+
+The provided Python code defines a function named `convert_bytes` that takes two arguments: `size` and `notation`.
+The `size` argument is expected to be a numerical value representing the size in bytes that you want to convert.
+The `notation` argument is a string that determines whether the conversion should be done in decimal or binary notation.
+By default, the `notation` is set to 'decimal'.
+
+The function begins by checking the value of the `notation` argument.
+If it's 'decimal', it sets `suffixes` to a list of decimal units from 'B' (bytes) to 'YB' (yottabytes), and `base` to 1000. If `notation` is 'binary', it sets `suffixes` to a list of binary units from 'B' (bytes) to 'YiB' (yobibytes), and `base` to 1024. If `notation` is neither 'decimal' nor 'binary', it raises a ValueError.
+
+[source,python]
+----
+if notation == 'decimal':
+    suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    base = 1000
+elif notation == 'binary':
+    suffixes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+    base = 1024
+else:
+    raise ValueError("Invalid notation. Please choose 'decimal' or 'binary'.")
+----
+
+Next, the function initializes an index variable to 0. It then enters a while loop that continues as long as `size` is greater than or equal to `base` and `index` is less than the length of `suffixes` minus 1. Inside the loop, `size` is divided by `base` and `index` is incremented by 1. This loop effectively finds the largest unit that `size` can be expressed in without resulting in a value less than 1.
+
+[source,python]
+----
+index = 0
+while size >= base and index < len(suffixes) - 1:
+    size /= base
+    index += 1
+----
+
+Finally, the function returns a formatted string that includes `size` rounded to two decimal places and the appropriate unit from `suffixes`.
+
+[source,python]
+----
+return f"{size:3.2f} {suffixes[index]}"
+----
+
+In summary, the `convert_bytes` function converts a size in bytes to the largest possible unit in either decimal or binary notation, depending on the `notation` argument.
+
+==== Advantages
+
+1. **Flexibility**: The method can convert bytes to either binary or decimal notation.
+This is achieved by passing the `notation` argument to the function, which can be either 'binary' or 'decimal'.
+
+2. **Simplicity**: The code is straightforward and easy to understand.
+It uses a while loop to divide the size by the base (1024 for binary and 1000 for decimal) until the size is less than the base.
+This effectively finds the largest unit that the size can be expressed in.
+
+3. **Error Handling**: The method includes a check for invalid `notation` values and raises a `ValueError` if the `notation` is neither 'binary' nor 'decimal'.
+
+==== Disadvantages
+
+1. **Limited Error Checking**: While the method does check for invalid `notation` values, it does not check if the `size` argument is a positive number.
+If a negative number or a non-numeric value is passed for `size`, the function may behave unexpectedly.
+
+2. **Lack of Documentation**: The docstring for the function is incomplete.
+The `:param`, `:type`, `:return`, and `:rtype` fields are not filled out, which can make it harder for other developers to understand what the function does and how to use it.
+
+3. **Inefficient Loop**: The while loop continues to divide the size by the base even after it has found the largest unit that the size can be expressed in.
+This could be avoided by breaking out of the loop as soon as the size is less than the base.
+
+==== Complexity Analysis
+
+**Time Complexity:**
+The time complexity of this code is O(1).
+This is because the function performs a fixed number of operations that do not scale with the size of the input.
+The while loop in the function runs at most 8 times (the length of the `suffixes` list minus 1), regardless of the value of `size`.
+
+**Space Complexity:**
+The space complexity of this code is also O(1).
+This is because the function uses a fixed amount of space to store the `suffixes` list and a few variables (`size`, `notation`, `base`, `index`).
+The space usage does not increase with the size of the input.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----

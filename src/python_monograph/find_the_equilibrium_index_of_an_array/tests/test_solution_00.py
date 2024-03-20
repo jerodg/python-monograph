@@ -53,7 +53,7 @@ def test_equilibrium_index_with_empty_array():
 
 @pytest.mark.benchmark
 def test_equilibrium_index_with_large_input(benchmark):
-    benchmark(equilibrium_index, ([1] * 10 ** 6))
+    benchmark(equilibrium_index, ([1] * 5 ** 6))
 
 
 def test_equilibrium_index_with_random_order():

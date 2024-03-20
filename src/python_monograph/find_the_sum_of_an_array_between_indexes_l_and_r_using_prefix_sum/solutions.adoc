@@ -1,0 +1,622 @@
+:doctitle: Find the Sum of an Array Between Indexes L and R Using Prefix Sum Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided code defines a class `Solution_00` in Python, which is designed to perform operations on an array of integers.
+The operations include calculating the sum of elements between two indices and checking if the array contains a target sum.
+
+The class `Solution_00` has two attributes: `prefix_sum`, which is a list that stores the prefix sum of the array.
+The prefix sum of an array is a new array where each element `i` is the sum of array elements up to `i`.
+
+The class is initialized with an array of integers.
+In the `__init__` method, it first checks if the array is not empty, and if so, initializes the first element of `prefix_sum` with the first element of the array.
+Then, it calculates the prefix sum of the array and stores it in `prefix_sum`.
+
+[source,python]
+----
+def __init__(self, array: list[int]) -> None:
+    len_array = len(array)
+    self.prefix_sum = [0] * len_array
+    if len_array > 0:
+        self.prefix_sum[0] = array[0]
+    for i in range(1, len_array):
+        self.prefix_sum[i] = self.prefix_sum[i - 1] + array[i]
+----
+
+The `get_sum` method returns the sum of array elements from the start to the end indexes.
+If the start index is 0, it directly returns the value at the end index from `prefix_sum`.
+Otherwise, it subtracts the prefix sum at `start - 1` from the prefix sum at `end` to get the sum of elements between the two indices.
+
+[source,python]
+----
+def get_sum(self, start: int, end: int) -> int:
+    if start == 0:
+        return self.prefix_sum[end]
+    return self.prefix_sum[end] - self.prefix_sum[start - 1]
+----
+
+The `contains_sum` method checks if the array contains a target sum.
+It initializes a set `sums` with 0 and iterates over `prefix_sum`.
+For each sum, it checks if the difference between the current sum and the target sum is in `sums`.
+If it is, it returns `True`, indicating that the array contains the target sum.
+If no matching sum is found after iterating over all elements, it returns `False`.
+
+[source,python]
+----
+def contains_sum(self, target_sum: int) -> bool:
+    sums = {0}
+    for sum_item in self.prefix_sum:
+        if sum_item - target_sum in sums:
+            return True
+        sums.add(sum_item)
+    return False
+----
+
+In summary, the `Solution_00` class provides a way to efficiently calculate the sum of elements between two indices and check if a target sum exists in an array by using the concept of prefix sum.
+
+==== Advantages
+
+1. **Efficient Queries**: The prefix sum allows for efficient queries to calculate the sum of elements between two indices.
+Once the prefix sum array is built, the sum of elements between any two indices can be calculated in constant time, O(1), which is a significant advantage for large arrays or multiple queries.
+2. **Space Efficient**: The space complexity is O(n), where n is the size of the input array.
+This is because it only needs to store the prefix sum array which has the same size as the input array.
+
+In the method `contains_sum`, it uses a set to store the prefix sums and checks if the array contains a target sum.
+
+1. **Efficient Checking**: The use of a set data structure allows for efficient checking if a certain sum exists.
+The lookup operation in a set is O(1) on average.
+
+==== Disadvantages
+
+1. **Update Cost**: While querying is efficient, updating an element in the original array is costly.
+If an element in the original array changes, the entire prefix sum array needs to be recalculated, which takes O(n) time.
+2. **Initial Construction Cost**: The initial construction of the prefix sum array also takes O(n) time.
+This might be a disadvantage if the array is very large and we need to perform operations immediately.
+
+In the method `contains_sum`, it uses a set to store the prefix sums and checks if the array contains a target sum.
+
+1. **Additional Space**: This method requires additional space to store the set of prefix sums.
+This increases the space complexity to O(n), where n is the size of the input array.
+2. **False Positives**: This method might give false positives in cases where the array contains negative numbers.
+For example, if the array is [10, -2, -8] and the target sum is 0, the method will return True even though there is no subarray that sums to 0.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code can be analyzed as follows:
+
+1. **Time Complexity:**
+
+- The `__init__` method has a time complexity of O(n) because it iterates over the input array once to calculate the prefix sum.
+
+- The `get_sum` method has a time complexity of O(1) because it performs a constant number of operations to calculate the sum between two indices.
+
+- The `contains_sum` method has a time complexity of O(n) because it iterates over the prefix sum array once.
+The operations inside the loop (checking if an item is in the set and adding an item to the set) are both O(1) on average.
+
+2. **Space Complexity:**
+
+- The space complexity of the class is O(n), where n is the size of the input array.
+This is because it stores the prefix sum array which has the same size as the input array.
+
+- The `contains_sum` method has an additional space complexity of O(n) because it creates a set to store the prefix sums.
+Therefore, the total space complexity when this method is called is O(2n), which simplifies to O(n).
+
+In summary, the time complexity of the class is O(n) for initialization and contains_sum method, and O(1) for the get_sum method.
+The space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided code defines a class `Solution_01` in Python, which is designed to perform operations on an array of integers using a data structure called a segment tree.
+The operations include building a segment tree from an array, updating a value at a particular index in the array, and calculating the sum of elements in the array between two indexes.
+
+The class `Solution_01` has two attributes: `n`, which is the length of the array, and `tree`, which is a list that represents the segment tree.
+The segment tree is a binary tree used for performing range queries and updates in logarithmic time.
+
+The class is initialized with an array of integers.
+In the `__init__` method, it first checks if the array is not empty and if all elements in the array are integers.
+Then, it initializes `n` with the length of the array and `tree` with a list of zeros of size `2n`.
+Finally, it calls the `build_tree` method to build the segment tree from the array.
+
+[source,python]
+----
+def __init__(self, arr: list[int]) -> None:
+    if not arr:
+        raise ValueError('Array cannot be empty')
+    if not all(isinstance(item, int) for item in arr):
+        raise TypeError('Array must contain only integers')
+    self.n = len(arr)
+    self.tree = [0] * (2 * self.n)
+    self.build_tree(arr)
+----
+
+The `build_tree` method builds the segment tree from the array.
+It first copies the array to the second half of `tree`.
+Then, it builds the segment tree in a bottom-up manner.
+For each node `i`, it calculates the sum of its two children and stores it in `tree[i]`.
+
+[source,python]
+----
+def build_tree(self, arr: list[int]) -> None:
+    for i in range(self.n):
+        self.tree[self.n + i] = arr[i]
+    for i in range(self.n - 1, 0, -1):
+        self.tree[i] = self.tree[i << 1] + self.tree[i << 1 | 1]
+----
+
+The `update` method updates the value at index `p` in the array.
+It first updates the value in `tree` at index `p + n`.
+Then, it updates the ancestors of the updated node in the segment tree.
+
+[source,python]
+----
+def update(self, p: int, value: int) -> None:
+    p += self.n
+    self.tree[p] = value
+    while p > 1:
+        self.tree[p >> 1] = self.tree[p] + self.tree[p ^ 1]
+        p >>= 1
+----
+
+The `query` method returns the sum of elements in the array from index `l` to `r`.
+It performs a range sum query in the segment tree.
+
+[source,python]
+----
+def query(self, l: int, r: int) -> int:
+    l += self.n
+    r += self.n
+    res = 0
+    while l < r:
+        if l & 1:
+            res += self.tree[l]
+            l += 1
+        if r & 1:
+            r -= 1
+            res += self.tree[r]
+        l >>= 1
+        r >>= 1
+    return res
+----
+
+In summary, the `Solution_01` class provides a way to efficiently perform range sum queries and updates on an array by using the concept of a segment tree.
+
+==== Advantages
+
+1. **Efficient Queries and Updates**: The segment tree allows for efficient range queries and updates.
+Once the segment tree is built, both queries and updates can be performed in logarithmic time, O(log n), which is a significant advantage for large arrays or multiple queries and updates.
+2. **Space Efficient**: The space complexity is O(n), where n is the size of the input array.
+This is because it only needs to store the segment tree which has the same size as the input array.
+
+==== Disadvantages
+
+1. **Complexity**: The concept of a segment tree is more complex than other data structures like arrays or linked lists.
+This can make the code harder to understand and maintain.
+2. **Initial Construction Cost**: The initial construction of the segment tree takes O(n) time.
+This might be a disadvantage if the array is very large and we need to perform operations immediately.
+3. **Not Suitable for Dynamic Arrays**: If the size of the array changes frequently (elements are often added or removed), the segment tree is not the best choice because the whole tree needs to be rebuilt every time the size of the array changes.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code can be analyzed as follows:
+
+1. **Time Complexity:**
+
+- The `__init__` method has a time complexity of O(n) because it iterates over the input array once to build the segment tree.
+
+- The `update` method has a time complexity of O(log n) because it updates the value at a particular index and its ancestors in the segment tree.
+The height of the segment tree is log n, so the number of ancestors is also log n.
+
+- The `query` method has a time complexity of O(log n) because it performs a range sum query in the segment tree.
+The number of nodes visited during the query is proportional to the height of the segment tree, which is log n.
+
+2. **Space Complexity:**
+
+- The space complexity of the class is O(n), where n is the size of the input array.
+This is because it stores the segment tree which has twice the size of the input array.
+However, since we disregard constants in Big O notation, the space complexity is O(n).
+
+In summary, the time complexity of the class is O(n) for initialization, and O(log n) for the update and query methods.
+The space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided code defines a class `Solution_02` in Python, which is designed to perform operations on an array of integers using a data structure called a Fenwick Tree, also known as a Binary Indexed Tree (BIT).
+The operations include building a BIT from an array, updating a value at a particular index in the array, and calculating the sum of elements in the array between two indexes.
+
+The class `Solution_02` has two attributes: `size`, which is the size of the array, and `tree`, which is a list that represents the BIT.
+
+The class is initialized with the size of the array.
+In the `__init__` method, it first checks if the size is a positive integer.
+Then, it initializes `size` with the size of the array and `tree` with a list of zeros of size `size + 1`.
+
+[source,python]
+----
+def __init__(self, size: int) -> None:
+    if not isinstance(size, int):
+        raise TypeError('Size must be an integer')
+    if not size > 0:
+        raise ValueError('Size must be a positive integer')
+    self.size = size
+    self.tree = [0] * (size + 1)
+----
+
+The `update` method updates the value at index `i` in the array.
+It uses a while loop to add `val` to `tree[i]` and all its ancestors in the BIT.
+The operation `i += i & -i` is used to get the next index.
+
+[source,python]
+----
+def update(self, i: int, val: int) -> None:
+    while i <= self.size:
+        self.tree[i] += val
+        i += i & -i
+----
+
+The `query` method returns the prefix sum up to index `i` in the array.
+It uses a while loop to add `tree[i]` to the result and move to the parent index.
+The operation `i -= i & -i` is used to get the parent index.
+
+[source,python]
+----
+def query(self, i: int) -> int:
+    res = 0
+    while i:
+        res += self.tree[i]
+        i -= i & -i
+    return res
+----
+
+The `range_query` method returns the sum of elements in the array from index `l` to `r`.
+It does this by returning the difference between the prefix sum up to index `r` and the prefix sum up to index `l - 1`.
+
+[source,python]
+----
+def range_query(self, l: int, r: int) -> int:
+    return self.query(r) - self.query(l - 1)
+----
+
+In summary, the `Solution_02` class provides a way to efficiently perform range sum queries and updates on an array by using the concept of a Fenwick Tree.
+
+==== Advantages
+
+1. **Efficient Queries and Updates**: The Fenwick Tree allows for efficient range queries and updates.
+Once the Fenwick Tree is built, both queries and updates can be performed in logarithmic time, O(log n), which is a significant advantage for large arrays or multiple queries and updates.
+2. **Space Efficient**: The space complexity is O(n), where n is the size of the input array.
+This is because it only needs to store the Fenwick Tree which has the same size as the input array.
+3. **Simplicity**: Compared to other tree data structures like Segment Trees, Fenwick Trees are simpler and easier to implement.
+
+==== Disadvantages
+
+1. **Limited Operations**: Fenwick Trees only support two operations: updating an element and getting a prefix sum.
+If other types of range queries (like minimum, maximum, etc.) are needed, Fenwick Trees cannot be used.
+2. **Array Indexing Starts from 1**: In Fenwick Trees, array indexing starts from 1, not 0. This is because the tree uses the binary representation of indexes, and the 0 index does not contribute to the tree.
+This might be a bit confusing for programmers used to 0-based indexing.
+3. **Not Suitable for Arrays That Change Frequently**: If the size of the array changes frequently (elements are often added or removed), the Fenwick Tree is not the best choice because the whole tree needs to be rebuilt every time the size of the array changes.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code can be analyzed as follows:
+
+1. **Time Complexity:**
+
+- The `__init__` method has a time complexity of O(1) because it only performs constant time operations such as assigning values to variables.
+
+- The `update` method has a time complexity of O(log n) because it updates the value at a particular index and its ancestors in the Fenwick Tree.
+The height of the Fenwick Tree is log n, so the number of ancestors is also log n.
+
+- The `query` method has a time complexity of O(log n) because it performs a prefix sum query in the Fenwick Tree.
+The number of nodes visited during the query is proportional to the height of the Fenwick Tree, which is log n.
+
+- The `range_query` method has a time complexity of O(log n) because it performs two prefix sum queries in the Fenwick Tree.
+
+2. **Space Complexity:**
+
+- The space complexity of the class is O(n), where n is the size of the input array.
+This is because it stores the Fenwick Tree which has the same size as the input array.
+
+In summary, the time complexity of the class is O(1) for initialization, and O(log n) for the update, query, and range_query methods.
+The space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The provided code defines a Python class `Solution_03`, which is designed to build a sparse table from an array and query the minimum value in a range.
+The sparse table is a data structure that allows for efficient range minimum queries, which are queries that ask for the minimum value in a subarray of the original array.
+
+The class `Solution_03` has two attributes: `n`, which is the length of the array, and `table`, which is a 2D list that represents the sparse table.
+
+The class is initialized with an array.
+In the `__init__` method, it first checks if the array is not empty and contains only integers.
+Then, it initializes `n` with the length of the array and `table` with the result of the `build_table` method.
+
+[source,python]
+----
+def __init__(self, arr: list[int]) -> None:
+    if not arr:
+        raise ValueError('Array cannot be empty')
+    if not all(isinstance(item, int) for item in arr):
+        raise TypeError('Array must contain only integers')
+    self.n = len(arr)
+    self.table = self.build_table(arr)
+----
+
+The `build_table` method builds the sparse table from the array.
+It first calculates `k`, which is the maximum power of 2 less than or equal to `n`.
+Then, it initializes `table` with a 2D list of zeros.
+After that, it fills the first column of `table` with the elements of the array.
+Finally, it fills the rest of `table` using the formula `min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1])`, which ensures that each cell contains the minimum value in the corresponding subarray of the original array.
+
+[source,python]
+----
+def build_table(self, arr: list[int]) -> list[list[int]]:
+    k = int(log2(self.n)) + 1
+    table = [[0] * k for _ in range(self.n)]
+    for i in range(self.n):
+        table[i][0] = arr[i]
+    for j in range(1, k):
+        i = 0
+        while i + (1 << j) <= self.n:
+            table[i][j] = min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1])
+            i += 1
+    return table
+----
+
+The `query` method returns the minimum value in the array from index `l` to `r`.
+It first calculates `j`, which is the largest power of 2 less than or equal to `r - l + 1`.
+Then, it returns the minimum of `table[l][j]` and `table[r - (1 << j) + 1][j]`, which are the minimum values in the two overlapping subarrays that cover the range from `l` to `r`.
+
+[source,python]
+----
+def query(self, l: int, r: int) -> int:
+    j = int(log2(r - l + 1))
+    return min(self.table[l][j], self.table[r - (1 << j) + 1][j])
+----
+
+In summary, the `Solution_03` class provides a way to efficiently perform range minimum queries on an array by using the concept of a sparse table.
+
+==== Advantages
+
+1. **Efficient Queries**: The Sparse Table allows for efficient range minimum queries.
+Once the Sparse Table is built, queries can be performed in constant time, O(1), which is a significant advantage for large arrays or multiple queries.
+2. **Space Efficient**: The space complexity is O(n log n), where n is the size of the input array.
+This is because it stores the Sparse Table which has size proportional to n log n.
+3. **Immutable Arrays**: Sparse Tables are particularly useful when the array is immutable, i.e., the array does not change after its creation.
+This is because the Sparse Table is built once and can be used for multiple queries afterwards.
+
+==== Disadvantages
+
+1. **Limited Operations**: Sparse Tables only support range minimum queries.
+If other types of range queries (like sum, maximum, etc.) or updates are needed, Sparse Tables cannot be used.
+2. **Space Complexity**: Although it is efficient for queries, the space complexity is higher than some other data structures like Segment Trees or Fenwick Trees.
+This is because it needs to store a 2D table with size proportional to n log n.
+3. **Not Suitable for Mutable Arrays**: If the array changes frequently (elements are often updated), the Sparse Table is not the best choice because the whole table needs to be rebuilt every time the array changes.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code can be analyzed as follows:
+
+1. **Time Complexity:**
+
+- The `__init__` method has a time complexity of O(n) because it calls the `build_table` method which has a time complexity of O(n log n), and the other operations in the `__init__` method take linear time or less.
+
+- The `build_table` method has a time complexity of O(n log n) because it fills a 2D table with size proportional to n log n.
+The outer loop runs for n iterations and the inner loop runs for log n iterations.
+
+- The `query` method has a time complexity of O(1) because it performs a range minimum query in constant time.
+This is possible because the Sparse Table is preprocessed to support such queries.
+
+2. **Space Complexity:**
+
+- The space complexity of the class is O(n log n), where n is the size of the input array.
+This is because it stores the Sparse Table which has size proportional to n log n.
+
+In summary, the time complexity of the class is O(n log n) for initialization and building the table, and O(1) for the query method.
+The space complexity is O(n log n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[]
+----
+
+==== Explanation
+
+The provided code defines a Python class `Solution_04`, which is designed to build a block array from an input array, update a value at a particular index in the array, and calculate the sum of elements in the array between two indexes.
+This is a technique often used in competitive programming to speed up range sum queries.
+
+The class `Solution_04` has four attributes: `n`, which is the length of the array, `block_size`, which is the size of each block, `blocks`, which is a list that represents the block array, and `arr`, which is the input array.
+
+The class is initialized with an array.
+In the `__init__` method, it first checks if the array is not empty and contains only integers.
+Then, it initializes `n` with the length of the array, `block_size` with the square root of `n` plus one, `blocks` with a list of zeros, and `arr` with the input array.
+Finally, it calls the `preprocess` method to fill the block array.
+
+[source,python]
+----
+def __init__(self, arr: list[int]) -> None:
+    if not arr:
+        raise ValueError('Array cannot be empty')
+    if not all(isinstance(item, int) for item in arr):
+        raise TypeError('Array must contain only integers')
+    self.n = len(arr)
+    self.block_size = int(math.sqrt(self.n)) + 1
+    self.blocks = [0] * self.block_size
+    self.arr = arr
+    self.preprocess()
+----
+
+The `preprocess` method fills the block array.
+It iterates over the array and adds each element to the corresponding block in the block array.
+
+[source,python]
+----
+def preprocess(self) -> None:
+    for i in range(self.n):
+        self.blocks[i // self.block_size] += self.arr[i]
+----
+
+The `update` method updates the value at a particular index in the array.
+It first calculates the block that contains the index, then updates the corresponding value in the block array and the array.
+
+[source,python]
+----
+def update(self, i: int, val: int) -> None:
+    block = i // self.block_size
+    self.blocks[block] += val - self.arr[i]
+    self.arr[i] = val
+----
+
+The `query` method calculates the sum of elements in the array between two indexes.
+It first calculates the blocks that contain the start and end indexes.
+Then, it calculates the sum of elements in the array from the start index to the end of the start block, the sum of elements in the blocks between the start block and the end block, and the sum of elements in the array from the start of the end block to the end index.
+
+[source,python]
+----
+def query(self, l: int, r: int) -> int:
+    start_block = l // self.block_size
+    end_block = r // self.block_size
+    sum = 0
+    if start_block == end_block:
+        for i in range(l, r + 1):
+            sum += self.arr[i]
+    else:
+        for i in range(l, (start_block + 1) * self.block_size):
+            sum += self.arr[i]
+        for i in range(start_block + 1, end_block):
+            sum += self.blocks[i]
+        for i in range(end_block * self.block_size, r + 1):
+            sum += self.arr[i]
+    return sum
+----
+
+In summary, the `Solution_04` class provides a way to efficiently perform range sum queries on an array by using the concept of a block array.
+
+==== Advantages
+
+1. **Efficient Queries**: The Block Array allows for efficient range sum queries.
+Once the Block Array is built, queries can be performed in O(sqrt(n)) time, which is a significant advantage for large arrays or multiple queries.
+2. **Supports Updates**: Unlike some other data structures like Sparse Tables, Block Arrays support updates.
+The update operation can be performed in O(1) time.
+3. **Space Efficient**: The space complexity is O(n), where n is the size of the input array.
+This is because it stores the Block Array which has the same size as the input array.
+
+==== Disadvantages
+
+1. **Limited Operations**: Block Arrays only support range sum queries and updates.
+If other types of range queries (like minimum, maximum, etc.) are needed, Block Arrays cannot be used.
+2. **Square Root Block Size**: The block size is chosen as the square root of the size of the array.
+This choice is a trade-off between the time complexities of the query and update operations.
+If the block size is too large, the time complexity of the query operation increases.
+If the block size is too small, the time complexity of the update operation increases.
+3. **Not Suitable for Large Updates**: If the array changes frequently (many elements are often updated), the Block Array is not the best choice because each update operation requires updating the corresponding block in the Block Array.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code can be analyzed as follows:
+
+1. **Time Complexity:**
+
+- The `__init__` method has a time complexity of O(n) because it calls the `preprocess` method which has a time complexity of O(n), and the other operations in the `__init__` method take constant time or less.
+
+- The `preprocess` method has a time complexity of O(n) because it iterates over the array to fill the block array.
+
+- The `update` method has a time complexity of O(1) because it updates a value in the array and the corresponding value in the block array in constant time.
+
+- The `query` method has a time complexity of O(sqrt(n)) because in the worst case, it needs to sum the elements in two partial blocks and all the blocks in between.
+The number of blocks is proportional to sqrt(n), so the time complexity is O(sqrt(n)).
+
+2. **Space Complexity:**
+
+- The space complexity of the class is O(n), where n is the size of the input array.
+This is because it stores the block array and the input array, both of which have size proportional to n.
+
+In summary, the time complexity of the class is O(n) for initialization and preprocessing, O(1) for the update method, and O(sqrt(n)) for the query method.
+The space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[]
+----

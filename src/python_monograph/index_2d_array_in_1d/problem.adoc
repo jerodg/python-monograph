@@ -1,0 +1,67 @@
+:doctitle: Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to index a 2-dimensional array in 1-dimension.
+
+=== Constraint(s)
+
+=== Example(s)
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+== Use-Case(s)
+
+The `Index2DArrayIterator` class is designed to provide an iterator for a 2D array.
+This can be useful in a variety of scenarios where you need to process or manipulate data in a 2D array in a sequential manner.
+Here are some common use cases:
+
+1. **Iterating through a 2D array**: The most straightforward use case is to iterate through all elements in a 2D array.
+This can be useful when you need to process each element in the array, such as calculating the sum or finding the maximum or minimum value.
+
+2. **Converting a 2D array to a 1D array**: If you need to convert a 2D array to a 1D array, you can use the `Index2DArrayIterator` to iterate through all elements in the 2D array and append them to a new 1D array.
+
+3. **Searching for an element in a 2D array**: If you need to check if a certain value exists in a 2D array, you can use the `Index2DArrayIterator` to iterate through all elements in the array and check if the value exists.
+
+4. **Applying a function to each element in a 2D array**: If you need to apply a function to each element in a 2D array, you can use the `Index2DArrayIterator` to iterate through all elements in the array and apply the function.
+
+5. **Sorting a 2D array**: If you need to sort the elements in a 2D array, you can use the `Index2DArrayIterator` to iterate through all elements in the array, sort them, and then reconstruct the 2D array.
+
+Remember, the `Index2DArrayIterator` class provides a way to iterate over a 2D array as if it were a 1D array, which can simplify many operations that you might want to perform on a 2D array.
+
+== Common Mistakes
+
+== Best Practices
+
+== Test Strategies
+
+== Performance Optimization
+
+== Follow-up
+
+== Related Topics
+
+== References

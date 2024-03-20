@@ -1,0 +1,468 @@
+:doctitle: Find Pairs With the Given Sum Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The Python function `solution_00` is designed to find all pairs of numbers in a given list that add up to a specified sum.
+It accepts two parameters: `arr`, a list of integers, and `req_sum`, an integer representing the required sum.
+
+[source,python]
+----
+def solution_00(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
+----
+
+The function is expected to return a tuple.
+The first element of the tuple is an integer representing the number of pairs found, and the second element is a list of tuples, where each tuple represents a pair of numbers that add up to `req_sum`.
+
+The function utilizes the `combinations` function from Python's built-in `itertools` module to generate all possible pairs of numbers in `arr`.
+This is accomplished in the following line of code:
+
+[source,python]
+----
+pairs = [(a, b) for a, b in combinations(arr, 2) if a + b == req_sum]
+----
+
+Here, a list comprehension is used to iterate over all combinations of two numbers in `arr`.
+For each pair `(a, b)`, if the sum of `a` and `b` equals `req_sum`, the pair is added to the list `pairs`.
+
+Finally, the function returns a tuple containing the number of pairs found (which is the length of the list `pairs`) and the list `pairs` itself:
+
+[source,python]
+----
+return len(pairs), pairs
+----
+
+This function provides a brute-force solution to the problem of finding pairs in an array that sum up to a given number.
+It has a time complexity of O(n^2), where n is the length of the input array, because it checks all possible pairs of numbers.
+
+==== Advantages
+
+1. **Simplicity**: The code is straightforward and easy to understand.
+It directly uses built-in Python functions and features, such as list comprehensions and the `combinations` function, making it easy to read and maintain.
+2. **Completeness**: This method finds all pairs that sum up to the required sum, not just one or some of them.
+This is useful when you need to know all possible pairs that meet the condition.
+3. **No Additional Space**: This method does not require any additional space proportional to the size of the input, except for the space needed to store the output pairs.
+
+==== Disadvantages
+
+1. **Time Complexity**: The time complexity of this method is O(n^2), where n is the number of elements in the input list.
+This is because the `combinations` function generates all possible pairs of numbers, which is a quadratic operation.
+Therefore, this method can be slow for large input lists.
+2. **Not Optimal**: There are more efficient algorithms to solve this problem that have a lower time complexity, such as methods using hashing or sorting.
+These methods can provide a significant speedup, especially for large input lists.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n^2), where n is the number of elements in the input list.
+This is because the `combinations` function from the `itertools` module generates all possible pairs of numbers in the list, which is a quadratic operation.
+
+The space complexity of the code is O(n), where n is the number of pairs that sum up to the required sum.
+This is because a list of these pairs is stored in memory.
+In the worst-case scenario, where every possible pair sums up to the required sum, the space complexity would be O(n^2).
+However, in most practical scenarios, the space complexity would be much less than this.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_01` that finds all pairs of numbers in a given list that add up to a specified sum.
+The function takes two arguments: a list of integers (`arr`) and an integer (`req_sum`).
+
+[source,python]
+----
+def solution_01(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
+----
+
+The function is expected to return a tuple.
+The first element of the tuple is an integer representing the number of pairs found, and the second element is a list of tuples, where each tuple represents a pair of numbers that add up to `req_sum`.
+
+The function uses a hash map (`freq`) to store the frequency of each number in the array.
+This is done in the following lines of code:
+
+[source,python]
+----
+freq = {}  # Initialize an empty hash map
+for num in arr:  # For each number in the array
+    if num in freq:  # If the current number is in the hash map
+        freq[num] += 1  # Increment its frequency
+    else:  # If the current number is not in the hash map
+        freq[num] = 1  # Set its frequency to 1
+----
+
+Then, for each number in the array, it subtracts the target sum from it and checks if the result is in the hash map.
+If it is, it adds the frequency of that number to the count.
+This is done in the following lines of code:
+
+[source,python]
+----
+pairs = []  # Initialize an empty list for pairs
+for num in arr:  # For each number in the array
+    if req_sum - num in freq:  # If the target sum minus the current number is in the hash map
+        pairs.extend([(num, req_sum - num)] * freq[req_sum - num])  # Add the pair to the list for each occurrence
+----
+
+Finally, the function returns a tuple containing the number of pairs found (which is the length of the list `pairs`) and the list `pairs` itself:
+
+[source,python]
+----
+return len(pairs), pairs
+----
+
+This function provides an optimized solution to the problem of finding pairs in an array that sum up to a given number.
+It has a time complexity of O(n), where n is the length of the input array, because it checks each number in the array only once.
+
+==== Advantages
+
+1. **Efficiency**: The time complexity of this method is O(n), where n is the number of elements in the input list.
+This is because it checks each number in the array only once, making it significantly faster than the brute-force approach for large input lists.
+2. **Completeness**: This method finds all pairs that sum up to the required sum, not just one or some of them.
+This is useful when you need to know all possible pairs that meet the condition.
+3. **Space Efficiency**: This method uses a hash map to store the frequency of each number in the array, which requires additional space.
+However, the space complexity is still O(n), where n is the number of elements in the input list, which is more space-efficient than storing all possible pairs.
+
+==== Disadvantages
+
+1. **Complexity**: This method is more complex than the brute-force approach.
+It requires a good understanding of hash maps and their operations.
+2. **Memory Usage**: Although the space complexity is O(n), in practice, this method can use a significant amount of memory if the input list is large, because it stores the frequency of each number in a hash map.
+3. **Collisions**: In the worst-case scenario, hash map operations can take longer than constant time due to collisions.
+However, this is rare and the average time complexity is still O(n).
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n), where n is the number of elements in the input list.
+This is because the function iterates over the list only once, performing constant time operations for each element.
+
+The space complexity of the code is O(n), where n is the number of elements in the input list.
+This is due to the use of a hash map (`freq`) to store the frequency of each number in the list.
+In the worst-case scenario, if all numbers in the list are unique, the size of the hash map would be equal to the size of the list.
+Additionally, the function creates a list (`pairs`) to store the pairs that sum up to the required sum.
+In the worst-case scenario, where every possible pair sums up to the required sum, the space complexity would be O(n^2).
+However, in most practical scenarios, the space complexity would be much less than this.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_02` that finds all pairs of numbers in a given list that add up to a specified sum.
+The function takes two arguments: a list of integers (`arr`) and an integer (`req_sum`).
+
+[source,python]
+----
+def solution_02(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
+----
+
+The function is expected to return a tuple.
+The first element of the tuple is an integer representing the number of pairs found, and the second element is a list of tuples, where each tuple represents a pair of numbers that add up to `req_sum`.
+
+The function uses a two-pointer approach.
+It first sorts the array, then initializes two pointers, one at the start of the array and one at the end.
+
+[source,python]
+----
+arr.sort()  # Sort the array
+left = 0  # Initialize the left pointer at the start of the array
+right = len(arr) - 1  # Initialize the right pointer at the end of the array
+----
+
+It then iterates over the array, and for each iteration, it calculates the sum of the elements at the two pointer positions.
+If the sum is equal to the target sum, it increments the count, adds the pair to the list, and moves both pointers towards the center of the array.
+If the sum is less than the target sum, it moves the start pointer towards the end of the array.
+If the sum is greater than the target sum, it moves the end pointer towards the start of the array.
+
+[source,python]
+----
+while left < right:  # While the left pointer is less than the right pointer
+    current_sum = arr[left] + arr[right]  # Calculate the sum of the elements at the two pointer positions
+    if current_sum == req_sum:  # If the sum is equal to the target sum
+        pairs.append((arr[left], arr[right]))  # Add the pair to the list
+        left += 1  # Move the left pointer towards the center of the array
+        right -= 1  # Move the right pointer towards the center of the array
+    elif current_sum < req_sum:  # If the sum is less than the target sum
+        left += 1  # Move the left pointer towards the end of the array
+    else:  # If the sum is greater than the target sum
+        right -= 1  # Move the right pointer towards the start of the array
+----
+
+Finally, the function returns a tuple containing the number of pairs found (which is the length of the list `pairs`) and the list `pairs` itself:
+
+[source,python]
+----
+return count, pairs
+----
+
+This function provides an optimized solution to the problem of finding pairs in an array that sum up to a given number.
+It has a time complexity of O(n log n), where n is the length of the input array, due to the sorting operation.
+The two-pointer approach then takes linear time, resulting in an overall time complexity of O(n log n).
+
+==== Advantages
+
+1. **Efficiency**: The two-pointer approach has a time complexity of O(n), where n is the number of elements in the input list.
+This is because it checks each pair of numbers in the array only once, making it significantly faster than the brute-force approach for large input lists.
+2. **Space Efficiency**: This method does not require any additional space, making it more space-efficient than methods that use additional data structures like hash maps.
+3. **Simplicity**: The two-pointer approach is relatively simple and easy to understand, making it a good choice for this problem.
+
+==== Disadvantages
+
+1. **Sorting Requirement**: This method requires the input array to be sorted, which has a time complexity of O(n log n).
+Therefore, the overall time complexity of the method is O(n log n), which is higher than methods that do not require sorting.
+2. **Modifies Input**: This method sorts the input array, which modifies it.
+This might not be desirable in situations where the original order of the array needs to be preserved.
+3. **Single Solution**: This method finds only one pair that sums up to the required sum, even if multiple pairs exist.
+If all pairs are needed, a different method would be more suitable.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n log n), where n is the number of elements in the input list.
+This is due to the sorting operation at the beginning of the function.
+After the list is sorted, the function uses a two-pointer approach to find the pairs, which takes linear time.
+Therefore, the overall time complexity is dominated by the sorting operation, making it O(n log n).
+
+The space complexity of the code is O(1), not including the input and output space.
+This is because the function only uses a constant amount of extra space to store the two pointers and the count variable.
+The space used by the input list and the output list of pairs is not counted in the space complexity analysis, as they are considered necessary for the problem's input and output.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The provided Python code includes two functions: `binary_search` and `solution_03`.
+
+The `binary_search` function is a standard implementation of the binary search algorithm, which is used to find the index of a given element (`x`) in a sorted list (`arr`).
+
+[source,python]
+----
+def binary_search(arr: List[int], low: int, high: int, x: int) -> int:
+----
+
+The function takes four arguments: the sorted list, the lower and higher indices of the list to search (`low` and `high`), and the element to search for (`x`).
+It uses recursion to divide the list into smaller parts until it finds the element or determines that the element is not in the list.
+
+The `solution_03` function is designed to find all pairs of numbers in a given list (`arr`) that add up to a specified sum (`req_sum`).
+
+[source,python]
+----
+def solution_03(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
+----
+
+The function returns a tuple, where the first element is the number of pairs found, and the second element is a list of the pairs themselves.
+
+The function starts by sorting the input list.
+It then initializes two variables: `count` to keep track of the number of pairs found, and `pairs` to store the pairs themselves.
+
+[source,python]
+----
+arr.sort()  # Sort the array
+count = 0  # Initialize count to 0
+pairs = []  # Initialize pairs to an empty list
+----
+
+The function then iterates over the sorted list.
+For each element in the list, it performs a binary search to find a matching pair that, when added to the current element, equals the required sum.
+If a pair is found, it increments the count and adds the pair to the list of pairs.
+
+[source,python]
+----
+for i in range(len(arr)):  # For each element in the array
+    # Perform a binary search for the required sum minus the current element
+    j = binary_search(arr, i + 1, len(arr) - 1, req_sum - arr[i])
+    if j != -1:  # If the element is found
+        count += 1  # Increment the count
+        pairs.append((arr[i], arr[j]))  # Add the pair to the list
+----
+
+Finally, the function returns the count and the list of pairs.
+
+[source,python]
+----
+return count, pairs  # Return the count and the list of pairs
+----
+
+This function provides an efficient solution to the problem of finding pairs in an array that sum up to a given number.
+It has a time complexity of O(n log n), due to the sorting operation and the binary search within the loop.
+The space complexity is O(1), as it only uses a constant amount of extra space for the count and pairs variables.
+
+==== Advantages
+
+1. **Efficiency**: The binary search operation has a time complexity of O(log n), which is more efficient than a linear search operation with a time complexity of O(n).
+This makes the method efficient for large input lists.
+2. **Space Efficiency**: This method does not require any additional space, making it more space-efficient than methods that use additional data structures like hash maps.
+3. **Multiple Pairs**: This method finds all pairs that sum up to the required sum, unlike some other methods that only find one pair.
+
+==== Disadvantages
+
+1. **Sorting Requirement**: This method requires the input array to be sorted, which has a time complexity of O(n log n).
+Therefore, the overall time complexity of the method is O(n log n), which is higher than methods that do not require sorting.
+2. **Modifies Input**: This method sorts the input array, which modifies it.
+This might not be desirable in situations where the original order of the array needs to be preserved.
+3. **Binary Search Limitation**: Binary search only works on sorted arrays.
+If the array is not sorted, the binary search will not work correctly.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n log n), where n is the number of elements in the input list.
+This is due to the sorting operation at the beginning of the `solution_03` function.
+After the list is sorted, the function iterates over the list and performs a binary search for each element, which takes log n time.
+Therefore, the overall time complexity is O(n log n).
+
+The space complexity of the code is O(1), not including the input and output space.
+This is because the function only uses a constant amount of extra space to store the count variable and the pairs list.
+The space used by the input list and the output list of pairs is not counted in the space complexity analysis, as they are considered necessary for the problem's input and output.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_04` that finds all pairs of numbers in a given list (`arr`) that add up to a specified sum (`req_sum`).
+
+[source,python]
+----
+def solution_04(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
+----
+
+The function returns a tuple, where the first element is the number of pairs found, and the second element is a list of the pairs themselves.
+
+The function starts by initializing two variables: `count` to keep track of the number of pairs found, and `pairs` to store the pairs themselves.
+
+[source,python]
+----
+count = 0  # Initialize count to 0
+pairs = []  # Initialize pairs to an empty list
+----
+
+The function then uses a nested loop to iterate over the list.
+For each element in the list, it checks every subsequent element to see if the two numbers add up to the required sum.
+
+[source,python]
+----
+for i in range(len(arr)):  # For each element in the array
+    for j in range(i + 1, len(arr)):  # For each element in the array after the current element
+        if arr[i] + arr[j] == req_sum:  # If the pair sums up to the target sum
+            count += 1  # Increment the count
+            pairs.append((arr[i], arr[j]))  # Add the pair to the list
+----
+
+If a pair is found, it increments the count and adds the pair to the list of pairs.
+
+Finally, the function returns the count and the list of pairs.
+
+[source,python]
+----
+return count, pairs  # Return the count and the list of pairs
+----
+
+This function provides a brute force solution to the problem of finding pairs in an array that sum up to a given number.
+It has a time complexity of O(n^2), due to the nested loop, and a space complexity of O(1), as it only uses a constant amount of extra space for the count and pairs variables.
+
+==== Advantages
+
+1. **Simplicity**: The brute force approach is straightforward and easy to understand.
+It does not require any advanced data structures or algorithms.
+2. **No Preprocessing**: Unlike methods that require the input array to be sorted or transformed in some way, this method works directly on the input array without any preprocessing.
+3. **Multiple Pairs**: This method finds all pairs that sum up to the required sum, unlike some other methods that only find one pair.
+
+==== Disadvantages
+
+1. **Efficiency**: The brute force approach has a time complexity of O(n^2), which can be inefficient for large input lists.
+This is because it checks every possible pair of numbers in the array.
+2. **No Early Termination**: This method does not have an early termination condition.
+It continues to check all pairs even after finding a pair that sums up to the required sum.
+3. **Duplicate Pairs**: This method can find duplicate pairs if the input array contains duplicate elements.
+For example, if the array is [1, 2, 2, 3] and the required sum is 4, the method will find two pairs: (1, 3) and (1, 3).
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n^2), where n is the number of elements in the input list.
+This is due to the nested loop in the `solution_04` function.
+For each element in the list, the function checks every subsequent element to see if the two numbers add up to the required sum.
+Therefore, the overall time complexity is O(n^2).
+
+The space complexity of the code is O(1), not including the input and output space.
+This is because the function only uses a constant amount of extra space to store the count variable and the pairs list.
+The space used by the input list and the output list of pairs is not counted in the space complexity analysis, as they are considered necessary for the problem's input and output.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[]
+----

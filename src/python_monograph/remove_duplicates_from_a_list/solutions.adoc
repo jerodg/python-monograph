@@ -1,0 +1,278 @@
+:doctitle: Remove Duplicates from a Sorted Array Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 13 February 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+==== Disadvantages
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----

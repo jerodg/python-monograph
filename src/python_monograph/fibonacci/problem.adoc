@@ -1,0 +1,200 @@
+:doctitle: The Fibonacci Sequence Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+The Fibonacci Sequence
+
+The Fibonacci sequence appears in nature all around us, in the arrangement of seeds in a sunflower and the spiral of a nautilus for example.
+
+The Fibonacci sequence begins with stem:[fibonacci(0) = 0] and stem:[fibonacci(1) = 1] as its first and second terms.
+After these first two elements, each subsequent element is equal to the sum of the previous two elements.
+
+Programmatically:
+stem:[fibonacci(0) = 0] +
+stem:[fibonacci(1) = 1] +
+stem:[fibonacci(n) = "fibonacci"(n-1) + "fibonacci"(n-2)]
+
+Given stem:[n], return the stem:[n]^th^ number in the sequence.
+
+=== Constraints
+
+stem:[0 <= n <= 30]
+
+=== Example(s)
+
+The Fibonacci sequence to stem:[6] is stem:[fs = [0, 1, 1, 2, 3, 5, 8]].
+With zero-based indexing, stem:[fs[5]] = 5.
+
+.Input
+[source,python,linenums]
+----
+3
+----
+
+.Output
+[source,python,linenums]
+----
+2
+----
+
+== Best Practices
+
+When finding the nth Fibonacci sequence, there are several best practices you can follow to ensure your code is efficient, readable, and maintainable:
+
+1. **Use Dynamic Programming**: As discussed earlier, dynamic programming is an efficient way to solve the Fibonacci sequence problem.
+It reduces the time complexity from exponential to linear by storing and reusing the solutions of subproblems.
+
+2. **Avoid Recursion for Large `n`**: While a recursive solution is simple and elegant, it can lead to a stack overflow for large `n` due to the high number of recursive calls.
+It also has a high time complexity of O(2^n) due to the repeated computation of the same subproblems.
+
+3. **Use Iteration for Space Efficiency**: If space is a concern, you can use an iterative solution that only keeps track of the last two Fibonacci numbers at any time.
+This reduces the space complexity from O(n) to O(1), but still maintains a time complexity of O(n).
+
+4. **Use Memoization**: If you do use a recursive solution, consider using memoization to store the results of subproblems.
+This can significantly improve the time complexity from exponential to linear.
+
+5. **Consider Using a Matrix Exponentiation Method**: For very large `n`, even a linear time complexity might not be efficient enough.
+In such cases, you can use a method based on matrix exponentiation to compute the nth Fibonacci number in O(log n) time.
+
+6. **Validate Input**: Always validate the input to your function.
+For the Fibonacci sequence, `n` should be a non-negative integer.
+
+7. **Write Clear and Concise Code**: Regardless of the method you choose, ensure your code is clear and concise.
+Use meaningful variable names, keep your functions small and focused, and include comments where necessary.
+
+8. **Test Your Code**: Make sure to test your code with various test cases, including edge cases such as `n = 0` and `n = 1`.
+
+Remember, the best practice depends on the specific requirements of your problem, such as the range of `n` and the trade-off between time and space complexity.
+
+== Test Strategies
+
+Testing strategies for finding the nth Fibonacci sequence could include:
+
+1. **Boundary Value Analysis (BVA)**: This strategy involves testing the boundaries of the input domain.
+For the Fibonacci sequence, this could mean testing with the smallest and largest possible values of n.
+For example, testing with n=0 (smallest possible value) and n=93 (largest possible value that Python's `int` can handle without overflow).
+
+2. **Equivalence Partitioning (EP)**: This strategy involves dividing the input domain into classes of equivalent data from which test cases can be derived.
+For the Fibonacci sequence, this could mean testing with n=1 (where the output should also be 1), n=2 (where the output should be 1), and n>2 (where the output should be the sum of the two preceding numbers).
+
+3. **Error Guessing**: This strategy involves guessing likely errors or problem areas in the code and writing tests to expose them.
+For the Fibonacci sequence, this could mean testing with negative values of n or non-integer values of n, which should raise exceptions.
+
+4. **State Transition Testing**: This strategy involves testing the transitions between different states of a system.
+For the Fibonacci sequence, this could mean testing the transition from n=1 to n=2 (where the output should remain 1), and from n=2 to n=3 (where the output should increase to 2).
+
+5. **White Box Testing**: This strategy involves testing the internal structures or workings of an application, as opposed to its functionality.
+For the Fibonacci sequence, this could mean testing that the function is using recursion or dynamic programming correctly.
+
+6. **Performance Testing**: This strategy involves testing the performance and scalability of a function or application.
+For the Fibonacci sequence, this could mean testing how quickly the function can calculate large Fibonacci numbers, and whether it can handle the maximum possible input without running out of memory or taking an excessive amount of time.
+
+== Use-Cases
+
+The Fibonacci sequence is a series of numbers where a number is the sum of the two preceding ones.
+It often appears in many different areas in mathematics and science, and thus, finding the nth Fibonacci sequence has various use cases.
+Here are a few examples:
+
+1. **Nature and Biology**: The Fibonacci sequence often appears in nature.
+For example, the arrangement of leaves on a plant, the pattern of seeds in a sunflower, the spiral of a nautilus shell, and the breeding pattern of rabbits all follow the Fibonacci sequence.
+Therefore, finding the nth Fibonacci sequence can be used in biological studies and research.
+
+2. **Computer Science and Mathematics**: The Fibonacci sequence is used in data structures like heaps, trees, and in algorithms like dynamic programming.
+It's also used in creating pseudorandom numbers, search algorithms, and sorting algorithms.
+
+3. **Financial Markets**: Some traders in the financial market use Fibonacci retracement levels to determine potential future price levels.
+The Fibonacci sequence can also be used in time series analysis.
+
+4. **Music and Art**: The Fibonacci sequence is used in music to tune instruments and in visual art to achieve aesthetically pleasing compositions.
+
+5. **Architecture and Construction**: The Fibonacci sequence is used in architecture and construction to create buildings and structures with proportions that are pleasing to the eye, as they often align with the golden ratio.
+
+Remember, these are just a few examples.
+The Fibonacci sequence has a wide range of applications in many different fields.
+
+== Common Mistakes
+
+When finding the nth Fibonacci sequence, developers often encounter several common mistakes.
+Here are some to avoid:
+
+1. **Not Handling Base Cases**: The base cases for the Fibonacci sequence are `fibonacci(0) = 0` and `fibonacci(1) = 1`.
+If these cases are not handled correctly, the function will not return the correct results.
+
+2. **Using Recursion Without Memoization**: A naive recursive solution for the Fibonacci sequence can lead to exponential time complexity due to repeated computation of the same subproblems.
+This can be avoided by using memoization to store the results of subproblems.
+
+3. **Ignoring Space Complexity**: While dynamic programming is efficient in terms of time complexity, it can consume more memory because it stores the solutions of all subproblems.
+If space is a concern, consider using an iterative solution that only keeps track of the last two Fibonacci numbers.
+
+4. **Not Validating Input**: The function should check that the input `n` is a non-negative integer.
+If `n` is negative or not an integer, the function should return an error or handle the case appropriately.
+
+5. **Not Considering Large Inputs**: For large `n`, even a dynamic programming solution with linear time complexity might not be efficient enough.
+In such cases, a method based on matrix exponentiation can be used to compute the nth Fibonacci number in O(log n) time.
+
+6. **Not Testing Edge Cases**: Make sure to test your code with various test cases, including edge cases such as `n = 0` and `n = 1`.
+
+Remember, avoiding these common mistakes can help you write more efficient and reliable code when finding the nth Fibonacci sequence.
+
+== Follow-up
+
+For a follow-up on computing the nth Fibonacci sequence, you could explore the following topics:
+
+1. **Implementing Other Optimization Techniques**: As discussed earlier, there are several optimization techniques for finding the nth Fibonacci sequence, such as using Binet's Formula, Fast Doubling, Fibonacci Q-Matrix, Fibonacci Heap, and Parallel Computing.
+You could implement these techniques and compare their performance.
+
+2. **Handling Large Fibonacci Numbers**: The Fibonacci sequence grows exponentially, so the nth Fibonacci number can be very large for even moderately large `n`.
+This can lead to overflow in languages that have a maximum limit on the size of integers.
+You could explore ways to handle large Fibonacci numbers, such as using arbitrary-precision arithmetic or returning the result modulo a certain number.
+
+3. **Applying the Fibonacci Sequence in Real-World Problems**: The Fibonacci sequence has a wide range of applications in many different fields.
+You could explore how the Fibonacci sequence is used in these fields and implement solutions to real-world problems.
+
+4. **Exploring Other Sequences**: Besides the Fibonacci sequence, there are many other interesting sequences in mathematics, such as the Lucas sequence, the Pell sequence, and the Padovan sequence.
+You could explore these sequences and implement functions to compute their nth term.
+
+5. **Analyzing the Time and Space Complexity**: You could perform a detailed analysis of the time and space complexity of your Fibonacci function.
+This could include plotting the time and space usage as a function of `n`, and comparing the theoretical and empirical complexity.
+
+6. **Implementing Unit Tests**: Writing unit tests for your Fibonacci function is a good practice.
+You could write tests for various edge cases, such as `n = 0`, `n = 1`, and large `n`.
+
+== Related Topics
+
+Related topics for computing the nth Fibonacci sequence include:
+
+- **Recursion**: This is a fundamental concept in computer science and a common method for solving the Fibonacci sequence problem. [Read more about recursion](https://www.cs.utah.edu/~germain/PPS/Topics/recursion.html)
+
+- **Dynamic Programming**: This is a method for solving complex problems by breaking them down into simpler subproblems.
+It's often used to optimize the time complexity of the Fibonacci sequence problem. [Read more about dynamic programming](https://www.geeksforgeeks.org/dynamic-programming/)
+
+- **Memoization**: This is a specific form of dynamic programming where the results of expensive function calls are cached and reused when the same inputs occur again.
+It's a common technique used to optimize the Fibonacci sequence problem. [Read more about memoization](https://www.geeksforgeeks.org/memoization-1d-2d-and-3d/)
+
+- **Time Complexity Analysis**: Understanding the time complexity of an algorithm is crucial for evaluating its efficiency.
+The Fibonacci sequence problem is a good example to learn about different time complexities. [Read more about time complexity analysis](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation)
+
+- **Space Complexity Analysis**: Similar to time complexity, understanding the space complexity of an algorithm is also important.
+The Fibonacci sequence problem can be solved with different space complexities depending on the approach. [Read more about space complexity analysis](https://www.geeksforgeeks.org/g-fact-86/)
+
+- **Matrix Exponentiation**: This is an advanced technique for solving the Fibonacci sequence problem in logarithmic time. [Read more about matrix exponentiation](https://www.hackerearth.com/practice/notes/matrix-exponentiation-1/)
+
+- **Number Theory**: The Fibonacci sequence has many interesting properties related to number theory, such as the relationship with the golden ratio. [Read more about number theory](https://www.khanacademy.org/computing/computer-science/cryptography#modarithmetic)
+
+- **Data Structures**: Certain data structures like heaps and trees have properties that relate to the Fibonacci sequence. [Read more about data structures](https://www.geeksforgeeks.org/data-structures/)
+
+- **Real-World Applications**: The Fibonacci sequence has applications in many fields, including computer science, mathematics, nature, and art.
+Understanding these can provide context and motivation for solving the problem. [Read more about real-world applications of the Fibonacci sequence](https://www.mathsisfun.com/numbers/fibonacci-sequence.html)

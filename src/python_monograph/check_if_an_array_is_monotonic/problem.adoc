@@ -1,0 +1,230 @@
+:doctitle: Check if an Array is Monotonic Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./imgIn https://en.wikipedia.org/wiki/Mathematics[mathematics], a *monotonic function* (or *monotone function*) is a https://en.wikipedia.org/wiki/Function_(mathematics)[function] between https://en.wikipedia.org/wiki/List_of_order_structures_in_mathematics[ordered sets] that preserves or reverses the given https://en.wikipedia.org/wiki/Order_relation[order].^https://en.wikipedia.org/wiki/Monotonic_function#cite_note-1[[1]]https://en.wikipedia.org/wiki/Monotonic_function#cite_note-:1-2[[2]]https://en.wikipedia.org/wiki/Monotonic_function#cite_note-:0-3[[3]]^ This concept first arose in https://en.wikipedia.org/wiki/Calculus[calculus], and was later generalized to the more abstract setting of https://en.wikipedia.org/wiki/Order_theory[order theory].
+
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+In https://en.wikipedia.org/wiki/Mathematics[mathematics], a *monotonic function* (or *monotone function*) is a https://en.wikipedia.org/wiki/Function_(mathematics)[function] between https://en.wikipedia.org/wiki/List_of_order_structures_in_mathematics[ordered sets] that preserves or reverses the given https://en.wikipedia.org/wiki/Order_relation[order].^https://en.wikipedia.org/wiki/Monotonic_function#cite_note-1[[1]]https://en.wikipedia.org/wiki/Monotonic_function#cite_note-:1-2[[2]]https://en.wikipedia.org/wiki/Monotonic_function#cite_note-:0-3[[3]]^ This concept first arose in https://en.wikipedia.org/wiki/Calculus[calculus], and was later generalized to the more abstract setting of https://en.wikipedia.org/wiki/Order_theory[order theory].
+
+An array is *monotonic* if it is either monotone increasing or monotone decreasing.
+
+An array `+nums+` is monotone increasing if for all `+i <= j+`, `+nums[i] <= nums[j]+`.
+An array `+nums+` is monotone decreasing if for all `+i <= j+`, `+nums[i] >= nums[j]+`.
+
+Given an integer array `+nums+`, return `+true+`_ if the given array is monotonic, or _`+false+`_ otherwise_.
+
+=== Constraint(s)
+
+* `+1 <= nums.length <= 10+`^`+5+`^
+* `+-10+`^`+5+`^`+ <= nums[i] <= 10+`^`+5+`^
+
+=== Example(s)
+
+==== 0
+
+.Input
+[source,python,linenums]
+----
+nums = [1,2,2,3]
+----
+
+.Output
+[source,python,linenums]
+----
+True
+----
+
+==== 1
+
+.Input
+[source,python,linenums]
+----
+nums = [6,5,4,4]
+----
+
+.Output
+[source,python,linenums]
+----
+True
+----
+
+==== 2
+
+.Input
+[source,python,linenums]
+----
+nums = [1,3,2]
+----
+
+.Output
+[source,python,linenums]
+----
+False
+----
+
+== Use-Case(s)
+
+Here are some common use cases for checking if an array is monotonic:
+
+1. **Data Analysis**: In data analysis, checking if an array is monotonic can be useful to understand trends in data.
+For example, if a data set representing sales over time is monotonic increasing, it indicates consistent growth.
+
+2. **Algorithm Optimization**: Some algorithms can be optimized if the input data is known to be monotonic.
+For example, binary search can be simplified if the array is known to be monotonic.
+
+3. **Signal Processing**: In signal processing, checking for monotonicity can help identify certain types of signals.
+For example, a monotonic increasing signal might represent a steadily increasing frequency.
+
+4. **Financial Mathematics**: In finance, checking for monotonicity can be useful in scenarios such as option pricing or risk management.
+For example, a monotonic decreasing array of stock prices might trigger a sell signal.
+
+5. **Physics and Engineering**: In fields like physics and engineering, checking for monotonicity can help in understanding the behavior of a system under certain conditions.
+For example, a monotonic array might represent a system reaching a steady state.
+
+== Common Mistakes
+
+Here are some common mistakes to avoid when checking if an array is monotonic:
+
+1. **Not Checking for Equal Elements**: A common mistake is to only check for strictly increasing or decreasing values.
+However, an array can still be monotonic even if it has consecutive equal elements.
+So, it's important to include equal elements in the check.
+
+2. **Not Handling Edge Cases**: Edge cases such as an array with a single element or an empty array should also be considered.
+These are technically monotonic as there are no elements violating the monotonicity.
+
+3. **Inefficient Checking**: Checking each pair of elements in the array is inefficient and unnecessary.
+It's enough to check each element with its next one, which reduces the time complexity.
+
+4. **Not Returning Early**: If the array is not monotonic, you can return false as soon as you find a pair of elements that violate the condition.
+There's no need to check the rest of the array.
+
+5. **Ignoring the Direction**: It's important to determine the direction (increasing or decreasing) at the start.
+A common mistake is to start checking the elements before knowing the direction, which can lead to incorrect results.
+
+== Best Practices
+
+Here are some best practices for checking if an array is monotonic:
+
+1. **Understand the Problem**: Before you start coding, make sure you understand what a monotonic array is.
+It's an array that is either entirely non-increasing or non-decreasing.
+
+2. **Choose the Right Data Structure**: In this case, the array itself is the data structure.
+There's no need for additional data structures.
+
+3. **Use Built-in Functions Where Possible**: Python has built-in functions that can make your code cleaner and more efficient.
+For example, the `all()` function can be used to check if all elements in a list are True.
+
+4. **Write Clean Code**: Make sure your code is clean and easy to understand.
+Use meaningful variable names, keep your functions small and avoid deep nesting.
+
+5. **Comment Your Code**: Especially when dealing with mathematical problems like this, it's important to comment your code to explain what you're doing and why.
+
+6. **Test Your Code**: Make sure to test your code with different cases, including edge cases like an empty array or an array with one element.
+
+7. **Optimize Your Code**: The initial solution you come up with might not be the most efficient.
+Always look for ways to optimize your code.
+In this case, you can return False as soon as you find a pair of elements that violate the condition, instead of checking the entire array.
+
+8. **Keep Learning**: Monotonicity is a concept from mathematics.
+The more you learn about mathematics and how it applies to computer science, the better you'll become at solving these types of problems.
+
+== Test Strategies
+
+Here are some testing strategies for checking if an array is monotonic:
+
+1. **Positive Testing**: Test with arrays that are known to be monotonic.
+This includes arrays that are strictly increasing, strictly decreasing, and arrays with equal elements.
+
+2. **Negative Testing**: Test with arrays that are known to not be monotonic.
+This includes arrays that increase and then decrease, or decrease and then increase.
+
+3. **Edge Cases**: Test with edge cases such as an empty array and an array with a single element.
+These are technically monotonic, so the function should return true.
+
+4. **Large Inputs**: Test with large arrays to ensure that the function can handle the maximum input size.
+This can also help identify any performance issues.
+
+5. **Random Inputs**: Test with random arrays to ensure that the function works correctly in all scenarios.
+This can be done by generating random arrays of different sizes and checking the output of the function.
+
+6. **Boundary Values**: Test with arrays that contain the minimum and maximum possible values.
+This can help identify any issues with integer overflow or underflow.
+
+Remember, the goal of testing is to ensure that the function works correctly in all scenarios, not just the ones that are most likely to occur.
+
+== Performance Optimization
+
+Here are some tips for optimizing the performance of a function that checks if an array is monotonic:
+
+1. **Early Return**: If the array is not monotonic, you can return false as soon as you find a pair of elements that violate the condition.
+There's no need to check the rest of the array.
+
+2. **Avoid Unnecessary Comparisons**: Instead of checking each pair of elements in the array, it's enough to check each element with its next one.
+This reduces the number of comparisons and thus the time complexity.
+
+3. **Use Built-in Functions**: Python has built-in functions that can make your code cleaner and more efficient.
+For example, the `all()` function can be used to check if all elements in a list are True.
+
+4. **Determine the Direction Early**: Determine whether the array is increasing or decreasing at the start.
+This way, you only need to check the elements according to the determined direction, which can lead to fewer comparisons.
+
+5. **Avoid Extra Space**: Try to avoid using extra space.
+The problem can be solved in constant space complexity, so there's no need for additional data structures.
+
+== Follow-up
+
+For follow-up on checking if an array is monotonic, you could consider the following:
+
+1. **Explore Other Languages**: Try implementing the same function in other programming languages.
+This can help you understand the differences and similarities between languages.
+
+2. **Parallel Processing**: If the array is extremely large, you might want to consider using parallel processing to speed up the check.
+This could be an interesting way to learn about multithreading or multiprocessing in Python.
+
+3. **Real World Application**: Try to find a real-world problem that requires checking if an array is monotonic.
+This could be a problem from your work, from a coding challenge, or a problem you come up with yourself.
+
+4. **Teaching Others**: Try explaining the problem, your solution, and the concept of monotonicity to someone else.
+This is a great way to reinforce your own understanding.
+
+5. **Further Reading**: Monotonicity is a concept from mathematics.
+You might want to read more about it and other similar concepts.
+This could help you in future coding problems.
+
+== Related Topics
+
+Here are some related topics for checking if an array is monotonic:
+
+1. **Array Manipulation**: Understanding how to manipulate arrays is crucial for solving this problem.
+You can learn more about array manipulation in Python from the [Python documentation](https://docs.python.org/3/tutorial/datastructures.html).
+
+2. **Order Theory**: The concept of monotonicity comes from order theory in mathematics.
+You can learn more about order theory from this [Wikipedia article](https://en.wikipedia.org/wiki/Order_theory).
+
+3. **Algorithm Complexity**: Understanding time and space complexity can help you optimize your solution.
+You can learn more about algorithm complexity from this [Khan Academy course](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation).
+
+4. **Python Built-in Functions**: Python's built-in functions can make your code cleaner and more efficient.
+You can learn more about Python's built-in functions from the [Python documentation](https://docs.python.org/3/library/functions.html).
+
+5. **Unit Testing**: Testing your code is crucial to ensure it works as expected.
+You can learn more about unit testing in Python from this [Real Python tutorial](https://realpython.com/python-testing/).
+
+6. **Parallel Processing**: If the array is extremely large, parallel processing can speed up the check.
+You can learn more about parallel processing in Python from this [Python documentation](https://docs.python.org/3/library/concurrent.futures.html).
+
+Remember, understanding the related topics can help you solve the problem more effectively and efficiently.
+
+== References

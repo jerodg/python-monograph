@@ -1,0 +1,200 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to get the human-readable format of file size given the most appropriate unit.
+
+=== Constraint(s)
+
+stem:[-9223372036854775807 <= n <= 9223372036854775807]
+
+=== Example(s)
+
+.Input
+[source,python,linenums]
+----
+1500, binary
+----
+
+.Output
+[source,python,linenums]
+----
+"1.46 KiB"
+----
+
+== Use-Case(s)
+
+Getting the human-readable format of data size given the most appropriate unit is a common task in many areas of software development.
+Here are some common use cases:
+
+1. **File Management Applications**: In file explorer or management applications, it's common to display the size of files and directories in a human-readable format.
+This helps users understand the size of their files without having to convert from bytes.
+
+2. **Network Monitoring Tools**: Network monitoring tools often display the amount of data sent and received in a human-readable format.
+This can help network administrators understand the bandwidth usage and network traffic.
+
+3. **Storage Management**: In cloud storage platforms or database management systems, it's common to display the total storage used or available in a human-readable format.
+This helps users or administrators manage their storage resources effectively.
+
+4. **Performance Monitoring**: Performance monitoring tools often display the amount of memory used by an application or process in a human-readable format.
+This helps developers and system administrators understand the memory usage and optimize the performance.
+
+5. **Data Transfer**: When downloading or uploading files, it's common to display the size of the file and the amount of data transferred in a human-readable format.
+This helps users understand the progress of the data transfer.
+
+6. **Big Data Processing**: In big data processing, it's common to display the size of the datasets in a human-readable format.
+This helps data scientists and engineers understand the size of the data they are working with.
+
+== Common Mistakes
+
+When getting the human-readable format of data size given the most appropriate unit, there are several common mistakes to avoid:
+
+1. **Incorrect Unit Conversion**: One of the most common mistakes is incorrect unit conversion.
+It's important to remember that 1 kilobyte is 1024 bytes in binary notation, not 1000 bytes.
+Similarly, 1 megabyte is 1024 kilobytes, and so on.
+However, in decimal notation, 1 kilobyte is 1000 bytes, 1 megabyte is 1000 kilobytes, and so on.
+Mixing up these two systems can lead to significant errors in the calculated size.
+
+2. **Ignoring the Decimal Places**: When converting to a larger unit, it's common to ignore the decimal places.
+However, this can lead to a loss of precision and can make the size appear smaller or larger than it actually is.
+It's generally a good practice to keep at least one or two decimal places.
+
+3. **Not Considering the Context**: The appropriate unit to use can depend on the context.
+For example, in networking, speeds are often expressed in bits per second, while storage is usually expressed in bytes.
+Ignoring the context can lead to confusion and misinterpretation of the data.
+
+4. **Not Handling Small Sizes Properly**: When the size is very small (less than 1 KB for example), it might be more appropriate to display it in bytes rather than converting it to a larger unit.
+Not handling these small sizes properly can lead to confusing or misleading results.
+
+5. **Not Accounting for Large Sizes**: On the other end of the spectrum, very large sizes (like those of big data sets) may require units like terabytes (TB) or even petabytes (PB).
+Not accounting for these large sizes can lead to unwieldy numbers.
+
+6. **Hardcoding the Conversion Factors**: Hardcoding the conversion factors (like 1024 for binary notation or 1000 for decimal notation) can make the code less flexible and harder to maintain.
+It's generally a good practice to define these as constants at the beginning of your code or to use a library function that handles the conversion for you.
+
+== Best Practices
+
+Best practices for getting the human-readable format of data size given the most appropriate unit include:
+
+1. **Use Constants for Conversion Factors**: Instead of hardcoding the conversion factors (like 1024 for binary notation or 1000 for decimal notation), define these as constants at the beginning of your code.
+This makes the code more readable and easier to maintain.
+
+2. **Handle Edge Cases**: Ensure your function can handle edge cases, such as very small sizes (less than 1 KB) and very large sizes (like those of big data sets).
+For small sizes, it might be more appropriate to display the size in bytes.
+For large sizes, your function should be able to handle units like terabytes (TB) or even petabytes (PB).
+
+3. **Precision Matters**: When converting to a larger unit, don't ignore the decimal places.
+Keeping at least one or two decimal places can prevent loss of precision and make the size appear more accurate.
+
+4. **Error Handling**: Your function should be able to handle potential errors, such as invalid inputs.
+For example, if the input size is a negative number or not a number at all, your function should throw an appropriate error.
+
+5. **Use Appropriate Data Types**: Use appropriate data types for your variables.
+For example, the size of data is usually represented using integers or floating-point numbers.
+
+6. **Documentation**: Document your code properly.
+This includes writing a comprehensive docstring for your function that explains what the function does, its parameters, return value, and any exceptions it raises.
+
+7. **Unit Testing**: Write unit tests for your function to ensure it behaves as expected.
+This will help catch any bugs or issues early in the development process.
+
+8. **Performance**: If your function is expected to handle very large sizes, ensure it performs well.
+If the function is being called frequently, consider optimizing its performance.
+
+9. **Code Readability**: Write your code in a way that is easy to read and understand.
+This includes using meaningful variable names, keeping your functions small and single-purposed, and organizing your code well.
+
+10. **Consider the Context**: The appropriate unit to use can depend on the context.
+For example, in networking, speeds are often expressed in bits per second, while storage is usually expressed in bytes.
+Make sure your function can handle different contexts.
+
+== Test Strategies
+
+Testing strategies for getting the human-readable format of data size given the most appropriate unit could include:
+
+1. **Unit Tests**: Write unit tests for your function to ensure it behaves as expected.
+Test with a variety of inputs, including edge cases.
+For example, test with sizes that are exactly on the boundary between two units (like 1024 bytes, which is 1 kilobyte in binary notation), very small sizes (like 1 byte), and very large sizes (like 1 yottabyte).
+
+2. **Integration Tests**: If your function is part of a larger system, write integration tests to ensure it interacts correctly with other parts of the system.
+For example, if your function is used to display file sizes in a file explorer application, you could write tests that create files of various sizes, then check that the application displays the correct size.
+
+3. **Performance Tests**: If your function is expected to handle very large sizes (like those of big data sets), it's important to ensure it performs well.
+Write performance tests that measure how long your function takes to run with large inputs.
+
+4. **Regression Tests**: Whenever you make changes to your function, run all your tests again to ensure you haven't introduced any new bugs.
+This is called regression testing.
+
+5. **Error Handling Tests**: Write tests that ensure your function handles errors correctly.
+For example, what happens if the input is a negative number, or not a number at all?
+
+6. **Boundary Tests**: These are tests where you push the limits of the software.
+For example, what happens when you input the maximum possible value that can be held by a variable?
+
+7. **Usability Tests**: If your function is part of a user interface, it's important to ensure that the output is easy for users to understand.
+This might involve user studies or A/B testing.
+
+Remember, the goal of testing is not just to show that your software works, but to find bugs and improve the quality of your code.
+
+== Follow-up
+
+A possible follow-up for getting the human-readable format of data size given the most appropriate unit could be:
+
+1. **Implementing Additional Notations**: The current implementation supports binary and decimal notations.
+You could extend this to support other notations such as hexadecimal. [Python Hexadecimal](https://docs.python.org/3/library/functions.html#hex)
+
+2. **Adding More Units**: The current implementation likely supports up to exabytes (EB).
+As data sizes continue to grow, you might need to add support for larger units such as zettabytes (ZB) and yottabytes (YB). [Data Measurement Chart](https://www.nasuni.com/blog/data-size-chart/)
+
+3. **Improving Error Handling**: The current implementation could be improved by adding more robust error handling.
+For example, you could add checks to ensure that the size input is a positive number and throw an appropriate error if it's not. [Python Exceptions](https://docs.python.org/3/tutorial/errors.html)
+
+4. **Optimizing Performance**: If the function is being called frequently, it might be worth investigating ways to optimize its performance.
+For example, you could use a lookup table to avoid the need for a loop. [Python Performance Optimization](https://docs.python.org/3/library/timeit.html)
+
+5. **Adding Localization**: If your software is used internationally, you might need to localize the units.
+For example, in some languages, the word for "byte" might be different. [Python Internationalization](https://docs.python.org/3/library/gettext.html)
+
+6. **Creating a User Interface**: If this function is part of a larger software application, you might want to create a user interface that allows users to select the unit they want to use and enter the size they want to convert. [Python GUI Programming](https://docs.python.org/3/library/tkinter.html)
+
+7. **Writing Unit Tests**: If not already done, writing unit tests for this function would be a good follow-up task.
+This will help ensure that the function works as expected and makes it easier to make changes in the future. [Python Unit Testing](https://docs.python.org/3/library/unittest.html)
+
+== Related Topics
+
+Related topics for getting the human-readable format of data size given the most appropriate unit include:
+
+1. **Data Types and Variables**: Understanding different data types, especially integers and floating-point numbers, is crucial as the size of data is usually represented using these types. [Python Data Types](https://docs.python.org/3/tutorial/introduction.html#using-python-as-a-calculator)
+
+2. **String Formatting**: The human-readable format of data size is typically a string that includes a numeric value and a unit.
+Knowledge of string formatting in Python, such as using f-strings or the `format` method, is important. [Python String Formatting](https://docs.python.org/3/tutorial/inputoutput.html#fancier-output-formatting)
+
+3. **Mathematical Operations**: Basic mathematical operations like division and the use of the modulus operator can be involved in converting data size to a human-readable format. [Python Arithmetic Operations](https://docs.python.org/3/tutorial/introduction.html#numbers)
+
+4. **Control Structures**: Control structures like loops and conditional statements are often used in the conversion process. [Python Control Flow](https://docs.python.org/3/tutorial/controlflow.html)
+
+5. **Error Handling**: It's important to know how to handle potential errors, such as invalid inputs. [Python Errors and Exceptions](https://docs.python.org/3/tutorial/errors.html)
+
+6. **Unit Testing**: Writing unit tests can help ensure your function works as expected and handles edge cases properly. [Python Unit Testing](https://docs.python.org/3/library/unittest.html)
+
+7. **File I/O**: Since this task is often related to file sizes, understanding file input/output (I/O) operations in Python can be beneficial. [Python Input and Output](https://docs.python.org/3/tutorial/inputoutput.html)
+
+8. **Operating System (OS) Module**: The OS module in Python provides functions for interacting with the operating system, including retrieving file sizes. [Python OS Module](https://docs.python.org/3/library/os.html)
+
+9. **Memory Management**: Understanding how memory is managed in a computer system can provide a deeper understanding of data sizes. [Python Memory Management](https://docs.python.org/3/c-api/memory.html)
+
+10. **Networking**: In the context of network data transfer, understanding networking concepts can be beneficial. [Python Networking](https://docs.python.org/3/library/socket.html)
+
+== References

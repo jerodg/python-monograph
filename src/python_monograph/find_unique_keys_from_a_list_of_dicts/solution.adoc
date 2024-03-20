@@ -1,0 +1,249 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(arr: List[dict]) -> list:
+    """Method 0: Using Chain itertools
+
+    Args:
+            arr (List[dict]):
+
+    Returns:
+            (list)"""
+    return list(set(chain.from_iterable(sub.keys() for sub in arr)))
+----
+
+==== Explanation
+
+The code above is a Python function named `method_0` that takes a list of dictionaries (`arr`) as an argument and returns a list of unique keys from all dictionaries in the list.
+
+The function uses the `chain` function from the `itertools` module to flatten the list of keys from all dictionaries.
+This is done by the line `chain.from_iterable(sub.keys() for sub in arr)`.
+Here, a generator expression is used to iterate over each dictionary in the list `arr` and get its keys.
+The `chain.from_iterable` function then flattens this list of keys into a single iterable.
+
+After the keys have been flattened into a single iterable, the function converts this iterable of keys into a set, effectively removing any duplicate keys since sets only contain unique elements.
+This is done by the line `set(...)`.
+
+Finally, the function converts the set of unique keys back into a list, which is then returned by the function.
+This is done by the line `list(...)`.
+
+In terms of complexity, the time complexity of this function is O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the `chain` function and the `set` function.
+The space complexity is also O(n), where n is the total number of keys in all dictionaries.
+This is due to the storage of all keys in a set and a list.
+
+The function is efficient in finding all unique keys in a list of dictionaries.
+However, it creates several intermediate data structures (a generator, a set, and a list), which can consume more memory when dealing with large inputs.
+
+===== Advantages
+
+- The use of `itertools.chain` makes the code concise and easy to understand.
+It allows the function to handle the keys from all dictionaries in a single line of code.
+- The function effectively finds all unique keys in a list of dictionaries.
+By converting the list of keys to a set, it automatically removes any duplicate keys.
+===== Disadvantages
+- The function creates several intermediate data structures (a generator, a set, and a list), which can consume more memory when dealing with large inputs.
+This could potentially lead to performance issues if the list of dictionaries is very large.
+- The function does not preserve the order of the keys.
+If the order of keys is important, this method would not be suitable.
+===== Complexity Analysis ====== Time The time complexity of this function is O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the chain function and the set function.
+The chain function iterates over each key in the list of dictionaries, and the set function also iterates over each key to remove duplicates.
+====== Space The space complexity is also O(n), where n is the total number of keys in all dictionaries.
+This is due to the storage of all keys in a set and a list.
+The chain function creates a generator, which is a lazy iterator and does not consume memory for all items at once.
+However, the set and the list created in the function store all keys, leading to a space complexity of O(n).
+==== Tests === Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_1(arr: List[dict]) -> list:
+    """Method 1: Using list/dict Comprehension
+
+    Args:
+            arr (List[dict]):
+
+    Returns:
+            (list)"""
+    return list(set(val for dic in arr for val in dic.keys()))
+----
+
+==== Explanation The code in question is a Python function named `method_0`.
+
+This function is designed to take a list of dictionaries as an input and return a list of unique keys from all the dictionaries in the list.
+
+The function begins by using the `chain` function from Python's `itertools` module.
+This is done in the line `chain.from_iterable(sub.keys() for sub in arr)`.
+Here, a generator expression is used to iterate over each dictionary in the list `arr` and extract its keys.
+The `chain.from_iterable` function then takes these keys and flattens them into a single iterable.
+
+Once the keys have been flattened into a single iterable, the function then converts this iterable into a set.
+This is achieved with the line `set(...)`.
+The purpose of this step is to remove any duplicate keys, as sets in Python only contain unique elements.
+
+Finally, the function converts the set of unique keys back into a list.
+This is done with the line `list(...)`.
+The list of unique keys is then returned by the function.
+
+In terms of complexity, the function has a time complexity of O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the `chain` function and the `set` function.
+The space complexity is also O(n), due to the storage of all keys in a set and a list.
+
+While the function is efficient in finding all unique keys in a list of dictionaries, it does create several intermediate data structures (a generator, a set, and a list), which can consume more memory when dealing with large inputs.
+===== Advantages - The use of `itertools.chain` makes the code concise and easy to understand.
+It allows the function to handle the keys from all dictionaries in a single line of code.
+- The function effectively finds all unique keys in a list of dictionaries.
+By converting the list of keys to a set, it automatically removes any duplicate keys.
+===== Disadvantages - The function creates several intermediate data structures (a generator, a set, and a list), which can consume more memory when dealing with large inputs.
+This could potentially lead to performance issues if the list of dictionaries is very large.
+- The function does not preserve the order of the keys.
+If the order of keys is important, this method would not be suitable.
+===== Complexity Analysis ====== Time The time complexity of this function is O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the list comprehension and the set function.
+The list comprehension iterates over each key in the list of dictionaries, and the set function also iterates over each key to remove duplicates.
+====== Space The space complexity is also O(n), where n is the total number of keys in all dictionaries.
+This is due to the storage of all keys in a list and a set.
+The list comprehension creates a list, which consumes memory for all items at once.
+However, the set created in the function stores all keys, leading to a space complexity of O(n).
+==== Tests === Method 2:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_2(arr: List[dict]) -> list:
+    """Method 2: Using keys(),extend(),list() and set() methods
+
+    Args:
+            arr (List[dict]):
+
+    Returns:
+            (list)"""
+    new_list = []
+
+    for i in arr:
+        new_list.extend(list(i.keys()))
+
+    return list(set(new_list))
+----
+
+==== Explanation The selected code is a Python function named `method_2`.
+
+This function is designed to extract all unique keys from a list of dictionaries.
+
+The function starts by initializing an empty list `new_list`.
+This list will be used to store all keys from all dictionaries in the input list.
+
+The function then enters a loop where it iterates over each dictionary in the input list `arr`.
+For each dictionary, it extracts the keys using the `keys()` method, converts them into a list, and extends `new_list` with this list of keys.
+This is done in the line `new_list.extend(list(i.keys()))`.
+
+At this point, `new_list` contains all keys from all dictionaries, possibly with duplicates.
+To remove these duplicates, the function converts `new_list` into a set.
+Since sets in Python only contain unique elements, this effectively removes any duplicate keys.
+This is done in the line `set(new_list)`.
+
+Finally, the function converts the set of unique keys back into a list and returns this list.
+This is done in the line `list(set(new_list))`.
+
+In terms of complexity, the function has a time complexity of O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the loop and the `set` function.
+The space complexity is also O(n), due to the storage of all keys in `new_list` and a set.
+===== Advantages - The function is straightforward and easy to understand.
+It uses basic Python constructs like for loops and list methods, which makes it accessible to developers with a basic understanding of Python.
+- The function effectively finds all unique keys in a list of dictionaries.
+By extending a list with the keys from each dictionary and then converting this list to a set, it automatically removes any duplicate keys.
+===== Disadvantages - The function creates several intermediate data structures (a list for each dictionary's keys, a combined list of all keys, and a set), which can consume more memory when dealing with large inputs.
+This could potentially lead to performance issues if the list of dictionaries is very large.
+- The function does not preserve the order of the keys.
+If the order of keys is important, this method would not be suitable.
+- The function iterates over the list of dictionaries twice: once to create the combined list of keys, and once to create the set.
+This could potentially slow down the function if the list of dictionaries is very large.
+===== Complexity Analysis ====== Time The time complexity of this function is O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the loop and the set function.
+The loop iterates over each dictionary in the list arr, and for each dictionary, it extracts its keys and extends new_list with this list of keys.
+The set function also iterates over each key in new_list to remove duplicates.
+====== Space The space complexity is also O(n), where n is the total number of keys in all dictionaries.
+This is due to the storage of all keys in new_list and a set.
+The loop creates a list for each dictionary's keys and extends new_list with this list of keys.
+After all dictionaries have been processed, new_list contains all keys from all dictionaries, possibly with duplicates.
+The set function then creates a set, which stores all unique keys from new_list.
+==== Tests === Method 3:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_3(arr: List[dict]) -> list:
+    """Method 3: Using functools.reduce()
+
+    Args:
+            arr (List[dict]):
+
+    Returns:
+            (list)"""
+    return list(reduce(lambda a, b: {**a, **b}, arr).keys())
+----
+
+==== Explanation The selected code is a Python function named `method_3`.
+
+This function is designed to extract all unique keys from a list of dictionaries.
+
+The function uses the `reduce` function from the `functools` module. `reduce` applies a function of two arguments cumulatively to the items of an iterable, from left to right, so as to reduce the iterable to a single output.
+In this case, the function being applied is a lambda function that merges two dictionaries into one.
+This is done in the line `reduce(lambda a, b: {**a, **b}, arr)`.
+
+The lambda function `lambda a, b: {**a, **b}` takes two arguments, `a` and `b`, which are dictionaries.
+It returns a new dictionary that is the result of merging `a` and `b`.
+The `{**a, **b}` syntax is a shorthand for creating a new dictionary and unpacking the keys and values of `a` and `b` into it.
+
+After `reduce` has been applied, the result is a single dictionary that contains all keys and values from all dictionaries in the input list `arr`.
+This dictionary may still contain duplicate keys.
+
+To extract the unique keys from this dictionary, the function uses the `keys()` method, which returns a view object that displays a list of all the keys.
+This is done in the line `...keys()`.
+
+Finally, the function converts the view object into a list and returns this list.
+This is done in the line `list(...)`.
+
+In terms of complexity, the function has a time complexity of O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the `reduce` function and the `keys()` method.
+The space complexity is also O(n), due to the storage of all keys in a single dictionary.
+===== Advantages - The function is concise and efficient.
+It uses the `reduce` function to merge all dictionaries into one, which simplifies the process of finding unique keys.
+- The function effectively finds all unique keys in a list of dictionaries.
+By merging all dictionaries into one and then extracting the keys, it automatically removes any duplicate keys.
+- The use of `reduce` and a lambda function makes the code more Pythonic and easier to understand for developers familiar with these concepts.
+===== Disadvantages - The function creates an intermediate dictionary that contains all keys and values from all dictionaries in the input list.
+This could potentially consume a lot of memory when dealing with large inputs.
+- The function does not preserve the order of the keys.
+If the order of keys is important, this method would not be suitable.
+- The use of `reduce` and a lambda function might make the code harder to understand for developers not familiar with these concepts.
+===== Complexity Analysis ====== Time The time complexity of this function is O(n), where n is the total number of keys in all dictionaries.
+This is because each key is processed once by the reduce function and the keys() method.
+The reduce function applies a lambda function that merges two dictionaries into one, and for each merge operation, it iterates over each key in the dictionaries.
+The keys() method also iterates over each key in the final merged dictionary to create a view object of all keys.
+====== Space The space complexity is also O(n), where n is the total number of keys in all dictionaries.
+This is due to the storage of all keys in a single dictionary.
+The reduce function creates a new dictionary that is the result of merging all dictionaries in the input list arr.
+This dictionary contains all keys and values from all dictionaries, possibly with duplicates.
+The keys() method then creates a view object, which is a lightweight object but still requires some space.
+==== Tests

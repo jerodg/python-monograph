@@ -1,0 +1,749 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Singly Linked List:
+
+==== Implementation
+
+[source,python,linenums]
+----
+class Node:
+    """
+    A class representing a node in a singly linked list.
+
+    Attributes
+    ----------
+    data : any type
+        The data stored in the node.
+    next : Node, optional
+        The next node in the list, defaults to None.
+
+    Methods
+    -------
+    __init__(self, data=None)
+        Constructs a new Node instance.
+    """
+
+    def __init__(self, data=None):
+        """
+        Constructs a new Node instance.
+
+        Parameters
+        ----------
+        data : any type, optional
+            The data to be stored in the node, defaults to None.
+        """
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    """
+    A class representing a singly linked list.
+
+    Attributes
+    ----------
+    head : Node, optional
+        The first node in the list, defaults to None.
+
+    Methods
+    -------
+    __init__(self)
+        Constructs a new LinkedList instance.
+    insert_at_beginning(self, data)
+        Inserts a new node at the beginning of the list.
+    insert_at_end(self, data)
+        Inserts a new node at the end of the list.
+    delete_node(self, key)
+        Deletes the first node with the given key from the list.
+    print_list(self)
+        Prints the data of all nodes in the list.
+    search(self, key)
+        Searches for a node with the given key in the list.
+    update(self, old_value, new_value)
+        Updates the first node with the old value to the new value.
+    sort(self)
+        Sorts the list in ascending order.
+    reverse(self)
+        Reverses the order of the list.
+    """
+
+    def __init__(self):
+        """
+        Constructs a new LinkedList instance.
+        """
+        self.head = None
+
+    def insert_at_beginning(self, data):
+        """
+        Inserts a new node at the beginning of the list.
+
+        Parameters
+        ----------
+        data : any type
+            The data to be stored in the new node.
+        """
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        """
+        Inserts a new node at the end of the list.
+
+        Parameters
+        ----------
+        data : any type
+            The data to be stored in the new node.
+        """
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        last_node = self.head
+        while last_node.next:
+            last_node = last_node.next
+        last_node.next = new_node
+
+    def delete_node(self, key):
+        """
+        Deletes the first node with the given key from the list.
+
+        Parameters
+        ----------
+        key : any type
+            The key of the node to be deleted.
+        """
+        temp = self.head
+        if temp is not None:
+            if temp.data == key:
+                self.head = temp.next
+                temp = None
+                return
+        while temp is not None:
+            if temp.data == key:
+                break
+            prev = temp
+            temp = temp.next
+        if temp == None:
+            return
+        prev.next = temp.next
+        temp = None
+
+    def print_list(self):
+        """
+        Prints the data of all nodes in the list.
+        """
+        temp = self.head
+        while temp:
+            print(temp.data, end=' ')
+            temp = temp.next
+
+    def search(self, key):
+        """
+        Searches for a node with the given key in the list.
+
+        Parameters
+        ----------
+        key : any type
+            The key of the node to be searched for.
+
+        Returns
+        -------
+        bool
+            True if a node with the key is found, False otherwise.
+        """
+        current = self.head
+        while current:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+
+    def update(self, old_value, new_value):
+        """
+        Updates the first node with the old value to the new value.
+
+        Parameters
+        ----------
+        old_value : any type
+            The old value to be replaced.
+        new_value : any type
+            The new value to replace the old value with.
+
+        Returns
+        -------
+        bool
+            True if a node with the old value is found and updated, False otherwise.
+        """
+        current = self.head
+        while current:
+            if current.data == old_value:
+                current.data = new_value
+                return True
+            current = current.next
+        return False
+
+    def sort(self):
+        """
+        Sorts the list in ascending order.
+        """
+        if self.head is None:
+            return
+        current = self.head
+        while current.next:
+            next_node = current.next
+            while next_node:
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
+            current = current.next
+
+    def reverse(self):
+        """
+        Reverses the order of the list.
+        """
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+----
+
+==== Explanation
+
+The provided code is a Python implementation of a singly linked list.
+It consists of two classes: `Node` and `LinkedList`.
+
+The `Node` class is a simple data structure that represents an element in the linked list.
+It has two attributes: `data` and `next`.
+The `data` attribute holds the value of the node, and `next` is a reference to the next node in the list.
+The `Node` class is initialized with `data` and sets `next` to `None`.
+
+[source,python]
+----
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+----
+
+The `LinkedList` class represents the actual linked list.
+It has a single attribute, `head`, which is a reference to the first node in the list.
+If the list is empty, `head` is `None`.
+
+[source,python]
+----
+class LinkedList:
+    def __init__(self):
+        self.head = None
+----
+
+The `LinkedList` class also includes several methods for manipulating the list.
+For example, `insert_at_beginning` creates a new node with the provided data and inserts it at the beginning of the list.
+It does this by setting the `next` attribute of the new node to the current head of the list, and then updating the list's head to the new node.
+
+[source,python]
+----
+def insert_at_beginning(self, data):
+    new_node = Node(data)
+    new_node.next = self.head
+    self.head = new_node
+----
+
+The `insert_at_end` method is similar, but it inserts the new node at the end of the list.
+It does this by iterating through the list to find the last node, and then setting the `next` attribute of the last node to the new node.
+
+[source,python]
+----
+def insert_at_end(self, data):
+    new_node = Node(data)
+    if self.head is None:
+        self.head = new_node
+        return
+    last_node = self.head
+    while last_node.next:
+        last_node = last_node.next
+    last_node.next = new_node
+----
+
+The `delete_node` method removes the first node in the list that has a specific key.
+It does this by iterating through the list until it finds a node with the matching key, then updating the `next` attribute of the previous node to skip over the node to be deleted.
+
+[source,python]
+----
+def delete_node(self, key):
+    temp = self.head
+    if temp is not None:
+        if temp.data == key:
+            self.head = temp.next
+            temp = None
+            return
+    while temp is not None:
+        if temp.data == key:
+            break
+        prev = temp
+        temp = temp.next
+    if temp == None:
+        return
+    prev.next = temp.next
+    temp = None
+----
+
+Other methods in the `LinkedList` class include `print_list` (which prints the data of all nodes in the list), `search` (which checks if a node with a specific key exists in the list), `update` (which updates the value of the first node with a specific old value to a new value), `sort` (which sorts the list in ascending order), and `reverse` (which reverses the order of the list).
+
+===== Advantages
+
+1. **Dynamic Size**: Unlike arrays, the size of a linked list can be increased or decreased dynamically, which provides flexibility and efficiency in memory management.
+2. **Insertion and Deletion**: Insertion and deletion of nodes are easier as compared to array.
+In an array, you need to shift elements to create space or fill the space caused by deletion, but in a linked list, you just need to update the address present in the next pointer of a node.
+
+===== Disadvantages
+
+1. **Memory Usage**: Each node in the linked list requires extra storage for pointers, which leads to an overhead of extra memory.
+2. **Traversal**: Accessing an element in a linked list requires sequential traversal from the head node, which can be time-consuming.
+Unlike arrays, elements in a linked list cannot be accessed directly.
+3. **Reverse Traversing**: Singly linked lists are linear and can only be traversed in one direction.
+This means that they cannot be traversed in reverse without first reversing the list, which can be computationally expensive.
+
+===== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+1. `insert_at_beginning(data)`:
+- Time Complexity: O(1), because inserting at the beginning of the linked list is a constant time operation as we have direct access to the head of the list.
+- Space Complexity: O(1), because only a constant amount of space is used.
+
+2. `insert_at_end(data)`:
+- Time Complexity: O(n), because in the worst case, we have to traverse the entire list to find the last node.
+- Space Complexity: O(1), because only a constant amount of space is used.
+
+3. `delete_node(key)`:
+- Time Complexity: O(n), because in the worst case, we have to traverse the entire list to find the node to be deleted.
+- Space Complexity: O(1), because only a constant amount of space is used.
+
+4. `print_list()`:
+- Time Complexity: O(n), because we have to traverse the entire list to print all nodes.
+- Space Complexity: O(1), because only a constant amount of space is used.
+
+5. `search(key)`:
+- Time Complexity: O(n), because in the worst case, we have to traverse the entire list to find the node.
+- Space Complexity: O(1), because only a constant amount of space is used.
+
+6. `update(old_value, new_value)`:
+- Time Complexity: O(n), because in the worst case, we have to traverse the entire list to find the node to be updated.
+- Space Complexity: O(1), because only a constant amount of space is used.
+
+7. `sort()`:
+- Time Complexity: O(n^2), because we are using a simple bubble sort algorithm to sort the linked list, which has a quadratic time complexity.
+- Space Complexity: O(1), because we are sorting the list in place and not using any additional space.
+
+8. `reverse()`:
+- Time Complexity: O(n), because we have to traverse the entire list to reverse it.
+- Space Complexity: O(1), because we are reversing the list in place and not using any additional space.
+
+Please note that 'n' is the number of nodes in the linked list.
+
+==== Tests
+
+=== Doubly Linked List:
+
+==== Implementation
+
+[source,python,linenums]
+----
+class Node:
+    """
+    A class to represent a node in a doubly linked list.
+
+    ...
+
+    Attributes
+    ----------
+    data : any
+        the data to be stored in the node
+    next : Node, optional
+        reference to the next node in the doubly linked list, defaults to None
+    prev : Node, optional
+        reference to the previous node in the doubly linked list, defaults to None
+
+    Methods
+    -------
+    __init__(self, data=None)
+        Constructs a Node with the specified data and next and prev set to None.
+    """
+
+    def __init__(self, data=None):
+        """
+        Constructs a Node with the specified data and next and prev set to None.
+
+        Parameters
+        ----------
+        data : any
+            The data to be stored in the node. Defaults to None.
+        """
+
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList:
+    """
+    A class to represent a doubly linked list.
+
+    ...
+
+    Attributes
+    ----------
+    head : Node, optional
+        the start of the doubly linked list, defaults to None
+
+    Methods
+    -------
+    __init__(self)
+        Constructs a DoublyLinkedList with the head set to None.
+    insert_at_beginning(self, data)
+        Inserts a new node at the beginning of the list.
+    insert_at_end(self, data)
+        Inserts a new node at the end of the list.
+    delete_node(self, key)
+        Deletes a node with the specified key from the list.
+    search(self, key)
+        Searches for a node with the specified key in the list.
+    update(self, old_value, new_value)
+        Updates the value of a node in the list.
+    sort(self)
+        Sorts the nodes in the list in ascending order.
+    reverse(self)
+        Reverses the order of the nodes in the list.
+    print_list(self)
+        Prints the data of all nodes in the list.
+    """
+
+    def __init__(self):
+        """
+        Constructs a DoublyLinkedList with the head set to None.
+        """
+
+        self.head = None
+
+    def insert_at_beginning(self, data):
+        """
+        Inserts a new node at the beginning of the list.
+
+        Parameters
+        ----------
+        data : any
+            The data to be stored in the new node.
+        """
+
+        new_node = Node(data)
+        new_node.next = self.head
+        if self.head is not None:
+            self.head.prev = new_node
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        """
+        Inserts a new node at the end of the list.
+
+        Parameters
+        ----------
+        data : any
+            The data to be stored in the new node.
+        """
+
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            last_node = self.head
+            while last_node.next:
+                last_node = last_node.next
+            last_node.next = new_node
+            new_node.prev = last_node
+
+    def delete_node(self, key):
+        """
+        Deletes a node with the specified key from the list.
+
+        Parameters
+        ----------
+        key : any
+            The key of the node to be deleted.
+        """
+
+        temp = self.head
+        while temp is not None:
+            if temp.data == key:
+                if temp.prev is not None:
+                    temp.prev.next = temp.next
+                if temp.next is not None:
+                    temp.next.prev = temp.prev
+                if temp == self.head:
+                    self.head = temp.next
+                temp = None
+                return
+            temp = temp.next
+
+    def search(self, key):
+        """
+        Searches for a node with the specified key in the list.
+
+        Parameters
+        ----------
+        key : any
+            The key of the node to be searched for.
+
+        Returns
+        -------
+        bool
+            True if a node with the specified key is found, False otherwise.
+        """
+
+        temp = self.head
+        while temp:
+            if temp.data == key:
+                return True
+            temp = temp.next
+        return False
+
+    def update(self, old_value, new_value):
+        """
+        Updates the value of a node in the list.
+
+        Parameters
+        ----------
+        old_value : any
+            The old value to be replaced.
+        new_value : any
+            The new value to replace the old value.
+
+        Returns
+        -------
+        bool
+            True if a node with the old value is found and updated, False otherwise.
+        """
+
+        temp = self.head
+        while temp:
+            if temp.data == old_value:
+                temp.data = new_value
+                return True
+            temp = temp.next
+        return False
+
+    def sort(self):
+        """
+        Sorts the nodes in the list in ascending order.
+        """
+
+        if self.head is None:
+            return
+        current = self.head
+        while current.next:
+            next_node = current.next
+            while next_node:
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                next_node = next_node.next
+            current = current.next
+
+    def reverse(self):
+        """
+        Reverses the order of the nodes in the list.
+        """
+
+        temp = None
+        current = self.head
+        while current:
+            temp = current.prev
+            current.prev = current.next
+            current.next = temp
+            current = current.prev
+        if temp:
+            self.head = temp.prev
+
+    def print_list(self):
+        """
+        Prints the data of all nodes in the list.
+        """
+
+        temp = self.head
+        while temp:
+            print(temp.data, end=' ')
+            temp = temp.next
+----
+
+==== Explanation
+
+The provided code is a Python implementation of a doubly linked list.
+A doubly linked list is a type of linked list in which each node contains a reference to the next node as well as the previous node in the sequence.
+This allows for more efficient operations in some scenarios compared to a singly linked list.
+
+The code defines two classes: `Node` and `DoublyLinkedList`.
+
+The `Node` class is used to create new nodes for the linked list.
+Each node has three attributes: `data`, `next`, and `prev`.
+The `data` attribute stores the value of the node.
+The `next` and `prev` attributes are pointers to the next and previous nodes in the list, respectively.
+The `__init__` method is used to initialize these attributes.
+
+[source,python]
+----
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+        self.prev = None
+----
+
+The `DoublyLinkedList` class represents the actual linked list.
+It has a single attribute, `head`, which points to the first node in the list.
+
+The `DoublyLinkedList` class also includes several methods for manipulating the linked list.
+These include `insert_at_beginning`, `insert_at_end`, `delete_node`, `search`, `update`, `sort`, `reverse`, and `print_list`.
+
+For example, the `insert_at_beginning` method creates a new node with the given data and inserts it at the beginning of the list.
+If the list is not empty, it adjusts the `prev` pointer of the old head node to point to the new node.
+
+[source,python]
+----
+def insert_at_beginning(self, data):
+    new_node = Node(data)
+    new_node.next = self.head
+    if self.head is not None:
+        self.head.prev = new_node
+    self.head = new_node
+----
+
+The `search` method traverses the list and returns `True` if it finds a node with the given key, and `False` otherwise.
+
+[source,python]
+----
+def search(self, key):
+    temp = self.head
+    while temp:
+        if temp.data == key:
+            return True
+        temp = temp.next
+    return False
+----
+
+The `sort` method sorts the nodes in the list in ascending order using a simple bubble sort algorithm.
+
+[source,python]
+----
+def sort(self):
+    if self.head is None:
+        return
+    current = self.head
+    while current.next:
+        next_node = current.next
+        while next_node:
+            if current.data > next_node.data:
+                current.data, next_node.data = next_node.data, current.data
+            next_node = next_node.next
+        current = current.next
+----
+
+These are just a few examples of the methods provided in the `DoublyLinkedList` class.
+Each method is designed to perform a specific operation on the linked list, making it a versatile and useful data structure for many different types of programming tasks.
+
+===== Advantages
+
+The selected code implements a doubly linked list in Python.
+It has several advantages and disadvantages:
+
+Advantages:
+1. **Dynamic Size**: Unlike arrays, the size of a linked list can be increased or decreased dynamically, which provides flexibility and efficiency in memory management.
+2. **Efficient Insertions/Deletions**: Insertions and deletions at any place in a linked list are generally more efficient than arrays or singly linked lists.
+This is because we don't need to shift elements, just change the pointers.
+3. **Bidirectional**: A doubly linked list can be traversed in both forward and backward direction.
+
+The methods in the `DoublyLinkedList` class also have their own advantages and disadvantages:
+
+- `insert_at_beginning` and `insert_at_end`: These methods allow for efficient (O(1)) insertion of a new node at the beginning or end of the list.
+However, if the position of the new node is not at the beginning or end, these methods are not suitable.
+
+- `delete_node`: This method allows for efficient (O(1)) deletion of a node if we have a pointer to the node.
+However, if we only have the key, we need to search for the node first, which takes O(n) time.
+
+- `search`: This method allows us to check if a node with a specific key exists in the list.
+However, in the worst case, it needs to traverse the entire list, which takes O(n) time.
+
+- `update`: This method allows us to update the value of a node.
+However, like `delete_node`, it needs to search for the node first if we only have the old value, which takes O(n) time.
+
+- `sort`: This method sorts the nodes in the list in ascending order.
+However, it uses a simple bubble sort algorithm, which has a time complexity of O(n^2) and is not efficient for large lists.
+
+- `reverse`: This method reverses the order of the nodes in the list.
+It is efficient (O(n)) but requires careful handling of the pointers to avoid breaking the list.
+
+- `print_list`: This method prints the data of all nodes in the list.
+It is straightforward and efficient (O(n)), but it only prints to the console and does not return a value.
+
+===== Disadvantages
+
+1. **Extra Memory**: Each node in the doubly linked list needs to store an extra pointer, which requires extra memory.
+2. **Traversal**: Accessing an element in a linked list requires sequential traversal from the head node, which can be time-consuming.
+Unlike arrays, elements in a linked list cannot be accessed directly.
+3. **Complexity**: The code for insertion and deletion in a doubly linked list is a bit complex because we have to maintain the previous and next pointers.
+
+===== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+1. `insert_at_beginning(data)`:
+- Time Complexity: O(1), as we are adding the node at the beginning of the list.
+- Space Complexity: O(1), as no extra space is used.
+
+2. `insert_at_end(data)`:
+- Time Complexity: O(n), where n is the number of nodes in the list.
+This is because we need to traverse the entire list to find the last node.
+- Space Complexity: O(1), as no extra space is used.
+
+3. `delete_node(key)`:
+- Time Complexity: O(n), as in the worst case we need to traverse the entire list to find the node to be deleted.
+- Space Complexity: O(1), as no extra space is used.
+
+4. `search(key)`:
+- Time Complexity: O(n), as in the worst case we need to traverse the entire list to find the node.
+- Space Complexity: O(1), as no extra space is used.
+
+5. `update(old_value, new_value)`:
+- Time Complexity: O(n), as in the worst case we need to traverse the entire list to find the node to be updated.
+- Space Complexity: O(1), as no extra space is used.
+
+6. `sort()`:
+- Time Complexity: O(n^2), as we are using a simple bubble sort algorithm to sort the nodes in the list.
+- Space Complexity: O(1), as no extra space is used.
+
+7. `reverse()`:
+- Time Complexity: O(n), as we need to traverse the entire list to reverse the links.
+- Space Complexity: O(1), as no extra space is used.
+
+8. `print_list()`:
+- Time Complexity: O(n), as we need to traverse the entire list to print all the nodes.
+- Space Complexity: O(1), as no extra space is used.
+
+In general, the space complexity for the entire `DoublyLinkedList` class is O(n), where n is the number of nodes in the list.
+This is because each node in the list contributes to the total space used.
+
+==== Tests

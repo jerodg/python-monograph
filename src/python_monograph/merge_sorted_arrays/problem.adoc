@@ -1,0 +1,317 @@
+:doctitle: Merge Sorted Arrays Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You are given two integer arrays `+nums1+` and `+nums2+`, sorted in *non-decreasing order*, and two integers `+m+` and `+n+`, representing the number of elements in `+nums1+` and `+nums2+` respectively.
+
+*Merge* `+nums1+` and `+nums2+` into a single array sorted in *non-decreasing order*.
+
+The final sorted array should not be returned by the function, but instead be _stored inside the array _`+nums1+`. To accommodate this, `+nums1+` has a length of `+m + n+`, where the first `+m+` elements denote the elements that should be merged, and the last `+n+` elements are set to `+0+` and should be ignored. `+nums2+` has a length of `+n+`.
+
+=== Approaches
+There are several techniques or approaches that can be used to solve the problem of merging two sorted arrays:
+
+1. **Two-Pointer Technique**: This is the most efficient technique for this problem.
+Since the arrays are already sorted, you can use two pointers to traverse both arrays simultaneously.
+Compare the elements at the current pointers in both arrays, and add the smaller one to the result array.
+Move the pointer of the array from which you took the smaller element, and repeat the process until you've gone through all elements in both arrays.
+
+2. **Merge and Sort**: This is a less efficient but simpler approach.
+You can concatenate or merge the two arrays into one and then sort the resulting array.
+However, this approach does not take advantage of the fact that the input arrays are already sorted, and sorting an array is generally more time-consuming than the two-pointer technique.
+
+3. **Heap or Priority Queue**: This approach is more useful when you have more than two sorted arrays.
+You can add the smallest element from each array to a min-heap or priority queue.
+Then, repeatedly remove the smallest element from the heap and add it to the result array, and add the next element from the array that the removed element belonged to.
+Repeat this process until the heap is empty.
+
+4. **Divide and Conquer**: This approach is also more useful when you have more than two sorted arrays.
+It's similar to the merge process in merge sort.
+Divide the arrays into pairs, merge each pair, and then merge the resulting arrays, and so on, until you have one sorted array.
+
+Remember, the best approach depends on the specific requirements and constraints of the problem.
+For this problem, the two-pointer technique is the most suitable.
+
+=== Constraint(s)
+
+* `+nums1.length == m + n+`
+* `+nums2.length == n+`
+* `+0 <= m, n <= 200+`
+* `+1 <= m + n <= 200+`
+* `+-10+`^`+9+`^`+ <= nums1[i], nums2[j] <= 10+`^`+9+`^
+
+=== Example(s)
+
+==== 0
+
+.Input
+[source,python,linenums]
+----
+[1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+----
+
+.Output
+[source,python,linenums]
+----
+[1,2,2,3,5,6]
+----
+
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+
+==== 1
+
+.Input
+[source,python,linenums]
+----
+nums1 = [1], m = 1, nums2 = [], n = 0
+----
+
+.Output
+[source,python,linenums]
+----
+[1]
+----
+
+Explanation: The arrays we are merging are [1] and [].
+The result of the merge is [1].
+
+==== 2
+
+.Input
+[source,python,linenums]
+----
+nums1 = [0], m = 0, nums2 = [1], n = 1
+----
+
+.Output
+[source,python,linenums]
+----
+[1]
+----
+
+Explanation: The arrays we are merging are [] and [1].
+The result of the merge is [1].
+NOTE: that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
+
+==== 3
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+==== 4
+
+.Input
+[source,python,linenums]
+----
+
+----
+
+.Output
+[source,python,linenums]
+----
+
+----
+
+== Use-Cases
+
+The problem of merging two sorted arrays into a single sorted array has several practical use cases in software development and data analysis.
+Here are a few examples:
+
+1. **Database Merging**: In database systems, sorted arrays can represent ordered datasets.
+Merging these datasets is a common operation, especially when dealing with distributed databases where data is partitioned across multiple nodes.
+
+2. **Search Engine Optimization**: Search engines often need to merge sorted lists of results from different sources or criteria.
+This problem is similar to merging sorted arrays.
+
+3. **Data Analysis**: In data analysis and statistics, sorted arrays can represent ordered datasets.
+Merging these datasets is a common operation when combining data from different sources or experiments.
+
+4. **Operating Systems**: In operating systems, sorted arrays can represent processes ordered by priority.
+Merging these arrays can be useful in scheduling algorithms where processes from different queues need to be combined.
+
+5. **Machine Learning**: In machine learning, sorted arrays can represent ordered feature sets.
+Merging these feature sets is a common operation when combining features from different sources or experiments.
+
+== Common Mistakes
+
+When solving the problem of merging two sorted arrays into a single sorted array, there are several common mistakes that developers often make:
+
+1. **Ignoring the fact that the arrays are already sorted**: The problem statement mentions that the input arrays are sorted in non-decreasing order.
+Some developers might overlook this fact and use a general merging approach which could lead to unnecessary complexity.
+Since the arrays are already sorted, you can use a two-pointer technique to merge them efficiently.
+
+2. **Modifying the second array**: The problem statement specifies that the merged array should be stored in `nums1`.
+Some developers might be tempted to modify `nums2` during the merging process, but this is unnecessary and could lead to incorrect results.
+
+3. **Not handling the remaining elements**: After the main merging process, there might be some remaining elements in either `nums1` or `nums2`.
+Some developers forget to handle these remaining elements, which could lead to an incomplete merged array.
+
+4. **Not using the given space in `nums1`**: The problem statement mentions that `nums1` has a length of `m + n` to accommodate the merged array.
+Some developers might create a new array for the merged result instead of using the given space in `nums1`, which could lead to unnecessary space usage.
+
+5. **Off-by-one errors**: When dealing with array indices, it's easy to make off-by-one errors.
+For example, some developers might use `<=` instead of `<` in their loop conditions, which could lead to out-of-bounds errors.
+Always be careful with your indices and consider edge cases.
+
+Remember, understanding the problem statement thoroughly and considering all edge cases is crucial to avoid these common mistakes.
+
+== Best Practices
+
+When solving the problem of merging two sorted arrays into a single sorted array, here are some best practices to consider:
+
+1. **Understand the Problem**: Before you start coding, make sure you understand the problem thoroughly.
+This includes understanding the constraints and the expected output.
+
+2. **Plan Your Approach**: Once you understand the problem, plan your approach.
+In this case, you can use a two-pointer technique to merge the arrays efficiently.
+
+3. **Write Clean Code**: Write your code in a clean and organized manner.
+Use meaningful variable names and include comments to explain your logic.
+
+4. **Consider Edge Cases**: Always consider edge cases, such as when one of the arrays is empty or when the arrays have only one element.
+
+5. **Test Your Code**: After writing your code, test it with different inputs to make sure it works as expected.
+This includes testing it with the provided examples and with your own test cases.
+
+6. **Optimize Your Code**: Once your code is working correctly, look for ways to optimize it.
+In this case, the two-pointer technique is already an efficient approach, but there might be other optimizations you can make.
+
+7. **Review and Refactor**: Finally, review your code and refactor it if necessary.
+Look for ways to make your code more efficient or easier to understand.
+
+Remember, the key to solving coding problems effectively is to understand the problem, plan your approach, write clean and efficient code, and test your code thoroughly.
+
+== Test Strategies
+
+When testing the solution for this problem, you can consider the following strategies:
+
+1. **Boundary Testing**: Test the solution with the minimum and maximum possible values.
+For example, test with `m` and `n` as 0 (minimum value) and 200 (maximum value).
+Also, test with `nums1[i]` and `nums2[j]` as `-10^9` (minimum value) and `10^9` (maximum value).
+
+2. **Edge Cases**: Test the solution with edge cases.
+For example, when one or both of the arrays are empty, or when one array is significantly larger than the other.
+
+3. **Random Testing**: Test the solution with random values.
+This can help uncover unexpected bugs.
+
+4. **Regression Testing**: After fixing a bug, re-run all the tests to ensure that the fix didn't introduce any new bugs.
+
+5. **Performance Testing**: Test the solution with large inputs to ensure that it can handle them within the time limits.
+This is especially important for this problem, as the maximum size of the arrays can be up to 200.
+
+6. **Equivalence Partitioning**: Divide the input domain into classes of equivalent data from which test cases can be derived.
+For example, you can divide the input arrays into different classes based on their size (small, medium, large) and test with inputs from each class.
+
+Remember, the goal of testing is not only to find bugs but also to ensure that the solution works correctly under all possible conditions.
+
+== Performance Optimization
+
+To optimize the performance of a function that solves the problem of merging two sorted arrays, you can consider the following strategies:
+
+1. **Two-Pointer Technique**: Since the input arrays are already sorted, you can use a two-pointer technique to merge them.
+This technique involves maintaining a pointer for each array and moving them based on the comparison of the elements at the pointer indices.
+This approach avoids unnecessary comparisons and operates in linear time complexity.
+
+2. **In-Place Merge**: The problem statement specifies that the merged array should be stored in `nums1`.
+Therefore, you can perform the merge operation in-place to save space.
+However, since the merge operation might overwrite elements in `nums1` that have not been considered yet, you should consider starting the merge from the end (where the zeros are) and work your way to the start.
+
+3. **Early Termination**: If one of the arrays is exhausted (all its elements have been considered), you can terminate the process early.
+This is because, if `nums2` is exhausted, the remaining elements in `nums1` are already in their correct place, and if `nums1` is exhausted, you can directly copy the remaining elements from `nums2`.
+
+4. **Avoid Unnecessary Operations**: Try to avoid unnecessary operations, such as unnecessary data copying or repeated calculations.
+For example, instead of repeatedly calculating the length of the arrays, you can store them in variables.
+
+5. **Use Efficient Data Structures**: If the problem constraints change and the in-place requirement is removed, using a data structure with efficient insert operations, like a priority queue, could be beneficial.
+
+Remember, the key to performance optimization is understanding the problem and its constraints, and choosing the right strategy and data structures based on them.
+
+== Follow-up
+
+For a follow-up to the problem of merging two sorted arrays, you could consider the following:
+
+1. **Different Data Types**: What if the arrays contained different data types, such as strings or custom objects?
+How would you modify your solution to handle this?
+
+2. **Different Sorting Orders**: What if the arrays were sorted in non-increasing order instead of non-decreasing order?
+How would you modify your solution to handle this?
+
+3. **Different Merge Requirements**: What if the merged array needed to be stored in a new array instead of in `nums1`?
+How would you modify your solution to handle this?
+
+4. **Performance Analysis**: Analyze the performance of your solution.
+How does it scale with the size of the input arrays?
+Can you make any optimizations to improve its performance?
+
+5. **Unit Testing**: Write unit tests for your solution.
+Make sure to cover edge cases, such as when one or both of the arrays are empty, or when one array is significantly larger than the other.
+
+6. **Code Review**: Have someone else review your code.
+They might spot mistakes or areas for improvement that you missed.
+
+Remember, the goal of these follow-ups is to deepen your understanding of the problem and to improve your problem-solving skills.
+
+== Related Topics
+
+Related topics for the problem of merging two sorted arrays include:
+
+1. **Array Manipulation**: This is a fundamental topic in many programming and data structure courses.
+Understanding how to manipulate arrays is crucial for solving this problem.
+You can refer to this [tutorial](https://www.geeksforgeeks.org/array-data-structure/) from GeeksforGeeks for more information.
+
+2. **Sorting Algorithms**: Since the problem involves merging sorted arrays, understanding different sorting algorithms can be beneficial.
+Here is a [link](https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/overview-of-sorting-algorithms) to Khan Academy's overview of sorting algorithms.
+
+3. **Two-Pointer Technique**: This technique is often used in array manipulation problems, including this one.
+You can learn more about it from this [article](https://www.geeksforgeeks.org/two-pointers-technique/) on GeeksforGeeks.
+
+4. **In-Place Algorithms**: The problem requires the merge operation to be performed in-place.
+Understanding in-place algorithms can help solve this problem efficiently.
+Here is a [link](https://www.geeksforgeeks.org/in-place-algorithm/) to an article about in-place algorithms on GeeksforGeeks.
+
+5. **Time and Space Complexity Analysis**: Analyzing the time and space complexity of your solution is important for understanding its efficiency.
+You can refer to this [guide](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation) on Khan Academy for more information.
+
+Remember to study these topics to deepen your understanding of the problem and improve your problem-solving skills.
+
+== References
+
+Here are some official documentation references that are relevant to the methods used in the problem of merging two sorted arrays:
+
+1. **Python Lists**: The problem involves manipulating Python lists (arrays).
+Here is the [official Python documentation](https://docs.python.org/3/tutorial/introduction.html#lists) on lists.
+
+2. **Python List Methods**: The problem may involve using various list methods.
+Here is the [official Python documentation](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists) on list methods.
+
+3. **Python for Loops**: The problem solution likely involves using a for loop to iterate over the arrays.
+Here is the [official Python documentation](https://docs.python.org/3/tutorial/controlflow.html#for-statements) on for loops.
+
+4. **Python if Statements**: The problem solution likely involves using if statements to make comparisons.
+Here is the [official Python documentation](https://docs.python.org/3/tutorial/controlflow.html#if-statements) on if statements.
+
+Remember to refer to these official documentation links to understand the Python constructs and methods used in the problem solution.

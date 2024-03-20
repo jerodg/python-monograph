@@ -1,0 +1,132 @@
+:doctitle: Find the sum of all the multiples of 3 or 5 below N Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+If we list all the natural numbers below `10` that are multiples of `3` or `5` , we get `3, 5, 6, 9`.
+The sum of those multiples is `23`.
+
+Find the sum of all the multiples of `3` or `5` below .
+
+Input Format
+
+First line contains `T` that denotes the number of test cases.
+This is followed by `T` lines, each containing an integer, .
+
+For each test case, print an integer that denotes the sum of all the multiples of `3` or `5` below `N`.
+
+=== Best Practices
+
+[.lead]
+When finding the sum of all multiples of 3 or 5 below a certain number, there are several best practices you can follow:
+
+1. **Use Arithmetic Progression**: Instead of iterating over each number up to `n`, you can use the formula for the sum of an arithmetic progression to calculate the sum of multiples of 3 and 5. This will significantly reduce the time complexity of your solution.
+
+2. **Avoid Double Counting**: Numbers that are multiples of both 3 and 5 (i.e., multiples of 15) will be counted twice if you simply sum the multiples of 3 and 5. To avoid this, you should subtract the sum of multiples of 15 from your final result.
+
+3. **Use Efficient Data Structures**: If you choose to generate multiples of 3 and 5, consider using efficient data structures.
+For example, a set in Python can store unique elements and has a constant time complexity for checking the presence of an element.
+
+4. **Error Handling**: Always check the validity of the input.
+For example, the input should be a positive integer.
+If the input is invalid, your function should return an appropriate error message.
+
+5. **Code Readability**: Write your code in a way that is easy to understand.
+Use meaningful variable names, add comments where necessary, and follow the style guide of your programming language.
+
+6. **Test Your Code**: Make sure to test your code with different inputs, including edge cases.
+For example, test your function with `n` as a small number, a large number, and a multiple of 3 or 5.
+
+=== Use-Cases
+
+[.lead]
+Finding the sum of all multiples of 3 or 5 below a certain number, such as 1000, can have several practical applications in different fields.
+Here are a few examples:
+
+1. **Mathematics and Education**: This problem is a common exercise in arithmetic progression and can be used as a teaching tool in mathematics education to help students understand the concept of multiples and summation.
+
+2. **Coding Interviews and Competitions**: This problem is often used in coding interviews and competitions to test a candidate's problem-solving skills and their understanding of time and space complexity.
+
+3. **Simulation and Modeling**: In simulations or modeling scenarios, such a function could be used to generate specific data sets or sequences for testing or analysis.
+
+4. **Game Development**: In game development, such a function could be used in the logic of a game.
+For example, a game might award points based on the sum of multiples of certain numbers.
+
+5. **Algorithm Benchmarking**: This problem can also be used to benchmark different algorithms or programming languages in terms of their performance and efficiency.
+
+=== Common Mistakes
+
+[.lead]
+When finding the sum of all multiples of 3 or 5 below a certain number, there are several common mistakes that developers often make:
+
+1. **Double Counting**: One of the most common mistakes is double counting the numbers that are multiples of both 3 and 5 (i.e., multiples of 15).
+If you simply sum the multiples of 3 and 5, you will count these numbers twice.
+To avoid this, you should subtract the sum of multiples of 15 from your final result.
+
+2. **Inefficient Iteration**: Another common mistake is to iterate over each number up to `n` to check if it is a multiple of 3 or 5. This is inefficient and can be slow for large values of `n`.
+Instead, you can use the formula for the sum of an arithmetic progression or generate multiples of 3 and 5 using the `range` function with a step parameter.
+
+3. **Ignoring Error Handling**: It's important to check the validity of the input.
+The input should be a positive integer.
+If the input is invalid, your function should return an appropriate error message.
+Ignoring error handling can lead to unexpected results or errors.
+
+4. **Not Testing with Different Inputs**: Make sure to test your code with different inputs, including edge cases.
+For example, test your function with `n` as a small number, a large number, and a multiple of 3 or 5. Not testing your code thoroughly can lead to bugs that are hard to detect.
+
+5. **Ignoring Space Complexity**: If you choose to generate multiples of 3 and 5 and store them in a data structure, be aware of the space complexity of your solution.
+Creating two sets for multiples of 3 and 5 can consume a significant amount of memory for large values of `n`.
+
+6. **Not Considering Readability**: Code should be written in a way that is easy to understand.
+Use meaningful variable names, add comments where necessary, and follow the style guide of your programming language.
+Ignoring code readability can make your code hard to maintain and debug.
+
+=== Constraints
+
+stem:[1 <= N <= 10^5] +
+stem:[1 <= T <= 10^9]
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+2
+10
+100
+----
+
+.Expected Output
+[source,python,linenums]
+----
+23
+2318
+----
+
+For `N=10` , if we list all the natural numbers below `10` that are multiples of `3` or `5`, we get  `3, 5, 6, 9`.
+The sum of these multiples is `23`.
+
+Similarly for `N=100`, we get `2318`.
+
+== Follow-up
+
+Can you solve the problem within stem:[O(1)] time complexity?
+
+== Related Topics
+
+https://en.wikipedia.org/wiki/Summation +
+https://projecteuler.net/problem=1

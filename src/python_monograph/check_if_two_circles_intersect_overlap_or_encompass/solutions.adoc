@@ -1,0 +1,199 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided code defines a Python class named `Circle`.
+This class is used to represent a circle in a two-dimensional space.
+Each instance of the `Circle` class has three attributes: `x`, `y`, and `r`, which represent the x-coordinate of the circle's center, the y-coordinate of the circle's center, and the radius of the circle, respectively.
+
+The `Circle` class has two methods: `__init__` and `check_relation`.
+
+The `__init__` method is the constructor of the `Circle` class.
+It takes three arguments: `x`, `y`, and `r`.
+This method initializes a `Circle` instance with the provided center coordinates and radius.
+If the provided radius is negative, the method raises a `ValueError`.
+
+[source,python]
+----
+def __init__(self, x: [int | float], y: [int | float], r: [int | float]):
+    if r < 0:
+        raise ValueError('Invalid input: radius must be positive')
+    self.x = x
+    self.y = y
+    self.r = r
+----
+
+The `check_relation` method takes another `Circle` instance as an argument and determines the relationship between the two circles.
+The relationship can be one of the following: the other circle is inside this circle, this circle is inside the other circle, the circles intersect, the circles touch, or the circles do not overlap, intersect, or touch.
+
+[source,python]
+----
+def check_relation(self, other_circle) -> str:
+    d = math.sqrt((self.x - other_circle.x) ** 2 + (self.y - other_circle.y) ** 2)
+    if d <= self.r - other_circle.r:
+        return 'other_circle is in this circle'
+    elif d <= other_circle.r - self.r:
+        return 'this circle is in other_circle'
+    elif d < self.r + other_circle.r:
+        return 'this circle and other_circle intersect'
+    elif d == self.r + other_circle.r:
+        return 'this circle and other_circle will touch'
+    else:
+        return 'this circle and other_circle do not overlap, intersect, or touch'
+----
+
+This method first calculates the Euclidean distance between the centers of the two circles.
+Then, it checks the relationship based on the distance and the radii of the two circles.
+The method returns a string that describes the relationship between the two circles.
+
+==== Advantages
+
+1. **Simplicity**: The method is straightforward and easy to understand.
+It uses basic mathematical concepts to determine the relationship between two circles.
+
+2. **Efficiency**: The method calculates the Euclidean distance between the centers of the two circles only once and uses this value to determine the relationship.
+This makes the method efficient.
+
+3. **Versatility**: The method can determine all possible relationships between two circles: whether one circle is inside the other, whether they intersect, whether they touch, or whether they are separate.
+
+==== Disadvantages
+
+1. **Limited to Two Dimensions**: The method is designed to work with circles in a two-dimensional space.
+It cannot be directly applied to spheres in a three-dimensional space or higher dimensional objects without modification.
+
+2. **No Error Handling for Invalid Inputs**: The method assumes that the input is always valid.
+If the input is not a `Circle` object, or if the `Circle` object is not properly initialized, the method may fail or produce incorrect results.
+
+3. **Dependence on `math` Module**: The method relies on the `math` module to calculate the square root.
+This is not a major issue, but it does mean that the method cannot be used if the `math` module is not available for some reason.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+Time Complexity:
+The time complexity of the `check_relation` method is O(1), which means it operates in constant time.
+This is because the operations performed inside this method (calculating the Euclidean distance and comparing it with the radii of the circles) do not depend on the size of the input.
+
+Space Complexity:
+The space complexity of the `Circle` class is also O(1), which means it uses a constant amount of space.
+Each instance of the `Circle` class uses a fixed amount of space to store the x and y coordinates of the center and the radius of the circle, regardless of their values.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a class named `Circle` that represents a circle in a two-dimensional space.
+The circle is defined by its center, represented as a complex number, and its radius.
+
+The `Circle` class is initialized with a tuple representing the center of the circle and a float representing the radius.
+The center is converted to a complex number where the real part is the x-coordinate and the imaginary part is the y-coordinate.
+If the provided radius is negative, a `ValueError` is raised.
+
+[source,python]
+----
+def __init__(self, center: tuple, radius: float):
+    if radius < 0:
+        raise ValueError('Invalid input: radius must be positive')
+    self.center = complex(*center)
+    self.radius = radius
+----
+
+The `Circle` class has a method named `relation` that determines the relationship between the instance circle and another circle.
+The relationship can be one of the following: "Separate", "Touch", "Encompass", or "Intersect".
+This is determined by calculating the Euclidean distance between the centers of the two circles and comparing it with the sum, difference, and individual values of their radii.
+
+[source,python]
+----
+def relation(self, other: 'Circle') -> str:
+    distance = abs(self.center - other.center)
+    if distance > self.radius + other.radius:
+        return 'Separate'
+    elif distance == self.radius + other.radius:
+        return 'Touch'
+    elif distance + min(self.radius, other.radius) < max(self.radius, other.radius):
+        return 'Encompass'
+    else:
+        return 'Intersect'
+----
+
+In summary, the `Circle` class provides a way to represent a circle in a two-dimensional space and determine its relationship with another circle.
+The use of complex numbers simplifies the calculation of the distance between the centers of the two circles.
+
+==== Advantages
+
+1. **Use of Complex Numbers**: The use of complex numbers to represent the center of the circle simplifies the calculation of the Euclidean distance between the centers of the two circles.
+This is because the subtraction of complex numbers automatically takes into account the differences in both the x and y coordinates.
+
+2. **Comprehensive**: The `relation` method can determine all possible relationships between two circles: whether they are separate, touch, one encompasses the other, or they intersect.
+This makes the method versatile and comprehensive.
+
+3. **Error Handling**: The constructor of the `Circle` class checks if the radius is negative and raises a `ValueError` if it is.
+This ensures that a `Circle` instance cannot be created with an invalid state.
+
+==== Disadvantages
+
+1. **Limited to Two Dimensions**: Similar to the previous method, this method is designed to work with circles in a two-dimensional space.
+It cannot be directly applied to spheres in a three-dimensional space or higher dimensional objects without modification.
+
+2. **No Error Handling for Invalid Inputs**: The `relation` method assumes that the input is always a `Circle` object.
+If the input is not a `Circle` object, or if the `Circle` object is not properly initialized, the method may fail or produce incorrect results.
+
+3. **Dependence on Complex Numbers**: While the use of complex numbers simplifies the calculation of the Euclidean distance, it also introduces a dependency on understanding how complex numbers work.
+Developers unfamiliar with complex numbers may find this method harder to understand and use.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+Time Complexity:
+The time complexity of the `relation` method is O(1), which means it operates in constant time.
+This is because the operations performed inside this method (calculating the Euclidean distance and comparing it with the radii of the circles) do not depend on the size of the input.
+
+Space Complexity:
+The space complexity of the `Circle` class is also O(1), which means it uses a constant amount of space.
+Each instance of the `Circle` class uses a fixed amount of space to store the center and the radius of the circle, regardless of their values.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----

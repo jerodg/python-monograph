@@ -1,0 +1,305 @@
+:doctitle: Find Pairs With the Given Sum Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+Given an array of integers and an integer req_sum, find the number of pairs and the pairs themselves of array elements whose sum is equal to req_sum.
+
+=== Constraint(s)
+
+The constraints for the problem "Find Pairs With the Given Sum" could be as follows:
+
+1. The input list `arr` is a list of integers.
+The length of `arr` is `n`, where `1 <= n <= 10^5`.
+2. Each element in `arr` is an integer `a`, where `-10^9 <= a <= 10^9`.
+3. The required sum `req_sum` is an integer, where `-10^9 <= req_sum <= 10^9`.
+4. The function should return an integer representing the number of pairs in `arr` that sum up to `req_sum`.
+5. If there are no pairs that sum up to `req_sum`, the function should return 0.
+6. If `arr` is empty, the function should return 0.
+7. The function should be able to handle both positive and negative integers in `arr`.
+8. The function should be able to handle duplicate elements in `arr`.
+9. The function should not modify the input list `arr`.
+10. The function should have a time complexity of O(n log n) or better.
+
+=== Example(s)
+
+==== 0
+
+.Input
+[source,python,linenums]
+----
+arr = [1, 5, 7, 1]
+req_sum = 6
+----
+
+.Output
+[source,python,linenums]
+----
+(2, [(1, 5), (5, 1)])
+----
+
+==== 1
+
+.Input
+[source,python,linenums]
+----
+arr = [1, 1, 1, 1, 1, 1, 1, 1]
+req_sum = 2
+----
+
+.Output
+[source,python,linenums]
+----
+(28, [(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)])
+----
+
+==== 2
+
+.Input
+[source,python,linenums]
+----
+arr = [1, 7, 6, 2, 5, 4, 3, 1, 9, 8]
+req_sum = 7
+----
+
+.Output
+[source,python,linenums]
+----
+(4, [(1, 6), (6, 1), (2, 5), (5, 2)])
+----
+
+==== 3
+
+.Input
+[source,python,linenums]
+----
+arr = [10, 20, 30, 40, 50]
+req_sum = 60
+----
+
+.Output
+[source,python,linenums]
+----
+(2, [(10, 50), (20, 40)])
+----
+
+==== 4
+
+.Input
+[source,python,linenums]
+----
+arr = [-1, -2, -3, -4, -5]
+req_sum = -6
+----
+
+.Output
+[source,python,linenums]
+----
+(2, [(-1, -5), (-2, -4)])
+----
+
+== Use-Case(s)
+
+The problem of finding pairs in an array that sum up to a given number has several practical use cases in real-world applications.
+Here are a few examples:
+
+1. **Financial Transactions**: In financial software, this problem can be used to identify transactions that together make up a specific total.
+This can be useful in fraud detection, budgeting, or reconciliation processes.
+
+2. **Data Analysis**: In data analysis and statistics, this problem can be used to identify pairs of data points that together meet a certain criteria.
+This can be useful in fields like bioinformatics, where you might want to find pairs of genes that together express a certain trait.
+
+3. **Computer Networking**: In computer networking, this problem can be used to identify pairs of nodes that together use a certain amount of bandwidth.
+
+4. **E-commerce Recommendations**: In e-commerce, this problem can be used to identify pairs of items that together cost a certain amount.
+This can be used to make recommendations to customers ("these items together cost X").
+
+5. **Travel Itinerary Planning**: In travel itinerary planning, this problem can be used to identify pairs of locations that can be visited within a certain budget or time frame.
+
+== Common Mistakes
+
+When solving the problem of finding pairs in an array that sum up to a given number, there are several common mistakes that developers often make:
+
+1. **Not Handling Negative Numbers**: Some developers assume that the input array will only contain positive numbers.
+However, the problem statement does not specify this, and the array could contain negative numbers as well.
+Therefore, your solution should be able to handle both positive and negative numbers.
+
+2. **Not Handling Duplicate Elements**: Another common mistake is not properly handling duplicate elements in the array.
+If the array contains duplicate elements that sum up to the required sum, each pair should be counted separately.
+
+3. **Modifying the Input Array**: Some solutions might involve sorting the input array.
+However, this modifies the input array, which might not be acceptable in some cases.
+If you need to sort the array, consider creating a copy of the array and sorting the copy.
+
+4. **Inefficient Solutions**: A brute force solution that checks all possible pairs of numbers in the array would have a time complexity of O(n^2), which might not be efficient for large arrays.
+Consider using more efficient solutions, such as the ones that use sorting and two-pointer technique or hashing, which have a time complexity of O(n log n) or O(n), respectively.
+
+5. **Not Considering Edge Cases**: Edge cases such as an empty array or an array with only one element should also be considered in your solution.
+Make sure your solution handles these edge cases correctly.
+
+== Best Practices
+
+When solving the problem of finding pairs in an array that sum up to a given number, here are some best practices to consider:
+
+1. **Understand the Problem**: Make sure you fully understand the problem before you start coding.
+This includes understanding the constraints and the expected output.
+
+2. **Choose the Right Data Structure**: The choice of data structure can greatly affect the efficiency of your solution.
+For this problem, a hash map (dictionary in Python) can be a good choice as it allows for constant time lookups.
+
+3. **Handle Edge Cases**: Always consider edge cases in your solution.
+For this problem, edge cases could include an empty array, an array with only one element, or an array with duplicate elements.
+
+4. **Write Clean Code**: Write your code in a clean and organized manner.
+Use meaningful variable names, keep your functions small and focused, and include comments to explain your logic.
+
+5. **Optimize for Efficiency**: Always consider the time and space complexity of your solution.
+For this problem, a brute force solution would have a time complexity of O(n^2), which is not efficient for large arrays.
+More efficient solutions, such as those using hashing or sorting and two-pointer technique, should be considered.
+
+6. **Test Your Code**: Always test your code with various test cases to make sure it works as expected.
+This includes both normal cases and edge cases.
+
+7. **Document Your Code**: Include docstrings for your functions to explain what they do, what the input parameters are, and what the return value is.
+This is not only helpful for others who might read your code, but also for you if you need to revisit your code in the future.
+
+8. **Use Built-in Functions and Libraries**: Python has a rich set of built-in functions and libraries that can make your code more efficient and easier to read.
+For example, you can use the `collections` library's `Counter` class to count the frequency of elements in the array.
+
+9. **Avoid Modifying the Input**: Unless specifically allowed by the problem statement, avoid modifying the input data.
+If you need to sort the array or make other modifications, consider creating a copy of the array and working on the copy.
+
+10. **Use Type Hints**: In Python, it's a good practice to use type hints.
+This makes your code more readable and helps prevent potential bugs related to incorrect data types.
+
+== Test Strategies
+
+When testing the solution for the problem "Find Pairs With the Given Sum", you can use the following strategies:
+
+1. **Unit Testing**: Write unit tests for your function to ensure it behaves as expected.
+Python's built-in `unittest` module or third-party libraries like `pytest` can be used for this purpose.
+Make sure to test with a variety of inputs, including both normal cases and edge cases.
+
+2. **Boundary Testing**: Test your function with boundary values.
+For example, test with the smallest and largest possible values of `n` (the length of `arr`), `a` (the elements of `arr`), and `req_sum` as per the constraints mentioned in the problem statement.
+
+3. **Edge Case Testing**: Test your function with edge cases.
+For example, test with an empty array, an array with only one element, an array with duplicate elements, and an array with both positive and negative numbers.
+
+4. **Performance Testing**: Test your function with large inputs to ensure it can handle them within the time limits.
+This is especially important for this problem, as the function should have a time complexity of O(n log n) or better.
+
+== Performance Optimization
+
+When optimizing the performance of a function that solves the problem of finding pairs in an array that sum up to a given number, consider the following tips:
+
+1. **Use Efficient Data Structures**: The choice of data structure can greatly affect the efficiency of your solution.
+For this problem, a hash map (dictionary in Python) can be a good choice as it allows for constant time lookups.
+This can significantly reduce the time complexity of your solution.
+
+2. **Avoid Nested Loops**: A common approach to this problem is to use two nested loops to check all possible pairs of numbers in the array.
+However, this approach has a time complexity of O(n^2), which is not efficient for large arrays.
+Instead, consider using a single loop and a hash map to check if the required pair exists in constant time.
+
+3. **Sort the Array**: If the problem allows you to modify the input array, consider sorting the array first.
+Once the array is sorted, you can use the two-pointer technique to find pairs that sum up to the required sum.
+This approach has a time complexity of O(n log n) due to the sorting, but the actual search for pairs is done in O(n) time.
+
+4. **Use Built-in Functions and Libraries**: Python has a rich set of built-in functions and libraries that can make your code more efficient.
+For example, you can use the `collections` library's `Counter` class to count the frequency of elements in the array.
+This can be useful if the array contains duplicate elements.
+
+5. **Avoid Unnecessary Operations**: Try to minimize the number of operations in your function.
+For example, if you are using a hash map to store the frequency of elements in the array, you can update the frequency and check for pairs in the same loop, instead of using separate loops.
+
+6. **Optimize Space Complexity**: While optimizing the time complexity of your function, also consider its space complexity.
+For example, if you are using a hash map to store the frequency of elements, note that this requires additional space.
+If space is a concern, you might need to find a balance between time and space complexity.
+
+== Follow-up
+
+For follow-up on solving the problem of finding pairs in an array that sum up to a given number, you might consider the following:
+
+1. **Extend to Three Numbers**: Try extending the problem to finding three numbers that add up to a given sum.
+This will require a different approach and will be a good exercise in problem-solving.
+
+2. **Different Data Structures**: Experiment with different data structures to solve the problem.
+For example, you could try using a binary search tree or a heap instead of a hash map.
+
+3. **Parallel Processing**: If the array is very large, you might consider using parallel processing to speed up the computation.
+This could involve dividing the array into chunks and processing each chunk on a different processor or thread.
+
+4. **Memory Efficiency**: If memory is a concern, try to come up with a solution that uses less memory.
+This might involve trading off some time efficiency for space efficiency.
+
+5. **Real-world Application**: Try to find a real-world application for this problem.
+This could involve finding a dataset that you can apply this problem to, or it could involve integrating this problem into a larger project or application.
+
+6. **Different Programming Languages**: Try solving the problem in a different programming language.
+This can help you understand the strengths and weaknesses of different languages and can improve your overall programming skills.
+
+7. **Code Review**: Have someone else review your code.
+They might be able to spot potential issues or suggest improvements that you didn't think of.
+
+== Related Topics
+
+Related topics for the problem of finding pairs in an array that sum up to a given number include:
+
+1. **Array Manipulation**: This is a fundamental topic in computer science and is directly related to this problem.
+You can find more information about it on [GeeksforGeeks](https://www.geeksforgeeks.org/array-data-structure/).
+
+2. **Hashing**: This problem can be efficiently solved using a hash map.
+You can learn more about hashing on [Wikipedia](https://en.wikipedia.org/wiki/Hash_function) and [GeeksforGeeks](https://www.geeksforgeeks.org/hashing-data-structure/).
+
+3. **Two-Pointer Technique**: This technique can be used to solve this problem efficiently if the array is sorted.
+You can learn more about it on [GeeksforGeeks](https://www.geeksforgeeks.org/two-pointers-technique/).
+
+4. **Sorting Algorithms**: If the problem allows you to sort the input array, you might need to use a sorting algorithm.
+You can learn more about sorting algorithms on [Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm) and [GeeksforGeeks](https://www.geeksforgeeks.org/sorting-algorithms/).
+
+5. **Time and Space Complexity**: Understanding the time and space complexity of your solution is crucial for this problem.
+You can learn more about time and space complexity on [Wikipedia](https://en.wikipedia.org/wiki/Time_complexity) and [GeeksforGeeks](https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/).
+
+6. **Unit Testing and Test-Driven Development (TDD)**: Writing tests for your solution is an important part of solving this problem.
+You can learn more about unit testing and TDD on [Wikipedia](https://en.wikipedia.org/wiki/Unit_testing) and [GeeksforGeeks](https://www.geeksforgeeks.org/unit-testing-python-unittest/).
+
+7. **Python Programming**: Since the problem is to be solved in Python, understanding Python programming is essential.
+You can learn more about Python on the [official Python documentation](https://docs.python.org/3/tutorial/index.html) and [GeeksforGeeks](https://www.geeksforgeeks.org/python-programming-language/).
+
+== References
+
+Here are the official Python documentation references relevant to the methods used in the provided code:
+
+1. **List Comprehensions**: List comprehensions provide a concise way to create lists based on existing lists.
+In Python, you can create a list using a for loop and if conditions. [Python Docs - List Comprehensions](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)
+
+2. **Dictionaries**: A dictionary is a built-in Python data structure that can be used to store key-value pairs.
+Dictionaries are mutable, which means they can be changed.
+The values in a dictionary can be accessed using their corresponding keys. [Python Docs - Dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
+
+3. **`itertools.combinations`**: This function is a part of the itertools module in Python.
+It is used to generate all possible combinations of an iterable for a given count of elements to select. [Python Docs - itertools.combinations](https://docs.python.org/3/library/itertools.html#itertools.combinations)
+
+4. **`enumerate` Function**: The enumerate function adds a counter to an iterable and returns it as an enumerate object.
+This can be used to get the index of elements while iterating over a list. [Python Docs - enumerate](https://docs.python.org/3/library/functions.html#enumerate)
+
+5. **`sort` Method**: The sort method sorts the elements of a given list in a specific order - Ascending or Descending. [Python Docs - sort](https://docs.python.org/3/library/stdtypes.html#list.sort)
+
+6. **`typing` Module**: The typing module in Python provides runtime support for type hints as specified by PEP 484, PEP 526, PEP 544, PEP 586, PEP 589, and PEP 604. [Python Docs - typing](https://docs.python.org/3/library/typing.html)
+
+7. **`if __name__ == "__main__"`**: This is used to execute some code only if the file was run directly, and not imported. [Python Docs - `__main__`](https://docs.python.org/3/library/__main__.html)
+
+8. **Docstrings**: Docstrings are literal strings used right after the definition of a function, method, class, or module.
+They are used to document the object to which they are attached. [Python Docs - Docstrings](https://www.python.org/dev/peps/pep-0257/)

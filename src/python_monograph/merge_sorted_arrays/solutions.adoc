@@ -1,0 +1,576 @@
+:doctitle: Merge Sorted Arrays Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_00` that merges two sorted integer arrays into one sorted array.
+The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
+Here, `nums1` is the first sorted integer array with a size of `m+n`, where the first `m` elements are the elements to consider for merging, and the rest are zeros. `nums2` is the second sorted integer array, and `n` is the number of elements in `nums2` to consider for merging.
+
+The function begins by creating a copy of the first `m` elements of `nums1` and then clears `nums1`.
+This is done using the following lines of code:
+
+[source,python]
+----
+nums1_copy = nums1[:m]
+nums1 = []
+----
+
+Next, the function initializes two pointers, `p1` and `p2`, each pointing to the start of `nums1_copy` and `nums2` respectively.
+This is achieved with:
+
+[source,python]
+----
+p1 = 0
+p2 = 0
+----
+
+The function then enters a while loop, which continues as long as both pointers are within the range of their respective arrays.
+Inside the loop, the function compares the elements pointed by the pointers and appends the smaller one into `nums1`.
+The corresponding pointer is then incremented.
+This is done using the following code:
+
+[source,python]
+----
+if nums1_copy[p1] <= nums2[p2]:
+    nums1.append(nums1_copy[p1])
+    p1 += 1
+else:
+    nums1.append(nums2[p2])
+    p2 += 1
+----
+
+After the loop, if there are remaining elements in `nums1_copy` or `nums2`, they are appended into `nums1`.
+This is done using the following code:
+
+[source,python]
+----
+if p1 < m:
+    nums1[p1 + p2 :] = nums1_copy[p1:]
+if p2 < n:
+    nums1[p1 + p2 :] = nums2[p2:]
+----
+
+Finally, the function returns the merged sorted array `nums1`.
+The function uses a two-pointer technique, where each pointer points to the start of each array and moves forward as we process each element.
+This technique allows the function to merge the two arrays in a time-efficient manner.
+
+==== Advantages
+
+1. **Efficiency**: The two-pointer technique is a time-efficient way to merge two sorted arrays.
+It processes each element only once, resulting in a linear time complexity of O(m+n), where m and n are the lengths of the two arrays.
+This is significantly faster than other methods that might have a time complexity of O((m+n) log(m+n)), such as combining the two arrays and then sorting the result.
+
+2. **In-place**: The method modifies one of the input arrays (`nums1`) to store the result, which saves auxiliary space.
+This is beneficial when dealing with large arrays where extra space could be a concern.
+
+==== Disadvantages
+
+1. **Destructive**: This method modifies the input array `nums1`, which might not be desirable in all cases.
+If the original arrays are needed later in the code, this method would not be suitable.
+
+2. **Limited applicability**: This method specifically handles the case where `nums1` has enough space at the end to accommodate `nums2`.
+If this is not the case, the method would need to be adjusted.
+
+3. **Zero placeholders**: The method assumes that the extra space in `nums1` is filled with zeros.
+If the array contains meaningful zeros, this method might produce incorrect results.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+**Time Complexity**: The time complexity of the function is O(m + n), where m and n are the lengths of the two input arrays.
+This is because in the worst-case scenario, the function will need to iterate through all elements of both arrays once.
+The while loop runs until we have processed all elements in both arrays, which gives us a linear time complexity.
+
+**Space Complexity**: The space complexity of the function is O(m), where m is the length of the first input array.
+This is because we are creating a copy of the first m elements of `nums1`.
+The rest of the variables used in the function (`nums1`, `p1`, `p2`) take constant space.
+Therefore, the space complexity is linear in the size of the first input array.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_01` that merges two sorted integer arrays into one sorted array.
+The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
+Here, `nums1` is the first sorted integer array with a size of `m+n`, where the first `m` elements are the elements to consider for merging, and the rest are zeros. `nums2` is the second sorted integer array, and `n` is the number of elements in `nums2` to consider for merging.
+
+The function begins by initializing two pointers, `p1` and `p2`, each pointing to the end of `nums1` and `nums2` respectively.
+This is achieved with:
+
+```python
+p1 = m - 1
+p2 = n - 1
+```
+
+Next, the function initializes a third pointer `p` for the last unprocessed position in `nums1`:
+
+[source,python]
+----
+p = m + n - 1
+----
+
+The function then enters a while loop, which continues as long as both pointers `p1` and `p2` are within the range of their respective arrays.
+Inside the loop, the function compares the elements pointed by the pointers and puts the larger one into the last unprocessed position in `nums1`.
+The corresponding pointer is then decremented.
+This is done using the following code:
+
+[source,python]
+----
+if nums1[p1] <= nums2[p2]:
+    nums1[p] = nums2[p2]
+    p2 -= 1
+else:
+    nums1[p] = nums1[p1]
+    p1 -= 1
+p -= 1
+----
+
+After the loop, if there are remaining elements in `nums2`, they are appended into the unprocessed positions in `nums1`.
+This is done using the following code:
+
+[source,python]
+----
+if p2 >= 0:
+    nums1[: p2 + 1] = nums2[: p2 + 1]
+----
+
+Finally, the function returns the merged sorted array `nums1`.
+The function uses a two-pointer technique, where each pointer points to the end of each array and moves backward as we process each element.
+This technique allows the function to merge the two arrays in a time-efficient manner.
+
+==== Advantages
+
+1. **Efficiency**: The two-pointer technique is a time-efficient way to merge two sorted arrays.
+It processes each element only once, resulting in a linear time complexity of O(m+n), where m and n are the lengths of the two arrays.
+This is significantly faster than other methods that might have a time complexity of O((m+n) log(m+n)), such as combining the two arrays and then sorting the result.
+
+2. **In-place**: The method modifies one of the input arrays (`nums1`) to store the result, which saves auxiliary space.
+This is beneficial when dealing with large arrays where extra space could be a concern.
+
+==== Disadvantages
+
+1. **Destructive**: This method modifies the input array `nums1`, which might not be desirable in all cases.
+If the original arrays are needed later in the code, this method would not be suitable.
+
+2. **Limited applicability**: This method specifically handles the case where `nums1` has enough space at the end to accommodate `nums2`.
+If this is not the case, the method would need to be adjusted.
+
+3. **Zero placeholders**: The method assumes that the extra space in `nums1` is filled with zeros.
+If the array contains meaningful zeros, this method might produce incorrect results.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+**Time Complexity**: The time complexity of the function is O(m + n), where m and n are the lengths of the two input arrays.
+This is because in the worst-case scenario, the function will need to iterate through all elements of both arrays once.
+The while loop runs until we have processed all elements in both arrays, which gives us a linear time complexity.
+
+**Space Complexity**: The space complexity of the function is O(1).
+This is because the function modifies the input array `nums1` in-place and does not use any additional space that scales with the size of the input.
+All other variables (`p1`, `p2`, `p`) used in the function take constant space.
+Therefore, the space complexity is constant.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_02` that merges two sorted integer arrays into one sorted array.
+The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
+
+`nums1` is the first sorted array, which has enough space to hold the additional elements from `nums2`. `m` is the number of initialized elements in `nums1`. `nums2` is the second sorted array, and `n` is the number of initialized elements in `nums2`.
+
+The function begins by appending the second array to the first one.
+This is done using the `+` operator, which concatenates the two lists.
+The slice `nums1[:m]` is used to get the first `m` elements of `nums1`, and `nums2` is appended to this slice.
+The result is a new list that contains the initialized elements of `nums1` followed by all elements of `nums2`.
+
+[source,python]
+----
+nums1[:] = sorted(nums1[:m] + nums2)
+----
+
+The `sorted` function is then used to sort this combined list.
+The sorted list is assigned back to `nums1` using slice assignment (`nums1[:] = ...`), which modifies the original list in-place.
+This is important because the function is expected to store the result in `nums1` and does not return anything.
+
+The function ends with a `return` statement, which returns the sorted list.
+This is not necessary because the function is supposed to modify `nums1` in-place and does not need to return anything.
+However, it does not harm and can be useful for testing or debugging purposes.
+
+[source,python]
+----
+return nums1
+----
+
+The function is accompanied by a docstring that provides a detailed explanation of its purpose, arguments, and return value.
+It also includes a doctest, which is a simple way to test the function.
+The doctest shows an example of how to call the function and what result to expect.
+
+==== Advantages
+
+1. **Simplicity**: The code is straightforward and easy to understand.
+It uses built-in Python functions, which makes it more readable and maintainable.
+2. **In-place operation**: The function modifies the first array in-place, which means it does not require additional space that scales with the size of the input.
+This can be beneficial in terms of memory efficiency.
+
+==== Disadvantages
+
+1. **Limited applicability**: This method specifically handles the case where `nums1` has enough space at the end to accommodate `nums2`.
+If this is not the case, the method would need to be adjusted.
+2. **Zero placeholders**: The method assumes that the extra space in `nums1` is filled with zeros.
+If the array contains meaningful zeros, this method might produce incorrect results.
+3. **Built-in sort function**: The use of the built-in sort function may not be the most efficient way to merge two sorted arrays.
+A more efficient approach would be to merge the arrays in a single pass, which can be done in linear time.
+The built-in sort function has a time complexity of O(n log n), which is less efficient for large inputs.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+Time Complexity: The time complexity of this function is dominated by the sorting operation.
+In Python, the built-in `sorted` function uses a sorting algorithm called Timsort, which has a worst-case and average time complexity of O(n log n), where n is the total number of elements in the combined list (`nums1` and `nums2`).
+Therefore, the time complexity of this function is O((m+n) log (m+n)), where m and n are the lengths of `nums1` and `nums2` respectively.
+
+Space Complexity: The space complexity of this function is O(m+n).
+This is because the function creates a new list that contains all elements of `nums1` and `nums2` when it performs the operation `nums1[:m] + nums2`.
+This new list requires O(m+n) space.
+After the sorting operation, this temporary list is not needed anymore, and the space it occupied is released.
+Therefore, the space complexity is not constant, but O(m+n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_03` that merges two sorted integer arrays into one sorted array.
+The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
+
+`nums1` is the first sorted array, which has enough space to hold the additional elements from `nums2`. `m` is the number of initialized elements in `nums1`. `nums2` is the second sorted array, and `n` is the number of initialized elements in `nums2`.
+
+The function starts by creating a new list, `nums3`.
+It then appends the first `m` elements from `nums1` and the first `n` elements from `nums2` to `nums3`.
+
+[source,python]
+----
+nums3 = []
+for i in range(m):
+    nums3.append(nums1[i])
+for i in range(n):
+    nums3.append(nums2[i])
+----
+
+Afterwards, it sorts `nums3` and replaces the first `m+n` elements in `nums1` with the sorted elements from `nums3`.
+
+[source,python]
+----
+for i, num in enumerate(sorted(nums3)):
+    nums1[i] = num
+----
+
+If `nums2` is empty (i.e., `n` equals 0), the function removes trailing zeros from `nums1`.
+
+[source,python]
+----
+if n == 0:
+    nums1 = nums1[:m]
+----
+
+Finally, the function returns `nums1`, which now contains the merged and sorted elements from the original `nums1` and `nums2`.
+
+The function is accompanied by a docstring that provides a detailed explanation of its purpose, arguments, and return value.
+It also includes a doctest, which is a simple way to test the function.
+The doctest shows an example of how to call the function and what result to expect.
+
+==== Advantages
+
+1. **Simplicity**: The method is straightforward and easy to understand.
+It uses built-in Python functions like `append` and `sorted`, which makes the code clean and readable.
+2. **In-place operation**: The method modifies the first input array `nums1` in-place, which means it does not require additional space proportional to the input size, except for the temporary list `nums3`.
+
+==== Disadvantages
+
+1. **Efficiency**: The method is not the most efficient way to merge two sorted arrays.
+It uses the built-in `sorted` function, which has a time complexity of O((m+n) log (m+n)), where m and n are the lengths of `nums1` and `nums2` respectively.
+A more efficient approach would be to merge the arrays in a single pass, which can be done in linear time.
+2. **Extra Space**: The method creates a new list `nums3` to hold elements from both `nums1` and `nums2`, which requires extra space.
+Although this space is released after the sorting operation, it still increases the space complexity to O(m+n).
+3. **Zero placeholders**: The method assumes that the extra space in `nums1` is filled with zeros.
+If the array contains meaningful zeros, this method might produce incorrect results.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+Time Complexity: The time complexity of this function is O((m+n) log (m+n)).
+This is because the function uses the built-in `sorted` function in Python, which has a time complexity of O(n log n), where n is the number of elements to be sorted.
+In this case, the function is sorting a list that contains m+n elements, hence the time complexity is O((m+n) log (m+n)).
+
+Space Complexity: The space complexity of this function is O(m+n).
+This is because the function creates a new list that contains all elements of `nums1` and `nums2` when it performs the operation `nums1[:m] + nums2`.
+This new list requires O(m+n) space.
+After the sorting operation, this temporary list is not needed anymore, and the space it occupied is released.
+Therefore, the space complexity is not constant, but O(m+n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_04` that merges two sorted integer arrays into a single sorted array in-place.
+The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
+Here, `nums1` is the first sorted integer array with a size of `m+n`, where the first `m` elements are the elements to consider for merging, and the rest are zeros. `nums2` is the second sorted integer array, and `n` is the number of elements in `nums2` to consider for merging.
+
+[source,python]
+----
+def solution_04(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]:
+----
+
+The function uses a two-pointer technique to merge the arrays.
+Two pointers, `p1` and `p2`, are initialized to point to the end of `nums1` and `nums2` respectively.
+
+[source,python]
+----
+p1, p2 = m - 1, n - 1
+----
+
+The function then enters a loop that iterates over each element in both arrays, starting from the end and moving towards the beginning.
+The loop index `i` ranges from `m + n - 1` to `0`.
+
+[source,python]
+----
+for i in range(m + n - 1, -1, -1):
+----
+
+Inside the loop, the function checks if the pointer `p1` is still within the range and if the current element in `nums1` is greater or equal to the current element in `nums2`.
+If this condition is met, the current element in `nums1` is placed into the current position, and the pointer `p1` is moved backward.
+
+[source,python]
+----
+if p1 >= 0 and (p2 < 0 or nums1[p1] >= nums2[p2]):
+    nums1[i] = nums1[p1]
+    p1 -= 1
+----
+
+Otherwise, if the pointer `p2` is still within the range, the current element in `nums2` is placed into the current position, and the pointer `p2` is moved backward.
+
+[source,python]
+----
+else:
+    if p2 >= 0:
+        nums1[i] = nums2[p2]
+        p2 -= 1
+----
+
+Finally, the function returns the first `m + n` elements of `nums1`, which now contains the merged sorted array.
+
+[source,python]
+----
+return nums1[: m + n]
+----
+
+This function is efficient as it merges the arrays in a single pass, and it does not require additional space proportional to the input size, making it beneficial in terms of space complexity.
+However, it overwrites the original data in `nums1` during the merging process, which might not be suitable if the original data in `nums1` is needed later.
+
+==== Advantages
+
+1. **Efficiency**: The method is efficient as it merges the arrays in a single pass, which can be done in linear time.
+This is achieved by using a two-pointer technique, where each pointer points to the end of each array and moves backward as we process each element.
+2. **In-place operation**: The method modifies the first input array `nums1` in-place, which means it does not require additional space proportional to the input size.
+This is beneficial in terms of space complexity.
+
+==== Disadvantages
+
+1. **Overwriting data**: The method overwrites the original data in `nums1` during the merging process.
+If the original data in `nums1` is needed later, this method might not be suitable.
+2. **Zero placeholders**: Similar to the previous method, this method assumes that the extra space in `nums1` is filled with zeros.
+If the array contains meaningful zeros, this method might produce incorrect results.
+3. **Dependent on sorted input**: This method assumes that the input arrays are sorted.
+If the input arrays are not sorted, this method will not produce a correct result.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+Time Complexity: The time complexity of this function is O(m + n).
+This is because the function uses a two-pointer technique, where each pointer points to the end of each array and moves backward as we process each element.
+The function iterates over each element in both arrays once, hence the time complexity is O(m + n), where m and n are the lengths of `nums1` and `nums2` respectively.
+
+Space Complexity: The space complexity of this function is O(1).
+This is because the function merges the arrays in-place, meaning it does not use any additional space that scales with the input size.
+The space used by the function is constant, regardless of the size of the input arrays.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[]
+----
+
+=== Solution 05
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_05.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_05` that merges two sorted integer arrays into a single sorted array.
+The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
+Here, `nums1` is the first sorted integer array with a size of `m+n`, where the first `m` elements are the elements to consider for merging, and the rest are zeros. `nums2` is the second sorted integer array, and `n` is the number of elements in `nums2` to consider for merging.
+
+[source,python]
+----
+def solution_05(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]:
+----
+
+The function first slices `nums1` up to the `m`th index. This operation removes any placeholder zeros at the end of `nums1`.
+
+[source,python]
+----
+nums1[:] = nums1[:m]
+----
+
+Next, the function extends `nums1` with the elements of `nums2`.
+This operation appends all elements from `nums2` to the end of `nums1`.
+
+[source,python]
+----
+nums1.extend(nums2)
+----
+
+After merging the arrays, the function sorts the combined array in-place.
+This operation rearranges the elements of `nums1` such that they are in ascending order.
+
+[source,python]
+----
+nums1.sort()
+----
+
+Finally, the function returns `nums1`, which now contains the merged and sorted array.
+
+[source,python]
+----
+return nums1
+----
+
+This function is simple and straightforward, as it directly uses built-in Python functions to merge and sort the arrays.
+However, it may not be the most efficient solution for large arrays, as the sorting operation has a time complexity of O((m+n) log (m+n)).
+
+==== Advantages
+
+1. **Simplicity**: The method is simple and straightforward, as it directly uses built-in Python functions to merge and sort the arrays.
+This makes the code easy to understand and maintain.
+2. **In-place operation**: The method modifies the first input array `nums1` in-place, which means it does not require additional space proportional to the input size.
+This is beneficial in terms of space complexity.
+
+==== Disadvantages
+
+1. **Efficiency**: The method may not be the most efficient solution for large arrays, as the sorting operation has a time complexity of O((m+n) log (m+n)).
+This is higher than the time complexity of the two-pointer technique used in `solution_04`, which is O(m + n).
+2. **Overwriting data**: Similar to `solution_04`, this method overwrites the original data in `nums1` during the merging process.
+If the original data in `nums1` is needed later, this method might not be suitable.
+3. **Dependent on sorted input**: This method assumes that the input arrays are sorted.
+If the input arrays are not sorted, this method will not produce a correct result.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code, `solution_05`, are as follows:
+
+Time Complexity: The time complexity of this function is O((m+n) log (m+n)).
+This is because the function uses Python's built-in `sort` function to sort the combined array.
+The `sort` function has a time complexity of O(n log n), where n is the number of elements in the array.
+In this case, the combined array has m + n elements, hence the time complexity is O((m+n) log (m+n)).
+
+Space Complexity: The space complexity of this function is O(1).
+This is because the function merges the arrays in-place, meaning it does not use any additional space that scales with the input size.
+The space used by the function is constant, regardless of the size of the input arrays.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_05.py[]
+----

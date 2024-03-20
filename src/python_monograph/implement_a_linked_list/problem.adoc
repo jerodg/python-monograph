@@ -1,0 +1,183 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+A **Linked List** is a linear data structure, in which elements are not stored at a contiguous location, rather they are linked using pointers.
+A Linked List forms a series of connected nodes, where each node stores the data and the address of the next node.
+
+.A Singly Linked List
+image::singlylinkedlist.png[Singly Linked List]
+
+Linked lists are versatile data structures that provide dynamic memory allocation and efficient insertion and deletion operations.
+Understanding the basics of linked lists is essential for any programmer or computer science enthusiast.
+With this knowledge, you can implement linked lists to solve various problems and expand your understanding of data structures and algorithms.
+
+== Common Use-Cases of Linked Lists
+
+Linked lists are a fundamental data structure in computer science and have a wide range of applications.
+Here are some common use cases for linked lists:
+
+1. **Dynamic Memory Allocation**: Linked lists are particularly useful in situations where the amount of data is not known in advance and can change during the execution of the program.
+They allow for efficient insertions and deletions, and their size can be adjusted dynamically.
+
+2. **Implementation of Stacks and Queues**: Both stacks (Last In First Out) and queues (First In First Out) can be efficiently implemented using linked lists.
+
+3. **Implementation of Graphs**: Linked lists can be used to implement graphs.
+Each node can represent a vertex and the linked list can represent the edges.
+
+4. **Creating a Music Playlist**: Linked lists can be used to create a music playlist, where each node represents a song.
+The 'next' pointer can be used to go to the next song and the 'previous' pointer in a doubly linked list can be used to go to the previous song.
+
+5. **Browser History**: Web browsers typically use linked lists to maintain a history of webpages visited by the user.
+Each node in the list represents a single webpage.
+This allows the 'back' and 'forward' navigation buttons to function by traversing the list.
+
+6. **Performing Arithmetic Operations on Long Integers**: Linked lists can be used to perform operations on very large numbers (numbers that cannot be stored in a single variable).
+Each node in the list can store a digit or a part of the number.
+
+7. **Hash Tables**: Linked lists are used in hash tables to handle collisions.
+When two keys hash to the same index, the corresponding values can be stored in a linked list at that index.
+
+8. **Circular Linked Lists**: These are used in applications that require a cyclic loop over a structure like a round-robin CPU scheduling algorithm.
+
+Remember, the choice of whether to use a linked list depends on the specific requirements of the problem you are trying to solve.
+
+== Components of a Linked List
+
+**Node Structure: **A node in a linked list typically consists of two components: +
+**Data: **It holds the actual value or data associated with the node. +
+**Next Pointer:** It stores the memory address (reference) of the next node in the sequence. +
+**Head and Tail: **The linked list is accessed through the head node, which points to the first node in the list.
+The last node in the list points to NULL or nullptr, indicating the end of the list.
+This node is known as the tail node.
+
+== Advantages of a Linked List over an Array
+
+1. **Dynamic Size**: Unlike arrays, linked lists do not have a fixed size.
+This makes them flexible for situations where the amount of data is not known in advance.
+
+2. **Efficient Insertions/Deletions**: Inserting a new element in an array of elements is expensive because the room has to be created for the new elements and to create room existing elements have to be shifted.
+For linked lists, insertions and deletions at any position can be done more efficiently.
+
+3. **No Memory Wastage**: As size of a linked list can increase or decrease at run time so there is no memory wastage.
+In case of array there is lot of memory wastage, like if we declare an array of size 10 and store only 6 elements in it then space of 4 elements are wasted.
+
+== Disadvantages of a Linked List over an Array:
+
+1. **Random Access**: Linked lists do not provide random access to an element as arrays do.
+To access an element, you have to start from the head of the list and follow the references until you get to that element.
+
+2. **Extra Memory**: Each element in the linked list requires storing the element value and the "next" reference.
+In contrast, arrays only need to store the element value, so linked lists require more memory.
+
+3. **Traversal**: If we want to reach to the last element then we have to pass all the elements present before the last element as we cannot directly access any element present in the middle of the list.
+But in case of arrays, direct access is possible.
+
+=== Types of Linked Lists
+
+There are several types of linked lists, each with its own advantages and disadvantages:
+
+1. **Singly Linked List**: This is the simplest type of linked list, where each node has data and a pointer to the next node in the sequence.
+The last node points to null, indicating the end of the list.
+
+- **Advantages**: Simplicity in implementation, less memory per node (only one pointer per node), easier to manage (less pointers to update when inserting or deleting nodes).
+- **Disadvantages**: Can only be traversed in one direction, deletion requires access to the previous node which is not directly available, reverse traversal is not directly possible.
+
+2. **Doubly Linked List**: In a doubly linked list, each node has two pointers, one pointing to the next node and one pointing to the previous node.
+This allows for traversal in both directions.
+
+- **Advantages**: Can be traversed in both directions, easier deletion (access to previous node is direct), reverse traversal is easier.
+- **Disadvantages**: More complex to implement, more memory per node (two pointers per node), more pointers to manage when inserting or deleting nodes.
+
+3. **Circular Linked List**: In a circular linked list, the last node in the list points back to the first node instead of pointing to null.
+This forms a circular chain of nodes.
+
+- **Advantages**: Can loop through the list indefinitely, useful for applications that require circular looping (like a round-robin scheduler).
+- **Disadvantages**: More complex to manage (need to handle the case where the list loops back to the start), can lead to infinite loops if not handled properly during traversal.
+
+4. **Multi-linked List**: A multi-linked list has more than two links per node.
+This can be useful in complex data structures where nodes need to be accessed in multiple ways.
+
+- **Advantages**: Allows for complex data structures with multiple access patterns.
+- **Disadvantages**: Very complex to manage and implement, high memory overhead.
+
+5. **Header Linked List**: A header linked list has a special node at the beginning of the list, known as the header node.
+This node does not contain data and is used to simplify and standardize operations on the list.
+
+- **Advantages**: Simplifies operations by providing a fixed node at the start of the list, useful for maintaining metadata about the list (like size).
+- **Disadvantages**: Extra node that does not hold data, needs to be checked and skipped during operations.
+
+6. **Dummy Node Linked List**: A dummy node linked list also has a special node, but this one is at the end of the list.
+The dummy node simplifies operations by eliminating the need to check for the end of the list during traversal.
+
+- **Advantages**: Simplifies operations by providing a fixed node at the end of the list, eliminates the need to check for the end of the list during traversal.
+- **Disadvantages**: Extra node that does not hold data, needs to be checked and skipped during operations.
+
+=== Common Operations
+
+Common operations performed on a linked list include:
+
+1. **Insertion**: This involves adding a new node to the list.
+It can be at the beginning, at the end, or between any two nodes of the linked list.
+
+2. **Deletion**: This involves removing a node from the list.
+It can be the first node, the last node, or any node in the middle.
+
+3. **Traversal**: This involves moving through the list, typically starting from the head and following the next pointers until the end of the list is reached.
+
+4. **Searching**: This involves finding a node in the list that contains a given value.
+
+5. **Accessing**: This involves retrieving the data of a particular node.
+Unlike arrays, random access is not allowed in a linked list.
+To access a node, we have to start from the head node and follow the links until we reach the desired node.
+
+6. **Updating**: This involves changing the data of a particular node.
+
+7. **Sorting**: This involves arranging the nodes of the linked list in a certain order.
+
+8. **Reversing**: This involves changing the direction of the links between the nodes to reverse the order of the linked list.
+
+Each of these operations has different time complexities depending on the type of linked list (singly, doubly, circular) and the specific implementation.
+
+=== Time Complexity
+
+The time complexities of common operations on a linked list are as follows:
+
+1. **Insertion**:
+- At the beginning: O(1)
+- At the end: O(1) if we have a tail pointer, otherwise O(n)
+- In the middle: O(n)
+
+2. **Deletion**:
+- From the beginning: O(1)
+- From the end: O(1) if we have a tail pointer and doubly linked list, otherwise O(n)
+- From the middle: O(n)
+
+3. **Traversal**: O(n)
+
+4. **Searching**: O(n)
+
+5. **Accessing**: O(n)
+
+6. **Updating**: O(n)
+
+7. **Sorting**: O(n log n) for merge sort, O(n^2) for bubble sort
+
+8. **Reversing**: O(n)
+
+NOTE: Please note that these complexities are for a singly linked list.
+For a doubly linked list, some operations might be more efficient.
+For example, deletion from the end of a doubly linked list with a tail pointer is O(1).

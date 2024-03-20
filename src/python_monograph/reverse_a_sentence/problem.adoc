@@ -1,0 +1,38 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to reverse a sentence.
+
+=== Use-Cases
+
+Reversing a sentence is a common operation in various fields of computer science and data management.
+Here are some use cases:
+
+1. **Natural Language Processing (NLP)**: In NLP, reversing a sentence can be used in certain language models or algorithms.
+For example, in sequence-to-sequence models used for tasks like machine translation, the input sentence is often reversed to help the model learn better.
+
+2. **Data Encryption**: In data encryption, reversing a sentence can be a simple method to obfuscate data.
+It's not a strong method on its own, but it can be a part of more complex encryption algorithms.
+
+3. **Palindrome Checking**: In algorithms that check for palindromes (words or sentences that read the same backward as forward), reversing a sentence is a fundamental operation.
+
+4. **Text Animation**: In graphical user interfaces or text animation, reversing a sentence can be used to create certain visual effects.
+
+5. **Data Structures Learning**: In computer science education, reversing a sentence is a common exercise for learning about data structures like stacks.
+
+These are just a few examples.
+The concept of reversing a sentence can be applied in many other scenarios depending on the problem at hand.
+=== Constraints == Examples === Example 0 == Follow-up == Related Topics

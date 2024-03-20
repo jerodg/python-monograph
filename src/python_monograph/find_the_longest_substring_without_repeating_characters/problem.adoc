@@ -1,0 +1,154 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+Given a string `+s+`, find the length of the *longest* *substring* without repeating characters.
+
+To solve this problem, you can use the sliding window technique.
+Here is the step-by-step plan:
+
+1. Initialize two pointers, `start` and `end`, to point to the beginning of the string.
+2. Initialize a set to keep track of the unique characters in the current substring.
+3. Move the `end` pointer to the right and add the character at the `end` to the set.
+4. If the character at the `end` is already in the set, it means we have found a duplicate character.
+In this case, move the `start` pointer to the right and remove the character at the `start` from the set.
+Repeat this step until the duplicate character is removed from the set.
+5. Update the length of the longest substring without repeating characters.
+6. Repeat steps 3-5 until the `end` pointer reaches the end of the string.
+
+Here is the Python code that implements this plan:
+
+[source,python]
+----
+
+----
+
+This function takes a string `s` as input and returns the length of the longest substring without repeating characters.
+The time complexity is O(n), where n is the length of the string, because we are doing a single pass through the string.
+The space complexity is O(min(n, m)), where m is the size of the character set, because we are storing each unique character in the set.
+
+=== Best Practices
+
+When optimizing the performance of the "Find the Longest Substring Without Repeating Characters" problem, there are several best practices you can follow:
+
+1. **Use the Right Data Structures**: In this case, a set is used to keep track of the unique characters in the current substring.
+A set is an appropriate choice because it allows for constant time complexity for search and insert operations.
+
+2. **Avoid Unnecessary Operations**: In the provided code, the `start` pointer is moved to the right until the duplicate character is removed from the set.
+This operation is performed in a while loop, which can be costly if the string contains many repeated characters.
+To optimize this, you could use a dictionary instead of a set to keep track of the characters and their indices.
+This way, when a duplicate character is found, you can directly move the `start` pointer to the right of the duplicate character, avoiding unnecessary operations.
+
+3. **Use Built-in Functions Wisely**: Python's built-in functions are usually optimized for performance.
+For example, the `max` function is used to update the length of the longest substring.
+This is more efficient than using an if statement to compare and update the length.
+
+4. **Minimize Space Usage**: The space complexity of the code is O(min(n, m)), where n is the length of the string and m is the size of the character set.
+If the character set is known and is small, this is not a problem.
+However, if the character set is large, the space usage can be high.
+To minimize space usage, you could use a bit vector instead of a set or dictionary if the character set is small and known (like ASCII).
+
+5. **Use Efficient String Concatenation**: If you need to return the longest substring itself, not just its length, be aware that string concatenation in Python can be costly if not done correctly.
+Instead of concatenating strings inside a loop, consider using a list to store the characters of the substring and then use the `join` method to concatenate them into a string.
+
+Remember, the actual performance gain from these optimizations may vary depending on the specific characteristics of the input and the Python interpreter's implementation.
+Always measure the performance before and after optimization to ensure that the changes have the desired effect.
+
+=== Use-Cases
+
+The problem of finding the longest substring without repeating characters is a common question in computer science and has several practical applications.
+Here are a few examples:
+
+1. **Text Analysis**: This problem can be used in text analysis where you might need to find the longest sequence of unique characters.
+This could be useful in tasks such as text classification, pattern recognition, or even in some aspects of natural language processing.
+
+2. **Data Compression**: In data compression, this problem can be used to find the longest unique sequence of data.
+This could help in optimizing the compression algorithm by identifying and eliminating redundant data.
+
+3. **Cryptography**: In cryptography, finding unique patterns in a string can be useful.
+For instance, if the string represents a cipher text, finding the longest substring without repeating characters could help in deciphering the text.
+
+4. **Genomics**: In genomics, DNA sequences are represented as strings of characters.
+Finding the longest substring without repeating characters could help identify unique patterns in the DNA sequence.
+
+5. **Web Development**: In web development, this problem can be used in form validation.
+For example, to check if a password or username has a certain number of unique characters.
+
+Remember, these are just a few examples.
+The actual applications can be much broader and depend on the specific requirements of your project.
+
+=== Common Mistakes
+
+When implementing the solution for the "Find the Longest Substring Without Repeating Characters" problem, there are several common mistakes that developers often make:
+
+1. **Not Handling Edge Cases**: It's important to handle edge cases correctly, such as when the input string is empty or contains only one unique character.
+These cases should return 0 and 1, respectively.
+
+2. **Not Updating Pointers Correctly**: The sliding window technique used in this problem involves moving two pointers, `start` and `end`.
+It's crucial to update these pointers correctly.
+A common mistake is to forget to update the `start` pointer when a repeating character is found.
+
+3. **Not Using the Right Data Structures**: The choice of data structures can significantly impact the performance of the solution.
+Using a list instead of a set to store unique characters, for example, can lead to a higher time complexity because searching for an element in a list takes linear time.
+
+4. **Not Returning the Correct Output**: The problem asks for the length of the longest substring without repeating characters.
+Some developers might mistakenly return the substring itself or forget to return the length.
+
+5. **Not Considering All Characters**: The input string can contain not only lowercase and uppercase English letters but also digits, symbols, and spaces.
+It's a common mistake to only consider English letters in the solution.
+
+6. **Not Testing Enough**: This problem has many edge cases, and it's important to test the solution with various inputs to ensure it works correctly in all scenarios.
+A common mistake is to only test the solution with a few simple cases.
+
+Remember, avoiding these common mistakes can help you implement a more robust and efficient solution.
+
+=== Constraints
+
+* `+0 <= s.length <= 5 * 10+`^`+4+`^
+* `+s+` consists of English letters, digits, symbols and spaces.
+
+== Examples
+
+=== Example 0
+
+[source,python,linenums]
+----
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+----
+
+=== Example 1
+
+[source,python,linenums]
+----
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+----
+
+=== Example 2
+
+[source,python,linenums]
+----
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+----
+
+== Follow-up
+
+== Related Topics

@@ -1,0 +1,367 @@
+:doctitle: Find the Longest Substring Without Repeating Characters Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The code provided is a Python function named `solution_00`.
+This function is designed to find the longest substring without repeating characters in a given string.
+It uses a technique known as the sliding window technique.
+
+[source,python]
+----
+def solution_00(s: str) -> tuple[int, str]:
+----
+
+The function takes a single argument `s`, which is the input string.
+It returns a tuple containing the length of the longest substring without repeating characters and the substring itself.
+
+The function starts by initializing three variables: `start`, `max_length`, and `used_chars`.
+
+[source,python]
+----
+start = 0
+max_length = 0
+used_chars = {}
+----
+
+`start` is a pointer that represents the start of the window. `max_length` is used to store the length of the longest window encountered during the process. `used_chars` is a dictionary that keeps track of the last occurrence of each character.
+
+The function then enters a loop that iterates over the string with the `end` pointer.
+
+[source,python]
+----
+for end in range(len(s)):
+----
+
+Inside the loop, the function checks if the current character is in the `used_chars` dictionary and if its last occurrence is in the current window.
+
+[source,python]
+----
+if s[end] in used_chars and start <= used_chars[s[end]]:
+----
+
+If the current character is in the `used_chars` dictionary and its last occurrence is in the current window, the window contracts by moving the `start` pointer to the right of the last occurrence of the current character.
+
+[source,python]
+----
+start = used_chars[s[end]] + 1
+----
+
+If the current character is not in the `used_chars` dictionary or if it is in the dictionary but its last occurrence is not in the current window, the window expands by moving the `end` pointer to the right.
+
+[source,python]
+----
+else:
+    max_length = max(max_length, end - start + 1)
+----
+
+In both cases, the function updates the last occurrence of the current character in the `used_chars` dictionary.
+
+[source,python]
+----
+used_chars[s[end]] = end
+----
+
+Finally, the function returns the length of the longest substring without repeating characters and the substring itself.
+
+[source,python]
+----
+return max_length, s[start : start + max_length]
+----
+
+This function is a practical implementation of the sliding window technique, which is a common approach for solving substring problems in linear time.
+
+==== Advantages
+
+1. **Efficiency**: The sliding window technique is a very efficient way to solve this problem.
+It only needs to iterate through the string once, which makes the time complexity of this algorithm O(n), where n is the length of the string.
+This is significantly faster than a naive approach that would have a time complexity of O(n^2).
+2. **Simplicity**: The sliding window technique is relatively simple to understand and implement.
+It uses two pointers to represent the window and a dictionary to keep track of the last occurrence of each character.
+This makes the code easy to read and maintain.
+3. **Versatility**: The sliding window technique can be used to solve a variety of problems related to substrings, not just this specific problem.
+This makes it a valuable tool in a developer's toolkit.
+
+==== Disadvantages
+
+1. **Space Complexity**: The sliding window technique uses a dictionary to keep track of the last occurrence of each character.
+This means that the space complexity of this algorithm is O(k), where k is the number of unique characters in the string.
+In the worst-case scenario, where all characters are unique, the space complexity would be O(n).
+2. **Dependence on Input**: The efficiency of the sliding window technique depends on the input.
+If the string has many repeating characters, the window will often contract, which could lead to less efficient performance.
+3. **Not In-place**: The sliding window technique is not an in-place algorithm.
+It requires additional space to store the `used_chars` dictionary.
+This might not be ideal for situations where memory is a concern.
+
+==== Complexity Analysis
+
+Time Complexity: The time complexity of the code is O(n), where n is the length of the string.
+This is because the code iterates over the string once.
+Each operation inside the loop, including the dictionary lookup and update, is a constant time operation.
+
+Space Complexity: The space complexity of the code is O(k), where k is the number of unique characters in the string.
+This is because a dictionary is used to keep track of the last occurrence of each character.
+In the worst-case scenario, where all characters are unique, the space complexity would be O(n), where n is the length of the string.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided code is a Python function named `solution_01`.
+This function is designed to find the longest substring without repeating characters in a given string.
+It uses a data structure known as a deque to implement the sliding window technique.
+
+[source,python]
+----
+def solution_01(s: str) -> tuple[int, str]:
+----
+
+The function takes a single argument `s`, which is the input string.
+It returns a tuple containing the length of the longest substring without repeating characters and the substring itself.
+
+The function starts by initializing a deque named `queue` and a variable `max_length`.
+
+[source,python]
+----
+queue = deque()
+max_length = 0
+----
+
+`queue` is used as a sliding window to keep track of the current substring without repeating characters. `max_length` is used to store the length of the longest substring encountered during the process.
+
+The function then enters a loop that iterates over the string.
+
+[source,python]
+----
+for char in s:
+----
+
+Inside the loop, the function checks if the current character is in the `queue`.
+
+[source,python]
+----
+while char in queue:
+----
+
+If the current character is in the `queue`, the function removes elements from the left of the deque until the deque does not contain the current character.
+
+[source,python]
+----
+queue.popleft()
+----
+
+Then, the function appends the current character to the `queue`.
+
+[source,python]
+----
+queue.append(char)
+----
+
+The function updates `max_length` with the maximum length of the `queue` encountered so far.
+
+[source,python]
+----
+max_length = max(max_length, len(queue))
+----
+
+Finally, the function returns the length of the longest substring without repeating characters and the substring itself.
+
+[source,python]
+----
+return max_length, "".join(list(queue))
+----
+
+This function is a practical implementation of the sliding window technique using a deque, which is a common approach for solving substring problems in linear time.
+
+==== Advantages
+
+Advantages:
+1. **Efficiency**: The sliding window technique is a very efficient way to solve this problem.
+It only needs to iterate through the string once, which makes the time complexity of this algorithm O(n), where n is the length of the string.
+This is significantly faster than a naive approach that would have a time complexity of O(n^2).
+2. **Simplicity**: The sliding window technique is relatively simple to understand and implement.
+It uses a deque to represent the window, which makes the code easy to read and maintain.
+3. **Versatility**: The sliding window technique can be used to solve a variety of problems related to substrings, not just this specific problem.
+This makes it a valuable tool in a developer's toolkit.
+
+==== Disadvantages
+
+1. **Space Complexity**: The sliding window technique uses a deque to keep track of the current substring.
+This means that the space complexity of this algorithm is O(k), where k is the length of the longest substring without repeating characters.
+In the worst-case scenario, where all characters are unique, the space complexity would be O(n), where n is the length of the string.
+2. **Dependence on Input**: The efficiency of the sliding window technique depends on the input.
+If the string has many repeating characters, the window will often contract, which could lead to less efficient performance.
+3. **Not In-place**: The sliding window technique is not an in-place algorithm.
+It requires additional space to store the deque.
+This might not be ideal for situations where memory is a concern.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code are as follows:
+
+Time Complexity: The time complexity of the code is O(n), where n is the length of the string.
+This is because the code iterates over the string once.
+Each operation inside the loop, including the deque operations (append and popleft), is a constant time operation.
+
+Space Complexity: The space complexity of the code is O(k), where k is the length of the longest substring without repeating characters.
+This is because a deque is used to keep track of the current substring.
+In the worst-case scenario, where all characters are unique, the space complexity would be O(n), where n is the length of the string.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided code is a Python function named `solution_02`.
+This function is designed to find the longest substring without repeating characters in a given string.
+It uses a dictionary to implement the sliding window technique.
+
+[source,python]
+----
+def solution_02(s: str) -> Tuple[int, str]:
+----
+
+The function takes a single argument `s`, which is the input string.
+It returns a tuple containing the length of the longest substring without repeating characters and the substring itself.
+
+The function starts by initializing a few variables: `start`, `max_length`, `seen`, and `max_str`.
+
+[source,python]
+----
+start = max_length = 0
+seen = dict()
+max_str = ""
+----
+
+`start` is used to keep track of the starting index of the current substring. `max_length` is used to store the length of the longest substring encountered during the process. `seen` is a dictionary that stores the last occurrence of each character. `max_str` stores the longest substring without repeating characters.
+
+The function then enters a loop that iterates over the string.
+
+[source,python]
+----
+for i, c in enumerate(s):
+----
+
+Inside the loop, the function checks if the current character `c` is in the `seen` dictionary and if its value is greater than or equal to `start`.
+
+[source,python]
+----
+if seen.get(c, -1) >= start:
+    start = seen[c] + 1
+----
+
+If the condition is true, the function updates `start` to the index after the last occurrence of the current character.
+
+The function then checks if the length of the current substring is greater than `max_length`.
+
+[source,python]
+----
+if max_length < i - start + 1:
+    max_length = i - start + 1
+    max_str = s[start : i + 1]
+----
+
+If the condition is true, the function updates `max_length` and `max_str` with the length and the value of the current substring, respectively.
+
+Finally, the function updates the `seen` dictionary with the current character and its index.
+
+[source,python]
+----
+seen[c] = i
+----
+
+The function ends by returning the length of the longest substring without repeating characters and the substring itself.
+
+[source,python]
+----
+return max_length, max_str
+----
+
+This function is a practical implementation of the sliding window technique using a dictionary, which is a common approach for solving substring problems in linear time.
+
+==== Advantages
+
+Advantages:
+1. **Efficiency**: The sliding window technique is a very efficient way to solve this problem.
+It only needs to iterate through the string once, which makes the time complexity of this algorithm O(n), where n is the length of the string.
+This is significantly faster than a naive approach that would have a time complexity of O(n^2).
+2. **Simplicity**: The sliding window technique is relatively simple to understand and implement.
+It uses a dictionary to track the last occurrence of each character, which makes the code easy to read and maintain.
+3. **Versatility**: The sliding window technique can be used to solve a variety of problems related to substrings, not just this specific problem.
+This makes it a valuable tool in a developer's toolkit.
+
+==== Disadvantages
+
+1. **Space Complexity**: The sliding window technique uses a dictionary to keep track of the last occurrence of each character.
+This means that the space complexity of this algorithm is O(k), where k is the number of unique characters in the string.
+In the worst-case scenario, where all characters are unique, the space complexity would be O(n), where n is the length of the string.
+2. **Dependence on Input**: The efficiency of the sliding window technique depends on the input.
+If the string has many repeating characters, the window will often contract, which could lead to less efficient performance.
+3. **Not In-place**: The sliding window technique is not an in-place algorithm.
+It requires additional space to store the dictionary.
+This might not be ideal for situations where memory is a concern.
+
+==== Complexity Analysis
+
+Time Complexity: The time complexity of the code is O(n), where n is the length of the string.
+This is because the code iterates over the string once.
+Each operation inside the loop, including the dictionary operations (get and set), is a constant time operation.
+
+Space Complexity: The space complexity of the code is O(k), where k is the number of unique characters in the string.
+This is because a dictionary is used to keep track of the last occurrence of each character.
+In the worst-case scenario, where all characters are unique, the space complexity would be O(n), where n is the length of the string.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----

@@ -1,0 +1,362 @@
+:doctitle: Calculate Product Sum of a Nested Array Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_00` that calculates the product sum of a nested array.
+The product sum of an array is defined as the sum of its elements multiplied by their respective depths.
+If an element is a list, its product sum is calculated recursively by multiplying the sum of its elements with its depth plus one.
+
+The function `solution_00` takes two arguments: `arr` and `depth`. `arr` is a list that can contain integers or other nested lists. `depth` is an integer representing the current depth level.
+
+[source,python]
+----
+def solution_00(arr: list[int | list], depth: int) -> int:
+----
+
+The function first checks if the `depth` argument is an integer.
+If it's not, it raises a `TypeError`.
+
+[source,python]
+----
+if not isinstance(depth, int):
+    raise TypeError('depth must be an integer')
+----
+
+The function then initializes a variable `total_sum` to 0. This variable will hold the final product sum.
+
+[source,python]
+----
+total_sum = 0
+----
+
+Next, the function iterates over the elements in the `arr` list.
+If an element is a list, the function recursively calculates its product sum and adds it to `total_sum`.
+If the element is an integer, it simply adds it to `total_sum`.
+
+[source,python]
+----
+for ele in arr:
+    total_sum += solution_00(ele, depth + 1) if isinstance(ele, list) else ele
+----
+
+Finally, the function multiplies `total_sum` by the current `depth` and returns the result.
+This is the final product sum of the array.
+
+[source,python]
+----
+return total_sum * depth
+----
+
+In summary, the function `solution_00` uses recursion to calculate the product sum of a nested array, taking into account the depth of each element in the array.
+
+==== Advantages
+
+1. **Simplicity**: Recursion provides a straightforward way to traverse nested data structures like the one in this problem.
+The code is easier to understand and write because it follows the natural structure of the problem.
+
+2. **Depth Handling**: The recursive approach inherently handles the depth of nested arrays.
+Each recursive call increases the depth by one, which aligns with the requirement of the problem to multiply the sum of elements by their respective depths.
+
+3. **Flexibility**: The function can handle arrays of arbitrary depth without any modifications.
+This makes it flexible and applicable to a wide range of inputs.
+
+==== Disadvantages
+
+1. **Stack Overflow Risk**: Recursion relies on the call stack to keep track of recursive calls.
+If the array is deeply nested, it could lead to a stack overflow error.
+
+2. **Performance Overhead**: Each recursive call adds a new layer to the call stack, which can lead to significant performance overhead for large inputs.
+This overhead includes the time it takes to add and remove stack frames, as well as the memory used by the stack.
+
+3. **Difficulty in Debugging**: Debugging recursive functions can be more challenging than iterative ones because of the additional complexity introduced by the call stack.
+It can be hard to follow the flow of execution and understand the state of the program at each recursive call.
+
+4. **No Tail Call Optimization**: Python does not support tail call optimization, a feature in some languages that optimizes recursive calls to avoid increasing the stack size.
+This means that Python recursive functions can be less efficient and risk causing a stack overflow for large inputs.
+
+==== Complexity Analysis
+
+The time and space complexity of the selected code is as follows:
+
+**Time Complexity:**
+
+The time complexity of the function `solution_00` is O(n), where n is the total number of elements in the array, including the elements of the nested arrays.
+This is because each element in the array (including nested arrays) is visited exactly once.
+
+**Space Complexity:**
+
+The space complexity of the function is O(d), where d is the maximum depth of the nested arrays.
+This is because in the worst-case scenario, if the array is deeply nested, a recursive call will be made for each level of depth, and each call adds a new layer to the system call stack.
+The maximum depth of the array determines the maximum size of the stack.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function `solution_01` that calculates the product sum of a nested array using an iterative method with a stack.
+The product sum of an array is defined as the sum of its elements multiplied by their respective depths.
+If an element is a list, its product sum is calculated iteratively by multiplying the sum of its elements with its depth plus one.
+
+The function `solution_01` takes one argument `arr`, which is a list that can contain integers or other nested lists.
+The function returns an integer which is the product sum of the array.
+
+The function starts by initializing a stack and pushing the input array and its depth (which is 1) into the stack.
+This is done with the line `stack = [(arr, 1)]`.
+It also initializes a variable `total_sum` to 0. This variable will hold the final product sum.
+
+The function then enters a while loop that continues as long as the stack is not empty.
+In each iteration of the loop, it pops an element from the stack.
+This element is a tuple containing an array and its depth, as shown in the line `current_arr, depth = stack.pop()`.
+
+Next, the function iterates over the array.
+For each element in the array, it checks if it is a list or an integer.
+If the element is a list, it pushes it into the stack along with its depth (which is the current depth + 1).
+This is done with the line `stack.append((ele, depth + 1))`.
+If the element is an integer, it adds it to `total_sum` multiplied by the depth.
+
+Finally, after all elements have been processed and the stack is empty, the function returns `total_sum`, which is the product sum of the array.
+
+==== Advantages
+
+1. **Iterative Approach**: The code uses an iterative approach with a stack to handle the nested lists.
+This approach is generally more efficient in terms of memory usage compared to a recursive approach, as it avoids the overhead of function call stack frames.
+2. **Generality**: The function can handle any level of nesting within the input list.
+It does not have a fixed limit on the depth of the nested lists.
+3. **Type Checking**: The function uses the `isinstance` function to check if an element is a list or an integer.
+This ensures that the function can handle mixed lists that contain both integers and other lists.
+
+==== Disadvantages
+
+1. **Error Handling**: The function does not have any error handling for invalid inputs.
+For example, if the input list contains elements that are neither integers nor lists, the function will raise an error.
+2. **In-place Modification**: The function modifies the input list in-place by using it to initialize the stack.
+This could lead to unexpected side effects if the caller does not expect the input list to be modified.
+3. **Single Responsibility Principle**: The function is doing multiple things - iterating over the list, checking the type of each element, and calculating the product sum.
+This could make the function harder to understand and maintain.
+It might be better to split these responsibilities into separate functions.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code is as follows:
+
+**Time Complexity:**
+
+The time complexity of the function is O(n), where n is the total number of elements in the array (including elements within nested arrays).
+This is because each element in the array (including nested arrays) is visited exactly once.
+
+**Space Complexity:**
+
+The space complexity of the function is O(d), where d is the maximum depth of the nested arrays.
+This is because in the worst-case scenario, if the array is deeply nested, the function will push each level of depth into the stack.
+The maximum depth of the array determines the maximum size of the stack.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The selected Python code defines a function `solution_02` that calculates the product sum of a nested array using a breadth-first search (BFS) algorithm.
+The product sum of an array is defined as the sum of its elements, where each element is multiplied by its depth.
+If an element is a list, its product sum is calculated iteratively by multiplying the sum of its elements with its depth plus one.
+
+The function `solution_02` takes one argument `arr`, which is a list that can contain integers or other nested lists.
+The function returns an integer which is the product sum of the array.
+
+The function starts by initializing a queue and enqueuing the input array and its depth (which is 1) into the queue.
+This is done with the line `queue = deque([(arr, 1)])`.
+It also initializes a variable `total_sum` to 0. This variable will hold the final product sum.
+
+The function then enters a while loop that continues as long as the queue is not empty.
+In each iteration of the loop, it dequeues an element from the queue.
+This element is a tuple containing an array and its depth, as shown in the line `current_arr, depth = queue.popleft()`.
+
+Next, the function iterates over the array.
+For each element in the array, it checks if it is a list or an integer.
+If the element is a list, it enqueues it into the queue along with its depth (which is the current depth + 1).
+This is done with the line `queue.append((ele, depth + 1))`.
+If the element is an integer, it adds it to `total_sum` multiplied by the depth.
+
+Finally, after all elements have been processed and the queue is empty, the function returns `total_sum`, which is the product sum of the array.
+
+==== Advantages
+
+1. **Breadth-First Search**: The code uses a breadth-first search (BFS) approach with a queue to handle the nested lists.
+This approach is efficient and can handle any level of nesting within the input list.
+2. **Generality**: The function can handle any level of nesting within the input list.
+It does not have a fixed limit on the depth of the nested lists.
+3. **Type Checking**: The function uses the `isinstance` function to check if an element is a list or an integer.
+This ensures that the function can handle mixed lists that contain both integers and other lists.
+
+==== Disadvantages
+
+1. **Error Handling**: The function does not have any error handling for invalid inputs.
+For example, if the input list contains elements that are neither integers nor lists, the function will raise an error.
+2. **In-place Modification**: The function modifies the input list in-place by using it to initialize the queue.
+This could lead to unexpected side effects if the caller does not expect the input list to be modified.
+3. **Single Responsibility Principle**: The function is doing multiple things - iterating over the list, checking the type of each element, and calculating the product sum.
+This could make the function harder to understand and maintain.
+It might be better to split these responsibilities into separate functions.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code is as follows:
+
+**Time Complexity:**
+
+The time complexity of the function is O(n), where n is the total number of elements in the array (including elements within nested arrays).
+This is because each element in the array (including nested arrays) is visited exactly once.
+
+**Space Complexity:**
+
+The space complexity of the function is O(d), where d is the maximum depth of the nested arrays.
+This is because in the worst-case scenario, if the array is deeply nested, the function will enqueue each level of depth into the queue.
+The maximum depth of the array determines the maximum size of the queue.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The selected Python code consists of two functions, `iterate` and `solution_03`, which work together to calculate the product sum of a nested array.
+The product sum of an array is the sum of its elements, where each element is multiplied by its depth.
+If an element is a list, its product sum is calculated iteratively by multiplying the sum of its elements with its depth plus one.
+
+The `iterate` function is a generator function that performs a depth-first traversal of the array and its nested arrays.
+It takes two arguments, `arr` and `depth`. `arr` is a list that can contain integers or other nested lists, and `depth` is an integer representing the current depth level.
+The function yields each integer in the array along with its depth.
+It does this by iterating over the array and checking if each element is a list or an integer.
+If the element is a list, it recursively calls itself with the list and an increased depth.
+If the element is an integer, it yields the integer along with its depth.
+This is shown in the following code snippet:
+
+[source,python]
+----
+for ele in arr:
+    if isinstance(ele, list):
+        yield from iterate(ele, depth + 1)
+    else:
+        yield ele, depth
+----
+
+The `solution_03` function calculates the product sum of a nested array using the `iterate` function.
+It takes one argument `arr`, which is a list that can contain integers or other nested lists.
+The function initializes a variable `total_sum` to 0. This variable will hold the final product sum.
+It then uses the `iterate` function to iterate over the array and its nested arrays.
+For each integer and its depth yielded by the `iterate` function, it adds the integer multiplied by the depth to `total_sum`.
+Finally, it returns `total_sum`, which is the product sum of the array.
+This is shown in the following code snippet:
+
+[source,python]
+----
+total_sum = 0
+for value, depth in iterate(arr):
+    total_sum += value * depth
+return total_sum
+----
+
+In summary, the code uses a depth-first traversal to iterate over a nested array and calculate the product sum of its elements, taking into account their depth in the array.
+
+==== Advantages
+
+1. **Depth-First Search**: The code uses a depth-first search (DFS) approach with recursion to handle the nested lists.
+This approach is efficient and can handle any level of nesting within the input list.
+2. **Generality**: The function can handle any level of nesting within the input list.
+It does not have a fixed limit on the depth of the nested lists.
+3. **Type Checking**: The function uses the `isinstance` function to check if an element is a list or an integer.
+This ensures that the function can handle mixed lists that contain both integers and other lists.
+4. **Generator Function**: The use of a generator function (`iterate`) allows the function to handle large inputs without consuming a lot of memory, as it yields one result at a time.
+
+==== Disadvantages
+
+1. **Error Handling**: The function does not have any error handling for invalid inputs.
+For example, if the input list contains elements that are neither integers nor lists, the function will raise an error.
+2. **Recursion**: The use of recursion in the `iterate` function could lead to a stack overflow error if the depth of the nested lists is too large.
+3. **Single Responsibility Principle**: The function is doing multiple things - iterating over the list, checking the type of each element, and calculating the product sum.
+This could make the function harder to understand and maintain.
+It might be better to split these responsibilities into separate functions.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code is as follows:
+
+**Time Complexity:**
+
+The time complexity of the function is O(n), where n is the total number of elements in the array (including elements within nested arrays).
+This is because each element in the array (including nested arrays) is visited exactly once.
+
+**Space Complexity:**
+
+The space complexity of the function is O(d), where d is the maximum depth of the nested arrays.
+This is because in the worst-case scenario, if the array is deeply nested, the function will enqueue each level of depth into the queue.
+The maximum depth of the array determines the maximum size of the queue.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----

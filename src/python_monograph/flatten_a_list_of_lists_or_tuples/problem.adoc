@@ -1,0 +1,36 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You have a list of lists (or tuples) and you want to flatten it into a single list.
+
+=== Use-Cases
+
+Flattening a list of lists (or tuples) into a single list is a common operation in various fields of computer science and data management.
+Here are some use cases:
+
+1. **Data Preprocessing**: In data preprocessing, you might have data organized in a nested structure (like a list of lists or tuples) and you want to flatten it for further processing or analysis.
+
+2. **Machine Learning**: In machine learning, you might need to flatten a list of feature vectors (represented as lists or tuples) into a single list before feeding it into a machine learning model.
+
+3. **Text Processing**: In text processing, you might have a list of sentences (where each sentence is a list of words) and you want to flatten it to perform word-level analysis.
+
+4. **Graph Theory**: In graph theory, you might have a list of edges (where each edge is represented as a tuple of nodes) and you want to flatten it to get a list of all nodes in the graph.
+
+5. **Image Processing**: In image processing, an image can be represented as a list of pixel rows (where each row is a list of pixels), and you might want to flatten it to perform pixel-level operations.
+
+These are just a few examples.
+The concept of flattening a list of lists or tuples into a single list can be applied in many other scenarios depending on the problem at hand.
+=== Constraints == Examples === Example 0 == Follow-up == Related Topics
