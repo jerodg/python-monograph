@@ -1,0 +1,38 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to find the intersection of two lists of tuples.
+
+=== Use-Cases
+
+Finding the intersection of two lists of tuples is a common task in various fields of computer science and data management.
+Here are some use cases:
+
+1. **Data Analysis**: In data analysis, you might have two datasets (represented as lists of tuples) and you want to find common data points (intersection) between them.
+This can be useful in comparative analysis, correlation studies, etc.
+
+2. **Database Operations**: In database operations, finding the intersection of two lists of tuples can be analogous to performing a JOIN operation on two tables based on common attributes.
+
+3. **Set Operations**: In mathematics and computer science, finding the intersection of two sets is a fundamental operation.
+If the sets are represented as lists of tuples, this operation can be used in various scenarios like solving problems related to graph theory, combinatorics, etc.
+
+4. **Machine Learning**: In machine learning, finding the intersection of two lists of tuples can be used in feature selection where you want to find common features (attributes) in different datasets.
+
+5. **Network Analysis**: In network analysis, you might have two lists of connections (represented as tuples) and you want to find common connections (intersection) between them.
+
+These are just a few examples.
+The concept of finding the intersection of two lists of tuples can be applied in many other scenarios depending on the problem at hand.
+=== Constraints == Examples === Example 0 === Example 1 === Example 2 == Follow-up === Performance Considerations == Related Topics

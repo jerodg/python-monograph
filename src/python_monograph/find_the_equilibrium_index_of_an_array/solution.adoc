@@ -1,0 +1,235 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(arr: list) -> int:
+    """This function finds the equilibrium index of an array. The equilibrium index of an array is an index such that
+    the sum of elements at lower indexes is equal to the sum of elements at higher indexes. The function uses a
+    brute force approach to find the equilibrium index by iterating over the array and for each index, it calculates
+    the sum of elements on the left and right. If the sums are equal, it returns the index. If no equilibrium index
+    is found, it returns -1.
+
+    Parameters:
+        arr (list): The input array for which to find the equilibrium index.
+
+    Returns:
+        int: The equilibrium index if found, otherwise -1.
+    """
+    leftsum = 0
+    rightsum = 0
+    n = len(arr)
+
+    # Iterate over the array
+    for i in range(n):
+        leftsum = 0
+        rightsum = 0
+
+        # Calculate the sum of elements on the left
+        for j in range(i):
+            leftsum += arr[j]
+
+        # Calculate the sum of elements on the right
+        for j in range(i + 1, n):
+            rightsum += arr[j]
+
+        # If the sums are equal, return the index
+        if leftsum == rightsum:
+            return i
+
+    # If no equilibrium index is found, return -1
+    return -1
+----
+
+==== Explanation
+
+The provided Python code defines a function named `method_0` that calculates the equilibrium index of an array.
+The equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+
+The function `method_0` takes a list `arr` as an argument.
+It initializes two variables `leftsum` and `rightsum` to 0 and calculates the length of the array `n`.
+
+[source,python]
+----
+def method_0(arr: list) -> int:
+    leftsum = 0
+    rightsum = 0
+    n = len(arr)
+----
+
+The function then enters a loop that iterates over the array.
+For each index `i`, it resets `leftsum` and `rightsum` to 0.
+
+[source,python]
+----
+for i in range(n):
+    leftsum = 0
+    rightsum = 0
+----
+
+Inside the loop, it calculates the sum of elements on the left of the index `i` by iterating from the start of the array to the index `i` and adds each element to `leftsum`.
+
+[source,python]
+----
+for j in range(i):
+    leftsum += arr[j]
+----
+
+Similarly, it calculates the sum of elements on the right of the index `i` by iterating from the index `i + 1` to the end of the array and adds each element to `rightsum`.
+
+[source,python]
+----
+for j in range(i + 1, n):
+    rightsum += arr[j]
+----
+
+After calculating the sums, it checks if `leftsum` is equal to `rightsum`.
+If they are equal, it means that the current index `i` is an equilibrium index, and the function returns `i`.
+
+[source,python]
+----
+if leftsum == rightsum:
+    return i
+----
+
+If the function iterates over the entire array and doesn't find an equilibrium index, it returns -1.
+
+[source,python]
+----
+return -1
+----
+
+This function uses a brute force approach to find the equilibrium index by iterating over the array and for each index, it calculates the sum of elements on the left and right.
+If the sums are equal, it returns the index.
+If no equilibrium index is found, it returns -1.
+
+===== Advantages
+
+- Simplicity: The code is straightforward and easy to understand.
+It doesn't require any advanced data structures or algorithms.
+- No additional space: The code doesn't use any extra space, as it doesn't create any new data structures.
+The space complexity is O(1).
+===== Disadvantages
+- Time complexity: The time complexity of the code is O(n^2) because for each element in the array, it sums up all the elements to its left and right.
+This can be inefficient for large arrays.
+- Multiple iterations: The code iterates over the array multiple times (once for each element), which can be inefficient.
+===== Complexity Analysis ====== Time The time complexity of the code is O(n^2).
+This is because for each element in the array, it sums up all the elements to its left and right.
+This results in a quadratic time complexity as the number of operations grows quadratically with the size of the input array.
+====== Space The space complexity of the code is O(1).
+This is because the code doesn't use any extra space that scales with input size.
+It only uses a fixed amount of space to store the variables leftsum, rightsum, and n, regardless of the size of the input array.
+==== Tests === Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_1(arr: list) -> int:
+    """This function finds the equilibrium index of an array. The equilibrium index of an array is an index such that
+    the sum of elements at lower indexes is equal to the sum of elements at higher indexes. The function uses an
+    optimized approach to find the equilibrium index by iterating over the array and for each index, it calculates
+    the sum of elements on the left and right in a single pass. If the sums are equal, it returns the index. If no
+    equilibrium index is found, it returns -1.
+
+    Parameters:
+        arr (list): The input array for which to find the equilibrium index.
+
+    Returns:
+        int: The equilibrium index if found, otherwise -1.
+    """
+    total_sum = sum(arr)
+    left_sum = 0
+
+    for i, num in enumerate(arr):
+        total_sum -= num
+
+        if left_sum == total_sum:
+            return i
+
+        left_sum += num
+
+    return -1
+----
+
+==== Explanation The provided Python code defines a function named `method_1` that calculates the equilibrium index of an array in an optimized way.
+
+The equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+
+The function `method_1` takes a list `arr` as an argument.
+It initializes two variables `total_sum` and `left_sum` to the sum of all elements in the array and 0, respectively.
+
+[source,python]
+----
+total_sum = sum(arr)
+left_sum = 0
+----
+
+The function then enters a loop that iterates over the array.
+For each index `i` and corresponding element `num`, it subtracts `num` from `total_sum`.
+
+[source,python]
+----
+for i, num in enumerate(arr):
+    total_sum -= num
+----
+
+After subtracting `num` from `total_sum`, it checks if `left_sum` is equal to `total_sum`.
+If they are equal, it means that the current index `i` is an equilibrium index, and the function returns `i`.
+
+[source,python]
+----
+if left_sum == total_sum:
+    return i
+----
+
+If `left_sum` is not equal to `total_sum`, it adds `num` to `left_sum` and continues to the next iteration.
+
+[source,python]
+----
+left_sum += num
+----
+
+If the function iterates over the entire array and doesn't find an equilibrium index, it returns -1.
+
+[source,python]
+----
+return -1
+----
+
+This function uses an optimized approach to find the equilibrium index by calculating the sum of elements on the left and right in a single pass.
+If the sums are equal, it returns the index.
+If no equilibrium index is found, it returns -1.
+===== Advantages - Efficiency: The code is more efficient than the brute force approach as it calculates the sum of elements on the left and right in a single pass.
+This reduces the time complexity to O(n).
+- Simplicity: The code is straightforward and easy to understand.
+It doesn't require any advanced data structures or algorithms.
+- No additional space: The code doesn't use any extra space, as it doesn't create any new data structures.
+The space complexity is O(1).
+===== Disadvantages - Single pass: While the single pass approach is more efficient, it may not be suitable for all scenarios.
+For example, if the array is being modified concurrently by another thread, a single pass approach may lead to incorrect results.
+- No error checking: The code doesn't check if the input is a valid list.
+If the input is not a list or is a list with non-numeric elements, the code will throw an error.
+===== Complexity Analysis ====== Time The time complexity of the code is O(n).
+This is because the function iterates over the array once, and for each element, it performs a constant amount of operations (subtracting the element from total_sum, comparing left_sum and total_sum, and adding the element to left_sum).
+Therefore, the number of operations grows linearly with the size of the input array.
+====== Space The space complexity of the code is O(1).
+This is because the code doesn't use any extra space that scales with input size.
+It only uses a fixed amount of space to store the variables total_sum, left_sum, i, and num, regardless of the size of the input array.
+==== Tests

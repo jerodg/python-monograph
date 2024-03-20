@@ -1,0 +1,307 @@
+:doctitle: Find the kth Largest or Smallest Element Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_00` that finds the kth largest or smallest element in a given list of numbers.
+The function takes three parameters: `nums`, `k`, and `largest`.
+
+The `nums` parameter is a list of integers.
+This is the list in which the function will search for the kth largest or smallest element.
+
+The `k` parameter is an integer that represents the position of the element to find.
+If the `largest` parameter is set to `True`, the function will find the kth largest element.
+If `largest` is set to `False`, the function will find the kth smallest element.
+
+The `largest` parameter is a boolean that indicates whether to find the kth largest or smallest element.
+It defaults to `True`, which means the function will find the kth largest element by default.
+
+The function begins by checking the value of the `largest` parameter.
+If `largest` is `True`, the function sorts the `nums` list in descending order.
+If `largest` is `False`, the function sorts the `nums` list in ascending order.
+This is done using the `sort` method of the list, with the `reverse` parameter set to `True` for descending order and `False` (or omitted) for ascending order.
+
+[source,python]
+----
+if largest:
+    nums.sort(reverse=True)
+else:
+    nums.sort()
+----
+
+After sorting the list, the function returns the kth element in the sorted list.
+It does this by indexing into the list with `k - 1`.
+The `-1` is necessary because list indices in Python start at 0, not 1. So, for example, to get the 1st element in the list, you would use an index of 0.
+
+[source,python]
+----
+return nums[k - 1]
+----
+
+In summary, this function sorts a list of numbers in either ascending or descending order, depending on the `largest` parameter, and then returns the kth element in the sorted list.
+
+==== Advantages
+
+1. **Simplicity**: The code is straightforward and easy to understand.
+It uses built-in Python functions, which makes it accessible to developers who are familiar with the language.
+
+2. **Flexibility**: The function can find both the kth largest and kth smallest elements, depending on the value of the `largest` parameter.
+
+3. **Reliability**: The sorting method is reliable and will always return the correct result as long as the input parameters are valid.
+
+==== Disadvantages
+
+1. **Efficiency**: Sorting the entire list takes O(n log n) time, where n is the length of the list.
+This is inefficient if you only need to find the kth largest or smallest element.
+There are other algorithms, such as QuickSelect or using a heap, that can solve this problem in O(n) or O(n log k) time, respectively.
+
+2. **Space Complexity**: The sort method used in the code sorts the list in-place, which means it doesn't use additional space proportional to the size of the list.
+However, Python's sort method uses a variant of the Timsort algorithm, which has a worst-case space complexity of O(n).
+This could be a disadvantage if memory usage is a concern.
+
+3. **Mutability**: The function sorts the input list in-place, which means it changes the order of the elements in the original list.
+This could be a disadvantage if you need to preserve the original order of the list for other parts of your program.
+
+==== Complexity Analysis
+
+**Time Complexity:**
+
+The time complexity of the function is dominated by the sorting operation.
+In Python, the built-in `sort` function uses a sorting algorithm called Timsort, which has a worst-case and average time complexity of O(n log n), where n is the number of elements in the list.
+Therefore, the overall time complexity of the function is O(n log n).
+
+**Space Complexity:**
+
+The space complexity of the function is O(1), which means it uses a constant amount of extra space.
+This is because the function sorts the list in-place and does not use any additional data structures that grow with the size of the input.
+However, it's worth noting that the Python `sort` function itself has a space complexity of O(n) in the worst case, due to the way the Timsort algorithm works.
+But since this space is used internally by the `sort` function and does not grow with the size of the input to our function, we consider the space complexity of our function to be O(1).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_01`.
+This function is designed to find the kth largest or smallest element in a given list of numbers.
+It uses a data structure called a heap to achieve this.
+
+The function takes three parameters: `nums`, `k`, and `largest`. `nums` is a list of integers, `k` is an integer representing the position of the element to find, and `largest` is a boolean that indicates whether to find the kth largest or smallest element.
+By default, `largest` is set to `True`, which means the function will find the kth largest element.
+
+The function begins by initializing an empty list called `heap`.
+It then iterates over the `nums` list, pushing each number onto the heap using the `heapq.heappush` function.
+This function maintains the heap property, meaning the smallest element is always at the root of the heap.
+
+[source,python]
+----
+heap = []
+for num in nums:
+    heapq.heappush(heap, num)
+----
+
+After each push operation, the function checks if the size of the heap exceeds `k`.
+If it does, it pops the smallest element off the heap using the `heapq.heappop` function.
+This ensures that the heap always contains the `k` largest elements seen so far.
+
+[source,python]
+----
+if len(heap) > k:
+    heapq.heappop(heap)
+----
+
+At the end of the function, the smallest element on the heap is the kth largest element in the list.
+This is returned as the result of the function.
+
+[source,python]
+----
+if largest:
+    return heapq.heappop(heap)
+----
+
+If the `largest` parameter is set to `False`, the function negates each element before pushing it onto the heap and after popping it off.
+This effectively turns the min-heap into a max-heap, allowing it to keep track of the `k` smallest elements instead of the `k` largest elements.
+
+[source,python]
+----
+else:
+    return -heapq.heappop(heap)
+----
+
+In summary, this function uses a heap to efficiently find the kth largest or smallest element in a list.
+It does this by maintaining a heap of the `k` largest or smallest elements seen so far, and returning the smallest element on the heap at the end.
+
+==== Advantages
+
+1. **Efficiency:** The heap data structure allows the function to efficiently keep track of the k largest or smallest elements seen so far.
+This is because the heap property ensures that the smallest element is always at the root of the heap, which allows the function to quickly remove the smallest element when the size of the heap exceeds k.
+
+2. **Flexibility:** The function can find either the kth largest or smallest element in the list, depending on the value of the `largest` parameter.
+This is achieved by negating each element before pushing it onto the heap and after popping it off when `largest` is set to `False`, which effectively turns the min-heap into a max-heap.
+
+==== Disadvantages
+
+1. **In-place modification:** The function modifies the input list in-place, which could be a disadvantage if you need to preserve the original order of the list for other parts of your program.
+
+2. **Extra space:** Although the function itself has a space complexity of O(1), the Python `heapq` functions used in the function have a space complexity of O(n) in the worst case.
+This is because the `heapq` functions use additional space to maintain the heap property.
+This extra space is used internally by the `heapq` functions and does not grow with the size of the input to our function, but it's still worth noting.
+
+==== Complexity Analysis
+
+**Time Complexity:**
+
+The time complexity of the function is dominated by the loop that iterates over the `nums` list.
+Inside this loop, the function performs two operations: pushing an element onto the heap and possibly popping an element off the heap.
+Both of these operations have a time complexity of O(log k), where k is the size of the heap.
+
+Since these operations are performed n times (where n is the length of the `nums` list), the overall time complexity of the function is O(n log k).
+
+**Space Complexity:**
+
+The space complexity of the function is determined by the size of the heap, which is at most k.
+Therefore, the space complexity of the function is O(k).
+
+In summary, the function has a time complexity of O(n log k) and a space complexity of O(k).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided code is written in Python and it implements the QuickSelect algorithm to find the kth largest or smallest element in a list.
+The QuickSelect algorithm is an efficient in-place variation of the QuickSort algorithm.
+
+The code consists of three main functions: `partition`, `quickselect`, and `solution_02`.
+
+The `partition` function takes a list of numbers and two indices, `low` and `high`, as input.
+It partitions the list around a pivot, such that all elements less than or equal to the pivot come before the pivot and all elements greater than the pivot come after it.
+The pivot is always chosen to be the last element in the list.
+The function returns the index of the pivot after the partition.
+
+[source,python]
+----
+pivot = nums[high]
+i = low - 1
+for j in range(low, high):
+    if nums[j] <= pivot:
+        i += 1
+        nums[i], nums[j] = nums[j], nums[i]
+nums[i + 1], nums[high] = nums[high], nums[i + 1]
+----
+
+The `quickselect` function implements the QuickSelect algorithm.
+It takes a list of numbers, an index `k`, and two indices `low` and `high` as input.
+The function first checks if the list contains only one element.
+If so, it returns that element.
+Otherwise, it partitions the list around a pivot using the `partition` function and then recursively searches the appropriate part of the list.
+
+[source,python]
+----
+pivot_index = partition(nums, low, high)
+if k == pivot_index:
+    return nums[k]
+elif k < pivot_index:
+    return quickselect(nums, k, low, pivot_index - 1)
+else:
+    return quickselect(nums, k, pivot_index + 1, high)
+----
+
+The `solution_02` function is the main function that uses the QuickSelect algorithm to find the kth largest or smallest element in a list.
+It takes a list of numbers, an index `k`, and a boolean flag `largest` as input.
+If `largest` is True, the function finds the kth largest element.
+If `largest` is False, the function finds the kth smallest element.
+
+[source,python]
+----
+if largest:
+    return quickselect(nums, len(nums) - k, 0, len(nums) - 1)
+else:
+    return quickselect(nums, k - 1, 0, len(nums) - 1)
+----
+
+In summary, this code provides a Python implementation of the QuickSelect algorithm, which is an efficient way to find the kth largest or smallest element in a list.
+
+==== Advantages
+
+1. *In-place Algorithm*: QuickSelect is an in-place algorithm, meaning it doesn't require any extra space apart from the input list.
+This makes it memory efficient.
+
+2. *Efficient for Large Lists*: QuickSelect is particularly efficient for large lists as it doesn't need to sort the entire list, but only partitions it based on the pivot.
+
+3. *Average Time Complexity*: The average time complexity of QuickSelect is O(n), which is quite efficient.
+
+==== Disadvantages
+
+1. *Worst-case Time Complexity*: The worst-case time complexity of QuickSelect is O(n^2^), which occurs when the pivot is the smallest or the largest element in the list.
+However, this scenario is quite rare, especially if the pivot is chosen randomly.
+
+2. *Not Stable*: QuickSelect is not a stable algorithm, meaning equal elements may change their relative order during the sorting process.
+
+3. *Sensitive to Pivot Choice*: The efficiency of QuickSelect heavily depends on the choice of the pivot.
+A poor choice of pivot can lead to poor performance.
+
+==== Complexity Analysis
+
+ The time complexity of the QuickSelect algorithm is O(n) on average, where n is the number of elements in the list. This is because each recursive call processes a list that is one element smaller than the previous list. However, in the worst-case scenario, when the pivot is the smallest or the largest element in the list, the time complexity can degrade to O(n^2^).  The space complexity of the QuickSelect algorithm is O(1), as it is an in-place algorithm. It does not require any additional space that scales with the input size. However, it should be noted that the algorithm is recursive, and each recursive call adds a level to the system call stack. The maximum depth of the recursion is n, so in terms of the call stack, the space complexity could be considered O(n) in the worst case.
+
+The space complexity of the QuickSelect algorithm is O(1), as it is an in-place algorithm.
+It does not require any additional space that scales with the input size.
+However, it should be noted that the algorithm is recursive, and each recursive call adds a level to the system call stack.
+The maximum depth of the recursion is n, so in terms of the call stack, the space complexity could be considered O(n) in the worst case.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----

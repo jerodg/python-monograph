@@ -1,0 +1,40 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to find all the unique keys from a list of dicts.
+
+=== Use-Cases
+
+Finding all the unique keys from a list of dictionaries is a common task in various fields of computer science and data management.
+Here are some use cases:
+
+1. **Data Analysis**: In data analysis, you might have a list of dictionaries representing a dataset, and you want to find all unique keys (attributes) in the dataset.
+This can be useful in understanding the structure of the dataset.
+
+2. **Data Transformation**: In data transformation, you might need to convert a list of dictionaries into another data structure (like a pandas DataFrame).
+Knowing all unique keys can help in this transformation.
+
+3. **Database Operations**: In database operations, a list of dictionaries can represent a table of data, with each dictionary being a row and keys being column names.
+Finding all unique keys can help in understanding the schema of the table.
+
+4. **JSON Parsing**: In JSON parsing, a list of dictionaries can represent a JSON array of objects.
+Finding all unique keys can help in understanding the structure of the JSON data.
+
+5. **Data Validation**: In data validation, you might need to check if all dictionaries in a list have the same keys or if there are any missing or extra keys in any dictionary.
+
+These are just a few examples.
+The concept of finding all the unique keys from a list of dictionaries can be applied in many other scenarios depending on the problem at hand.
+=== Constraints == Examples === Example 0 === Example 1 === Example 2 == Follow-up === Performance Considerations == Related Topics

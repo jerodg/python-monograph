@@ -1,0 +1,180 @@
+:doctitle: Check if an Array is Monotonic Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The function `solution_00` is a Python function that checks if a given list of integers is monotonic.
+A list is considered monotonic if it is either entirely non-increasing or non-decreasing.
+The function takes one argument, `nums`, which is a list of integers.
+
+[source,python]
+----
+def solution_00(nums: list[int]) -> bool:
+----
+
+The function uses a generator expression and the built-in `all()` function to check if the list is monotonic.
+This is known as the two-pass method.
+The `all()` function returns `True` if all elements in the passed iterable are true.
+Otherwise, it returns `False`.
+
+[source,python]
+----
+all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1))
+----
+
+The generator expression `(nums[i] <= nums[i + 1] for i in range(len(nums) - 1))` generates a sequence of boolean values representing whether each pair of consecutive elements in the list is in non-decreasing order.
+If all pairs are in non-decreasing order, the `all()` function returns `True`.
+
+The function performs this check twice: once for non-decreasing order and once for non-increasing order.
+If either check returns `True`, the function returns `True`, indicating that the list is monotonic.
+
+[source,python]
+----
+return all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1)) or all(nums[i] >= nums[i + 1] for i in range(len(nums) - 1))
+----
+
+In summary, `solution_00` is a Python function that checks if a list of integers is monotonic using the two-pass method.
+It performs two passes over the list: one to check for non-decreasing order and one to check for non-increasing order.
+If either check succeeds, the function concludes that the list is monotonic.
+
+==== Advantages
+
+- **Simplicity**: The two-pass method is straightforward and easy to understand.
+It uses built-in Python functions and language features, making it accessible to developers familiar with Python.
+- **Efficiency**: The two-pass method is efficient for lists that are already sorted or nearly sorted.
+It can determine if a list is monotonic in linear time, which is the best possible time complexity for this problem.
+
+==== Disadvantages
+
+- **Performance**: The two-pass method may not be as efficient for large lists that are not sorted or nearly sorted.
+It makes two passes over the list, which can be costly for large lists.
+- **Memory Usage**: The two-pass method uses a generator expression, which can consume a significant amount of memory for large lists.
+This could be a concern in memory-constrained environments.
+
+In summary, the two-pass method is a simple and efficient solution for checking if a list is monotonic, but it may not be the best choice for large, unsorted lists due to its potential memory usage and performance characteristics.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n), where n is the length of the input list.
+This is because the code makes two passes over the list, each of which takes linear time.
+
+The space complexity of the selected code is O(1).
+This is because the code uses a fixed amount of space to store the input list and a few variables, and this space usage does not change with the size of the input list.
+
+NOTE: that the generator expressions used in the `all()` functions do not consume space for each element in the list, as they generate each boolean value on the fly and do not store them.
+Therefore, they do not contribute to the space complexity.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The function `solution_01` is a Python function that checks if a given list of integers is monotonic.
+A list is considered monotonic if it is either entirely non-increasing or non-decreasing.
+The function takes one argument, `nums`, which is a list of integers.
+
+[source,python]
+----
+def solution_01(nums: list[int]) -> bool:
+----
+
+The function uses two boolean flags, `increasing` and `decreasing`, to keep track of whether the list is non-decreasing and non-increasing, respectively.
+Initially, both flags are set to `True`.
+
+[source,python]
+----
+increasing = decreasing = True
+----
+
+The function then iterates over the list, comparing each pair of consecutive elements.
+If the current element is greater than the next element, the `increasing` flag is set to `False`.
+If the current element is less than the next element, the `decreasing` flag is set to `False`.
+
+[source,python]
+----
+for i in range(len(nums) - 1):
+    if nums[i] > nums[i + 1]:
+        increasing = False
+    if nums[i] < nums[i + 1]:
+        decreasing = False
+----
+
+Finally, the function returns `True` if either the `increasing` or `decreasing` flag is still `True`, indicating that the list is monotonic.
+
+[source,python]
+----
+return increasing or decreasing
+----
+
+In summary, `solution_01` is a Python function that checks if a list of integers is monotonic using a single pass with flags.
+It iterates over the list, comparing each pair of consecutive elements and updating the `increasing` and `decreasing` flags as necessary.
+If either flag is still `True` at the end of the iteration, the function concludes that the list is monotonic.
+
+==== Advantages
+
+Advantages:
+- **Simplicity**: The single-pass with flags method is straightforward and easy to understand.
+It uses basic Python language features, making it accessible to developers familiar with Python.
+- **Efficiency**: The single-pass with flags method is efficient as it only makes one pass over the list, which can be beneficial for large lists.
+It can determine if a list is monotonic in linear time, which is the best possible time complexity for this problem.
+
+==== Disadvantages
+
+- **Performance**: While the single-pass with flags method is efficient, it may not be as efficient for lists that are already sorted or nearly sorted.
+This is because it still makes a full pass over the list, even if the list is already sorted.
+- **Memory Usage**: The single-pass with flags method uses two boolean flags, which consume a small amount of memory.
+However, this is negligible and should not be a concern in most environments.
+
+NOTE: the single-pass with flags method is a simple and efficient solution for checking if a list is monotonic, but it may not be the best choice for lists that are already sorted or nearly sorted due to its performance characteristics.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n), where n is the length of the input list.
+This is because the code makes a single pass over the list, which takes linear time.
+
+The space complexity of the selected code is O(1).
+This is because the code uses a fixed amount of space to store the input list and a few variables, and this space usage does not change with the size of the input list.
+The boolean flags `increasing` and `decreasing` do not contribute significantly to the space complexity as they only take constant space.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----

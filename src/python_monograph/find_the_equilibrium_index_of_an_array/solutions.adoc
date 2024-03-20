@@ -1,0 +1,150 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+
+:description: Find the Equilibrium Index of an Array Solutions
+:keywords: solution, python
+
+= {description}
+
+== Approaches
+
+1. **Brute Force Approach:** The simplest approach is to iterate through the array and for each index, calculate the sum of elements on the left and right.
+If the sums are equal, return the current index as the equilibrium index.
+This approach has a time complexity of O(n^2) as for each element, we are summing up the elements on its left and right.
+
+2. **Prefix Sum Approach:** A more efficient approach is to first calculate the total sum of the array.
+Then, iterate through the array and for each index, update the total sum by subtracting the current element and update the left sum by adding the previous element.
+If the left sum is equal to the total sum, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) as we are making a single pass through the array.
+
+3. **Using Extra Space:** Another approach is to create two additional arrays, one to store the prefix sum (sum of elements from start to the current index) and another to store the suffix sum (sum of elements from the current index to the end).
+Then, iterate through the array and for each index, check if the prefix sum is equal to the suffix sum.
+If they are equal, return the current index as the equilibrium index.
+This approach also has a time complexity of O(n), but uses extra space.
+
+4. **Using Stack:** We can also use a stack to store the indices of the array in decreasing order of their prefix sum.
+Then, iterate through the array from right to left and for each index, while the top of the stack has a smaller or equal prefix sum, pop the stack.
+If the prefix sum at the current index is equal to the total sum minus the prefix sum at the top of the stack, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and uses extra space.
+
+5. **Divide and Conquer:** We can also use a divide and conquer approach where we divide the array into two halves, find the equilibrium index in each half, and then combine the results.
+This approach has a time complexity of O(n log n) as we are dividing the array into halves at each step.
+
+6. **Binary Search:** If the array is sorted, we can use binary search to find the equilibrium index.
+Calculate the total sum of the array.
+Then, perform binary search on the array.
+For each mid index, calculate the sum of elements on the left and right.
+If the left sum is less than half of the total sum, search in the right half of the array.
+Otherwise, search in the left half.
+If the left sum is equal to the total sum minus the left sum minus the current element, return the mid index as the equilibrium index.
+This approach has a time complexity of O(n log n).
+
+7. **Using Dynamic Programming:** We can use dynamic programming to store the sum of elements from the start to each index in a dp array.
+Then, iterate through the dp array and for each index, check if the total sum minus twice the dp value at the current index is equal to the current element.
+If it is, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and uses extra space.
+
+8. **Two Pointers:** We can use two pointers to keep track of the left and right sums.
+Initialize the left sum to 0 and the right sum to the total sum of the array.
+Then, iterate through the array and for each index, update the left sum by adding the previous element and update the right sum by subtracting the current element.
+If the left sum is equal to the right sum, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and does not use extra space.
+
+9. **Hash Map:** We can use a hash map to store the prefix sum and its corresponding index.
+Then, iterate through the array and for each index, check if the prefix sum is equal to the suffix sum.
+If it is, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and uses extra space.
+
+10. **Two Pointers with Prefix Sum:** We can use two pointers to keep track of the left and right sums.
+Initialize the left sum to 0 and the right sum to the total sum of the array.
+Then, iterate through the array and for each index, update the left sum by adding the previous element and update the right sum by subtracting the current element.
+If the left sum is equal to the right sum, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and does not use extra space.
+
+11. **Two Pointers with Prefix Sum and Suffix Sum:** We can use two pointers to keep track of the left and right sums.
+Initialize the left sum to 0 and the right sum to the total sum of the array.
+Then, iterate through the array and for each index, update the left sum by adding the previous element and update the right sum by subtracting the current element.
+If the left sum is equal to the right sum, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and does not use extra space.
+
+12. **Two Pointers with Prefix Sum and Suffix Sum and Extra Space:** We can use two pointers to keep track of the left and right sums.
+Initialize the left sum to 0 and the right sum to the total sum of the array.
+Then, iterate through the array and for each index, update the left sum by adding the previous element and update the right sum by subtracting the current element.
+If the left sum is equal to the right sum, return the current index as the equilibrium index.
+This approach has a time complexity of O(n) and uses extra space.
+
+== Performance Optimizations
+
+Here are some tips for optimizing the performance of a Python function that solves the problem of finding the equilibrium index of an array:
+
+1. **Use Efficient Data Structures:** Certain data structures like sets and dictionaries in Python have constant time complexity for lookup operations.
+If your solution involves searching for elements in the array, consider using these data structures.
+
+2. **Avoid Nested Loops:** Nested loops can significantly increase the time complexity of your solution.
+If possible, try to find a solution that only requires a single pass through the array.
+
+3. **Use Built-in Functions:** Python's built-in functions are usually optimized for performance.
+For example, the `sum()` function can be used to calculate the sum of an array more efficiently than manually iterating through the array.
+
+4. **Minimize Function Calls:** Each function call adds a little bit of overhead.
+If you're calling a function inside a loop, consider if there's a way to call it just once outside the loop.
+
+5. **Use Local Variables:** Accessing local variables is faster than accessing global variables or object attributes.
+If you're using a variable frequently inside a function, consider making it a local variable.
+
+6. **Avoid Unnecessary Operations:** If your solution involves repeating the same operation multiple times, consider if there's a way to do it just once.
+For example, if you're subtracting the same number from each element in the array, you could subtract it from the sum instead.
+
+7. **Use List Comprehensions:** List comprehensions are faster than equivalent `for` loops because they are optimized for performance in Python.
+
+8. **Use Generator Expressions:** If you're creating a list just to iterate over it, consider using a generator expression instead.
+Generator expressions are more memory-efficient because they generate values on the fly, rather than storing them in memory.
+
+9. **Use the `in` Operator for Membership Tests:** The `in` operator is an efficient way to check if an element exists in a list or other iterable.
+
+10. **Use the `bisect` Module for Sorted Lists:** If your array is sorted and you need to perform binary search operations, consider using the `bisect` module, which is an efficient implementation of the binary search algorithm.
+
+== Solutions
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+== Tests
+
+===  Test Solution 00
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[lines=21..]
+----

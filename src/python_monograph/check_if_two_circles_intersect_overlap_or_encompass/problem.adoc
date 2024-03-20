@@ -1,0 +1,299 @@
+:doctitle: Check if Two Circles Intersect, Overlap, or Encompass Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to find out if two circles intersect, overlap, or encompass eachother.
+
+=== Constraint(s)
+
+The constraints for the problem "Check if Two Circles Intersect, Overlap, or Encompass" could be as follows:
+
+1. The input will be the coordinates of the center and the radius of two circles.
+The coordinates will be in the form of (x, y) where x and y are real numbers, and the radius will be a positive real number.
+2. The circles can be located anywhere in the 2D plane.
+3. The circles can be of any size, as long as the radius is a positive real number.
+4. The circles can intersect, overlap, or encompass each other, or they can be completely separate.
+5. The output should be a string indicating whether the circles intersect, overlap, encompass each other, or are separate.
+
+=== Example(s)
+
+==== 0
+
+.Input
+[source,python,linenums]
+----
+circle1 = ((0, 0), 2)
+circle2 = ((3, 0), 2)
+----
+
+.Output
+[source,python,linenums]
+----
+"Intersect"
+----
+
+==== 1
+
+.Input
+[source,python,linenums]
+----
+circle1 = ((0, 0), 2)
+circle2 = ((2, 0), 2)
+----
+
+.Output
+[source,python,linenums]
+----
+"Overlap"
+----
+
+==== 2
+
+.Input
+[source,python,linenums]
+----
+circle1 = ((0, 0), 2)
+circle2 = ((0, 0), 1)
+----
+
+.Output
+[source,python,linenums]
+----
+"Encompass"
+----
+
+==== 3
+
+.Input
+[source,python,linenums]
+----
+circle1 = ((0, 0), 2)
+circle2 = ((5, 0), 2)
+----
+
+.Output
+[source,python,linenums]
+----
+"Separate"
+----
+
+==== 4
+
+.Input
+[source,python,linenums]
+----
+circle1 = ((0, 0), 2)
+circle2 = ((0, 0), 2)
+----
+
+.Output
+[source,python,linenums]
+----
+"Identical"
+----
+
+== Use-Case(s)
+
+The problem of determining whether two circles intersect, overlap, or encompass each other has several practical applications in various fields.
+Here are a few examples:
+
+1. **Computer Graphics and Game Development**: In computer graphics and game development, this problem is often encountered when dealing with collision detection.
+For instance, determining whether two characters or objects in a game have collided or not.
+
+2. **Geographical Information Systems (GIS)**: In GIS, this problem can be used to determine whether two geographical areas (represented as circles) overlap or encompass each other.
+This can be useful in various scenarios such as planning for infrastructure, determining the impact of natural disasters, etc.
+
+3. **Robotics**: In robotics, this problem can be used for path planning and obstacle avoidance.
+Robots can use this information to navigate around obstacles and reach their destination.
+
+4. **Physics Simulations**: In physics simulations, this problem can be used to model the behavior of particles or objects.
+For example, determining whether two atoms will collide or not.
+
+5. **Astronomy**: In astronomy, this problem can be used to determine whether two celestial bodies will collide or pass by each other.
+
+== Common Mistakes
+
+When solving the problem of determining whether two circles intersect, overlap, or encompass each other, there are several common mistakes that developers often make:
+
+1. **Incorrect Distance Calculation**: The most common mistake is incorrectly calculating the distance between the centers of the two circles.
+This is usually done using the Euclidean distance formula.
+If this calculation is incorrect, the entire solution will be incorrect.
+
+2. **Not Considering All Cases**: Another common mistake is not considering all possible cases - intersect, overlap, encompass, separate, and identical.
+Each of these cases has a different condition that needs to be checked, and missing any of these can lead to incorrect results.
+
+3. **Ignoring Edge Cases**: Edge cases such as when the two circles are identical (i.e., they have the same center and radius) or when one circle is completely inside the other (i.e., one circle encompasses the other) are often overlooked.
+These cases need to be handled separately to ensure correct results.
+
+4. **Floating Point Precision**: When dealing with real numbers, precision can be an issue.
+Comparing two floating-point numbers directly can lead to incorrect results due to precision errors.
+It's better to use a small tolerance value when comparing floating-point numbers.
+
+5. **Not Validating Input**: Not validating the input can lead to runtime errors.
+For example, the radius of the circles should be a positive real number.
+If the radius is not validated, it could lead to mathematical errors or incorrect results.
+
+== Best Practices
+
+When solving the problem of determining whether two circles intersect, overlap, or encompass each other, here are some best practices to consider:
+
+1. **Use Helper Functions**: Break down the problem into smaller, manageable tasks.
+For instance, you can create a helper function to calculate the distance between two points.
+This makes your code more modular and easier to debug.
+
+2. **Validate Input**: Always validate the input before processing.
+Ensure that the coordinates are real numbers and the radius is a positive real number.
+This can prevent runtime errors and unexpected behavior.
+
+3. **Handle Edge Cases**: Make sure to handle edge cases such as when the two circles are identical or when one circle is completely inside the other.
+These cases need to be handled separately to ensure correct results.
+
+4. **Use Comments**: Use comments to explain your logic, especially when dealing with complex calculations or conditions.
+This makes your code easier to understand for others and for yourself when you revisit it later.
+
+5. **Use Descriptive Variable Names**: Use descriptive variable names to make your code self-explanatory.
+For example, instead of using `x1` and `x2`, use `center1_x` and `center2_x`.
+
+6. **Avoid Magic Numbers**: Avoid using magic numbers in your code.
+Instead, use constants with descriptive names.
+For example, instead of directly using `2` in the formula to calculate the distance, you can define a constant `DIMENSION = 2`.
+
+7. **Precision in Floating Point Comparisons**: When comparing floating-point numbers, consider the precision.
+Direct comparison might not yield the expected result due to precision errors.
+It's better to use a small tolerance value when comparing floating-point numbers.
+
+8. **Testing**: Write tests to verify your solution.
+Make sure to include tests for edge cases.
+This can help catch bugs and ensure your solution works for all scenarios.
+
+== Test Strategies
+
+When testing the solution for the problem "Check if Two Circles Intersect, Overlap, or Encompass", you can consider the following strategies:
+
+1. **Unit Testing**: Write unit tests for each function in your solution.
+This includes the main function that determines the relationship between the two circles, as well as any helper functions you may have written, such as a function to calculate the distance between two points.
+
+2. **Boundary Testing**: Test your solution with edge cases.
+This could include cases where the two circles are identical, one circle is completely inside the other, or the circles are just touching at one point.
+Also, consider cases where the circles are far apart and do not interact at all.
+
+3. **Random Testing**: Generate random test cases to ensure your solution works for a wide range of inputs.
+This could include circles of varying sizes and positions.
+
+4. **Performance Testing**: If your solution is expected to handle large inputs, it's important to test its performance.
+This could involve creating test cases with large numbers or running your tests multiple times to measure the average execution time.
+
+5. **Regression Testing**: If you make changes to your solution, run all your tests again to ensure that the changes have not introduced new bugs.
+
+6. **Integration Testing**: If your solution is part of a larger system, test how it interacts with the rest of the system.
+This could involve testing how it handles input from other parts of the system, or how other parts of the system handle its output.
+
+Remember, the goal of testing is not only to find bugs, but also to ensure that your solution meets all the requirements and constraints of the problem.
+
+== Performance Optimization
+
+When optimizing the performance of a function that solves the problem of determining whether two circles intersect, overlap, or encompass each other, you can consider the following tips:
+
+1. **Efficient Distance Calculation**: The distance between the centers of the two circles is a crucial part of the solution.
+Using an efficient method to calculate this distance can significantly improve the performance.
+For instance, you can avoid the square root operation in the Euclidean distance calculation as you are only interested in comparing distances.
+
+2. **Early Return**: If you can determine the relationship between the two circles early in your function, return the result immediately.
+This avoids unnecessary calculations.
+For example, if you find that one circle is completely inside the other, you can return "Encompass" without checking for other conditions.
+
+3. **Avoid Redundant Calculations**: If you find yourself calculating the same value multiple times, consider storing it in a variable and reusing it.
+This can save computation time.
+
+4. **Use Efficient Data Structures**: If your function needs to handle a large number of circles, using efficient data structures can improve performance.
+For example, a spatial data structure like a quadtree can help to quickly find nearby circles.
+
+5. **Parallel Processing**: If your function needs to handle a large number of circles and the relationship between each pair of circles can be determined independently, consider using parallel processing to speed up the computation.
+
+6. **Optimize Memory Usage**: Be mindful of your function's memory usage.
+Avoid creating large temporary data structures that can slow down your function and consume a lot of memory.
+
+7. **Profiling and Benchmarking**: Use profiling tools to identify the parts of your function that are taking the most time.
+This can help you focus your optimization efforts where they will have the most impact.
+Also, benchmark your function with different inputs to measure its performance and ensure that your optimizations are effective.
+
+== Follow-up
+
+After solving the problem of determining whether two circles intersect, overlap, or encompass each other, here are some follow-up actions you could consider:
+
+1. **Refactor the Code**: Look for opportunities to make your code cleaner and more efficient.
+This could involve simplifying complex logic, extracting repeated code into helper functions, or replacing inefficient algorithms with more efficient ones.
+
+2. **Optimize the Code**: If your solution is not as efficient as it could be, consider ways to optimize it.
+This could involve using more efficient data structures or algorithms, reducing unnecessary computations, or parallelizing the code to take advantage of multiple cores or processors.
+
+3. **Expand the Problem**: Consider variations of the problem.
+For example, you could extend the problem to three dimensions and determine whether two spheres intersect, overlap, or encompass each other.
+Or you could consider more complex shapes than circles.
+
+4. **Apply the Solution to Real-World Problems**: Think about how the solution to this problem could be applied to real-world problems.
+For example, you could use it in a game to detect collisions, in a GIS application to determine overlapping areas, or in a physics simulation to model interactions between particles.
+
+5. **Learn More About the Underlying Concepts**: The problem involves concepts from geometry and computer science.
+You could take this opportunity to learn more about these topics.
+For example, you could study the mathematics of circles and distances in more depth, or learn about different algorithms and data structures for spatial problems.
+
+== Related Topics
+
+Here are some related topics for the problem of determining whether two circles intersect, overlap, or encompass each other:
+
+1. **Geometry**: This is the branch of mathematics that deals with shapes, sizes, and properties of figures and spaces.
+Understanding basic geometric concepts can be very helpful in solving this problem.
+You can refer to [Khan Academy's course on Geometry](https://www.khanacademy.org/math/geometry) for a comprehensive understanding.
+
+2. **Collision Detection**: This is a key concept in computer graphics and game development.
+It involves determining whether two or more objects intersect or overlap.
+You can refer to this [tutorial on Collision Detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection) from MDN Web Docs.
+
+3. **Euclidean Distance**: This is a measure of the straight line distance between two points in a space.
+It's used in the solution to calculate the distance between the centers of the two circles.
+You can refer to this [Wikipedia article on Euclidean Distance](https://en.wikipedia.org/wiki/Euclidean_distance) for more information.
+
+4. **Spatial Data Structures**: These are data structures that are designed to organize spatial data, or data that exists in a multi-dimensional space.
+An example of a spatial data structure that could be useful in this problem is a Quadtree.
+You can refer to this [Wikipedia article on Quadtrees](https://en.wikipedia.org/wiki/Quadtree) for more information.
+
+5. **Floating Point Precision**: Understanding how floating point numbers are represented and the issues with precision can be crucial in solving this problem.
+You can refer to this [article on Floating Point Precision](https://floating-point-gui.de/) for a detailed explanation.
+
+6. **Unit Testing**: Writing tests for your code is a good practice to ensure your solution works as expected.
+You can refer to this [tutorial on Unit Testing in Python](https://realpython.com/python-testing/) from Real Python.
+
+Remember, these topics are related to the problem but understanding them in depth will require time and practice.
+
+== References
+
+Here are some references to the official Python documentation that are relevant to the methods and concepts used in the provided code:
+
+1. [Python's Official Documentation on Classes](https://docs.python.org/3/tutorial/classes.html): This documentation provides a comprehensive guide on how to define and use classes in Python.
+It's relevant to the `Circle` class defined in the code.
+
+2. [Python's Official Documentation on Complex Numbers](https://docs.python.org/3/library/cmath.html): This documentation provides information on Python's built-in support for complex numbers, which is used in the second solution to represent the center of the circles.
+
+3. [Python's Official Documentation on the Math Module](https://docs.python.org/3/library/math.html): This documentation provides information on Python's built-in math module, which is used in the first solution to calculate the Euclidean distance between the centers of the two circles.
+
+4. [Python's Official Documentation on the `abs` function](https://docs.python.org/3/library/functions.html#abs): This documentation provides information on the `abs` function, which is used in the second solution to calculate the Euclidean distance between the centers of the two circles.
+
+5. [Python's Official Documentation on Type Hints](https://docs.python.org/3/library/typing.html): This documentation provides information on Python's type hinting system, which is used in the code to specify the types of the function arguments and return values.
+
+6. [Python's Official Documentation on the `pytest` module](https://docs.python.org/3/library/unittest.html): This documentation provides information on Python's built-in `unittest` module, which provides a framework for writing and running tests.
+This is relevant to the unit tests written for the `Circle` class.
+
+7. [Python's Official Documentation on Docstrings](https://www.python.org/dev/peps/pep-0257/): This documentation provides information on how to write docstrings in Python, which are used in the code to document the purpose and usage of the `Circle` class and its methods.

@@ -1,0 +1,284 @@
+:doctitle: Find Triplets With Zero Sum Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_00`.
+This function is designed to find all unique triplets in an array that sum up to zero.
+The function accepts a list of integers as an argument and returns a list of lists, where each sublist contains three integers whose sum is zero.
+
+The function signature is `def solution_00(nums: list[int]) -> list[list[int]]:`.
+The `nums` parameter is the list of integers that the function will process.
+The function returns a list of lists, where each sublist is a triplet of integers that sum to zero.
+
+The main logic of the function is encapsulated in a single line of code: `return [list(x) for x in sorted({abc for abc in combinations(sorted(nums), 3) if not sum(abc)})]`.
+This line uses a list comprehension to generate the output.
+
+The `combinations(sorted(nums), 3)` part generates all possible combinations of three integers from the input list.
+The `sorted(nums)` ensures that the combinations are generated in a sorted order.
+This is important because it helps to avoid duplicate triplets in the output.
+
+The `{abc for abc in combinations(sorted(nums), 3) if not sum(abc)}` part filters out the combinations whose sum is not zero.
+It uses a set comprehension to eliminate duplicates, as sets in Python cannot contain duplicate elements.
+
+Finally, the `list(x) for x in sorted(...)` part converts each triplet (which is a tuple) back into a list and sorts the entire output list of lists.
+This ensures that the output is presented in a consistent and predictable order.
+
+The function also includes a docstring that provides a detailed explanation of its purpose, parameters, return value, and usage examples.
+This is a common practice in Python to improve code readability and maintainability.
+
+==== Advantages
+
+1. **Efficiency**: The function uses Python's built-in `combinations` function from the `itertools` module, which is highly optimized for generating combinations.
+This makes the function relatively efficient.
+2. **Simplicity**: The function is implemented in a single line of code, which makes it concise and easy to understand for someone familiar with Python's list and set comprehensions.
+3. **Elimination of Duplicates**: The use of a set comprehension `{abc for abc in combinations(sorted(nums), 3) if not sum(abc)}` helps in eliminating duplicate triplets, as sets in Python do not allow duplicate elements.
+4. **Sorted Output**: The function returns the output in a sorted order, which can be useful in certain scenarios where the order of the output matters.
+
+==== Disadvantages
+
+1. **Memory Usage**: The function generates all possible combinations of three elements from the input list.
+This can consume a lot of memory if the input list is large.
+2. **Performance**: Although the function is relatively efficient due to the use of Python's built-in functions, it can still be slow for large input lists because it generates all combinations of three elements, which is an operation with a time complexity of O(n^3).
+3. **Readability**: While the function is concise, the use of complex list and set comprehensions in a single line can make the code harder to read and understand for developers who are not familiar with these Python features.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n^3), where n is the length of the input list.
+This is because the function generates all possible combinations of three elements from the input list, which is an operation with a time complexity of O(n^3).
+
+The space complexity of the function is also O(n^3) for the same reason.
+The function generates all possible combinations of three elements from the input list and stores them in memory.
+Therefore, the space complexity is proportional to the number of combinations, which is O(n^3).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided Python function, `solution_01(nums: list[int]) -> list[list[int]]`, is designed to find all unique triplets in a given list of integers (`nums`) that sum up to zero.
+The function returns a list of lists, where each sublist contains three integers that sum up to zero.
+
+The function begins by sorting the input list with the `nums.sort()` method.
+This is a crucial step as it allows the subsequent two-pointer technique to work correctly.
+
+The function then initializes an empty list, `result = []`, which will be used to store the resulting triplets.
+
+The main logic of the function is contained within a for loop that iterates over the sorted list.
+For each number in the list, the function uses a two-pointer technique to find a pair in the rest of the list that sums up to the negative of the current number.
+This ensures that the three numbers sum up to zero.
+
+The two-pointer technique is implemented within a while loop.
+If the sum of the numbers at the two pointers is less than zero, the left pointer is moved to the right.
+If the sum is greater than zero, the right pointer is moved to the left.
+If the sum is zero, the triplet is added to the result list.
+
+To handle duplicates and ensure that the result list only contains unique triplets, the function includes a check to skip over the same numbers.
+This is done both in the main for loop and in the while loop.
+
+Finally, the function returns the `result` list, which contains all the unique triplets that sum up to zero.
+
+==== Advantages
+
+Advantages:
+1. **Efficiency**: The two-pointer technique is a very efficient way to solve this problem.
+It reduces the time complexity from O(n^3) (which would be the case for a brute force solution) to O(n^2), where n is the length of the input list.
+This is because for each element in the list, the function only needs to make a single pass over the rest of the list to find the pairs that sum up to the negative of the current element.
+
+2. **Handling Duplicates**: The method effectively handles duplicates by skipping over the same numbers.
+This ensures that the result list only contains unique triplets.
+
+==== Disadvantages
+
+1. **Sorting Requirement**: The method requires the input list to be sorted.
+If the input list is not sorted, the two-pointer technique will not work correctly.
+Sorting the list adds an additional time complexity of O(n log n), which could be a disadvantage if the input list is very large.
+
+2. **Space Complexity**: The method uses extra space to store the result list.
+The space complexity is O(n), where n is the length of the input list.
+This could be a disadvantage if the input list is very large and memory is a concern.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n^2), where n is the length of the input list.
+This is because the function iterates over the list once (which is an O(n) operation), and for each iteration, it may potentially iterate over the rest of the list (which is also an O(n) operation).
+Therefore, the total time complexity is O(n^2).
+
+The space complexity of the function is O(n), where n is the length of the input list.
+This is because the function creates a new list `result` to store the triplets that sum up to zero.
+In the worst-case scenario, where all possible combinations of three numbers sum up to zero, the size of the `result` list would be proportional to the size of the input list, hence the space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided Python function, `solution_02(arr: list[int]) -> list[list[int]]`, is designed to find all unique triplets in a given list of integers (`arr`) that sum up to zero.
+The function returns a list of lists, where each sublist contains three integers that sum up to zero.
+
+The function starts by initializing the target sum to zero and an empty list `output_arr` to store the resulting triplets.
+
+The main logic of the function is contained within a for loop that iterates over the input list.
+For each number in the list, the function calculates the `current_sum` needed to reach the target sum by subtracting the current item from the target sum.
+
+The function then initializes an empty set `set_initialize` to store the second elements that can complement the final sum.
+It traverses the subarray `arr[index + 1 :]` and for each `other_item` in the subarray, it calculates the `required_value` for the second element by subtracting `other_item` from `current_sum`.
+
+If `required_value` is found in `set_initialize`, it means a triplet that sums up to zero is found.
+The triplet is sorted and added to `output_arr` if it's not already there.
+
+After checking for the `required_value`, the `other_item` is added to `set_initialize` for subsequent complement verification.
+
+Finally, the function returns `output_arr` which contains all the unique triplets that sum up to zero.
+
+==== Advantages
+
+1. **Efficiency**: The hashing technique is an efficient way to solve this problem.
+It reduces the time complexity from O(n^3) (which would be the case for a brute force solution) to O(n^2), where n is the length of the input list.
+This is because for each element in the list, the function only needs to make a single pass over the rest of the list to find the pairs that sum up to the negative of the current element.
+
+2. **Handling Duplicates**: The method effectively handles duplicates by checking if the triplet is already in the output list before adding it.
+This ensures that the result list only contains unique triplets.
+
+==== Disadvantages
+
+1. **Space Complexity**: The method uses extra space to store the `set_initialize` and `output_arr`.
+The space complexity is O(n), where n is the length of the input list.
+This could be a disadvantage if the input list is very large and memory is a concern.
+
+2. **Ordering**: The method does not maintain the original order of the input list as it sorts the triplets before adding them to the output list.
+This might not be a problem for some applications, but in others, maintaining the original order could be important.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n^2), where n is the length of the input list.
+This is because the function iterates over the list once (which is an O(n) operation), and for each iteration, it may potentially iterate over the rest of the list (which is also an O(n) operation).
+Therefore, the total time complexity is O(n^2).
+
+The space complexity of the function is O(n), where n is the length of the input list.
+This is because the function creates a new list `output_arr` to store the triplets that sum up to zero.
+In the worst-case scenario, where all possible combinations of three numbers sum up to zero, the size of the `output_arr` list would be proportional to the size of the input list, hence the space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The provided Python function, `solution_03(nums: list) -> list[list[int]]`, is designed to find all unique triplets in a given list of integers (`nums`) that sum up to zero.
+The function returns a list of lists, where each sublist contains three integers that sum up to zero.
+
+The function begins by creating an empty hash table `freq = {}`.
+This hash table is used to store the frequency of each element in the input list.
+It then iterates over the input list, and for each number in the list, it checks if the number is already in the hash table.
+If it is, it increments the frequency of that number.
+If it's not, it adds the number to the hash table with a frequency of 1.
+
+After populating the hash table, the function initializes an empty list `result = []` to store the resulting triplets.
+
+The function then enters a nested loop that iterates over each pair of elements in the input list.
+For each pair of numbers, it calculates the negative of their sum `sum_neg = -(nums[i] + nums[j])`.
+This is the value that, when added to the sum of the current pair of numbers, would result in zero.
+
+The function then checks if this `sum_neg` value exists in the hash table.
+If it does, it means a triplet that sums up to zero has been found.
+The triplet is sorted and added to the `result` list, but only if it's not already there.
+This is done to ensure that the result list only contains unique triplets.
+
+Finally, the function returns the `result` list, which contains all the unique triplets that sum up to zero.
+
+==== Advantages
+
+1. **Efficiency**: The hashing technique is an efficient way to solve this problem.
+It reduces the time complexity from O(n^3) (which would be the case for a brute force solution) to O(n^2), where n is the length of the input list.
+This is because for each element in the list, the function only needs to make a single pass over the rest of the list to find the pairs that sum up to the negative of the current element.
+
+2. **Handling Duplicates**: The method effectively handles duplicates by checking if the triplet is already in the output list before adding it.
+This ensures that the result list only contains unique triplets.
+
+==== Disadvantages
+
+1. **Space Complexity**: The method uses extra space to store the `freq` and `result`.
+The space complexity is O(n), where n is the length of the input list.
+This could be a disadvantage if the input list is very large and memory is a concern.
+
+2. **Ordering**: The method does not maintain the original order of the input list as it sorts the triplets before adding them to the output list.
+This might not be a problem for some applications, but in others, maintaining the original order could be important.
+
+==== Complexity Analysis
+
+The time complexity of the selected code is O(n^2), where n is the length of the input list.
+This is because the function iterates over the list once (which is an O(n) operation), and for each iteration, it may potentially iterate over the rest of the list (which is also an O(n) operation).
+Therefore, the total time complexity is O(n^2).
+
+The space complexity of the function is O(n), where n is the length of the input list.
+This is because the function creates a new list `result` to store the triplets that sum up to zero and a hash table `freq` to store the frequency of each element in the list.
+In the worst-case scenario, where all possible combinations of three numbers sum up to zero, the size of the `result` list and `freq` hash table would be proportional to the size of the input list, hence the space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----

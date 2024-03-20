@@ -1,0 +1,359 @@
+:doctitle: Merge Two Sorted Lists Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python, merge, list, sort
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+def method_0(l1: ListNode, l2: ListNode) -> ListNode:
+    """Method 0: Iterative
+
+    Parameters
+    ----------
+    l1 : ListNode
+    l2 : ListNode
+
+    Returns
+    -------
+    ListNode
+    """
+    dummy = ListNode(0)
+    current = dummy
+
+    while l1 and l2:
+        if l1.val < l2.val:
+            current.next = l1
+            l1 = l1.next
+        else:
+            current.next = l2
+            l2 = l2.next
+        current = current.next
+
+    current.next = l1 or l2
+
+    return dummy.next
+----
+
+==== Explanation
+
+The provided code is a Python implementation of a function that merges two sorted linked lists.
+The function is named `method_0` and it takes two parameters, `l1` and `l2`, which are instances of the `ListNode` class.
+
+The `ListNode` class is a simple data structure with two attributes: `val` and `next`.
+The `val` attribute holds the value of the node, and the `next` attribute points to the next node in the list.
+
+[source,python,linenums]
+----
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+----
+
+The `method_0` function starts by creating a dummy node, `dummy`, and a pointer, `current`, that points to this dummy node.
+The dummy node is used to keep track of the head of the new merged list.
+
+[source,python,linenums]
+----
+dummy = ListNode(0)
+current = dummy
+----
+
+The function then enters a loop that continues as long as both `l1` and `l2` are not `None`.
+Inside this loop, it compares the values of the nodes pointed to by `l1` and `l2`.
+The node with the smaller value is appended to the new list, and the pointer (`l1` or `l2`) is moved to the next node.
+
+[source,python,linenums]
+----
+while l1 and l2:
+    if l1.val < l2.val:
+        current.next = l1
+        l1 = l1.next
+    else:
+        current.next = l2
+        l2 = l2.next
+    current = current.next
+----
+
+After the loop, at least one of the lists (`l1` or `l2`) has been fully traversed.
+The remaining nodes from the other list are then appended to the new list.
+
+[source,python,linenums]
+----
+current.next = l1 or l2
+----
+
+Finally, the function returns the merged list, excluding the dummy head node.
+
+[source,python,linenums]
+----
+return dummy.next
+----
+
+This function effectively merges two sorted linked lists into a new sorted linked list, maintaining the original sort order.
+
+===== Advantages
+
+===== Disadvantages
+
+===== Complexity Analysis
+
+====== Time
+
+The time complexity of the method_0 function is O(n + m), where n and m are the lengths of the two input linked lists, l1 and l2. This is because in the worst-case scenario, the function will need to traverse both lists in their entirety.
+====== Space The space complexity of the function is O(1).
+This is because the function only uses a constant amount of space to store the dummy and current nodes.
+It does not use any additional space that scales with the size of the input lists.
+The new linked list is constructed using the nodes of the original lists, so no additional space is required for this.
+=== Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+class ListNode:
+    """
+    Definition for singly-linked list.
+    """
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+def method_1(l1: ListNode, l2: ListNode) -> ListNode:
+    """Method 1: Recursive
+
+    Parameters
+    ----------
+    l1 : ListNode
+    l2 : ListNode
+
+    Returns
+    -------
+    ListNode
+    """
+    if not l1:
+        return l2
+    elif not l2:
+        return l1
+    elif l1.val < l2.val:
+        l1.next = method_1(l1.next, l2)
+        return l1
+    else:
+        l2.next = method_1(l1, l2.next)
+        return l2
+----
+
+==== Explanation
+
+The provided code includes three methods for merging two sorted linked lists in Python.
+The first method, `method_0`, has already been explained.
+Let's move on to the second method, `method_1`.
+
+`method_1` is a recursive solution to the problem.
+It takes two parameters, `l1` and `l2`, which are instances of the `ListNode` class.
+
+[source,python,linenums]
+----
+def method_1(l1: ListNode, l2: ListNode) -> ListNode:
+----
+
+The function starts by checking if either of the lists is empty (`None`).
+If `l1` is `None`, it returns `l2`, and if `l2` is `None`, it returns `l1`.
+This is because if one of the lists is empty, the result of the merge is simply the other list.
+
+[source,python]
+----
+if not l1:
+    return l2
+elif not l2:
+    return l1
+----
+
+If both lists are not empty, the function compares the values of the first nodes of `l1` and `l2`.
+If the value of the first node of `l1` is smaller, it sets the `next` attribute of this node to the result of a recursive call to `method_1` with the next node of `l1` and `l2` as arguments.
+It then returns the first node of `l1`.
+
+[source,python,linenums]
+----
+elif l1.val < l2.val:
+    l1.next = method_1(l1.next, l2)
+    return l1
+----
+
+If the value of the first node of `l2` is smaller or equal, it does the same but with the roles of `l1` and `l2` reversed.
+
+[source,python,linenums]
+----
+else:
+    l2.next = method_1(l1, l2.next)
+    return l2
+----
+
+This way, the function builds the merged list one node at a time, always choosing the node with the smaller value, and uses recursion to merge the rest of the lists.
+
+The third method, `method_2`, is not implemented in the provided code.
+
+===== Advantages
+
+===== Disadvantages
+
+===== Complexity Analysis
+
+====== Time
+
+The time complexity of the method_1 function is O(n + m), where n and m are the lengths of the two input linked lists, l1 and l2. This is because in the worst-case scenario, the function will need to traverse both lists in their entirety.
+====== Space The space complexity of the function is O(n + m).
+This is due to the recursive nature of the function.
+Each recursive call to method_1 adds a level to the call stack.
+The maximum depth of the recursion is the length of the longer list.
+Therefore, the space complexity is proportional to the lengths of the input lists.
+=== Method 2:
+==== Implementation
+
+[source,python,linenums]
+----
+import heapq
+
+class ListNode:
+    """
+    Definition for singly-linked list.
+    """
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+def method_2(l1: ListNode, l2: ListNode) -> ListNode:
+    """Method 2: Priority Queue
+
+    Parameters
+    ----------
+    l1 : ListNode
+    l2 : ListNode
+
+    Returns
+    -------
+    ListNode
+    """
+    dummy = ListNode(0)
+    current = dummy
+    queue = []
+
+    while l1:
+        heapq.heappush(queue, (l1.val, l1))
+        l1 = l1.next
+
+    while l2:
+        heapq.heappush(queue, (l2.val, l2))
+        l2 = l2.next
+
+    while queue:
+        val, node = heapq.heappop(queue)
+        current.next = ListNode(val)
+        current = current.next
+        node = node.next
+        if node:
+            heapq.heappush(queue, (node.val, node))
+
+    return dummy.next
+----
+
+==== Explanation
+
+The provided code introduces a third method, `method_2`, for merging two sorted linked lists in Python.
+This method uses a priority queue to sort the nodes from both lists.
+
+[source,python,linenums]
+----
+def method_2(l1: ListNode, l2: ListNode) -> ListNode:
+----
+
+The function starts by creating a dummy node, `dummy`, and a pointer, `current`, that points to this dummy node.
+The dummy node is used to keep track of the head of the new merged list.
+It also initializes an empty list, `queue`, which will be used as the priority queue.
+
+[source,python,linenums]
+----
+dummy = ListNode(0)
+current = dummy
+queue = []
+----
+
+The function then enters two separate loops to traverse `l1` and `l2`.
+In each loop, it pushes each node from the list into the priority queue.
+The `heapq.heappush` function is used to maintain the heap property of the queue.
+The nodes are pushed as tuples, with the value of the node as the first element and the node itself as the second element.
+This is because the `heapq` module sorts tuples by the first element.
+
+[source,python,linenums]
+----
+while l1:
+    heapq.heappush(queue, (l1.val, l1))
+    l1 = l1.next
+
+while l2:
+    heapq.heappush(queue, (l2.val, l2))
+    l2 = l2.next
+----
+
+After all nodes have been pushed into the queue, the function enters another loop that continues as long as the queue is not empty.
+In each iteration, it pops the node with the smallest value from the queue and appends a new node with this value to the new list.
+The `heapq.heappop` function is used to pop the node.
+
+[source,python,linenums]
+----
+while queue:
+    val, node = heapq.heappop(queue)
+    current.next = ListNode(val)
+    current = current.next
+----
+
+If the popped node has a next node, this next node is pushed into the queue.
+
+[source,python,linenums]
+----
+node = node.next
+if node:
+    heapq.heappush(queue, (node.val, node))
+----
+
+Finally, the function returns the merged list, excluding the dummy head node.
+
+[source,python,linenums]
+----
+return dummy.next
+----
+
+This method effectively merges two sorted linked lists into a new sorted linked list, maintaining the original sort order.
+It uses a priority queue to always select the node with the smallest value from the two lists.
+
+===== Advantages
+
+===== Disadvantages
+
+===== Complexity Analysis
+
+====== Time
+
+The time complexity of the method_2 function is O((n + m) log(n + m)), where n and m are the lengths of the two input linked lists, l1 and l2. This is because each insertion into a heap takes O(log n) time and we do this for each node in both lists.
+====== Space The space complexity of the function is O(n + m).
+This is because in the worst-case scenario, all nodes from both lists could end up in the heap at the same time.
+Therefore, the space complexity is proportional to the total number of nodes.

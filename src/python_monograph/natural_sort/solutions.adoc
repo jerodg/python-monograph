@@ -27,27 +27,38 @@
 
 To solve the problem of implementing a natural sort function in Python, you can consider the following techniques, approaches, or methodologies:
 
-1. **Custom Comparator for Sort Function**: Python's built-in sort function allows you to provide a custom comparator function. You can use this feature to implement a comparator that compares strings based on their natural order.
+1. **Custom Comparator for Sort Function**: Python's built-in sort function allows you to provide a custom comparator function.
+You can use this feature to implement a comparator that compares strings based on their natural order.
 
-2. **Regular Expressions**: Regular expressions can be used to extract the numeric parts of the strings. You can then convert these numeric parts to integers and use them for comparison.
+2. **Regular Expressions**: Regular expressions can be used to extract the numeric parts of the strings.
+You can then convert these numeric parts to integers and use them for comparison.
 
-3. **Regular Expressions w/ Recursion**: Regular expressions can be used to extract the numeric parts of the strings. You can then convert these numeric parts to integers and use them for comparison.
+3. **Regular Expressions w/ Recursion**: Regular expressions can be used to extract the numeric parts of the strings.
+You can then convert these numeric parts to integers and use them for comparison.
 
-4. **String Padding**: If the numbers in the strings have different lengths, you can pad the numbers with leading zeros to make them the same length. This will allow you to compare the strings based on their lexicographical order, which will give the correct result for natural order.
+4. **String Padding**: If the numbers in the strings have different lengths, you can pad the numbers with leading zeros to make them the same length.
+This will allow you to compare the strings based on their lexicographical order, which will give the correct result for natural order.
 
-5. **Two-Step Sorting**: You can first sort the strings based on their lexicographical order, and then sort them again based on their natural order. This can be more efficient than a single sort operation that compares strings based on their natural order.
+5. **Two-Step Sorting**: You can first sort the strings based on their lexicographical order, and then sort them again based on their natural order.
+This can be more efficient than a single sort operation that compares strings based on their natural order.
 
-6. **Divide and Conquer**: You can divide the list into smaller lists based on the first character of the strings, sort each smaller list separately, and then merge the sorted lists. This can be more efficient than sorting the entire list at once.
+6. **Divide and Conquer**: You can divide the list into smaller lists based on the first character of the strings, sort each smaller list separately, and then merge the sorted lists.
+This can be more efficient than sorting the entire list at once.
 
-7. **Bucket Sort**: If the range of numbers in the strings is known and not too large, you can use a bucket sort algorithm. This involves creating a separate "bucket" for each possible number, placing each string in the bucket that corresponds to its number, and then concatenating the buckets.
+7. **Bucket Sort**: If the range of numbers in the strings is known and not too large, you can use a bucket sort algorithm.
+This involves creating a separate "bucket" for each possible number, placing each string in the bucket that corresponds to its number, and then concatenating the buckets.
 
-8. **Radix Sort**: If the strings contain numbers of different lengths, you can use a radix sort algorithm. This involves sorting the strings based on each digit or group of digits, starting from the least significant digit and moving to the most significant digit.
+8. **Radix Sort**: If the strings contain numbers of different lengths, you can use a radix sort algorithm.
+This involves sorting the strings based on each digit or group of digits, starting from the least significant digit and moving to the most significant digit.
 
-9. **Parallel Sorting**: If the list is very large and the problem allows for it, you can use parallel processing to speed up the sorting process. This involves dividing the list into smaller parts, sorting each part in a separate process or thread, and then merging the sorted parts.
+9. **Parallel Sorting**: If the list is very large and the problem allows for it, you can use parallel processing to speed up the sorting process.
+This involves dividing the list into smaller parts, sorting each part in a separate process or thread, and then merging the sorted parts.
 
-10. **In-Place Sorting**: If the problem constraints allow for it, you can sort the list in-place to save memory. This involves rearranging the strings in the original list, rather than creating a new list.
+10. **In-Place Sorting**: If the problem constraints allow for it, you can sort the list in-place to save memory.
+This involves rearranging the strings in the original list, rather than creating a new list.
 
-11. **Lazy Evaluation**: If the list is very large and only a small part of it needs to be sorted (for example, if you only need the first few strings in sorted order), you can use a lazy evaluation approach. This involves sorting the list as needed, rather than sorting the entire list upfront.
+11. **Lazy Evaluation**: If the list is very large and only a small part of it needs to be sorted (for example, if you only need the first few strings in sorted order), you can use a lazy evaluation approach.
+This involves sorting the list as needed, rather than sorting the entire list upfront.
 
 Remember, the choice of technique, approach, or methodology depends on the specific requirements and constraints of the problem, as well as the characteristics of the input data.
 
@@ -55,23 +66,35 @@ Remember, the choice of technique, approach, or methodology depends on the speci
 
 When optimizing the performance of a Python function that implements a natural sort, consider the following tips:
 
-1. **Efficient Sorting Algorithm**: Python's built-in `sort` function is quite efficient as it uses a variant of the Timsort algorithm. However, the efficiency of the sort can be affected by the comparator function you use. Try to make your comparator function as efficient as possible.
+1. **Efficient Sorting Algorithm**: Python's built-in `sort` function is quite efficient as it uses a variant of the Timsort algorithm.
+However, the efficiency of the sort can be affected by the comparator function you use.
+Try to make your comparator function as efficient as possible.
 
-2. **Minimize String Operations**: String operations can be costly, especially when dealing with large strings. Try to minimize the number of string operations you perform. For example, instead of repeatedly slicing strings, consider using regular expressions or other methods to extract the parts of the strings you need.
+2. **Minimize String Operations**: String operations can be costly, especially when dealing with large strings.
+Try to minimize the number of string operations you perform.
+For example, instead of repeatedly slicing strings, consider using regular expressions or other methods to extract the parts of the strings you need.
 
-3. **Use Built-in Functions and Libraries**: Python's built-in functions and libraries are usually optimized for performance. Whenever possible, use built-in functions and libraries instead of writing your own.
+3. **Use Built-in Functions and Libraries**: Python's built-in functions and libraries are usually optimized for performance.
+Whenever possible, use built-in functions and libraries instead of writing your own.
 
-4. **Avoid Unnecessary Memory Allocation**: Creating new objects and data structures can be costly in terms of memory and time. Try to avoid unnecessary memory allocation. For example, instead of creating a new list, consider sorting the list in-place (if it doesn't violate the problem constraints).
+4. **Avoid Unnecessary Memory Allocation**: Creating new objects and data structures can be costly in terms of memory and time.
+Try to avoid unnecessary memory allocation.
+For example, instead of creating a new list, consider sorting the list in-place (if it doesn't violate the problem constraints).
 
-5. **Use Lazy Evaluation**: Python supports lazy evaluation, which means that computations are only performed when needed. This can be useful for optimizing performance, especially when dealing with large data sets.
+5. **Use Lazy Evaluation**: Python supports lazy evaluation, which means that computations are only performed when needed.
+This can be useful for optimizing performance, especially when dealing with large data sets.
 
-6. **Use Efficient Data Structures**: The choice of data structures can greatly affect the performance of your function. For example, in some cases, using a list comprehension can be more efficient than using a for loop to create a new list.
+6. **Use Efficient Data Structures**: The choice of data structures can greatly affect the performance of your function.
+For example, in some cases, using a list comprehension can be more efficient than using a for loop to create a new list.
 
-7. **Profiling and Benchmarking**: Use Python's built-in profiling tools to identify bottlenecks in your function. Once you've identified the bottlenecks, you can focus on optimizing those parts of your function.
+7. **Profiling and Benchmarking**: Use Python's built-in profiling tools to identify bottlenecks in your function.
+Once you've identified the bottlenecks, you can focus on optimizing those parts of your function.
 
-8. **Parallel Processing**: If the problem allows for it, consider using parallel processing to speed up the sorting process. Python's `multiprocessing` module can be used to distribute the sorting process across multiple cores.
+8. **Parallel Processing**: If the problem allows for it, consider using parallel processing to speed up the sorting process.
+Python's `multiprocessing` module can be used to distribute the sorting process across multiple cores.
 
-Remember, it's important to have a working solution before you start optimizing. Also, make sure to measure the performance of your function before and after optimization to ensure that your changes have the desired effect.
+Remember, it's important to have a working solution before you start optimizing.
+Also, make sure to measure the performance of your function before and after optimization to ensure that your changes have the desired effect.
 
 // todo: Fill this in
 
@@ -268,15 +291,20 @@ include::./solution_10.py[lines=21..]
 
 When testing the `natural_sort` function, you can consider the following strategies:
 
-1. **Positive Testing**: Test the function with valid inputs where you expect it to succeed. This includes lists of strings that contain numbers, letters, and special characters.
+1. **Positive Testing**: Test the function with valid inputs where you expect it to succeed.
+This includes lists of strings that contain numbers, letters, and special characters.
 
-2. **Negative Testing**: Test the function with invalid inputs where you expect it to handle gracefully. This could include inputs like `None`, an empty list, or a list that contains non-string elements.
+2. **Negative Testing**: Test the function with invalid inputs where you expect it to handle gracefully.
+This could include inputs like `None`, an empty list, or a list that contains non-string elements.
 
-3. **Boundary Testing**: Test the function with edge cases. This could include a list with a single string, a list with two strings that should be swapped, or a list with strings that contain leading zeros.
+3. **Boundary Testing**: Test the function with edge cases.
+This could include a list with a single string, a list with two strings that should be swapped, or a list with strings that contain leading zeros.
 
-4. **Performance Testing**: Test the function with large lists of strings to ensure that it performs well even with large inputs. This will help you identify any potential performance bottlenecks.
+4. **Performance Testing**: Test the function with large lists of strings to ensure that it performs well even with large inputs.
+This will help you identify any potential performance bottlenecks.
 
-5. **Random Testing**: Generate random lists of strings and test the function with these lists. This can help uncover unexpected bugs.
+5. **Random Testing**: Generate random lists of strings and test the function with these lists.
+This can help uncover unexpected bugs.
 
 6. **Regression Testing**: If you make changes to the function to fix a bug or add a new feature, re-run your existing tests to ensure that the changes haven't broken anything.
 

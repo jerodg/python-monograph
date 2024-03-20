@@ -1,0 +1,461 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(ls0: list, ls1: list) -> set:
+    """Using sorted(), set(), and list comprehension
+
+    :param ls0: (list)
+    :param ls1: (list)
+    :return: (set)"""
+    return set([tuple(sorted(x)) for x in ls0]) & set([tuple(sorted(y)) for y in ls1])
+----
+
+==== Explanation
+
+The selected code is a Python function named `method0`.
+This function takes two lists as input parameters, `ls0` and `ls1`, and returns a set.
+The purpose of this function is to find the intersection of two lists of tuples.
+
+The function begins by using a list comprehension to iterate over each element `x` in the list `ls0`.
+For each element, it sorts the tuple `x` and converts it into a tuple again.
+This is done using the `sorted()` function and the `tuple()` function.
+The sorted tuples are then converted into a set.
+This is done using the `set()` function.
+The same process is repeated for the list `ls1`.
+
+[source,python]
+----
+set([tuple(sorted(x)) for x in ls0])
+set([tuple(sorted(y)) for y in ls1])
+----
+
+The intersection of these two sets is then found using the `&` operator.
+The `&` operator in Python is used for set intersection.
+It returns a set which is the intersection of two sets.
+
+[source,python]
+----
+set([tuple(sorted(x)) for x in ls0]) & set([tuple(sorted(y)) for y in ls1])
+----
+
+The result of this operation, which is a set of tuples that are common to both `ls0` and `ls1`, is then returned by the function.
+
+In summary, `method0` is a Python function that finds and returns the intersection of two lists of tuples.
+It does this by converting the lists into sets of sorted tuples and then finding the intersection of these sets.
+
+===== Advantages
+
+1. **Simplicity**: The function is straightforward and easy to understand.
+It uses built-in Python functions and operators, making it accessible to developers familiar with Python.
+
+2. **Efficiency**: The function uses set operations, which are generally faster than list operations for large data sets.
+This is because set operations in Python are implemented using hash tables.
+
+3. **Uniqueness**: By converting the lists to sets, the function automatically removes duplicate tuples from the lists.
+This can be an advantage if you only want unique intersections.
+===== Disadvantages
+1. **Order**: Sets in Python are unordered.
+This means that the function does not preserve the order of the tuples from the original lists.
+
+2. **Mutability**: The function converts the tuples in the lists to sets.
+This means that the original tuples, which are mutable, are lost.
+If you need to preserve the original tuples for some reason, this could be a disadvantage.
+
+3. **Time Complexity**: The function has a time complexity of O(m * n log n + min(len(ls0), len(ls1))), where m is the length of the list and n is the length of the tuple.
+This could be a disadvantage if you are working with large lists or tuples.
+===== Complexity Analysis ====== Time Time Complexity: The time complexity of the function method_0 is dominated by the list comprehension and the set intersection operation.
+The list comprehension involves sorting each tuple in the list.
+The time complexity of sorting a tuple is O(n log n), where n is the length of the tuple.
+Since this operation is performed for each tuple in the list, the overall time complexity for this part is O(m * n log n), where m is the length of the list.
+The set intersection operation (&) has a time complexity of O(min(len(ls0), len(ls1))).
+This is because in the worst case, every element in the smaller set is compared with every element in the larger set.
+Therefore, the overall time complexity of the function is O(m * n log n + min(len(ls0), len(ls1))).
+====== Space Space Complexity: The space complexity of the function is determined by the space required to store the sets created from the lists.
+In the worst case, if all tuples in the lists are unique, the space complexity would be O(m), where m is the total number of tuples in the lists.
+Please note that this analysis assumes that the sizes of the lists ls0 and ls1 are roughly equivalent.
+If one list is significantly larger than the other, it could impact the time complexity of the set intersection operation.
+==== Tests === Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_1(ls0: list, ls1: list) -> set:
+    """Using list comprehension, map(), frozenset(), and &
+
+    :param ls0: (list)
+    :param ls1: (list)
+    :return: (set)"""
+    return set(map(frozenset, ls0)) & set(map(frozenset, ls1))
+----
+
+==== Explanation The selected code is a Python function named `method_1`.
+
+This function takes two lists as input parameters, `ls0` and `ls1`, and returns a set.
+The purpose of this function is to find the intersection of two lists of tuples.
+
+The function uses the `map()` function to apply the `frozenset()` function to each element in the lists `ls0` and `ls1`.
+The `frozenset()` function is used to create an immutable set from the tuples.
+This is necessary because sets in Python cannot contain mutable elements, and tuples are mutable.
+By converting the tuples to frozensets, they can be included in a set.
+
+[source,python]
+----
+set(map(frozenset, ls0))
+set(map(frozenset, ls1))
+----
+
+The intersection of these two sets is then found using the `&` operator.
+The `&` operator in Python is used for set intersection.
+It returns a set which is the intersection of two sets.
+
+[source,python]
+----
+set(map(frozenset, ls0)) & set(map(frozenset, ls1))
+----
+
+The result of this operation, which is a set of frozensets that are common to both `ls0` and `ls1`, is then returned by the function.
+
+In summary, `method_1` is a Python function that finds and returns the intersection of two lists of tuples.
+It does this by converting the tuples into frozensets, converting the lists into sets of frozensets, and then finding the intersection of these sets.
+===== Advantages 1. **Efficiency**: The function uses the set intersection operation (`&`), which is generally efficient and faster than manual iteration.
+2. **Simplicity**: The function is relatively simple and easy to understand.
+It uses built-in Python functions and operators, making it easy to read and maintain.
+3. **Immutable Elements**: By converting the tuples to frozensets, the function ensures that the elements in the sets are immutable.
+This is necessary because sets in Python cannot contain mutable elements.
+===== Disadvantages 1. **Mutability**: The function converts the tuples in the lists to frozensets.
+This means that the original tuples, which are mutable, are lost.
+If you need to preserve the original tuples for some reason, this could be a disadvantage.
+2. **Time Complexity**: The function has a time complexity of O(m * n), where m is the length of the list and n is the length of the tuple.
+This could be a disadvantage if you are working with large lists or tuples.
+
+Please note that the time complexity mentioned above is a rough estimate and the actual time complexity may vary depending on the specific data and Python's internal optimizations.
+===== Complexity Analysis
+NOTE: Please note that this analysis assumes that the sizes of the lists ls0 and ls1 are roughly equivalent.
+If one list is significantly larger than the other, it could impact the time complexity of the set intersection operation.
+
+====== Time
+
+The time complexity of method_1 is dominated by the map() function and the set intersection operation (&).
+The map() function applies the frozenset() function to each tuple in the list, which takes O(n) time, where n is the length of the tuple.
+Since this operation is performed for each tuple in the list, the overall time complexity for this part is O(m * n), where m is the length of the list.
+The set intersection operation (&) has a time complexity of O(min(len(ls0), len(ls1))).
+Therefore, the overall time complexity of the function is O(m * n + min(len(ls0), len(ls1))).
+====== Space The space complexity of method_1 is determined by the space required to store the sets created from the lists.
+In the worst case, if all tuples in the lists are unique, the space complexity would be O(m), where m is the total number of tuples in the lists.
+==== Tests === Method 2:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_2(ls0: list, ls1: list) -> list:
+    """Using list comprehension
+
+    :param ls0: (list)
+    :param ls1: (list)
+    :return: (list)"""
+    return [x for x in ls0 for y in ls1 if x == y]
+----
+
+==== Explanation
+
+The selected code is a Python function named `method_2`.
+This function is designed to find the intersection of two lists of tuples.
+The intersection of two sets is a set that contains all elements that are common to both sets.
+In this case, the function is finding all tuples that appear in both lists.
+
+The function takes two parameters, `ls0` and `ls1`, which are expected to be lists of tuples.
+The function returns a list of tuples that are found in both input lists.
+
+The core of this function is a list comprehension, which is a concise way to create lists in Python.
+The list comprehension iterates over each tuple `x` in the first list `ls0` and for each tuple `y` in the second list `ls1`.
+If `x` is equal to `y`, it adds `x` to the result list.
+Here's the core part of the function:
+
+[source,python]
+----
+[x for x in ls0 for y in ls1 if x == y]
+----
+
+This line of code is equivalent to the following nested for loop:
+
+[source,python]
+----
+result = []
+for x in ls0:
+    for y in ls1:
+        if x == y:
+            result.append(x)
+----
+
+However, the list comprehension is more concise and typically more efficient.
+
+In summary, `method_2` is a Python function that uses list comprehension to find the intersection of two lists of tuples.
+It iterates over each tuple in the first list and checks if it exists in the second list.
+If it does, it adds the tuple to the result.
+
+===== Advantages
+
+1. **Simplicity**: The function is straightforward and easy to understand.
+It uses list comprehension, which is a concise way to create lists in Python.
+2. **Preservation of Order**: Unlike methods that convert the lists to sets, this method preserves the order of the tuples from the original lists.
+3. **Preservation of Duplicates**: This method also preserves duplicate tuples.
+If a tuple appears multiple times in both lists, it will appear multiple times in the result.
+===== Disadvantages
+1. **Efficiency**: This method uses nested loops to find the intersection, which can be inefficient for large lists.
+The time complexity is O(m * n), where m and n are the lengths of the lists.
+This could be a disadvantage if you are working with large lists.
+2. **Memory Usage**: This method creates a new list for the result, which can consume a significant amount of memory if the lists are large.
+===== Complexity Analysis ====== Time The time complexity of method_2 is dominated by the list comprehension, which involves nested loops.
+For each tuple x in the first list ls0, it iterates over each tuple y in the second list ls1. Therefore, if there are m tuples in ls0 and n tuples in ls1, the time complexity is O(m * n).
+====== Space The space complexity of method_2 is determined by the space required to store the result list.
+In the worst case, if all tuples in the lists are unique and all tuples in ls0 are in ls1, the space complexity would be O(m), where m is the total number of tuples in the list ls0 ==== Tests === Method 3:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_3(ls0: list, ls1: list) -> list:
+    """Using set.intersection()
+
+    :param ls0: (list)
+    :param ls1: (list)
+    :return: (list)"""
+    return list(set(ls0).intersection(set(ls1)))
+----
+
+==== Explanation The selected code is a Python function named `method_3`.
+
+This function is designed to find the intersection of two lists of tuples.
+The intersection of two sets is a set that contains all elements that are common to both sets.
+In this case, the function is finding all tuples that appear in both lists.
+
+The function takes two parameters, `ls0` and `ls1`, which are expected to be lists of tuples.
+The function returns a list of tuples that are found in both input lists.
+
+The core of this function is the use of Python's built-in `set` and `intersection` functions.
+It converts the input lists into sets and then uses the `intersection` function to find the common elements.
+Here's the core part of the function:
+
+[source,python]
+----
+set(ls0).intersection(set(ls1))
+----
+
+This line of code is equivalent to using the `&` operator between two sets:
+
+[source,python]
+----
+set(ls0) & set(ls1)
+----
+
+However, the `intersection` function is more explicit and may be easier to understand for some developers.
+
+The result of the intersection operation is a set, which is then converted back into a list before being returned by the function.
+
+In summary, `method_3` is a Python function that uses the `set` and `intersection` functions to find the intersection of two lists of tuples.
+It converts the lists into sets, finds the common elements, and then converts the result back into a list.
+===== Advantages 1. **Efficiency**: The function uses set operations, which are generally faster than list operations for large data sets.
+This is because set operations in Python are implemented using hash tables.
+2. **Simplicity**: The function is relatively simple and easy to understand.
+It uses built-in Python functions, making it easy to read and maintain.
+3. **Uniqueness**: By converting the lists to sets, the function automatically removes duplicate tuples from the lists.
+This can be an advantage if you only want unique intersections.
+===== Disadvantages 1. **Order**: Sets in Python are unordered.
+This means that the function does not preserve the order of the tuples from the original lists.
+2. **Mutability**: The function converts the tuples in the lists to sets.
+This means that the original tuples, which are mutable, are lost.
+If you need to preserve the original tuples for some reason, this could be a disadvantage.
+3. **Time Complexity**: The function has a time complexity of O(m + n), where m and n are the lengths of the lists.
+This could be a disadvantage if you are working with large lists.
+===== Complexity Analysis ====== Time The time complexity of method_3 is dominated by the set conversion and intersection operations.
+Converting a list to a set in Python takes O(m) time, where m is the length of the list.
+This operation is performed twice, once for each list, so the total time for this part is O(m + n), where m and n are the lengths of the lists ls0 and ls1 respectively.
+The set intersection operation has a time complexity of O(min(m, n)).
+Therefore, the overall time complexity of the function is O(m + n).
+====== Space The space complexity of method_3 is determined by the space required to store the sets created from the lists and the result list.
+In the worst case, if all tuples in the lists are unique, the space complexity would be O(m + n), where m and n are the total number of tuples in the lists ls0 and ls1 respectively.
+==== Tests === Method 4:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_4(ls0: list, ls1: list) -> list:
+    """Using a List Comprehension with in Operator
+
+    :param ls0: (list)
+    :param ls1: (list)
+    :return: (list)"""
+    return [x for x in ls0 if x in ls1]
+----
+
+==== Explanation The selected code is a Python function named `method_4`.
+
+This function is designed to find the intersection of two lists of tuples.
+The intersection of two sets is a set that contains all elements that are common to both sets.
+In this case, the function is finding all tuples that appear in both lists.
+
+The function takes two parameters, `ls0` and `ls1`, which are expected to be lists of tuples.
+The function returns a list of tuples that are found in both input lists.
+
+The core of this function is the use of Python's list comprehension and the `in` operator.
+It iterates over each tuple in the first list and checks if it exists in the second list.
+If it does, it adds the tuple to the result.
+Here's the core part of the function:
+
+[source,python]
+----
+[x for x in ls0 if x in ls1]
+----
+
+This line of code is equivalent to using a for loop to iterate over the first list and an if statement to check if each tuple exists in the second list.
+However, using a list comprehension is more concise and often more efficient.
+
+In summary, `method_4` is a Python function that uses a list comprehension and the `in` operator to find the intersection of two lists of tuples.
+It iterates over the tuples in the first list and checks if they exist in the second list, adding the common tuples to the result.
+
+NOTE: This method does not preserve the order of the tuples from the original lists and do not handle duplicate tuples.
+If you need to preserve the order or handle duplicates, you may need to modify these methods or use a different approach.
+===== Advantages 1. **Simplicity**: The function is straightforward and easy to understand.
+It uses list comprehension, which is a concise way to create lists in Python.
+2. **Preservation of Order**: Unlike methods that convert the lists to sets, this method preserves the order of the tuples from the original lists.
+3. **Preservation of Duplicates**: This method also preserves duplicate tuples.
+If a tuple appears multiple times in both lists, it will appear multiple times in the result.
+===== Disadvantages 1. **Efficiency**: This method uses the `in` operator to check if a tuple from the first list exists in the second list.
+This operation can be inefficient for large lists because it needs to scan through the entire second list for each tuple in the first list.
+The time complexity is O(m * n), where m and n are the lengths of the lists.
+This could be a disadvantage if you are working with large lists.
+2. **Memory Usage**: This method creates a new list for the result, which can consume a significant amount of memory if the lists are large.
+===== Complexity Analysis ====== Time The time complexity of method_4 is dominated by the list comprehension, which involves the in operator.
+For each tuple x in the first list ls0, it checks if x is in the second list ls1. Therefore, if there are m tuples in ls0 and n tuples in ls1, the time complexity is O(m * n).
+====== Space The space complexity of method_4 is determined by the space required to store the result list.
+In the worst case, if all tuples in the lists are unique and all tuples in ls0 are in ls1, the space complexity would be O(m), where m is the total number of tuples in the list ls0 ==== Tests === Method 5:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_5(ls0: list, ls1: list) -> list:
+    """Using the filter() Function
+
+    :param ls0:
+    :param ls1:
+    :return: """
+    return list(filter(lambda x: x in ls1, ls0))
+----
+
+==== Explanation The selected code is a Python function named `method_5`.
+
+This function is designed to find the intersection of two lists of tuples.
+The intersection of two sets is a set that contains all elements that are common to both sets.
+In this case, the function is finding all tuples that appear in both lists.
+
+The function takes two parameters, `ls0` and `ls1`, which are expected to be lists of tuples.
+The function returns a list of tuples that are found in both input lists.
+
+The core of this function is the use of Python's `filter()` function and the `in` operator.
+It uses a lambda function to check if each tuple from the first list exists in the second list and filters out the tuples that do not.
+Here's the core part of the function:
+
+[source,python]
+----
+filter(lambda x: x in ls1, ls0)
+----
+
+This line of code is equivalent to using a for loop to iterate over the first list and an if statement to check if each tuple exists in the second list.
+However, using the `filter()` function is more concise.
+
+The `filter()` function returns a filter object, which is an iterator that yields the tuples that pass the filter.
+This filter object is then converted to a list using the `list()` function.
+
+In summary, `method_5` is a Python function that uses the `filter()` function and the `in` operator to find the intersection of two lists of tuples.
+It iterates over the tuples in the first list and checks if they exist in the second list, adding the common tuples to the result.
+===== Advantages 1. **Simplicity**: The function is straightforward and easy to understand.
+It uses the `filter()` function, which is a built-in Python function, making it accessible to developers familiar with Python.
+2. **Preservation of Order**: Unlike methods that convert the lists to sets, this method preserves the order of the tuples from the original lists.
+3. **Preservation of Duplicates**: This method also preserves duplicate tuples.
+If a tuple appears multiple times in both lists, it will appear multiple times in the result.
+===== Disadvantages 1. **Efficiency**: This method uses the `in` operator to check if a tuple from the first list exists in the second list.
+This operation can be inefficient for large lists because it needs to scan through the entire second list for each tuple in the first list.
+The time complexity is O(m * n), where m and n are the lengths of the lists.
+This could be a disadvantage if you are working with large lists.
+2. **Memory Usage**: This method creates a new list for the result, which can consume a significant amount of memory if the lists are large.
+===== Complexity Analysis ====== Time The time complexity of method_5 is dominated by the filter() function, which involves the in operator.
+For each tuple x in the first list ls0, it checks if x is in the second list ls1. Therefore, if there are m tuples in ls0 and n tuples in ls1, the time complexity is O(m * n).
+====== Space The space complexity of method_5 is determined by the space required to store the result list.
+In the worst case, if all tuples in the lists are unique and all tuples in ls0 are in ls1, the space complexity would be O(m), where m is the total number of tuples in the list ls0.
+==== Tests === Method 6:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_6(ls0: list, ls1: list) -> list:
+    """Using a Set Comprehension
+
+    :param ls0: (list)
+    :param ls1: (list)
+    :return: (list)"""
+    return list({x for x in ls0}.intersection(ls1))
+----
+
+==== Explanation The selected code is a Python function named `method_6`.
+
+This function is designed to find the intersection of two lists of tuples.
+The intersection of two sets is a set that contains all elements that are common to both sets.
+In this case, the function is finding all tuples that appear in both lists.
+
+The function takes two parameters, `ls0` and `ls1`, which are expected to be lists of tuples.
+The function returns a list of tuples that are found in both input lists.
+
+The core of this function is the use of Python's set comprehension and the `intersection()` method.
+It creates a set from the first list `ls0` and then uses the `intersection()` method to find common tuples in the second list `ls1`.
+Here's the core part of the function:
+
+[source,python]
+----
+{x for x in ls0}.intersection(ls1)
+----
+
+This line of code is equivalent to using a for loop to iterate over the first list and an if statement to check if each tuple exists in the second list.
+However, using set comprehension and the `intersection()` method is more concise and efficient.
+
+The `intersection()` method returns a set, which is then converted to a list using the `list()` function.
+
+In summary, `method_6` is a Python function that uses set comprehension and the `intersection()` method to find the intersection of two lists of tuples.
+It iterates over the tuples in the first list and checks if they exist in the second list, adding the common tuples to the result.
+===== Advantages 1. **Efficiency**: The function uses set operations, which are generally faster than list operations for large data sets.
+This is because set operations in Python are implemented using hash tables.
+2. **Simplicity**: The function is relatively simple and easy to understand.
+It uses built-in Python functions and operators, making it easy to read and maintain.
+3. **Uniqueness**: By converting the lists to sets, the function automatically removes duplicate tuples from the lists.
+This can be an advantage if you only want unique intersections.
+===== Disadvantages 1. **Order**: Sets in Python are unordered.
+This means that the function does not preserve the order of the tuples from the original lists.
+2. **Mutability**: The function converts the tuples in the lists to sets.
+This means that the original tuples, which are mutable, are lost.
+If you need to preserve the original tuples for some reason, this could be a disadvantage.
+3. **Time Complexity**: The function has a time complexity of O(m + n), where m and n are the lengths of the lists.
+This could be a disadvantage if you are working with large lists.
+===== Complexity Analysis ====== Time The time complexity of method_6 is dominated by the set comprehension and the intersection() method.
+Converting a list to a set in Python takes O(m) time, where m is the length of the list.
+This operation is performed once for the list ls0. The intersection() method has a time complexity of O(min(m, n)), where m and n are the lengths of the lists ls0 and ls1 respectively.
+Therefore, the overall time complexity of the function is O(m + min(m, n)).
+====== Space The space complexity of method_6 is determined by the space required to store the set created from the list ls0 and the result list.
+In the worst case, if all tuples in the lists are unique, the space complexity would be O(m), where m is the total number of tuples in the list ls0.
+==== Tests

@@ -282,16 +282,23 @@ Here is the Python's official documentation on unit testing: [unittest — Unit 
 
 Here are some references to the official Python documentation that are relevant to the methods used in the provided code:
 
-1. `re.split()`: This function is used to split a string by the occurrences of a pattern. You can find more information about it in the [Python documentation for `re.split()`](https://docs.python.org/3/library/re.html#re.split).
+1. `re.split()`: This function is used to split a string by the occurrences of a pattern.
+You can find more information about it in the [Python documentation for `re.split()`](https://docs.python.org/3/library/re.html#re.split).
 
-2. `re.compile()`: This function is used to compile a regular expression pattern into a regular expression object, which can be used for matching using its match() and other methods. You can find more information about it in the [Python documentation for `re.compile()`](https://docs.python.org/3/library/re.html#re.compile).
+2. `re.compile()`: This function is used to compile a regular expression pattern into a regular expression object, which can be used for matching using its match() and other methods.
+You can find more information about it in the [Python documentation for `re.compile()`](https://docs.python.org/3/library/re.html#re.compile).
 
-3. `sorted()`: This function is used to return a new sorted list from the elements of any sequence. You can find more information about it in the [Python documentation for `sorted()`](https://docs.python.org/3/library/functions.html#sorted).
+3. `sorted()`: This function is used to return a new sorted list from the elements of any sequence.
+You can find more information about it in the [Python documentation for `sorted()`](https://docs.python.org/3/library/functions.html#sorted).
 
-4. `list`: This is a built-in Python data type that is mutable and can contain items of different types. You can find more information about it in the [Python documentation for `list`](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists).
+4. `list`: This is a built-in Python data type that is mutable and can contain items of different types.
+You can find more information about it in the [Python documentation for `list`](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists).
 
-5. `str.isdigit()`: This method returns `True` if all the characters in the string are digits, `False` otherwise. You can find more information about it in the [Python documentation for `str.isdigit()`](https://docs.python.org/3/library/stdtypes.html#str.isdigit).
+5. `str.isdigit()`: This method returns `True` if all the characters in the string are digits, `False` otherwise.
+You can find more information about it in the [Python documentation for `str.isdigit()`](https://docs.python.org/3/library/stdtypes.html#str.isdigit).
 
-6. `str.lower()`: This method returns a copy of the string with all the cased characters converted to lowercase. You can find more information about it in the [Python documentation for `str.lower()`](https://docs.python.org/3/library/stdtypes.html#str.lower).
+6. `str.lower()`: This method returns a copy of the string with all the cased characters converted to lowercase.
+You can find more information about it in the [Python documentation for `str.lower()`](https://docs.python.org/3/library/stdtypes.html#str.lower).
 
-7. `lambda`: This keyword is used to create small anonymous functions. You can find more information about it in the [Python documentation for `lambda`](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions).
+7. `lambda`: This keyword is used to create small anonymous functions.
+You can find more information about it in the [Python documentation for `lambda`](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions).

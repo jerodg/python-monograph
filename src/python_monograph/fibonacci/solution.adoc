@@ -1,0 +1,285 @@
+:doctitle: The Fibonacci Sequence Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir:./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Method 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::solution_00_dynamic_programming.py[]
+----
+
+==== Explanation
+
+The provided code defines a function named `fibonacci` that calculates the nth number in the Fibonacci sequence using a technique called dynamic programming.
+The function takes an integer `n` as an argument, which represents the position in the Fibonacci sequence to calculate.
+The first position is considered as 0.
+
+The function starts by initializing a list `fib` with the first two numbers of the Fibonacci sequence, which are 0 and 1. The rest of the list is filled with zeros, and its length is determined by the input `n`.
+This is done with the following line of code:
+
+[source,python]
+----
+fib = [0, 1] + [0] * (n - 1)
+----
+
+Next, the function enters a loop that starts from the 2nd index and goes up to `n`.
+For each iteration, it calculates the current Fibonacci number by adding the two preceding numbers in the sequence.
+This is achieved with the following line of code:
+
+[source,python]
+----
+fib[i] = fib[i - 1] + fib[i - 2]
+----
+
+Finally, the function returns the nth number in the Fibonacci sequence, which is the last element in the `fib` list:
+
+[source,python]
+----
+return fib[n]
+----
+
+This approach of building up to the desired value by iteratively solving and storing the subproblems is a classic example of dynamic programming.
+It ensures that each subproblem is only solved once, reducing the time complexity from exponential (in the case of a naive recursive approach) to linear.
+
+===== Advantages
+
+1. **Efficiency**: Dynamic programming reduces the time complexity from exponential (in the case of a naive recursive approach) to linear.
+This is because it ensures that each subproblem is only solved once and the result is stored for future use.
+This makes it highly efficient for problems where the same subproblems are solved multiple times, such as the Fibonacci sequence.
+
+2. **Optimization**: Dynamic programming is an optimization method that can find the best solution among a set of possible solutions.
+It is especially useful when the number of possible solutions is exponentially large.
+
+===== Disadvantages
+
+1. **Memory Usage**: Dynamic programming can consume more memory because it stores the solutions of all subproblems, not just the current one.
+In the case of the Fibonacci sequence, an array of size `n` is used to store the Fibonacci numbers, which can be a problem if `n` is very large.
+
+2. **Applicability**: Dynamic programming is not a universal solution.
+It can only be used when the problem exhibits the properties of overlapping subproblems and optimal substructure.
+Not all problems can be broken down into simpler subproblems that can be reused.
+
+3. **Complexity**: Dynamic programming solutions can be more complex and harder to understand than recursive or iterative solutions.
+They require a good understanding of the problem and careful design to ensure that all subproblems are covered and combined in the correct way.
+
+===== Complexity Analysis
+
+====== Time
+
+The time complexity of the code is O(n).
+This is because there is a single loop in the function that iterates n times.
+Each iteration performs a constant amount of work (adding two numbers and storing the result), so the total amount of work is proportional to n.
+
+====== Space
+
+The space complexity of the code is also O(n).
+This is because a list of size n is used to store the Fibonacci numbers.
+Each element in the list uses a constant amount of space, so the total space used is proportional to n.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Method 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::solution_01_recursion.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function `method_01(n)`, which calculates the nth number in the Fibonacci sequence using recursion.
+The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1.
+
+The function `method_01(n)` takes one argument `n`, which is the position in the Fibonacci sequence to calculate.
+The first position is 0. The function returns the nth number in the Fibonacci sequence.
+
+The function starts by checking if `n` is a negative number.
+If `n` is less than 0, it raises a `ValueError` with the message "`n` must be a non-negative integer".
+This is done to ensure that the function only works with non-negative integers, as the Fibonacci sequence is not defined for negative numbers.
+
+[source,python]
+----
+if n < 0:
+    raise ValueError("`n` must be a non-negative integer")
+----
+
+Next, the function checks if `n` is an integer.
+If `n` is not an integer, it raises a `TypeError` with the message "`n` must be a non-negative integer".
+This is done to ensure that the function only works with integers, as the Fibonacci sequence is not defined for non-integer numbers.
+
+[source,python]
+----
+if not isinstance(n, int):
+    raise TypeError("`n` must be a non-negative integer")
+----
+
+After these checks, the function calculates the nth number in the Fibonacci sequence.
+If `n` is less than or equal to 1, it returns `n` directly.
+This is because the 0th and 1st numbers in the Fibonacci sequence are 0 and 1, respectively.
+
+[source,python]
+----
+if n <= 1:
+    return n
+----
+
+If `n` is greater than 1, the function calculates the nth number in the Fibonacci sequence by recursively calling itself with `n - 1` and `n - 2` and adding the results.
+This is based on the definition of the Fibonacci sequence, where each number is the sum of the two preceding ones.
+
+[source,python]
+----
+else:
+    return method_01(n - 1) + method_01(n - 2)
+----
+
+In summary, the function `method_01(n)` calculates the nth number in the Fibonacci sequence using recursion, with error checking to ensure that `n` is a non-negative integer.
+
+===== Advantages
+
+1. **Simplicity**: The recursive solution is straightforward and easy to understand.
+It directly follows the mathematical definition of the Fibonacci sequence, which states that each number is the sum of the two preceding ones.
+
+2. **Code Readability**: Recursive solutions are often more readable than their iterative counterparts.
+This is because they don't require loop constructs and temporary variables to hold intermediate results.
+
+===== Disadvantages
+
+1. **Efficiency**: The recursive solution has a high time complexity of O(2^n) because it performs a large number of redundant calculations.
+For each number calculated, the function calls itself twice, leading to an exponential number of function calls as `n` increases.
+
+2. **Stack Overflow**: Each recursive call adds a layer to the call stack.
+If `n` is large, the function could cause a stack overflow error because it exceeds the maximum stack depth.
+
+3. **Memory Usage**: Recursive solutions generally use more memory than iterative solutions because they need to keep track of all the recursive calls.
+
+===== Complexity Analysis
+
+**Time Complexity:**
+The time complexity of this code is O(2^n).
+This is because for each number calculated, the function calls itself twice - once for `(n-1)` and once for `(n-2)`.
+This leads to an exponential number of function calls as `n` increases, resulting in a time complexity of O(2^n).
+
+**Space Complexity:**
+The space complexity of this code is O(n).
+This is due to the use of recursion, which utilizes the call stack.
+Each recursive call to the function adds a layer to the call stack.
+The maximum depth of the stack will be `n`, hence the space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Method 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02_matrix_exponentiation.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function `method_02(n)`, which calculates the nth number in the Fibonacci sequence using matrix exponentiation.
+The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1.
+
+The function `method_02(n)` takes one argument `n`, which is the position in the Fibonacci sequence to calculate.
+The first position is 0. The function returns the nth number in the Fibonacci sequence.
+
+The function starts by checking if `n` is a negative number.
+If `n` is less than 0, it raises a `ValueError` with the message "`n` must be a non-negative integer".
+This is done to ensure that the function only works with non-negative integers, as the Fibonacci sequence is not defined for negative numbers.
+
+[source,python]
+----
+if n < 0:
+    raise ValueError("`n` must be a non-negative integer")
+----
+
+Next, the function checks if `n` is an integer.
+If `n` is not an integer, it raises a `TypeError` with the message "`n` must be a non-negative integer".
+This is done to ensure that the function only works with integers, as the Fibonacci sequence is not defined for non-integer numbers.
+
+[source,python]
+----
+if not isinstance(n, int):
+    raise TypeError("`n` must be a non-negative integer")
+----
+
+After these checks, the function defines the Fibonacci matrix `F` as a 2x2 matrix with the values [[1, 1], [1, 0]].
+This matrix is used to calculate the nth number in the Fibonacci sequence using matrix exponentiation.
+
+[source,python]
+----
+F = np.matrix([[1, 1], [1, 0]], dtype="int64")
+----
+
+Finally, the function calculates the nth number in the Fibonacci sequence by raising the Fibonacci matrix `F` to the power of `n` and returning the value at the position [0, 1] in the resulting matrix.
+This is based on the property of the Fibonacci sequence that it can be expressed as a matrix that is raised to the power of `n`.
+
+[source,python]
+----
+return (F**n)[0, 1]
+----
+
+In summary, the function `method_02(n)` calculates the nth number in the Fibonacci sequence using matrix exponentiation, with error checking to ensure that `n` is a non-negative integer.
+
+==== Advantages
+
+1. **Efficiency**: The matrix exponentiation solution has a time complexity of O(log n), which is significantly more efficient than the recursive solution.
+This is because it avoids the redundant calculations performed by the recursive solution.
+
+2. **Scalability**: This method can handle larger values of `n` without running into issues like stack overflow or excessive memory usage, which can be a problem with recursive solutions.
+
+==== Disadvantages
+
+1. **Complexity**: The matrix exponentiation solution is more complex and harder to understand than the recursive solution.
+It requires knowledge of matrix operations and the mathematical properties of the Fibonacci sequence.
+
+2. **Dependency on External Libraries**: This method relies on the NumPy library for matrix operations, which adds an external dependency to the code.
+This might not be desirable in some cases, especially if you're trying to keep your codebase minimal or if you're working in an environment where you can't easily install external libraries.
+
+==== Complexity Analysis
+
+**Time Complexity:**
+The time complexity of this code is O(log n).
+This is because the matrix exponentiation operation can be performed in logarithmic time.
+The function raises the Fibonacci matrix `F` to the power of `n`, and this operation can be done efficiently using the "exponentiation by squaring" method, which has a time complexity of O(log n).
+
+**Space Complexity:**
+The space complexity of this code is O(1).
+This is because the function uses a fixed amount of space to store the Fibonacci matrix `F` and does not use any additional space that scales with `n`.
+The function does not use recursion or any data structures that would increase the space complexity.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----

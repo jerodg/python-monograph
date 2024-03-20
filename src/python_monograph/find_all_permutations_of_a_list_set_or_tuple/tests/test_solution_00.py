@@ -18,6 +18,8 @@ copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
+from itertools import permutations
+
 import pytest
 
 from python_monograph.find_all_permutations_of_a_list_set_or_tuple.solution_00 import find_all_permutations
@@ -28,7 +30,8 @@ def test_empty_input():
 
 
 def test_single_list_input():
-    assert find_all_permutations([1, 2, 3]) == [[1], [2], [3]]
+    assert find_all_permutations([[1, 3, 4], [6, 7, 9], [8, 10, 5]]) == list(
+        permutations([[1, 3, 4], [6, 7, 9], [8, 10, 5]]))
 
 
 # def test_single_list_input_():

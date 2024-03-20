@@ -1,0 +1,163 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(dictionary, target_key):
+    """This function searches for a target key in a dictionary recursively.
+    If the key is in the dictionary, it returns the value.
+    If the key is not in the dictionary, it iterates over the dictionary's values.
+    If a value is a dictionary, it calls itself with the value (the nested dictionary) and the target key as arguments.
+
+    Parameters:
+    dictionary (dict): The dictionary to be searched.
+    Target_key (Any): The key to be searched for in the dictionary.
+
+    Returns:
+    Any: The value of the first occurrence of the target key. If the key is not found, it returns None.
+    """
+    if target_key in dictionary:
+        return dictionary[target_key]
+    else:
+        for key in dictionary:
+            if isinstance(dictionary[key], dict):
+                result = method_0(dictionary[key], target_key)
+
+                if result is not None:
+                    return result
+
+    return None
+----
+
+==== Explanation
+
+The provided code is a Python function named `method_0`.
+This function is designed to search for a specific key in a dictionary.
+The search is performed recursively, meaning the function will search not only the top-level dictionary but also any nested dictionaries.
+
+The function takes two parameters: `dictionary` and `target_key`. `dictionary` is the dictionary to be searched, and `target_key` is the key that the function is looking for.
+
+The function begins by checking if `target_key` is in the `dictionary`.
+This is done using the line `if target_key in dictionary:`.
+If the `target_key` is found, the function immediately returns the corresponding value with `return dictionary[target_key]`.
+
+If the `target_key` is not found in the top-level dictionary, the function then iterates over the dictionary's values.
+This is done using the line `for key in dictionary:`.
+For each value, the function checks if it is a dictionary itself.
+This is done using the line `if isinstance(dictionary[key], dict):`.
+If the value is a dictionary, the function makes a recursive call to itself with the nested dictionary and the `target_key` as arguments.
+This is done using the line `result = method_0(dictionary[key], target_key)`.
+
+The function continues this process, searching through all nested dictionaries until it either finds the `target_key` or exhausts all possibilities.
+If the `target_key` is found in a nested dictionary, the function returns the corresponding value.
+If the `target_key` is not found anywhere in the dictionary or its nested dictionaries, the function returns `None`.
+
+In summary, `method_0` is a Python function that performs a recursive search for a specific key in a dictionary and its nested dictionaries.
+It returns the value associated with the first occurrence of the key it finds, or `None` if the key is not found.
+
+===== Advantages
+
+1. **Simplicity**: The function is straightforward and easy to understand.
+It uses basic Python constructs like loops and conditionals, making it accessible to developers of all skill levels.
+
+2. **Recursion**: The function uses recursion to search nested dictionaries.
+This is a powerful technique that allows the function to handle dictionaries of arbitrary depth.
+
+3. **Early Exit**: The function returns as soon as it finds the target key, which can potentially save time if the key is located early in the search.
+===== Disadvantages
+1. **Performance**: The function may be slow for large dictionaries or deeply nested dictionaries due to the recursive nature of the function.
+Each recursive call adds a new layer to the call stack, which can lead to a stack overflow for very deep dictionaries.
+
+2. **Memory Usage**: The function uses a recursive approach, which can lead to high memory usage for large or deeply nested dictionaries.
+Each recursive call to the function creates a new stack frame, consuming additional memory.
+
+3. **No Multiple Matches**: The function returns after finding the first match.
+If there are multiple occurrences of the target key in the dictionary, the function will not find them.
+===== Complexity Analysis ====== Time The time complexity of the function is O(n), where n is the total number of keys in the dictionary and all nested dictionaries.
+This is because in the worst-case scenario, the function will need to visit every key in the dictionary to find the target key.
+====== Space The space complexity of the function is O(d), where d is the depth of the deepest nested dictionary.
+This is because the function uses recursion to search nested dictionaries, and each recursive call adds a new layer to the call stack.
+The maximum depth of the recursion is equal to the depth of the deepest nested dictionary.
+==== Tests === Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_1(dictionary, target_key) -> Generator[Any, None, None]:
+    """This function searches for a target key in a dictionary recursively using a generator.
+    It iterates over the dictionary's items. If the key matches the target key, it yields the value.
+    If the value is a dictionary, it yields from a recursive call to itself with the value (the nested dictionary) and the target key as arguments.
+
+    Parameters:
+    dictionary (dict): The dictionary to be searched.
+    target_key (Any): The key to be searched for in the dictionary.
+
+    Returns:
+    Generator[Any, None, None]: A generator that yields the values of all occurrences of the target key. If the key is not found, it does not yield anything.
+    """
+    for key, value in dictionary.items():
+        if key == target_key:
+            yield value
+        elif isinstance(value, dict):
+            yield from method_1(value, target_key)
+----
+
+==== Explanation The provided code defines a Python function named `method_1`.
+
+This function is designed to search for a specific key in a dictionary and its nested dictionaries.
+Unlike `method_0`, `method_1` uses a generator to yield all occurrences of the target key, not just the first one.
+
+The function takes two parameters: `dictionary`, which is the dictionary to be searched, and `target_key`, which is the key that the function is looking for.
+
+The function starts by iterating over the items in the `dictionary` using the line `for key, value in dictionary.items():`.
+For each key-value pair, it checks if the key matches the `target_key`.
+If a match is found, it yields the value with `yield value`.
+
+If the key does not match the `target_key`, the function checks if the value is a dictionary itself with `isinstance(value, dict)`.
+If the value is a dictionary, the function makes a recursive call to itself with the nested dictionary and the `target_key` as arguments, and yields from the result of this call with `yield from method_1(value, target_key)`.
+
+This process continues until all keys in the dictionary and its nested dictionaries have been checked.
+If the `target_key` is found, the function yields all corresponding values.
+If the `target_key` is not found, the function does not yield anything.
+
+In summary, `method_1` is a Python function that performs a recursive search for a specific key in a dictionary and its nested dictionaries.
+Unlike `method_0`, it uses a generator to yield all occurrences of the key, not just the first one.
+===== Advantages 1. **Generators**: The function uses Python generators, which are a simple and powerful tool for creating iterators.
+They are especially useful when the result set can be large and only one result is needed at a time.
+
+2. **All Occurrences**: Unlike `method_0`, `method_1` yields all occurrences of the target key, not just the first one.
+This can be useful when you need to find all matches of a key in a dictionary.
+
+3. **Recursion**: Like `method_0`, `method_1` also uses recursion to search nested dictionaries.
+This allows the function to handle dictionaries of arbitrary depth.
+===== Disadvantages
+1. **Performance**: Similar to `method_0`, the function may be slow for large dictionaries or deeply nested dictionaries due to the recursive nature of the function.
+Each recursive call adds a new layer to the call stack, which can lead to a stack overflow for very deep dictionaries.
+
+2. **Memory Usage**: The function uses a recursive approach, which can lead to high memory usage for large or deeply nested dictionaries.
+Each recursive call to the function creates a new stack frame, consuming additional memory.
+
+3. **Generator Complexity**: While generators are powerful, they can be more difficult to understand and use correctly compared to simple return statements, especially for developers who are not familiar with them.
+===== Complexity Analysis ====== Time The time complexity of the function is O(n), where n is the total number of keys in the dictionary and all nested dictionaries.
+This is because in the worst-case scenario, the function will need to visit every key in the dictionary to find the target key.
+====== Space The space complexity of the function is O(d), where d is the depth of the deepest nested dictionary.
+This is because the function uses recursion to search nested dictionaries, and each recursive call adds a new layer to the call stack.
+The maximum depth of the recursion is equal to the depth of the deepest nested dictionary.
+==== Tests

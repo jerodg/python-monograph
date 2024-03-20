@@ -1,0 +1,532 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(sentence: str) -> str:
+    """Method 0: Reversed
+        - Reverses the entire sentence
+
+    Args:
+        sentence: (str)
+
+    Returns:
+        result: (str)"""
+    return "".join(reversed(sentence))
+----
+
+==== Explanation
+
+The selected Python code is a function named `method_0`.
+This function is designed to reverse a sentence, which is passed to it as an argument.
+The argument `sentence` is expected to be a string.
+
+The core of this function is the use of the built-in Python function `reversed()`.
+This function takes an iterable object and returns a reverse iterator.
+In this case, the iterable is the string `sentence`.
+Here's the relevant code snippet:
+
+[source,python]
+----
+reversed(sentence)
+----
+
+However, `reversed()` doesn't return a string, but an iterable of the characters in the string in reverse order.
+To convert this back into a string, the `join()` function is used.
+This function takes an iterable of strings (in this case, single characters) and concatenates them into a single string.
+Here's the relevant code snippet:
+
+[source,python]
+----
+"".join(reversed(sentence))
+----
+
+The `join()` function is called on an empty string (`""`), which means that the characters are joined together without any additional characters in between.
+
+In summary, `method_0` takes a string, reverses the order of its characters, and returns the reversed string.
+
+===== Advantages
+
+- Simplicity: The code is straightforward and easy to understand.
+It uses built-in Python functions, which makes it efficient and reliable.
+- Universality: This method works for any string, regardless of its content or length.
+===== Disadvantages
+- Word Order: This method reverses the entire sentence, including the order of the words.
+This might not be the desired outcome in cases where you want to preserve the order of the words while reversing the characters within each word.
+- Non-In-Place: The `reversed()` function does not reverse the string in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the sentence.
+This is because the reversed() function iterates over the sentence once.
+The join() function also has a time complexity of O(n), as it needs to iterate over the reversed sentence to join the characters together.
+Therefore, the overall time complexity is O(n + n), which simplifies to O(n).
+====== Space The space complexity of this method is also O(n).
+The reversed() function creates a new iterable object that stores the reversed sentence, which takes up space.
+The join() function then creates a new string from this iterable.
+Therefore, the space complexity is proportional to the size of the input sentence.
+==== Tests === Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_1(sentence: str) -> str:
+    """Method 1: Regex
+        - Reverse the letters of each word, preserving word-order.
+
+    Args:
+        sentence: (str)
+
+    Returns:
+        result: (str)"""
+    return re.sub(r"(\w+)", lambda x: x.group()[::-1], sentence)
+----
+
+==== Explanation The selected Python code is a function named `method_1`.
+
+This function is designed to reverse the letters of each word in a sentence, while preserving the order of the words.
+The sentence is passed to the function as an argument, and the function returns the modified sentence.
+
+The core of this function is the use of the `sub()` function from the `re` (regular expressions) module.
+The `sub()` function replaces all occurrences of a pattern in a string with a replacement.
+In this case, the pattern is `r"(\w+)"`, which matches any word, and the replacement is a lambda function that reverses each matched word.
+Here's the relevant code snippet:
+
+[source,python]
+----
+re.sub(r"(\w+)", lambda x: x.group()[::-1], sentence)
+----
+
+The lambda function `lambda x: x.group()[::-1]` takes a match object `x`, gets the matched word with `x.group()`, and reverses it with Python's slicing syntax `[::-1]`.
+
+In summary, `method_1` takes a sentence, reverses the letters of each word while preserving the order of the words, and returns the modified sentence.
+===== Advantages - Word Order Preservation: This method reverses the letters of each word while keeping the words in the same order.
+This can be useful in cases where you want to preserve the order of the words while reversing the characters within each word.
+- Flexibility: Regular expressions are very flexible and can be adapted to match complex patterns.
+This can be useful if you need to modify the function to handle more complex cases in the future.
+===== Disadvantages - Complexity: Regular expressions can be difficult to understand and debug, especially for complex patterns.
+This can make the code harder to maintain.
+- Performance: Regular expressions can be slower than other methods, especially for large strings.
+This is because the regular expression engine needs to interpret the pattern and apply it to the string, which can take some time.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the sentence.
+This is because the sub() function from the re module needs to iterate over the sentence once to find all occurrences of the pattern.
+The lambda function that reverses each matched word also has a time complexity of O(n), as it needs to iterate over each word to reverse it.
+Therefore, the overall time complexity is O(n + n), which simplifies to O(n).
+====== Space The space complexity of this method is also O(n).
+The sub() function creates a new string that stores the modified sentence, which takes up space.
+Therefore, the space complexity is proportional to the size of the input sentence.
+==== Tests === Method 2:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_2(sentence: str) -> str:
+    """Method 2: Slice
+
+    Args:
+        sentence: (str)
+
+    Returns:
+        result: (str)"""
+    return sentence[slice(None, None, -1)]
+----
+
+==== Explanation The selected code is a Python function named `method_2`.
+
+This function takes a single argument, `sentence`, which is expected to be a string.
+The purpose of this function is to reverse the order of characters in the provided string.
+
+[source,python]
+----
+def method_2(sentence: str) -> str:
+----
+
+The function uses Python's built-in `slice` function to achieve this.
+The `slice` function is used to get a slice of the given string from a specified start to end index.
+In this case, it is used with three arguments: `None`, `None`, and `-1`.
+
+[source,python]
+----
+return sentence[slice(None, None, -1)]
+----
+
+The first two arguments, both `None`, mean that the slicing will start from the beginning and end at the end of the string.
+The third argument, `-1`, is the step, which means that the slicing will go backwards, effectively reversing the string.
+
+The reversed string is then returned as the result of the function.
+This function will work with any string input, including empty strings and strings with special characters.
+===== Advantages - **Simplicity**: The code is straightforward and easy to understand.
+It uses Python's built-in `slice` function, which makes it efficient and reliable.
+- **Performance**: The slicing operation in Python is highly optimized and faster compared to other methods like using a loop to reverse a string.
+- **Universality**: This method works for any string, regardless of its content or length.
+===== Disadvantages - **Word Order**: This method reverses the entire sentence, including the order of the words.
+This might not be the desired outcome in cases where you want to preserve the order of the words while reversing the characters within each word.
+- **Non-In-Place**: The slicing operation does not reverse the string in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the string.
+This is because slicing operation in Python iterates over the string once.
+====== Space The space complexity of this method is also O(n).
+The slicing operation does not reverse the string in-place.
+Instead, it creates a new string that is the reverse of the original.
+Therefore, the space complexity is proportional to the size of the input string ==== Tests === Method 3:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_3(sentence: str) -> str:
+    """Method 3: Shorthand slice
+
+    Args:
+        sentence: (str)
+
+    Returns:
+        result: (str)"""
+    return sentence[::-1]
+----
+
+==== Explanation The selected code is a Python function named `method_3`.
+
+This function takes a single argument, `sentence`, which is expected to be a string.
+The purpose of this function is to reverse the order of characters in the provided string.
+
+[source,python]
+----
+def method_3(sentence: str) -> str:
+----
+
+The function uses Python's built-in slicing syntax to achieve this.
+The slicing syntax is used to get a slice of the given string from a specified start to end index.
+In this case, it is used with three arguments: `None`, `None`, and `-1`.
+
+[source,python]
+----
+return sentence[::-1]
+----
+
+The first two arguments, both `None`, mean that the slicing will start from the beginning and end at the end of the string.
+The third argument, `-1`, is the step, which means that the slicing will go backwards, effectively reversing the string.
+
+The reversed string is then returned as the result of the function.
+This function will work with any string input, including empty strings and strings with special characters.
+===== Advantages - **Simplicity**: The code is straightforward and easy to understand.
+It uses Python's built-in slicing syntax, which makes it efficient and reliable.
+- **Performance**: The slicing operation in Python is highly optimized and faster compared to other methods like using a loop to reverse a string.
+- **Universality**: This method works for any string, regardless of its content or length.
+===== Disadvantages - **Word Order**: This method reverses the entire sentence, including the order of the words.
+This might not be the desired outcome in cases where you want to preserve the order of the words while reversing the characters within each word.
+- **Non-In-Place**: The slicing operation does not reverse the string in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the string.
+This is because slicing operation in Python iterates over the string once.
+====== Space The space complexity of this method is also O(n).
+The slicing operation does not reverse the string in-place.
+Instead, it creates a new string that is the reverse of the original.
+Therefore, the space complexity is proportional to the size of the input string.
+==== Tests === Method 4:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_4(sentence: str) -> str:
+    """Method 4:
+        - Changes word order only
+    Args:
+        sentence: (str)
+
+    Returns:
+        result: (str)"""
+    s = sentence.split()
+    l = []
+    for i in s:
+        l.append(i)
+
+    res = [ii for n, ii in enumerate(l) if ii not in l[:n]]
+    return " ".join(res[::-1])
+----
+
+==== Explanation The selected code is a Python function named `method_4`.
+
+This function takes a single argument, `sentence`, which is expected to be a string.
+The purpose of this function is to reverse the order of the words in the provided string.
+
+[source,python]
+----
+def method_4(sentence: str) -> str:
+----
+
+The function begins by splitting the input string into a list of words using the `split()` method.
+This method splits a string into a list where each word is a separate element.
+
+[source,python]
+----
+s = sentence.split()
+----
+
+Next, it creates an empty list `l` and appends each word from the split sentence to this list.
+
+[source,python]
+----
+l = []
+for i in s:
+    l.append(i)
+----
+
+Then, it creates a new list `res` using list comprehension.
+This list contains each word from `l` only once, preserving the order of their first occurrence.
+This is achieved by checking if the word is not in the part of the list before its current position.
+
+[source,python]
+----
+res = [ii for n, ii in enumerate(l) if ii not in l[:n]]
+----
+
+Finally, it reverses the order of the words in `res` using slicing syntax and joins them into a string with spaces in between using the `join()` method.
+This reversed string is then returned as the result of the function.
+
+[source,python]
+----
+return " ".join(res[::-1])
+----
+
+This function will work with any string input, including empty strings and strings with special characters.
+It will reverse the order of the words, but not the characters within each word.
+===== Advantages - **Word Order**: This method reverses the order of the words in the sentence, which can be useful in certain contexts where you want to change the order of the words but not the characters within each word.
+- **Universality**: This method works for any string, regardless of its content or length.
+===== Disadvantages - **Redundancy**: The code creates multiple lists (`s`, `l`, and `res`) which can be avoided.
+This redundancy can make the code less efficient and harder to read.
+- **Non-In-Place**: The method does not reverse the order of words in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+- **Unnecessary Complexity**: The code uses list comprehension to create a list of unique words (`res`), which is not necessary for simply reversing the order of words.
+This adds unnecessary complexity to the code.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the string.
+This is because the split() function, the for loop, and the list comprehension all iterate over the string or the list of words once.
+====== Space The space complexity of this method is also O(n).
+This is because the function creates several new lists (s, l, and res) that store the words of the sentence, and a new string that is the reverse of the original.
+Therefore, the space complexity is proportional to the size of the input string.
+==== Tests === Method 5:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_5(sentence: str) -> str:
+    """
+
+    :param sentence:
+    :type sentence:
+    :return:
+    :rtype:
+    """
+    words = sentence.split()
+    reversed_words = words[::-1]
+    reversed_sentence = ' '.join(reversed_words)
+    return reversed_sentence
+----
+
+==== Explanation The selected code is a Python function named `method_5`.
+
+This function takes a single argument, `sentence`, which is expected to be a string.
+The purpose of this function is to reverse the order of the words in the provided string.
+
+[source,python]
+----
+def method_5(sentence: str) -> str:
+----
+
+The function begins by splitting the input string into a list of words using the `split()` method.
+This method splits a string into a list where each word is a separate element.
+
+[source,python]
+----
+words = sentence.split()
+----
+
+Next, it reverses the order of the words in the list using Python's built-in slicing syntax.
+The `[::-1]` slice reverses the order of the elements in the list.
+
+[source,python]
+----
+reversed_words = words[::-1]
+----
+
+Finally, it joins the reversed list of words back into a string using the `join()` method.
+This method concatenates all the elements in the list into a single string, with each element separated by a space.
+This reversed string is then returned as the result of the function.
+
+[source,python]
+----
+reversed_sentence = ' '.join(reversed_words)
+return reversed_sentence
+----
+
+This function will work with any string input, including empty strings and strings with special characters.
+It will reverse the order of the words, but not the characters within each word.
+===== Advantages - **Simplicity**: The code is straightforward and easy to understand.
+It uses Python's built-in functions and slicing syntax, which makes it efficient and reliable.
+- **Performance**: The slicing operation in Python is highly optimized and faster compared to other methods like using a loop to reverse a string.
+- **Universality**: This method works for any string, regardless of its content or length.
+===== Disadvantages - **Non-In-Place**: The method does not reverse the order of words in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+- **Single Use**: This method is specifically designed to reverse the order of words in a string.
+It cannot be easily adapted to perform other operations on the string.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the string.
+This is because the split() function, the slicing operation, and the join() function all iterate over the string or the list of words once.
+====== Space The space complexity of this method is also O(n).
+This is because the function creates a new list (words and reversed_words) that store the words of the sentence, and a new string (reversed_sentence) that is the reverse of the original.
+Therefore, the space complexity is proportional to the size of the input string.
+==== Tests === Method 6:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_6(sentence: str) -> str:
+    """Method 6 - Using list comprehension alternate
+
+    :param sentence:
+    :type sentence:
+    :return:
+    :rtype:
+    """
+    return ' '.join(word for word in sentence.split()[::-1])
+----
+
+==== Explanation The selected code is a Python function named `method_6`.
+
+This function takes a single argument, `sentence`, which is expected to be a string.
+The purpose of this function is to reverse the order of the words in the provided string.
+
+[source,python]
+----
+def method_6(sentence: str) -> str:
+----
+
+The function begins by splitting the input string into a list of words using the `split()` method.
+This method splits a string into a list where each word is a separate element.
+
+[source,python]
+----
+sentence.split()
+----
+
+Next, it uses Python's built-in slicing syntax to reverse the order of the words in the list.
+The `[::-1]` slice reverses the order of the elements in the list.
+
+[source,python]
+----
+sentence.split()[::-1]
+----
+
+This reversed list of words is then passed to a list comprehension, which simply iterates over each word in the list.
+
+[source,python]
+----
+word for word in sentence.split()[::-1]
+----
+
+Finally, it uses the `join()` method to concatenate all the elements in the list into a single string, with each element separated by a space.
+This reversed string is then returned as the result of the function.
+
+[source,python]
+----
+' '.join(word for word in sentence.split()[::-1])
+----
+
+This function will work with any string input, including empty strings and strings with special characters.
+It will reverse the order of the words, but not the characters within each word.
+===== Advantages - **Simplicity**: The code is straightforward and easy to understand.
+It uses Python's built-in functions and slicing syntax, which makes it efficient and reliable.
+- **Performance**: The slicing operation in Python is highly optimized and faster compared to other methods like using a loop to reverse a string.
+- **Universality**: This method works for any string, regardless of its content or length.
+===== Disadvantages - **Non-In-Place**: The method does not reverse the order of words in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+- **Single Use**: This method is specifically designed to reverse the order of words in a string.
+It cannot be easily adapted to perform other operations on the string.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the string.
+This is because the split() function, the slicing operation, and the list comprehension all iterate over the string or the list of words once.
+====== Space The space complexity of this method is also O(n).
+This is because the function creates a new list from the split() function and the list comprehension that store the words of the sentence in reverse order.
+Therefore, the space complexity is proportional to the size of the input string.
+==== Tests === Method 7:
+==== Implementation
+
+[source,python,linenums]
+----
+def method_7(sentence: str) -> str:
+    """Method 7 - Using reduce
+
+    :param sentence:
+    :type sentence:
+    :return:
+    :rtype:
+    """
+    return reduce(lambda x, y: y + ' ' + x, sentence.split())
+----
+
+==== Explanation The selected code is a Python function named `method_7`.
+
+This function takes a single argument, `sentence`, which is expected to be a string.
+The purpose of this function is to reverse the order of the words in the provided string.
+
+[source,python]
+----
+def method_7(sentence: str) -> str:
+----
+
+The function begins by splitting the input string into a list of words using the `split()` method.
+This method splits a string into a list where each word is a separate element.
+
+[source,python]
+----
+sentence.split()
+----
+
+Next, it uses the `reduce()` function from the `functools` module.
+The `reduce()` function applies a binary function (a function that takes two arguments) to all elements in an iterable in a cumulative way.
+
+[source,python]
+----
+reduce(lambda x, y: y + ' ' + x, sentence.split())
+----
+
+In this case, the binary function is a lambda function that takes two arguments, `x` and `y`.
+The lambda function concatenates `y`, a space, and `x` in that order.
+When used with `reduce()`, this effectively reverses the order of the words in the sentence.
+
+The result of the `reduce()` function is then returned as the result of the `method_7` function.
+This function will work with any string input, including empty strings and strings with special characters.
+It will reverse the order of the words, but not the characters within each word.
+===== Advantages - **Functional Programming**: The use of the `reduce()` function is a functional programming approach, which can lead to cleaner, more readable code.
+- **Efficiency**: The `reduce()` function can be more efficient than using a loop to reverse the words in a string, especially for large strings.
+- **Universality**: This method works for any string, regardless of its content or length.
+===== Disadvantages - **Readability**: The use of the `reduce()` function and a lambda function can make the code harder to understand for developers who are not familiar with functional programming concepts.
+- **Non-In-Place**: The method does not reverse the order of words in-place.
+Instead, it creates a new string that is the reverse of the original.
+This could potentially use a lot of memory for very large strings.
+- **Single Use**: This method is specifically designed to reverse the order of words in a string.
+It cannot be easily adapted to perform other operations on the string.
+===== Complexity Analysis ====== Time The time complexity of this method is O(n), where n is the length of the string.
+This is because the split() function and the reduce() function both iterate over the string or the list of words once.
+====== Space The space complexity of this method is also O(n).
+This is because the function creates a new list from the split() function that stores the words of the sentence, and a new string that is the reverse of the original.
+Therefore, the space complexity is proportional to the size of the input string.
+==== Tests

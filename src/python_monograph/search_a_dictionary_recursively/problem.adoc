@@ -1,0 +1,95 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+=== Use-Cases
+
+Searching a dictionary is a common operation in Python and can be used in a variety of scenarios:
+
+1. **Configuration Lookup**: Dictionaries are often used to store configuration settings for an application.
+Searching a dictionary can be used to retrieve the value of a specific setting.
+
+2. **Data Aggregation**: If you have a collection of data items and you want to group them based on some attribute, you can use a dictionary.
+The attribute value can be the key, and the value can be a list of items that have that attribute value.
+
+3. **Caching**: Dictionaries can be used to implement a cache.
+The key can be the input to a function, and the value can be the result of the function.
+Before performing a potentially expensive operation, you can check if the result is already in the dictionary.
+
+4. **Counting**: If you want to count the number of occurrences of items in a collection, you can use a dictionary.
+The item can be the key, and the count can be the value.
+Each time you encounter an item, you increment its count in the dictionary.
+
+5. **Graph Representation**: In graph theory, a dictionary can be used to represent a graph.
+The keys can be the nodes of the graph, and the values can be lists of nodes that are connected to the key node.
+
+6. **Memoization**: This is a specific form of caching where the results of expensive function calls are stored and can be returned quickly if the same inputs occur again.
+
+7. **Object to Object Mapping**: Dictionaries can be used to map one object (the key) to another object (the value).
+This is useful in a variety of scenarios, such as looking up a customer record based on a customer ID.
+
+8. **Implementing a Set**: A dictionary can be used to implement a set data structure, where each key is an element in the set.
+This can be useful for checking membership of an element in the set.
+
+These are just a few examples, and there are many other scenarios where searching a dictionary can be useful.
+=== Best Practices Here are some best practices for optimizing the performance of dictionary operations in Python:
+
+1. **Use `dict.get()` or `in` for Safe Key Access**: Instead of directly accessing a key which can lead to a `KeyError` if the key doesn't exist, use `dict.get(key)` or `key in dict` which are safer and faster ways to access keys.
+
+2. **Use Dictionary Comprehensions**: Dictionary comprehensions are a fast and efficient way to create dictionaries.
+They are faster than using a for loop to populate a dictionary.
+
+3. **Avoid Unnecessary Key Lookups**: If you need to access a key's value multiple times, consider storing it in a variable instead of looking it up each time.
+
+4. **Use `defaultdict` for Default Values**: If you often find yourself checking if a key exists and then setting a default value if it doesn't, consider using a `collections.defaultdict`.
+It automatically initializes missing keys with a default value.
+
+5. **Avoid Large Dictionaries**: If your dictionary is very large, operations can become slow.
+Consider alternative data structures or techniques such as database storage, trie data structure, or sharding the dictionary across multiple smaller dictionaries.
+
+6. **Use `dict.update()` for Merging Dictionaries**: If you need to merge two dictionaries, use `dict1.update(dict2)`.
+It's faster than using a for loop to add each key-value pair individually.
+
+7. **Use Keys for Sorting**: If you need to sort a dictionary, sort the keys instead of the items.
+Sorting keys is faster than sorting items.
+
+8. **Avoid Mutating While Iterating**: Don't add or remove items from a dictionary while iterating over it.
+This can lead to unexpected behavior or errors.
+
+Remember, the best way to optimize dictionary operations is to understand how Python dictionaries work and to carefully consider the characteristics of your specific use case when choosing a method to perform an operation.
+=== Common Mistakes There are several common mistakes to avoid when searching for a key in a dictionary:
+
+1. **Not Checking for Key Existence**: One common mistake is to directly access a key in a dictionary without first checking if it exists.
+This can lead to a `KeyError` if the key is not in the dictionary.
+To avoid this, you can use the `dict.get()` method or the `in` operator to check if the key exists before accessing it.
+
+2. **Ignoring Case Sensitivity**: Python dictionaries are case-sensitive, which means that 'key' and 'Key' are considered different keys.
+If you're not careful, this can lead to unexpected results when searching for a key.
+
+3. **Not Handling Nested Dictionaries**: If your dictionary contains nested dictionaries, simply using `dict.get()` or the `in` operator will not be enough to find a key in the nested dictionaries.
+You will need to use a recursive approach or a stack/queue-based approach to search the nested dictionaries.
+
+4. **Mutating Dictionary During Iteration**: If you're iterating over a dictionary and searching for a key, you should avoid adding or removing items from the dictionary during iteration.
+This can lead to unexpected behavior or errors.
+
+5. **Not Considering Dictionary Size**: If your dictionary is very large, some methods of searching for a key can be slow.
+For example, using a recursive approach to search a large, deeply nested dictionary can lead to a stack overflow or high memory usage.
+In such cases, you might need to consider alternative approaches, such as using a stack or queue to avoid recursion.
+
+6. **Ignoring Return Value of `dict.get()`**: The `dict.get()` method returns `None` if the key is not found in the dictionary, unless a default value is provided.
+If you ignore the return value of `dict.get()`, you might not realize that the key was not found.
+
+Remember, the best way to avoid these mistakes is to understand how Python dictionaries work and to carefully consider the characteristics of your specific use case when choosing a method to search for a key.
+=== Constraints == Examples === Example 0 == Follow-up == Related Topics

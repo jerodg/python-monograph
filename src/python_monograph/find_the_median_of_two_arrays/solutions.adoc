@@ -1,0 +1,366 @@
+:doctitle: Find the Median of Two Arrays Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+==== Advantages
+
+1. **Simplicity**: The code is straightforward and easy to understand.
+It directly implements the definition of the median without any complex algorithms or data structures.
+
+2. **Generality**: The code works for any two arrays, regardless of their sizes or the values they contain.
+It does not make any assumptions about the input data.
+
+3. **No Extra Space**: The code does not use any extra space proportional to the size of the input arrays.
+The only extra space used is for the merged array.
+
+==== Disadvantages
+
+1. **Time Complexity**: The time complexity of the code is O(n log n), where n is the total number of elements in the two arrays.
+This is because the `sorted()` function is used to sort the merged array, which takes O(n log n) time.
+
+2. **Not Optimal for Large Inputs**: Due to its time complexity, the code may be slow for large inputs.
+There are more efficient algorithms to find the median of two sorted arrays that work in O(log n) time.
+
+3. **Does Not Take Advantage of Sorted Inputs**: The code does not take advantage of the fact that the input arrays are already sorted.
+It merges and sorts the two arrays, which is unnecessary work if the arrays are already sorted.
+
+In summary, while the selected code is simple and general, it is not the most efficient solution for finding the median of two sorted arrays.
+It could be improved by using a more efficient algorithm that takes advantage of the sorted inputs.
+
+==== Complexity Analysis
+
+**Time Complexity**: The time complexity of the code is O(n log n), where n is the total number of elements in the two arrays.
+This is because the `sorted()` function is used to sort the merged array, which takes O(n log n) time.
+
+**Space Complexity**: The space complexity of the code is O(n), where n is the total number of elements in the two arrays.
+This is because a new list `merged` is created to store the elements of the two input arrays.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The function `solution_01(nums: List[int], nums1: List[int]) -> float:` is designed to find the median of two sorted arrays.
+It takes two arguments, `nums` and `nums1`, which are both lists of integers.
+
+The function begins by checking if both input arrays are empty.
+If they are, it raises a `ValueError` with the message "Both input arrays are empty." This is done to prevent further processing on empty arrays, as shown in the following code snippet:
+
+[source,python]
+----
+if not nums and not nums1:
+    raise ValueError("Both input arrays are empty.")
+----
+
+Next, the function ensures that `nums1` is the smaller array.
+If `nums` is larger, it swaps `nums` and `nums1`.
+This is done to optimize the binary search that will be performed later.
+
+[source,python]
+----
+if len(nums) > len(nums1):
+    nums, nums1 = nums1, nums
+----
+
+The function then performs a binary search on `nums1` and calculates the median based on the elements at the partition points.
+The binary search is performed in a while loop, which continues until the start index is greater than the end index.
+
+[source,python]
+----
+while start <= end:
+    partitionX = (start + end) // 2
+    partitionY = ((x + y + 1) // 2) - partitionX
+----
+
+Inside the while loop, the function calculates the maximum and minimum elements on the left and right sides of the partition points in both arrays.
+These values are used to check if the correct partition points have been found.
+
+[source,python]
+----
+maxLeftX = float("-inf") if partitionX == 0 else nums[partitionX - 1]
+minRightX = float("inf") if partitionX == x else nums[partitionX]
+maxLeftY = float("-inf") if partitionY == 0 else nums1[partitionY - 1]
+minRightY = float("inf") if partitionY == y else nums1[partitionY]
+----
+
+If the correct partition points have been found, the function calculates and returns the median.
+If the total number of elements in the two arrays is even, the median is the average of the maximum element on the left and the minimum element on the right.
+If the total number of elements is odd, the median is the maximum element on the left.
+
+[source,python]
+----
+if (x + y) % 2 == 0:
+    return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2
+else:
+    return max(maxLeftX, maxLeftY)
+----
+
+If the correct partition points have not been found, the function adjusts the start and end indices and continues the binary search.
+
+In summary, this function uses a binary search to find the median of two sorted arrays.
+The binary search is performed on the smaller array to optimize the search time.
+The median is calculated based on the elements at the partition points in the two arrays.
+
+==== Advantages
+
+1. **Efficiency**: The code uses a binary search, which is an efficient algorithm with a time complexity of O(log n).
+This makes the code faster for large inputs compared to a brute force approach.
+
+2. **Optimized for Sorted Inputs**: The code takes advantage of the fact that the input arrays are already sorted.
+It performs a binary search on the smaller array, which optimizes the search time.
+
+3. **Handles Edge Cases**: The code handles edge cases such as when both input arrays are empty.
+It raises a `ValueError` in this case, which prevents further processing on empty arrays.
+
+==== Disadvantages
+
+1. **Complexity**: The code is more complex than a brute force approach.
+It requires a good understanding of binary search and how to apply it to find the median of two sorted arrays.
+
+2. **Requires Sorted Inputs**: The code assumes that the input arrays are sorted.
+If the inputs are not sorted, the code will not work correctly.
+
+==== Complexity Analysis
+
+**Time Complexity**: The time complexity of the code is O(log(min(m, n))), where m and n are the lengths of the two input arrays.
+This is because the code performs a binary search on the smaller array, which takes O(log(min(m, n))) time.
+
+**Space Complexity**: The space complexity of the code is O(1), which means it uses constant extra space.
+This is because the code does not create any new data structures that grow with the size of the input arrays.
+It only uses a few variables to store the indices and elements at the partition points, which does not depend on the size of the input arrays.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The function `solution_02(nums: List[int], nums1: List[int]) -> float:` is designed to find the median of two sorted arrays.
+It takes two arguments, `nums` and `nums1`, which are both lists of integers.
+
+The function starts by initializing an empty list `merged` and two pointers `i` and `j` at 0. These pointers are used to traverse the two input arrays.
+
+[source,python]
+----
+merged = []
+i = j = 0
+----
+
+The function then enters a while loop, which continues as long as both pointers are within the bounds of their respective arrays.
+Inside this loop, the function compares the elements at the current positions of the pointers in the two arrays.
+If the element in `nums` is smaller, it is appended to `merged` and the pointer `i` is incremented.
+Otherwise, the element in `nums1` is appended to `merged` and the pointer `j` is incremented.
+
+[source,python]
+----
+while i < len(nums) and j < len(nums1):
+    if nums[i] < nums1[j]:
+        merged.append(nums[i])
+        i += 1
+    else:
+        merged.append(nums1[j])
+        j += 1
+----
+
+After the while loop, the function checks if there are any remaining elements in either of the input arrays.
+If there are, it appends these elements to `merged`.
+
+[source,python]
+----
+while i < len(nums):
+    merged.append(nums[i])
+    i += 1
+
+while j < len(nums1):
+    merged.append(nums1[j])
+    j += 1
+----
+
+Finally, the function calculates and returns the median of the merged array.
+If the length of `merged` is even, the median is the average of the two middle elements.
+Otherwise, the median is the middle element.
+
+[source,python]
+----
+if len(merged) % 2 == 0:
+    return (merged[len(merged) // 2] + merged[len(merged) // 2 - 1]) / 2
+else:
+    return merged[len(merged) // 2]
+----
+
+In summary, this function uses two pointers to merge two sorted arrays into one and then calculates the median of the merged array.
+The merging process is done in a way that maintains the sorted order of the elements, which allows the median to be calculated easily.
+
+==== Advantages
+
+1. **Efficiency**: The code is efficient as it traverses each array only once.
+This makes the code faster for large inputs compared to a brute force approach.
+
+2. **Optimized for Sorted Inputs**: The code takes advantage of the fact that the input arrays are already sorted.
+It uses two pointers to merge the arrays, which optimizes the time complexity.
+
+3. **Handles Different Sizes**: The code can handle input arrays of different sizes.
+It continues to append remaining elements from the longer array after one array is exhausted.
+
+==== Disadvantages
+
+1. **Space Complexity**: The code creates a new list `merged` to store the merged array.
+This increases the space complexity to O(m + n), where m and n are the lengths of the input arrays.
+
+2. **Requires Sorted Inputs**: The code assumes that the input arrays are sorted.
+If the inputs are not sorted, the code will not work correctly.
+
+In summary, while the selected code is efficient and optimized for sorted inputs, it requires additional space to store the merged array and assumes that the input arrays are sorted.
+
+==== Complexity Analysis
+
+**Time Complexity**: The time complexity of the code is O(m + n), where m and n are the lengths of the two input arrays.
+This is because the code traverses each array once to merge them into a single array.
+
+**Space Complexity**: The space complexity of the code is O(m + n), which means it uses extra space proportional to the size of the input arrays.
+This is because the code creates a new list `merged` to store the merged array.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The function `solution_03(nums: list[int], nums1: list[int]) -> float:` is designed to find the median of two sorted arrays.
+It takes two arguments, `nums` and `nums1`, which are both lists of integers.
+
+The function begins by checking if both input arrays are empty.
+If they are, it raises a `ValueError`.
+
+[source,python]
+----
+if not nums and not nums1:
+    raise ValueError("Both input arrays are empty.")
+----
+
+Next, the function merges the two input arrays into a single sorted array.
+This is done by concatenating the two arrays using the `+` operator and then sorting the result using the `sorted()` function.
+
+[source,python]
+----
+merged = sorted(nums + nums1)
+----
+
+The function then calculates the total number of elements in the merged array and stores it in the variable `total`.
+
+[source,python]
+----
+total = len(merged)
+----
+
+If the total number of elements is odd, the function returns the middle element of the merged array.
+This is done by using integer division (`//`) to find the index of the middle element and then accessing this element using square brackets (`[]`).
+
+[source,python]
+----
+if total % 2 == 1:
+    return float(merged[total // 2])
+----
+
+If the total number of elements is even, the function calculates the average of the two middle elements as the median.
+This is done by accessing the two middle elements, converting them to floats, adding them together, and then dividing by 2.
+
+[source,python]
+----
+middle1 = merged[total // 2 - 1]
+middle2 = merged[total // 2]
+return (float(middle1) + float(middle2)) / 2.0
+----
+
+In summary, this function merges two sorted arrays into one, sorts the merged array, and then calculates the median of the merged array.
+The median is either the middle element (if the total number of elements is odd) or the average of the two middle elements (if the total number of elements is even).
+
+==== Advantages
+
+1. **Simplicity**: The code is straightforward and easy to understand.
+It directly merges the two arrays and sorts the result, which is a simple and intuitive approach.
+
+2. **Handles Different Sizes and Empty Inputs**: The code can handle input arrays of different sizes and even empty arrays.
+It raises a `ValueError` if both input arrays are empty, providing clear error handling.
+
+
+3. **Handles Both Odd and Even Total Elements**: The code correctly calculates the median whether the total number of elements in the merged array is odd or even.
+
+==== Disadvantages
+
+1. **Efficiency**: The code is not the most efficient solution.
+It uses the `sorted()` function on the merged array, which has a time complexity of O((m+n)log(m+n)), where m and n are the lengths of the input arrays.
+More efficient solutions exist that could find the median in linear or even logarithmic time.
+
+2. **Space Complexity**: The code creates a new list `merged` to store the merged array.
+This increases the space complexity to O(m + n), where m and n are the lengths of the input arrays.
+
+==== Complexity Analysis
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----

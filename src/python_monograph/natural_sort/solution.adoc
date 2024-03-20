@@ -1,0 +1,143 @@
+:doctitle: Solution
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Method 0:
+
+==== Implementation
+
+[source,python,linenums]
+----
+def method_0(x: list, rvrs: bool = False) -> list:
+    if isinstance(x, list):
+        return [
+            method_0(y, rvrs=rvrs)
+            for y in sorted(
+                x,
+                key=lambda _: [int(s) if s.isdigit() else s.lower() for s in split(DRE, _)],
+                reverse=rvrs,
+            )
+        ]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `method_0` that performs a natural sort on a list.
+Natural sorting is a type of sorting where the elements are arranged in the way that a human would naturally sort them.
+For example, if we have a list `['item1', 'item10', 'item2']`, a natural sort would sort this list as `['item1', 'item2', 'item10']` instead of `['item1', 'item10', 'item2']` which is the result of a standard lexicographical sort.
+
+The function `method_0` takes two parameters: `x` which is the list to be sorted, and `rvrs` which is a boolean indicating whether the list should be sorted in reverse order.
+The default value of `rvrs` is `False`, meaning that the list will be sorted in ascending order by default.
+
+[source,python]
+----
+def method_0(x: list, rvrs: bool = False) -> list:
+----
+
+The function first checks if the input `x` is a list.
+If it is not, the function does not proceed further.
+
+[source,python]
+----
+if isinstance(x, list):
+----
+
+If `x` is a list, the function sorts it using the `sorted` function.
+The `key` argument of the `sorted` function is a lambda function that splits each element of the list into a list of digits and non-digit parts using the regular expression `DRE`.
+If a part is a digit, it is converted to an integer; otherwise, it is converted to lowercase.
+This ensures that the sorting is case-insensitive and that digits are sorted numerically.
+
+[source,python]
+----
+key=lambda _: [int(s) if s.isdigit() else s.lower() for s in split(DRE, _)]
+----
+
+The `reverse` argument of the `sorted` function is set to the value of `rvrs`, so the list is sorted in reverse order if `rvrs` is `True`.
+
+Finally, the sorted list is returned.
+If the elements of the list are also lists, they are sorted recursively by calling `method_0` on each of them.
+
+[source,python]
+----
+return [
+    method_0(y, rvrs=rvrs)
+    for y in sorted(
+        x,
+        key=lambda _: [int(s) if s.isdigit() else s.lower() for s in split(DRE, _)],
+        reverse=rvrs,
+    )
+]
+----
+
+In summary, `method_0` is a function that performs a natural sort on a list, with the option to sort in reverse order.
+It can handle lists of lists, sorting each sublist in the same way.
+
+===== Advantages
+
+===== Disadvantages
+
+===== Complexity Analysis
+
+The time complexity of the selected code is O(n log n) and the space complexity is O(n).
+
+====== Time
+
+The time complexity of the selected code is primarily determined by the sorting operation.
+In Python, the built-in sorted function uses a sorting algorithm called Timsort, which has a worst-case and average time complexity of O(n log n), where n is the number of elements in the list.
+The lambda function used as the key for sorting has a time complexity of O(k), where k is the number of characters in a string.
+However, since this operation is performed for each element in the list, it does not change the overall time complexity from O(n log n).
+====== Space The space complexity of the selected code is O(n), where n is the number of elements in the list.
+This is because the sorted function returns a new list containing all elements from the original list, thus requiring additional space.
+The recursive calls to method_0 do not change the overall space complexity, as each call works on a different subset of the original list and the space used by a call is freed up after the call is finished.
+=== Method 1:
+==== Implementation
+
+[source,python,linenums]
+----
+
+----
+
+==== Explanation
+
+===== Advantages
+
+===== Disadvantages
+
+===== Complexity Analysis
+
+====== Time
+
+====== Space
+
+=== Method 2:
+
+==== Implementation
+
+[source,python,linenums]
+----
+
+----
+
+==== Explanation
+
+===== Advantages
+
+===== Disadvantages
+
+===== Complexity Analysis
+
+====== Time
+
+====== Space

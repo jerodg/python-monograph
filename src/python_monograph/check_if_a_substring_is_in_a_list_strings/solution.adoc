@@ -1,0 +1,518 @@
+:doctitle: Check if Substring is in a List of Strings Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: solution, python
+
+== Solutions
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_00` that checks if a given substring is present in any of the strings in a list.
+The function takes two parameters: `data`, which is a list of strings, and `substr`, which is the substring to be searched for.
+
+The function begins with a docstring that provides a detailed explanation of its purpose, parameters, return value, and usage.
+It also includes a note that the function does not provide the location of the substring in the string, and references to the Python documentation for the `any()` function.
+
+The function's logic starts with two error checking conditions.
+The first condition checks if the `substr` parameter is `None`.
+If it is, a `TypeError` is raised with the message "NoneType found in substr".
+This is to ensure that the function does not attempt to search for a `None` value, which would not make sense in this context.
+
+[source,python]
+----
+if substr is None:
+    raise TypeError("NoneType found in substr")
+----
+
+The second condition checks if any element in the `data` list is `None`.
+If it is, a `TypeError` is raised with the message "NoneType found in list".
+This is to ensure that the function does not attempt to search within a `None` value, which would result in an error.
+
+[source,python]
+----
+if None in data:
+    raise TypeError("NoneType found in list")
+----
+
+After these error checks, the function uses the `any()` function in combination with a generator expression to check if the substring is in any string in the list.
+The `any()` function returns `True` if at least one element is `True`, and the 'in' operator checks if the substring is a part of each string.
+The 'for' loop iterates over each string in the list.
+If the substring is found in any string, the function returns `True`.
+Otherwise, it returns `False`.
+
+[source,python]
+----
+return any(substr in x for x in data)
+----
+
+This function is a concise and efficient way to check if a substring is present in any string in a list, and it includes robust error checking to handle potential issues with the input data.
+
+==== Advantages
+
+1. **Efficiency**: The `any()` function is a built-in Python function, which is highly optimized and efficient.
+It stops and returns `True` as soon as it finds a `True` element, making it a quick way to check for the presence of a substring.
+2. **Simplicity**: The use of a generator expression simplifies the code by combining the iteration over the list and the search for the substring into a single line.
+This makes the code more concise and easier to read.
+3. **Error Handling**: The function includes error checking to handle potential issues with the input data.
+It checks if the substring or any element in the list is `None` and raises a `TypeError` if it is.
+
+==== Disadvantages
+
+1. **Limited Information**: The function only returns a boolean value indicating whether the substring was found in the list.
+It does not provide any information about where the substring was found.
+If this information is needed, the function would need to be modified or a different approach would need to be used.
+2. **Case Sensitivity**: The `in` operator is case sensitive, so the function will not find a match if the case of the substring does not match the case of the strings in the list.
+If case-insensitive matching is required, the function would need to be modified.
+3. **Error Handling**: While the function does handle `None` values in the input, it might not be the most appropriate way to handle this situation.
+It might be better to simply ignore `None` values or to return a specific value indicating that the list or the substring contained invalid data.
+
+==== Complexity Analysis
+
+**Time Complexity**: The function uses the `any()` function in combination with a generator expression to iterate over each string in the `data` list.
+For each string, it checks if the substring is found in the string using the `in` operator.
+Both the `any()` function and the `in` operator have a time complexity of O(n), where n is the length of the string.
+Therefore, the total time complexity of the function is O(n * m), where n is the number of strings in the list and m is the average length of the strings.
+
+**Space Complexity**: The space complexity of the function is O(1), as it does not use any additional space that scales with the size of the input.
+The function only uses a few variables to store the input parameters and the result, so the space complexity is constant.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `method_01` that checks if a given substring is present in any of the strings in a list.
+The function takes two parameters: `data` and `substr`. `data` is a list of strings where the substring will be searched, and `substr` is the substring to search in the list of strings.
+
+The function signature is as follows:
+
+[source,python]
+----
+def method_01(data: List[str], substr: str) -> bool:
+----
+
+This indicates that the function `method_01` takes in two arguments, `data` which is a list of strings, and `substr` which is a string.
+The function returns a boolean value.
+
+The function uses the `find()` method of Python strings.
+The `find()` method returns the lowest index in the string where the substring is found.
+If the substring is not found, the `find()` method returns -1. In this case, the function iterates over each string `row` in the list `data`, and checks if the substring `substr` is found in `row`.
+
+The relevant lines of code are:
+
+[source,python]
+----
+for row in data:
+    if row.find(substr) != -1:  # Returns -1 if not found
+        return True
+----
+
+These lines of code will return `True` if the substring `substr` is found in any string in the list `data`, and `False` otherwise.
+
+It's important to note that this function does not provide the location of the substring in the string.
+It only checks for the existence of the substring in the list of strings.
+
+==== Advantages
+
+1. **Simplicity**: The method is straightforward and easy to understand.
+It uses built-in Python functions and language features, making it accessible to developers familiar with Python.
+
+2. **Efficiency**: The `find()` method stops iterating as soon as it finds an element in the iterable that satisfies the condition.
+This means that in the best-case scenario (the substring is found in the first string), the function has a time complexity of O(1).
+In the worst-case scenario (the substring is not found or is in the last string), the function has a time complexity of O(n), where n is the total number of characters in all strings in the list.
+
+3. **Versatility**: This method can handle any list of strings and any substring, including empty strings and lists.
+
+==== Disadvantages
+
+1. **Lack of Detailed Information**: The method only checks for the existence of the substring in the list of strings.
+It does not provide the location of the substring in the string or in which string(s) the substring was found.
+
+2. **Case Sensitivity**: Python's `find()` method is case-sensitive, which means that the method might not work as expected if the case of the substring and the strings in the list do not match.
+If case-insensitive matching is required, additional steps would need to be taken (such as converting all strings to lower or upper case before the check).
+
+3. **No Pattern Matching**: The method checks for exact matches of the substring in the strings in the list.
+It does not support pattern matching or regular expressions.
+If more complex searches are required, a different method might be more suitable.
+
+==== Complexity Analysis
+
+**Time Complexity**: The time complexity of the function is O(n*m), where n is the number of strings in the list and m is the average length of the strings.
+This is because for each string in the list, the function checks if the substring exists within it.
+The 'find()' method, used to check if the substring exists in a string, has a time complexity of O(m), where m is the length of the string.
+Therefore, if there are n strings in the list, the total time complexity becomes O(n*m).
+
+**Space Complexity**: The space complexity of the function is O(1), which means it uses constant space.
+This is because the function only uses a fixed amount of space to store the input and variables, and does not use any additional data structures whose size depends on the input.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_02` that checks if a given substring is found in any of the strings in a list.
+The function takes two parameters: `data`, which is a list of strings, and `substr`, which is the substring to be searched for.
+
+The function begins by checking if `None` is present in the `data` list.
+If `None` is found, it raises an `AttributeError`.
+This is done to ensure that the list does not contain any `None` values, which could cause issues when the `find()` method is called on them.
+
+[source,python]
+----
+if None in data:
+    raise AttributeError('NoneType found in list')
+----
+
+The main logic of the function uses a list comprehension to iterate over each string in the `data` list and apply the `find()` method.
+The `find()` method is a built-in Python method that returns the lowest index in the string where the substring is found.
+If the substring is not found, `find()` returns -1.
+
+[source,python]
+----
+[x for x in data if x.find(substr) != -1]
+----
+
+The list comprehension will return a list with at least one element if the substring is found in any string (i.e., if `find()` does not return -1).
+If the substring is not found in any string, the list comprehension will return an empty list.
+
+Finally, the function returns `True` if the list comprehension returns a non-empty list (i.e., the substring was found in at least one string in the list), and `False` otherwise.
+
+[source,python]
+----
+return True if [x for x in data if x.find(substr) != -1] else False
+----
+
+In summary, `solution_02` is a Python function that checks if a given substring is present in any string within a provided list.
+It uses the `find()` method and a list comprehension to achieve this.
+
+NOTE: This method will fail if the list contains `None` values.
+
+==== Advantages
+
+1. **Efficiency**: The `find()` method is a built-in Python method, which is highly optimized and efficient.
+It returns the lowest index in the string where the substring is found, or -1 if the substring is not found.
+This makes it a quick and efficient way to check for the presence of a substring.
+2. **Simplicity**: The use of a list comprehension simplifies the code by combining the iteration over the list and the application of the `find()` method into a single line.
+This makes the code more concise and easier to read.
+3. **Flexibility**: The function can handle any list of strings and any substring, making it a flexible solution for checking the presence of a substring in a list of strings.
+
+==== Disadvantages
+
+1. **Error Handling**: The function raises an `AttributeError` if `None` is found in the list.
+While this prevents the function from failing when it encounters a `None` value, it may not be the most appropriate way to handle this situation.
+It might be better to simply ignore `None` values or to return a specific value indicating that the list contained invalid data.
+2. **Limited Information**: The function only returns a boolean value indicating whether the substring was found in any string in the list.
+It does not provide any information about where the substring was found, or in which strings.
+If this information is needed, the function would need to be modified or a different approach would need to be used.
+3. **Case Sensitivity**: The `find()` method is case sensitive, so the function will not find a match if the case of the substring does not match the case of the strings in the list.
+If case-insensitive matching is required, the function would need to be modified.
+
+==== Complexity Analysis
+
+**Time Complexity**: The `find()` method, used to check if the substring exists in a string, has a time complexity of O(m), where m is the length of the string.
+Therefore, if there are n strings in the list, the total time complexity becomes O(n*m).
+
+**Space Complexity**: The space complexity of the function is O(1), which means it uses constant space.
+This is because the function only uses a fixed amount of space to store the input and variables, and does not use any additional data structures whose size depends on the input.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_03` that checks if a given substring is found in a joined string of a list.
+The function takes two parameters: `data`, which is a list of strings, and `substr`, which is the substring to be searched for.
+
+The function begins by checking if `substr` or any element in `data` is `None`.
+If `None` is found, it raises a `TypeError`.
+This is done to ensure that the substring and the list do not contain any `None` values, which could cause issues when the `join()` method is called on them.
+
+[source,python]
+----
+if substr is None:
+    raise TypeError('NoneType found in substr')
+
+if None in data:
+    raise TypeError('NoneType found in list')
+----
+
+The main logic of the function uses the `join()` method to concatenate all the strings in the `data` list into a single string with a specified delimiter.
+In this case, the delimiter is a tab character ("\t").
+
+[source,python]
+----
+"\t".join(data)
+----
+
+After joining the strings, the function checks if the substring is found in the resulting string using the `in` keyword.
+The `in` keyword in Python is used to check if a value exists in a sequence (like a list, tuple, string etc.).
+
+[source,python]
+----
+return substr in "\t".join(data)
+----
+
+In summary, `solution_03` is a Python function that checks if a given substring is present in a joined string of a provided list.
+It uses the `join()` method and the `in` keyword to achieve this.
+
+NOTE: This method will fail if the list or the substring contains `None` values.
+
+==== Advantages
+
+1. **Efficiency**: The `join()` method is a built-in Python method, which is highly optimized and efficient.
+It concatenates all the strings in the list into a single string, which can then be searched for the substring.
+This makes it a quick and efficient way to check for the presence of a substring.
+2. **Simplicity**: The use of the `join()` method and the `in` keyword simplifies the code by combining the joining of the strings and the search for the substring into a single line.
+This makes the code more concise and easier to read.
+3. **Flexibility**: The function can handle any list of strings and any substring, making it a flexible solution for checking the presence of a substring in a list of strings.
+
+==== Disadvantages
+
+1. **Error Handling**: The function raises a `TypeError` if `None` is found in the list or in the substring.
+While this prevents the function from failing when it encounters a `None` value, it may not be the most appropriate way to handle this situation.
+It might be better to simply ignore `None` values or to return a specific value indicating that the list or the substring contained invalid data.
+2. **Limited Information**: The function only returns a boolean value indicating whether the substring was found in the joined string.
+It does not provide any information about where the substring was found.
+If this information is needed, the function would need to be modified or a different approach would need to be used.
+3. **Case Sensitivity**: The `in` keyword is case sensitive, so the function will not find a match if the case of the substring does not match the case of the strings in the list.
+If case-insensitive matching is required, the function would need to be modified.
+4. **Delimiter**: The function uses a tab character as a delimiter when joining the strings.
+This could potentially cause issues if the strings in the list or the substring contain tab characters.
+
+==== Complexity Analysis
+
+**Time Complexity**: The `join()` method, used to concatenate all the strings in the list into a single string, has a time complexity of O(n), where n is the total length of all the strings in the list.
+The `in` keyword, used to check if the substring exists in the joined string, also has a time complexity of O(n), where n is the length of the joined string.
+Therefore, the total time complexity of the function is O(n + n) = O(2n), which simplifies to O(n).
+
+**Space Complexity**: The space complexity of the function is O(n), where n is the total length of all the strings in the list.
+This is because the `join()` method creates a new string that is the concatenation of all the strings in the list.
+The size of this new string depends on the total length of all the strings in the list, so the space complexity is O(n).
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_04` that checks if a given substring is found in any of the strings in a list.
+The function takes two parameters: `data`, which is a list of strings, and `substr`, which is the substring to be searched for.
+
+The function begins by checking if `substr` is `None`.
+If `None` is found, it raises a `TypeError`.
+This is done to ensure that the substring does not contain any `None` values, which could cause issues when the `in` operator is used on it.
+
+[source,python]
+----
+if substr is None:
+    raise TypeError('NoneType found in substr')
+----
+
+The main logic of the function uses a for-loop to iterate over each string in the `data` list.
+For each string, it checks if the substring is found in the string using the `in` operator.
+The `in` keyword in Python is used to check if a value exists in a sequence (like a list, tuple, string etc.).
+
+[source,python]
+----
+for row in data:
+    if substr in row:
+        return True
+----
+
+If the substring is found in any string, the function immediately returns `True`.
+If the substring is not found in any string after iterating over the entire list, the function returns `False`.
+
+[source,python]
+----
+return False
+----
+
+In summary, `solution_04` is a Python function that checks if a given substring is present in any string of a provided list.
+It uses a for-loop and the `in` keyword to achieve this.
+
+==== Advantages
+
+1. **Efficiency**: The `in` keyword is a built-in Python operator, which is highly optimized and efficient.
+It checks for the presence of a substring in a string, making it a quick and efficient way to check for the presence of a substring.
+2. **Simplicity**: The use of a for-loop and the `in` keyword simplifies the code by combining the iteration over the list and the search for the substring into a few lines.
+This makes the code more concise and easier to read.
+3. **Flexibility**: The function can handle any list of strings and any substring, making it a flexible solution for checking the presence of a substring in a list of strings.
+
+==== Disadvantages
+
+1. **Error Handling**: The function raises a `TypeError` if `None` is found in the list or in the substring.
+While this prevents the function from failing when it encounters a `None` value, it may not be the most appropriate way to handle this situation.
+It might be better to simply ignore `None` values or to return a specific value indicating that the list or the substring contained invalid data.
+2. **Limited Information**: The function only returns a boolean value indicating whether the substring was found in the list.
+It does not provide any information about where the substring was found.
+If this information is needed, the function would need to be modified or a different approach would need to be used.
+3. **Case Sensitivity**: The `in` keyword is case sensitive, so the function will not find a match if the case of the substring does not match the case of the strings in the list.
+If case-insensitive matching is required, the function would need to be modified.
+
+==== Complexity Analysis
+
+**Time Complexity**: The function uses a for-loop to iterate over each string in the `data` list.
+For each string, it checks if the substring is found in the string using the `in` operator.
+Both the for-loop and the `in` operator have a time complexity of O(n), where n is the length of the string.
+Therefore, the total time complexity of the function is O(n * m), where n is the number of strings in the list and m is the average length of the strings.
+
+**Space Complexity**: The space complexity of the function is O(1), as it does not use any additional space that scales with the size of the input.
+The function only uses a few variables to store the input parameters and the result, so the space complexity is constant.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[]
+----
+
+=== Solution 05
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_05.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function named `solution_05` that checks if a given substring is found in any of the strings in a list.
+The function takes two parameters: `data`, which is a list of strings, and `substr`, which is the substring to be searched for.
+
+The function begins by checking if `None` is found in the `data` list or in the `substr`.
+If `None` is found, it raises a `TypeError`.
+This is done to ensure that the list and the substring do not contain any `None` values, which could cause issues when the `in` operator is used on them.
+
+[source,python]
+----
+if None in data:
+    raise TypeError('NoneType found in list')
+if substr is None:
+    raise TypeError('NoneType found in substr')
+----
+
+The main logic of the function uses a list comprehension to iterate over each string in the `data` list.
+For each string, it checks if the substring is found in the string using the `in` operator.
+The `in` keyword in Python is used to check if a value exists in a sequence (like a list, tuple, string etc.).
+
+[source,python]
+----
+[x for x in data if substr in x]
+----
+
+If the substring is found in any string, the list comprehension will return a list with at least one element, and the function will return `True`.
+If the substring is not found in any string, the list comprehension will return an empty list, and the function will return `False`.
+
+[source,python]
+----
+return True if [x for x in data if substr in x] else False
+----
+
+In summary, `solution_05` is a Python function that checks if a given substring is present in any string of a provided list.
+It uses a list comprehension and the `in` keyword to achieve this.
+
+==== Advantages
+
+1. **Efficiency**: The `in` keyword is a built-in Python operator, which is highly optimized and efficient.
+It checks for the presence of a substring in a string, making it a quick and efficient way to check for the presence of a substring.
+2. **Simplicity**: The use of a list comprehension simplifies the code by combining the iteration over the list and the search for the substring into a single line.
+This makes the code more concise and easier to read.
+3. **Flexibility**: The function can handle any list of strings and any substring, making it a flexible solution for checking the presence of a substring in a list of strings.
+
+==== Disadvantages
+
+1. **Error Handling**: The function raises a `TypeError` if `None` is found in the list or in the substring.
+While this prevents the function from failing when it encounters a `None` value, it may not be the most appropriate way to handle this situation.
+It might be better to simply ignore `None` values or to return a specific value indicating that the list or the substring contained invalid data.
+2. **Limited Information**: The function only returns a boolean value indicating whether the substring was found in the list.
+It does not provide any information about where the substring was found.
+If this information is needed, the function would need to be modified or a different approach would need to be used.
+3. **Case Sensitivity**: The `in` keyword is case sensitive, so the function will not find a match if the case of the substring does not match the case of the strings in the list.
+If case-insensitive matching is required, the function would need to be modified.
+
+==== Complexity Analysis
+
+**Time Complexity**: The function uses a list comprehension to iterate over each string in the `data` list.
+For each string, it checks if the substring is found in the string using the `in` operator.
+Both the list comprehension and the `in` operator have a time complexity of O(n), where n is the length of the string.
+Therefore, the total time complexity of the function is O(n * m), where n is the number of strings in the list and m is the average length of the strings.
+
+**Space Complexity**: The space complexity of the function is O(1), as it does not use any additional space that scales with the size of the input.
+The function only uses a few variables to store the input parameters and the result, so the space complexity is constant.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_05.py[]
+----

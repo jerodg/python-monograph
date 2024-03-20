@@ -1,0 +1,104 @@
+:doctitle: Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided Python code consists of two main parts: the `Index2DArrayIterator` class and the `index_2d_array_in_1d` function.
+
+The `Index2DArrayIterator` class is a custom iterator for 2D arrays.
+It's defined as a dataclass with a single attribute `matrix`, which is the 2D array to be iterated over.
+The class has a single method `__iter__`, which is a generator function that yields each element in the 2D array one by one.
+This is achieved by using a nested loop where the outer loop iterates over each row in the matrix and the inner loop (implemented with `yield from`) iterates over each element in the row.
+Here's a snippet of the class definition and the `__iter__` method:
+
+[source,python]
+----
+@dataclass
+class Index2DArrayIterator:
+    matrix: list[list[int]]
+
+    def __iter__(self) -> Iterator[int]:
+        for row in self.matrix:
+            yield from row
+----
+
+The `index_2d_array_in_1d` function retrieves the value at a given 1D index from a 2D array.
+The function takes a 2D array and a 1D index as input, and returns the value at the corresponding position in the 2D array.
+The function first checks if the array is empty or if the index is out of range, and raises a `ValueError` if either condition is true.
+Then, it calculates the row and column indices in the 2D array corresponding to the 1D index, and returns the value at that position.
+Here's a snippet of the function definition and the calculation of the row and column indices:
+
+[source,python]
+----
+def index_2d_array_in_1d(array: list[list[int]], index: int) -> int:
+    rows = len(array)
+    cols = len(array[0])
+    # ...
+    return array[index // cols][index % cols]
+----
+
+In summary, the `Index2DArrayIterator` class provides a way to iterate over a 2D array as if it were a 1D array, and the `index_2d_array_in_1d` function provides a way to access a 2D array using a 1D index.
+Both of these can be useful in various scenarios where you need to work with 2D arrays.
+
+==== Advantages
+
+1. **Flexibility**: The `Index2DArrayIterator` class allows for flexible iteration over a 2D array.
+It can be used in a variety of contexts where an iterator is expected, such as in a for loop or in functions that take an iterator as an argument.
+2. **Simplicity**: The `index_2d_array_in_1d` function simplifies the process of retrieving a value from a 2D array using a 1D index.
+This can make the code easier to read and understand.
+3. **Error Handling**: The `index_2d_array_in_1d` function includes error handling to check if the array is empty or if the index is out of range.
+This can prevent runtime errors and make the code more robust.
+
+==== Disadvantages
+
+1. **Memory Usage**: The `Index2DArrayIterator` class creates a new object for each 2D array that needs to be iterated over.
+This could potentially use a lot of memory if there are many large 2D arrays.
+2. **Performance**: The `index_2d_array_in_1d` function calculates the row and column indices for each call.
+This could be inefficient if the function is called many times in a loop.
+3. **Limited Use Case**: The `index_2d_array_in_1d` function assumes that all rows and columns in the 2D array are the same size.
+This may not be the case for all 2D arrays, limiting the function's use case.
+
+==== Complexity Analysis
+
+The time and space complexity for the selected code can be analyzed as follows:
+
+1. `Index2DArrayIterator` class:
+- The `__iter__` method has a time complexity of O(n), where n is the total number of elements in the 2D array.
+This is because it iterates over each element in the 2D array once.
+- The space complexity of the `__iter__` method is O(1), as it only uses a constant amount of space to store the iterator state.
+It does not create any additional data structures that scale with the size of the input.
+
+2. `index_2d_array_in_1d` function:
+- The time complexity of this function is O(1), as it performs a constant number of operations to calculate the row and column indices and retrieve the value at that position in the 2D array.
+- The space complexity of this function is also O(1), as it only uses a constant amount of space to store the input parameters and the calculated indices.
+It does not create any additional data structures that scale with the size of the input.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----

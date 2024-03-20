@@ -1,0 +1,585 @@
+:doctitle: Find All Permutations of a List of Lists Solutions
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:imagesdir: ./img
+:keywords: solution, python
+
+== Solution(s)
+
+[.lead]
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[]
+----
+
+==== Explanation
+
+The provided Python code defines a function `solution_00(nums: list[int]) -> list[list[int]]` that generates all permutations of a given list of integers using a recursive approach.
+
+The function starts by initializing an empty list `result` to store the permutations.
+This is done with the line `result: list[list[int]] = []`.
+
+The function then checks if the input list `nums` is empty.
+If it is, the function returns a list containing an empty list.
+This is the base case for the recursion.
+This is done with the lines:
+
+[source,python]
+----
+if len(nums) == 0:
+    return [[]]
+----
+
+The function then enters a loop where it iterates over the input list.
+In each iteration, it removes the first element from the list, recursively generates all permutations of the remaining list, and then appends the removed element to each of these permutations.
+This is done with the lines:
+
+[source,python]
+----
+for _ in range(len(nums)):
+    n = nums.pop(0)
+    permutations = solution_00(nums.copy())
+    for perm in permutations:
+        perm.append(n)
+    result.extend(permutations)
+    nums.append(n)
+----
+
+Here, `n = nums.pop(0)` removes the first element from the list and `permutations = solution_00(nums.copy())` recursively generates all permutations of the remaining list.
+The removed element is then appended to each permutation with `perm.append(n)`, and the new permutations are added to the result list with `result.extend(permutations)`.
+Finally, the removed element is added back to the end of the list with `nums.append(n)`.
+
+At the end of the function, the list of all permutations is returned with `return result`.
+
+In summary, this function uses a recursive approach to generate all permutations of a given list of integers.
+It does this by removing each element from the list, generating all permutations of the remaining list, and then appending the removed element to each of these permutations.
+
+==== Advantages
+
+1. **Simplicity**: Recursive solutions are often simpler and more straightforward to understand than their iterative counterparts.
+The base and recursive cases are clearly defined, which makes the code easier to read and understand.
+2. **No need for auxiliary data structures**: Unlike some other methods that require the use of stacks or queues, this recursive approach does not require any additional data structures, which can simplify the implementation.
+
+==== Disadvantages
+
+1. **Stack Overflow**: Recursive solutions have the risk of stack overflow if the recursion depth becomes too large.
+This is because each recursive call adds a layer to the system call stack.
+If the list is very large, the system might run out of stack space, leading to a stack overflow error.
+2. **Inefficiency**: The recursive approach can be inefficient for large lists.
+This is because it involves a lot of repeated computation where the same subproblems are solved multiple times.
+This redundancy increases the time complexity of the solution.
+3. **Mutability**: The function mutates the input list in each recursive call with `nums.pop(0)` and `nums.append(n)`.
+This could lead to unexpected side effects if the input list is used elsewhere in the program after the function call.
+
+==== Complexity Analysis
+
+The time and space complexity of the selected code can be analyzed as follows:
+
+Time Complexity: The time complexity of generating all permutations of a list of `n` elements is `O(n!)`.
+This is because there are `n!` (n factorial) possible permutations of a list of `n` elements, and the algorithm generates each permutation once.
+The factorial function grows very rapidly with `n`, so the time complexity is exponential.
+
+Space Complexity: The space complexity of the algorithm is also `O(n!)`.
+This is because all `n!` permutations are stored in memory at the same time.
+Each permutation is a list of `n` elements, but since the space complexity is measured in terms of the input size `n`, and not the size of the output, the space complexity is `O(n!)`.
+
+It's worth noting that the actual memory usage might be higher due to the use of recursion.
+Each recursive call adds a layer to the system call stack, and the maximum depth of the recursion is `n`.
+Therefore, the space complexity could be considered as `O(n*n!)` in the worst case, taking into account the call stack.
+However, typically when we talk about space complexity, we refer to the space needed to store the output, hence `O(n!)`.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[]
+----
+
+=== Solution 01
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[]
+----
+
+==== Explanation
+
+The selected code consists of two Python functions, `backtrack` and `solution_01`, which work together to generate all permutations of a given list of integers.
+
+The `backtrack` function is a helper function that uses a recursive approach to generate the permutations.
+It takes three arguments: `output`, `nums`, and `start`.
+The `output` is a list that stores the permutations, `nums` is the input list of integers, and `start` is the index from which to begin generating permutations.
+
+The function begins by checking if the `start` index is the last index of the list.
+If it is, it appends a copy of the list to the `output` list.
+This is the base case for the recursion.
+Here's the relevant code snippet:
+
+[source,python]
+----
+if start == len(nums) - 1:
+    output.append(nums[:])
+----
+
+If the `start` index is not the last index, the function iterates over the list from the `start` index.
+For each element, it swaps the `start` element with the current element, recursively generates all permutations of the remaining list, and then swaps the elements back to backtrack.
+This is done using the following code:
+
+[source,python]
+----
+for i in range(start, len(nums)):
+    nums[start], nums[i] = nums[i], nums[start]
+    backtrack(output, nums, start + 1)
+    nums[start], nums[i] = nums[i], nums[start]
+----
+
+The `solution_01` function is the main function that generates all permutations of a given list of integers.
+It takes one argument, `nums`, which is the input list of integers.
+It initializes an empty list, `output`, to store the permutations and then calls the `backtrack` function to start generating permutations from the first index of the list.
+Here's the relevant code snippet:
+
+[source,python]
+----
+output: list[list[int]] = []
+output = backtrack(output, nums, 0)
+----
+
+Finally, the `solution_01` function returns the `output` list, which now contains all permutations of the input list.
+Each permutation is represented as a list of integers.
+
+==== Advantages
+
+1. **Completeness:** The backtracking algorithm ensures that all possible permutations are generated.
+2. **In-Place:** The algorithm swaps elements in the original list, which means it does not require additional space for each permutation.
+3. **Flexibility:** The algorithm can be easily modified to generate permutations in a specific order or to stop generating permutations once a certain condition is met.
+
+==== Disadvantages
+
+1. **Efficiency:** The backtracking algorithm has a time complexity of O(n!), which means it can be slow for large lists.
+2. **Recursion:** The algorithm uses recursion, which can lead to a stack overflow if the depth of recursion is too high (i.e., if the list is too large).
+3. **Side Effects:** The algorithm modifies the original list during its execution, which can be a source of bugs if the original list is needed later in the program.
+
+==== Complexity Analysis
+
+**Time Complexity:**
+The time complexity of generating all permutations of a list of `n` elements using a backtracking algorithm is `O(n!)`.
+This is because there are `n!` (n factorial) possible permutations of a list of `n` elements, and each permutation is generated in `O(n)` time due to the list copying (`nums[:]`) in the base case of the recursion.
+
+**Space Complexity:**
+The space complexity of the code is `O(n*n!)`.
+This is because all permutations are stored in memory at once.
+Each permutation is a list of `n` elements, and there are `n!` permutations, so the total space required is proportional to `n * n!`.
+
+NOTE: that this analysis assumes that the size of the input list `nums` is `n`.
+If the size of the input list is not considered to be a constant, then the space complexity would be `O(n * n!)` because each permutation is a list of `n` elements.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[]
+----
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_02`.
+This function is designed to generate all permutations of a given list of integers.
+It uses Python's built-in `itertools.permutations` function to achieve this.
+
+The function takes one argument, `nums`, which is expected to be a list of integers.
+The type hint `list[int]` is used to indicate this.
+Here's the function signature:
+
+[source,python]
+----
+def solution_02(nums: list[int]) -> list[list[int]]:
+----
+
+Inside the function, a list comprehension is used to iterate over the result of the `itertools.permutations` function.
+This function returns an iterable of tuples, where each tuple is a permutation of the input list.
+The list comprehension converts each tuple to a list, as the requirement is to return a list of lists.
+Here's the relevant line of code:
+
+[source,python]
+----
+return [list(permutation) for permutation in permutations(nums)]
+----
+
+In the end, the function returns a list of all permutations of the input list, where each permutation is represented as a list of integers.
+This is indicated by the return type hint `list[list[int]]`.
+
+The function also includes a docstring that provides a detailed explanation of its purpose, arguments, return value, and an example of its usage.
+This is a common practice in Python to help other developers understand the purpose and usage of the function.
+
+==== Advantages
+
+1. **Efficiency:** The `itertools.permutations` function is implemented in C, making it faster than a pure Python implementation.
+2. **Readability:** The use of list comprehension makes the code concise and easy to read.
+3. **Standard Library:** Both `itertools.permutations` and list comprehension are part of Python's standard library, so no additional packages need to be installed.
+
+==== Disadvantages
+
+1. **Memory Usage:** The list comprehension creates a new list in memory.
+If the input list is large, this could potentially use a significant amount of memory.
+2. **Not In-Place:** The original tuples are not converted to lists in-place, meaning the original data structure is not modified.
+This might not be desirable in some cases where memory usage is a concern.
+3. **Limited Flexibility:** The `itertools.permutations` function generates all permutations of the input list, which might not be necessary in some cases.
+There's no easy way to limit the number of permutations or to generate them in a specific order.
+
+==== Complexity Analysis
+
+The time complexity of generating all permutations of a list of `n` elements is `O(n!)`.
+This is because there are `n!` (n factorial) possible permutations of a list of `n` elements, and the `itertools.permutations` function generates each permutation in constant time.
+
+The space complexity of the code is also `O(n!)`.
+This is because all permutations are stored in memory at once.
+Each permutation is a list of `n` elements, and there are `n!` permutations, so the total space required is proportional to `n * n!`.
+However, since `n` is a constant factor, it can be omitted from the space complexity, leaving us with `O(n!)`.
+
+NOTE: that this analysis assumes that the size of the input list `nums` is `n`.
+If the size of the input list is not considered to be a constant, then the space complexity would be `O(n * n!)` because each permutation is a list of `n` elements.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[]
+----
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_03`.
+This function generates all permutations of a given list of integers using an iterative approach.
+
+The function takes one argument, `nums`, which is expected to be a list of integers.
+The type hint `list[int]` is used to indicate this.
+Here's the function signature:
+
+[source,python]
+----
+def solution_03(nums: list[int]) -> list[list[int]]:
+----
+
+The function begins by initializing the `output` list with the input list as the first permutation.
+This is done using the following line of code:
+
+[source,python]
+----
+output = [nums]
+----
+
+Then, the function enters a loop that iterates over the length of the input list.
+Inside this loop, a new `output` list is initialized for each iteration.
+This is done using the following line of code:
+
+[source,python]
+----
+new_output = []
+----
+
+Next, the function enters a nested loop that iterates over each permutation in the `output` list.
+Inside this loop, another nested loop is used to iterate over each index in the permutation.
+For each index, a new permutation is created by inserting the last element of the permutation at the current index.
+This new permutation is then added to the `new_output` list.
+This is done using the following lines of code:
+
+[source,python]
+----
+for i in range(len(perm)):
+    new_perm = perm[:i] + [perm[-1]] + perm[i:-1]
+    new_output.append(new_perm)
+----
+
+After all permutations have been generated for the current iteration, the `output` list is updated with the `new_output` list.
+This is done using the following line of code:
+
+[source,python]
+----
+output = new_output
+----
+
+Finally, after all iterations have been completed, the function returns the `output` list, which now contains all permutations of the input list.
+Each permutation is represented as a list of integers.
+This is indicated by the return type hint `list[list[int]]`.
+
+The function also includes a docstring that provides a detailed explanation of its purpose, arguments, return value, and an example of its usage.
+This is a common practice in Python to help other developers understand the purpose and usage of the function.
+
+==== Advantages
+
+1. **In-Place:** The algorithm generates permutations in-place, which means it does not require additional space for each permutation.
+2. **Iterative:** The algorithm uses an iterative approach, which avoids the potential for stack overflow that can occur with recursive solutions.
+3. **Flexibility:** The algorithm can be easily modified to generate permutations in a specific order or to stop generating permutations once a certain condition is met.
+
+==== Disadvantages
+
+1. **Efficiency:** The iterative algorithm has a time complexity of O(n!), which means it can be slow for large lists.
+2. **Memory Usage:** The algorithm stores all permutations in memory at once, which can be a concern for large lists due to high memory usage.
+3. **Complexity:** The algorithm involves multiple nested loops, which can make the code more difficult to understand and maintain.
+
+==== Complexity Analysis
+
+The time and space complexity of the selected code can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of generating all permutations of a list of `n` elements using an iterative approach is `O(n!)`.
+This is because there are `n!` (n factorial) possible permutations of a list of `n` elements, and each permutation is generated in `O(n)` time due to the list slicing and concatenation operations.
+
+**Space Complexity:**
+
+The space complexity of the code is `O(n*n!)`.
+This is because all permutations are stored in memory at once.
+Each permutation is a list of `n` elements, and there are `n!` permutations, so the total space required is proportional to `n * n!`.
+
+Please note that this analysis assumes that the size of the input list `nums` is `n`.
+If the size of the input list is not considered to be a constant, then the space complexity would be `O(n * n!)` because each permutation is a list of `n` elements.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[]
+----
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_04`.
+This function generates all permutations of a given list of integers using a stack-based approach.
+
+The function takes one argument, `nums`, which is expected to be a list of integers.
+The type hint `list[int]` is used to indicate this.
+Here's the function signature:
+
+[source,python]
+----
+def solution_04(nums: list[int]) -> list[list[int]]:
+----
+
+The function begins by initializing a stack with the input list and an empty permutation.
+This is done using the following line of code:
+
+[source,python]
+----
+stack = [(nums, [])]
+----
+
+Then, the function initializes the `output` list, which will store all the permutations.
+This is done using the following line of code:
+
+[source,python]
+----
+output = []
+----
+
+Next, the function enters a loop that continues as long as the stack is not empty.
+Inside this loop, a list and a permutation are popped from the stack.
+If the list is empty, the permutation is added to the `output` list.
+This is done using the following lines of code:
+
+[source,python]
+----
+nums, perm = stack.pop()
+if not nums:
+    output.append(perm)
+----
+
+If the list is not empty, the function enters a loop that iterates over each number in the list.
+Inside this loop, a new list (with the current number removed) and a new permutation (with the current number added) are pushed to the stack.
+This is done using the following lines of code:
+
+[source,python]
+----
+for i in range(len(nums)):
+    stack.append((nums[:i] + nums[i + 1 :], perm + [nums[i]]))
+----
+
+Finally, after all permutations have been generated, the function returns the `output` list, which now contains all permutations of the input list.
+Each permutation is represented as a list of integers.
+This is indicated by the return type hint `list[list[int]]`.
+
+The function also includes a docstring that provides a detailed explanation of its purpose, arguments, return value, and an example of its usage.
+This is a common practice in Python to help other developers understand the purpose and usage of the function.
+
+==== Advantages
+
+1. **Non-Recursive:** The stack-based approach is non-recursive, which avoids the potential for stack overflow that can occur with recursive solutions.
+2. **Space Efficient:** The algorithm generates permutations in-place, which means it does not require additional space for each permutation.
+3. **Flexibility:** The algorithm can be easily modified to generate permutations in a specific order or to stop generating permutations once a certain condition is met.
+
+==== Disadvantages
+
+1. **Efficiency:** The stack-based algorithm has a time complexity of O(n!), which means it can be slow for large lists.
+2. **Memory Usage:** The algorithm stores all permutations in memory at once, which can be a concern for large lists due to high memory usage.
+3. **Complexity:** The algorithm involves multiple nested loops and stack operations, which can make the code more difficult to understand and maintain.
+
+==== Complexity Analysis
+
+The time and space complexity of the selected code can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of generating all permutations of a list of `n` elements using a stack-based approach is `O(n!)`.
+This is because there are `n!` (n factorial) possible permutations of a list of `n` elements, and each permutation is generated in `O(n)` time due to the list slicing and concatenation operations.
+
+**Space Complexity:**
+
+The space complexity of the code is `O(n*n!)`.
+This is because all permutations are stored in memory at once.
+Each permutation is a list of `n` elements, and there are `n!` permutations, so the total space required is proportional to `n * n!`.
+
+Please note that this analysis assumes that the size of the input list `nums` is `n`.
+If the size of the input list is not considered to be a constant, then the space complexity would be `O(n * n!)` because each permutation is a list of `n` elements.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[]
+----
+
+=== Solution 05
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_05.py[]
+----
+
+==== Explanation
+
+The selected code is a Python function named `solution_05`.
+This function generates all permutations of a given list of integers using a queue-based approach.
+
+The function takes one argument, `nums`, which is expected to be a list of integers.
+The type hint `list[int]` is used to indicate this.
+Here's the function signature:
+
+[source,python]
+----
+def solution_05(nums: list[int]) -> list[list[int]]:
+----
+
+The function begins by initializing a queue with the input list and an empty permutation.
+This is done using the following line of code:
+
+[source,python]
+----
+queue = deque([(nums, [])])
+----
+
+Then, the function initializes the `output` list, which will store all the permutations.
+This is done using the following line of code:
+
+[source,python]
+----
+output = []
+----
+
+Next, the function enters a loop that continues as long as the queue is not empty.
+Inside this loop, a list and a permutation are dequeued from the queue.
+If the list is empty, the permutation is added to the `output` list.
+This is done using the following lines of code:
+
+[source,python]
+----
+nums, perm = queue.popleft()
+if not nums:
+    output.append(perm)
+----
+
+If the list is not empty, the function enters a loop that iterates over each number in the list.
+Inside this loop, a new list (with the current number removed) and a new permutation (with the current number added) are enqueued to the queue.
+This is done using the following lines of code:
+
+[source,python]
+----
+for i in range(len(nums)):
+    queue.append((nums[:i] + nums[i + 1 :], perm + [nums[i]]))
+----
+
+Finally, after all permutations have been generated, the function returns the `output` list, which now contains all permutations of the input list.
+Each permutation is represented as a list of integers.
+This is indicated by the return type hint `list[list[int]]`.
+
+The function also includes a docstring that provides a detailed explanation of its purpose, arguments, return value, and an example of its usage.
+This is a common practice in Python to help other developers understand the purpose and usage of the function.
+
+==== Advantages
+
+1. **Non-Recursive:** The queue-based approach is non-recursive, which avoids the potential for stack overflow that can occur with recursive solutions.
+2. **Space Efficient:** The algorithm generates permutations in-place, which means it does not require additional space for each permutation.
+3. **Flexibility:** The algorithm can be easily modified to generate permutations in a specific order or to stop generating permutations once a certain condition is met.
+
+==== Disadvantages
+
+1. **Efficiency:** The queue-based algorithm has a time complexity of O(n!), which means it can be slow for large lists.
+2. **Memory Usage:** The algorithm stores all permutations in memory at once, which can be a concern for large lists due to high memory usage.
+3. **Complexity:** The algorithm involves multiple nested loops and queue operations, which can make the code more difficult to understand and maintain.
+
+==== Complexity Analysis
+
+The time and space complexity of the selected code can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of generating all permutations of a list of `n` elements using a queue-based approach is `O(n!)`.
+This is because there are `n!` (n factorial) possible permutations of a list of `n` elements, and each permutation is generated in `O(n)` time due to the list slicing and concatenation operations.
+
+**Space Complexity:**
+
+The space complexity of the code is `O(n*n!)`.
+This is because all permutations are stored in memory at once.
+Each permutation is a list of `n` elements, and there are `n!` permutations, so the total space required is proportional to `n * n!`.
+
+Please note that this analysis assumes that the size of the input list `nums` is `n`.
+If the size of the input list is not considered to be a constant, then the space complexity would be `O(n * n!)` because each permutation is a list of `n` elements.
+
+==== Tests
+
+[source,python,linenums]
+----
+include::./tests/test_solution_05.py[]
+----

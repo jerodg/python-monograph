@@ -1,0 +1,297 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+
+:description: Find the Equilibrium Index of an Array Problem
+:keywords: problem, python
+
+= {description}
+
+[.lead]
+The task is to find the equilibrium index of an array.
+The equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+
+Given a sequence `arr[]` of size `n`, we need to write a function `equilibrium(arr: List[int], n: int) -> int` that returns an equilibrium index (if any) or -1 if no equilibrium index exists.
+
+The function takes two parameters:
+1. `arr` (List[int]): A list of integers representing the array.
+2. `n` (int): The size of the array.
+
+The function should return an integer representing the equilibrium index of the array if it exists, otherwise -1.
+
+For example, consider the array `[-7, 1, 5, 2, -4, 3, 0]`.
+The function should return `3` as an output because at index `3`, the sum of array elements to the left is `(-7 + 1 + 5 = -1)` and to the right is `( -4 + 3 + 0 = -1)`.
+
+This problem requires understanding of array manipulation and mathematical summation.
+The solution can be achieved by iterating over the array and calculating the sum of elements to the left and right of each index.
+The index where these sums are equal is the equilibrium index.
+If no such index is found, the function should return -1.
+
+== Constraints
+
+The constraints for the problem "Find the Equilibrium Index of an Array" are as follows:
+
+1. The array can contain both positive and negative integers.
+This means the array elements are not limited to a specific range and can be any integer value.
+
+2. The size of the array `n` is a positive integer.
+This implies that the array cannot be empty and must contain at least one element.
+
+3. The equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+If no such index exists, the function should return -1.
+
+4. The function should be able to handle large inputs efficiently.
+This is an implied constraint based on the nature of the problem.
+The function should be designed in a way that it does not result in a time-out error for large inputs.
+
+5. The function should return an integer representing the equilibrium index of the array if it exists, otherwise -1. This is a constraint on the output of the function.
+
+These constraints should be taken into account while implementing the solution to ensure it works correctly for all possible inputs.
+
+== Examples
+
+Here are five examples that cover a range of use cases for the problem of finding the equilibrium index of an array:
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+arr = [-7, 1, 5, 2, -4, 3, 0]
+n = 7
+----
+
+.Output
+[source,python,linenums]
+----
+3
+----
+
+Explanation: At index 3, the sum of array elements to the left is (-7 + 1 + 5 = -1) and to the right is ( -4 + 3 + 0 = -1).
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+arr = [1, 2, 3, 4, 5, 6]
+n = 6
+----
+
+.Output
+[source,python,linenums]
+----
+-1
+----
+
+Explanation: There is no index in this array where the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+arr = [1, 2, 3, 4, 3, 2, 1]
+n = 7
+----
+
+.Output
+[source,python,linenums]
+----
+3
+----
+
+Explanation: At index 3, the sum of array elements to the left is (1 + 2 + 3 = 6) and to the right is (3 + 2 + 1 = 6).
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+arr = [20, 10, -80, 10, 10, 15, 35]
+n = 7
+----
+
+.Output
+[source,python,linenums]
+----
+0
+----
+
+Explanation: At index 0, the sum of array elements to the left is 0 (as there are no elements to the left) and to the right is (10 - 80 + 10 + 10 + 15 + 35 = 0).
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+arr = [0, -3, 5, -4, -2, 3, 1, 0]
+n = 8
+----
+
+.Output
+[source,python,linenums]
+----
+3
+----
+
+Explanation: At index 3, the sum of array elements to the left is (0 - 3 + 5 = 2) and to the right is (-2 + 3 + 1 + 0 = 2).
+
+== Use-Cases
+
+The problem of finding the equilibrium index of an array has several real-world applications:
+
+1. **Balancing Load in Distributed Systems:** In distributed systems, tasks are often distributed across multiple nodes.
+The equilibrium index can be used to determine the point at which the load is evenly distributed on both sides.
+This can help in optimizing the performance of the system.
+
+2. **Financial Transactions:** In financial applications, the equilibrium index can be used to find a point in time where the total amount of money coming in equals the total amount going out.
+This can be useful in budgeting and financial planning.
+
+3. **Data Analysis and Statistics:** In data analysis, finding the equilibrium index can be useful in identifying the median or the point of balance in a data set.
+This can be used in various statistical analyses.
+
+4. **Physics and Engineering:** In physics and engineering, the concept of equilibrium is widely used.
+For example, in structural engineering, the equilibrium index can represent the point where the forces acting on a structure are balanced.
+
+5. **Computer Science and Algorithms:** The problem of finding the equilibrium index is a common question in computer science and algorithms courses.
+It helps students understand the concepts of array manipulation and mathematical summation.
+
+**Q1:** How can the concept of equilibrium index be applied in machine learning and artificial intelligence?
+**Q2:** Are there any specific industries or sectors where the problem of finding the equilibrium index is particularly relevant?
+**Q3:** Can the concept of equilibrium index be extended to multi-dimensional arrays or matrices?
+If so, how?
+
+== Common Mistakes
+
+When solving the problem of finding the equilibrium index of an array, there are several common mistakes that one should avoid:
+
+1. **Not Considering Negative Numbers:** One common mistake is not considering that the array can contain both positive and negative numbers.
+This can lead to incorrect results as the sum of elements at lower and higher indexes can be equal even with negative numbers.
+
+2. **Not Handling Non-Existent Equilibrium Index:** Another common mistake is not handling the case where there is no equilibrium index.
+The function should return -1 if no equilibrium index exists.
+
+3. **Inefficient Solution:** A brute force solution that calculates the sum of elements at lower and higher indexes for each index in the array would have a time complexity of O(n^2).
+This is inefficient and can lead to a time-out error for large inputs.
+A more efficient solution would be to calculate the total sum of the array first and then iterate over the array while updating the sum of elements at lower and higher indexes.
+
+4. **Not Checking Input Validity:** It's important to check that the input is valid, i.e., the array is not empty and contains at least one element.
+Failing to do so can lead to unexpected errors.
+
+5. **Incorrect Indexing:** Python uses zero-based indexing, meaning that the first element of the array is at index 0. A common mistake is to use one-based indexing, which can lead to incorrect results or out-of-bounds errors.
+
+**Q1:** What are some strategies to avoid these common mistakes when solving this problem?
+**Q2:** How can unit tests be used to catch these common mistakes?
+**Q3:** What are some other common mistakes to avoid when working with arrays in Python?
+
+== Best Practices
+
+When solving the problem of finding the equilibrium index of an array, the following best practices can be applied:
+
+1. **Understand the Problem:** Before starting to code, make sure you understand the problem statement and requirements thoroughly.
+This includes understanding the concept of the equilibrium index and how it applies to an array.
+
+2. **Plan Your Approach:** Plan your approach before starting to code.
+This could involve writing pseudocode or drawing a flowchart.
+A good approach for this problem is to first calculate the total sum of the array, then iterate over the array while updating the sum of elements at lower and higher indexes.
+
+3. **Consider Edge Cases:** Make sure your solution handles edge cases.
+For this problem, edge cases could include an empty array, an array with one element, or an array where no equilibrium index exists.
+
+4. **Write Clean and Readable Code:** Write your code in a clean and readable manner.
+Use meaningful variable names and include comments to explain your logic.
+This will make your code easier to understand and debug.
+
+5. **Optimize Your Solution:** Aim for an efficient solution.
+A brute force solution that calculates the sum of elements at lower and higher indexes for each index in the array would have a time complexity of O(n^2).
+A more efficient solution would have a time complexity of O(n).
+
+6. **Test Your Solution:** Test your solution with various test cases to make sure it works as expected.
+This should include the provided examples as well as your own test cases.
+
+7. **Review and Refactor:** After your solution is working, review your code and refactor if necessary.
+Look for ways to make your code more efficient or readable.
+
+8. **Document Your Solution:** Finally, document your solution.
+This includes explaining your approach, the time and space complexity of your solution, and any assumptions or constraints you considered.
+This will be helpful for others who read your code, and for you if you need to revisit your code in the future.
+
+== Follow-up
+
+After implementing the solution for finding the equilibrium index of an array, I would recommend the following steps:
+
+1. **Testing:** Write a comprehensive set of test cases to validate your solution.
+This should include edge cases such as an empty array, an array with one element, and an array where no equilibrium index exists.
+
+2. **Optimization:** Analyze the time and space complexity of your solution.
+If it's not optimal, consider different approaches that could improve its efficiency.
+
+3. **Code Review:** Have your code reviewed by a peer.
+They might spot potential issues or areas for improvement that you missed.
+
+4. **Documentation:** Document your function properly.
+Include information about its purpose, parameters, return value, and any exceptions it might throw.
+Also, explain the logic behind your solution.
+
+5. **Refactoring:** Based on feedback from your code review and your own analysis, refactor your code to improve its readability, efficiency, or both.
+
+6. **Validation:** Validate your solution with a variety of test cases.
+This should include edge cases such as an empty array, an array with one element, and an array where no equilibrium index exists.
+
+7. **Performance Analysis:** Evaluate the time and space complexity of your solution.
+If it's not optimal, consider different strategies that could enhance its efficiency.
+
+8. **Peer Review:** Have your code reviewed by a colleague.
+They might identify potential issues or areas for improvement that you overlooked.
+
+Remember, solving the problem is just the first step.
+Ensuring that your solution is robust, efficient, and maintainable is equally important.
+
+== Related Topics
+
+Related topics for finding the equilibrium index of an array include:
+
+1. **Array Data Structure:** Understanding the basics of arrays is crucial as the problem is based on array manipulation.
+You can read more about it on [GeeksforGeeks](https://www.geeksforgeeks.org/array-data-structure/).
+
+2. **Prefix Sum Array:** The concept of prefix sum array can be used to solve this problem in an efficient manner.
+You can learn more about it on [GeeksforGeeks](https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/).
+
+3. **Time and Space Complexity:** Understanding time and space complexity is important to analyze the efficiency of your solution.
+You can read more about it on [GeeksforGeeks](https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/).
+
+4. **Python Programming:** As the problem is being solved in Python, understanding Python syntax and built-in functions can be helpful.
+You can learn more about it in the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
+
+5. **Unit Testing in Python:** To validate your solution, knowledge of unit testing in Python can be beneficial.
+You can read more about it in the [Python Documentation](https://docs.python.org/3/library/unittest.html).
+
+6. **Code Review Practices:** To improve the quality of your solution, understanding good code review practices can be useful.
+You can learn more about it on [Atlassian](https://www.atlassian.com/agile/software-development/code-reviews).
+
+7. **Code Refactoring Techniques:** To improve the readability and efficiency of your solution, knowledge of code refactoring techniques can be helpful.
+You can learn more about it on [Refactoring Guru](https://refactoring.guru/refactoring/techniques).
+
+8. **Python Docstrings:** To document your function, understanding how to write Python docstrings can be beneficial.
+You can learn more about it in the [Python Documentation](https://www.python.org/dev/peps/pep-0257/).
+
+Remember, these topics are related to the problem at hand and understanding them can help you solve the problem more effectively and efficiently.
+
+== References

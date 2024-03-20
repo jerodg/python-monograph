@@ -1,0 +1,305 @@
+:doctitle: Remove Duplicates from a Sorted Array Problem
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+[.lead]
+Given an integer array `+nums+` sorted in *non-decreasing order*, remove the duplicates https://en.wikipedia.org/wiki/In-place_algorithm[*in-place*] such that each unique element appears only *once*. The *relative order* of the elements should be kept the *same*. Then return _the number of unique elements in _`+nums+`.
+
+Consider the number of unique elements of `+nums+` to be `+k+`, to get accepted, you need to do the following things:
+
+* Change the array `+nums+` such that the first `+k+` elements of `+nums+` contain the unique elements in the order they were present in `+nums+` initially. The remaining elements of `+nums+` are not important as well as the size of `+nums+`.
+* Return `+k+`.
+
+*Custom Judge:*
+
+The judge will test your solution with the following code:
+
+....
+int[] nums = [...]; // Input array
+int[] expectedNums = [...]; // The expected answer with correct length
+
+int k = removeDuplicates(nums); // Calls your implementation
+
+assert k == expectedNums.length;
+for (int i = 0; i < k; i++) {
+    assert nums[i] == expectedNums[i];
+}
+....
+
+If all assertions pass, then your solution will be *accepted*.
+
+
+=== Approaches
+
+To solve the problem of removing duplicates from a sorted array in-place, you can consider the following techniques:
+
+1. **Two-Pointer Technique**: This technique involves maintaining two pointers: one for iterating over the array and the other for keeping track of the position where the next unique element should be placed.
+As you iterate over the array, whenever you encounter a new unique element, you place it at the position indicated by the second pointer and then increment the second pointer.
+
+2. **Counting Unique Elements**: Another approach is to first count the number of unique elements in the array.
+This can be done by iterating over the array and keeping track of the current element.
+If the next element is different from the current element, increment a counter.
+The counter will then give the number of unique elements.
+
+3. **Using a Set**: Although this approach does not strictly adhere to the in-place requirement, it can be used to solve a more general version of the problem where additional space is allowed.
+You can iterate over the array and insert each element into a set, which automatically removes duplicates.
+Then, you can copy the elements from the set back into the array.
+
+Remember, the key to solving this problem efficiently is understanding the problem constraints (in this case, the in-place requirement and the fact that the array is already sorted) and choosing the right technique based on them.
+
+=== Constraints
+* `+1 <= nums.length <= 3 * 10+`^`+4+`^
+* `+-100 <= nums[i] <= 100+`
+* `+nums+` is sorted in *non-decreasing* order.
+
+=== Examples
+
+==== 0
+
+.Input
+[source,python,linenums]
+----
+[1,1,2]
+----
+
+.Output
+[source,python,linenums]
+----
+[1,2]
+----
+
+==== 1
+
+.Input
+[source,python,linenums]
+----
+[0,0,1,1,1,2,2,3,3,4]
+----
+
+.Output
+[source,python,linenums]
+----
+[0,1,2,3,4]
+----
+
+==== 2
+
+.Input
+[source,python,linenums]
+----
+[-100,-100,-50,-50,0,0,50,50,100,100]
+----
+
+.Output
+[source,python,linenums]
+----
+[-100,-50,0,50,100]
+
+----
+
+==== 3
+
+.Input
+[source,python,linenums]
+----
+[1,1,1,1,1,1,1,1,1,1]
+----
+
+.Output
+[source,python,linenums]
+----
+[1]
+----
+
+==== 4
+
+.Input
+[source,python,linenums]
+----
+[-100,-50,0,50,100]
+----
+
+.Output
+[source,python,linenums]
+----
+[-100,-50,0,50,100]
+----
+
+== Use-Cases
+
+The problem of removing duplicates from a sorted array in-place is a common task in data processing and manipulation.
+Here are some use cases:
+
+1. **Data Cleaning**: In data analysis and machine learning, it's common to clean the data before processing it.
+This could involve removing duplicate entries to ensure that the data is unique.
+
+2. **Database Operations**: When dealing with databases, especially in operations like merging tables or records, duplicates might occur.
+Removing these duplicates is essential to maintain the integrity of the data.
+
+3. **Search Engine Optimization (SEO)**: In SEO, it's important to avoid duplicate content on a website.
+A tool that removes duplicates from a sorted list of webpage content or metadata can help improve a site's SEO.
+
+4. **E-commerce Applications**: In e-commerce platforms, removing duplicates from a sorted list can be useful in various scenarios, such as removing duplicate product listings.
+
+5. **Social Networking Applications**: In social networking applications, removing duplicates from a sorted list can be useful in scenarios like removing duplicate friend requests or posts.
+
+Remember, these are just a few examples.
+The need to remove duplicates from a sorted array in-place can arise in many different contexts.
+
+== Common Mistakes
+
+When solving the problem of removing duplicates from a sorted array in-place, there are several common mistakes that you should avoid:
+
+1. **Ignoring the In-Place Requirement**: One of the key constraints of this problem is that the solution must be in-place, meaning it should not allocate extra space for another array.
+Using a separate array or data structure to store the unique elements is a common mistake.
+
+2. **Not Maintaining the Relative Order**: The problem requires that the relative order of the elements should be kept the same.
+It's a mistake to sort the array or rearrange the elements in a way that changes their original order.
+
+3. **Not Handling Edge Cases**: Edge cases such as an empty array or an array with all identical elements should be handled correctly.
+Ignoring these cases can lead to incorrect results or runtime errors.
+
+4. **Inefficient Use of Pointers**: In the two-pointer technique, it's important to correctly manage the pointers to ensure that each unique element is correctly placed in the array.
+Mismanagement of pointers can lead to incorrect results.
+
+5. **Returning the Wrong Value**: The problem requires returning the number of unique elements in the array.
+Returning the modified array instead of the count of unique elements is a common mistake.
+
+6. **Not Considering Time Complexity**: The problem should ideally be solved with a time complexity of O(n), where n is the length of the array.
+Solutions with higher time complexity may not be efficient for large inputs.
+
+== Best Practices
+
+When solving the problem of removing duplicates from a sorted array in-place, here are some best practices to consider:
+
+1. **Understand the Problem**: Make sure you fully understand the problem before you start coding.
+This includes understanding the constraints and requirements of the problem.
+
+2. **Choose the Right Approach**: Depending on the constraints of the problem, different approaches may be more suitable.
+For example, if the problem requires an in-place solution, using a set or a separate array would not be appropriate.
+
+3. **Use Descriptive Variable Names**: When using pointers or counters, make sure to use descriptive variable names.
+This will make your code easier to read and understand.
+
+4. **Handle Edge Cases**: Make sure to handle edge cases, such as an empty array or an array with all identical elements.
+These cases can often lead to unexpected results if not handled correctly.
+
+5. **Test Your Code**: After implementing your solution, make sure to test it with various test cases to ensure it works as expected.
+This includes both the provided examples and any additional cases you can think of.
+
+6. **Analyze Time and Space Complexity**: Always analyze the time and space complexity of your solution.
+This will help you understand the efficiency of your code and whether it can handle large inputs.
+
+7. **Write Clean and Readable Code**: Make sure your code is clean, readable, and well-organized.
+This includes using proper indentation, removing unnecessary comments or debug statements, and organizing your code in a logical way.
+
+8. **Document Your Code**: It's a good practice to document your code, especially if it will be read by others.
+This includes writing comments explaining what your code does and why you made certain decisions.
+
+== Test Strategies
+
+When testing the solution for the problem of removing duplicates from a sorted array in-place, you can consider the following strategies:
+
+1. **Boundary Tests**: Test your solution with the minimum and maximum possible inputs.
+For example, an array with only one element (minimum) and an array with the maximum number of elements as per the problem's constraints.
+
+2. **Random Tests**: Generate random test cases within the problem's constraints to ensure your solution works for any input.
+
+3. **Edge Cases**: Test your solution with edge cases.
+For example, an array with all identical elements, an array with no duplicates, or an empty array.
+
+4. **Large Inputs**: Test your solution with large inputs to ensure it can handle the maximum constraints and doesn't exceed time limits.
+
+5. **Variety of Inputs**: Test your solution with a variety of inputs.
+For example, an array with negative numbers, positive numbers, and zero.
+
+6. **Performance Testing**: Analyze the time and space complexity of your solution and test it with large inputs to ensure it performs well.
+
+7. **Regression Testing**: After making any changes or optimizations to your solution, re-run all the tests to ensure the changes didn't break anything.
+
+Remember, the goal of testing is to ensure your solution is correct, efficient, and robust against all possible inputs within the problem's constraints.
+
+== Performance Optimizations
+
+When optimizing the performance of a function that solves the problem of removing duplicates from a sorted array in-place, consider the following tips:
+
+1. **Use the Two-Pointer Technique**: This technique is efficient for this problem as it only requires a single pass through the array.
+One pointer is used to iterate over the array, and the other is used to keep track of the position where the next unique element should be placed.
+
+2. **Avoid Unnecessary Operations**: Try to minimize the number of operations in your function.
+For example, avoid unnecessary comparisons or assignments.
+
+3. **Leverage the Sorted Property of the Array**: Since the array is sorted, you can simply compare the current element with the next one to check for duplicates.
+This takes advantage of the sorted property and can significantly speed up the function.
+
+4. **In-Place Modification**: As the problem requires an in-place solution, avoid creating new data structures which would increase space complexity and potentially slow down your function due to increased memory usage.
+
+5. **Early Return**: If applicable, consider conditions under which you can return early from the function.
+For example, if the array is empty or only contains one element, you can return immediately.
+
+6. **Optimize for the Worst Case**: When optimizing, consider the worst-case scenario.
+In this case, the worst scenario is when all elements are unique.
+Ensure your solution is efficient even in this case.
+
+Remember, always measure the performance of your function before and after making optimizations to ensure they are having the desired effect.
+
+== Follow-up
+
+For follow-up on solving the problem of removing duplicates from a sorted array in-place, you could consider the following:
+
+1. **Variations of the Problem**: Try solving variations of the problem.
+For example, what if the array is not sorted?
+What if you need to remove duplicates such that each element appears at most twice?
+
+2. **Different Data Types**: Try solving the problem with different data types.
+For example, what if the elements in the array are strings or custom objects?
+
+3. **Different Programming Languages**: Try implementing the solution in different programming languages.
+This can help you understand the nuances of each language.
+
+4. **Code Review**: Have your solution reviewed by peers or mentors.
+They might provide valuable feedback and suggest improvements.
+
+5. **Benchmarking**: Benchmark your solution against other solutions.
+This can help you understand how efficient your solution is.
+
+6. **Understand the Underlying Concepts**: Make sure you understand the underlying concepts, such as the two-pointer technique, in-depth.
+This will help you apply these concepts to other similar problems.
+
+7. **Teach Others**: Try explaining the problem and your solution to others.
+This can reinforce your understanding and improve your communication skills.
+
+== Related Topics
+
+Here are some related topics for the problem of removing duplicates from a sorted array in-place:
+
+1. **Two-Pointer Technique**: This is a common technique used in array manipulation problems.
+It involves maintaining two pointers to track different positions in the array.
+You can learn more about it [here](https://www.geeksforgeeks.org/two-pointers-technique/).
+
+2. **In-Place Algorithm**: This is a type of algorithm that transforms input using no auxiliary data structure.
+The input is usually overwritten by the output as the algorithm executes.
+You can learn more about it [here](https://en.wikipedia.org/wiki/In-place_algorithm).
+
+3. **Array Manipulation**: This is a broad topic that covers various techniques for manipulating arrays, including sorting, searching, and modifying elements.
+You can learn more about it [here](https://www.geeksforgeeks.org/array-data-structure/).
+
+4. **Time and Space Complexity**: Understanding the time and space complexity of an algorithm is crucial for evaluating its efficiency.
+You can learn more about it [here](https://www.geeksforgeeks.org/analysis-algorithms-big-o-analysis/).
+
+5. **Python Programming**: Since the problem is being solved in Python, understanding Python's specific features and syntax is important.
+You can learn more about Python [here](https://docs.python.org/3/tutorial/index.html).
+
+Remember, these topics are related to the problem at hand and understanding them can help you solve similar problems in the future.
+
+== References

@@ -1,0 +1,38 @@
+:doctitle: Title
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 04 January 2024
+:revdate: {docdatetime}
+:doctype: article
+:sectanchors:
+:sectlinks:
+:sectnums:
+:toc:
+:icons: font
+:keywords: problem, python
+
+== Problem
+
+[.lead]
+You need to find the memory size of an object in Python.
+
+=== Use-Cases
+
+Finding the memory size of an object in Python is a common task in various fields of computer science and data management.
+Here are some use cases:
+
+1. **Memory Management**: In memory management, it's important to know the size of objects to manage memory usage effectively.
+This can help in optimizing the performance of Python programs.
+
+2. **Data Analysis**: In data analysis, especially when dealing with large datasets, it's useful to know the memory size of data structures like lists, dictionaries, or pandas dataframes.
+This can help in making decisions about data processing and manipulation techniques.
+
+3. **Performance Optimization**: In performance optimization, understanding the memory footprint of objects can help in identifying memory leaks or inefficient data structures, which can then be optimized to improve the performance of the application.
+
+4. **Debugging**: During debugging, knowing the memory size of objects can help in identifying issues related to memory usage.
+
+5. **Resource Allocation**: In scenarios where resources are limited, such as in embedded systems or cloud environments with specific memory limits, knowing the memory size of objects can guide decisions about resource allocation.
+
+These are just a few examples.
+The concept of finding the memory size of an object in Python can be applied in many other scenarios depending on the problem at hand.
+=== Constraints == Examples === Example 0 == Follow-up == Related Topics
