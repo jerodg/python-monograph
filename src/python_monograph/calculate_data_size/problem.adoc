@@ -1,0 +1,395 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Calculate Data Size Problem
+:keywords: problem, python
+
+== {description}
+
+[.lead]
+In the world of computing, data size is a critical aspect that often needs to be understood and managed. Data can be represented in various units such as bytes, kilobytes, megabytes, gigabytes, and so on. These units can be represented in two different notations - decimal and binary.  The task is to write a Python function, calculate_data_size(size: int, notation: str = 'decimal') -> str, that takes in a size in bytes and a notation ('decimal' or 'binary'), and returns a string representing the size in the appropriate notation.  The function should raise a ValueError if the size is negative or if the notation is not 'decimal' or 'binary'.
+
+*Decimal* units are defined by SI(International System of Units), use Metric prefixes such as kilo, mega etc. Decimal units are multiples of 1000.
+
+*Binary* units are comparatively newer, defined by IEC(International Electro technical Commission), prefixed with kibi, mebi etc. evaluated as multiples of 1024. You can find further details on each units below.
+
+https://www.dataunitconverter.com/bit[Bit]
+
+Bit (binary digit) is the most basic unit of information in digital computing and communications systems. Bit is the smallest unit to represent digital data. A bit represents a logical state with one of two possible values either 1 or 0. The unit symbol for bit is *b*
+
+https://www.dataunitconverter.com/nibble[Nibble]
+
+Nibble is an aggregation of *four bits*. It is also called a quadbit or a half-byte. Nibble can have up to 16 possible values, represented by a single hexadecimal digit 0 - F
+
+https://www.dataunitconverter.com/byte[Byte]
+
+Byte is a unit of digital information that most commonly consists of eight bits. A single byte can be used to represent 256 different values. 1000bytes = 1 Kilobyte (KB). 1024 bytes = 1 Kibibyte (KiB)
+
+https://www.dataunitconverter.com/kilobit[Kilobit]
+
+One Kilobit is defined as *10^3^* or *1000 Bits*. Kilobit is a decimal unit defined as per SI standard. The unit symbol for Kilobit is *kbit* or *kb*. Kilobit is not same as Kibibit (Kib) that contains 1024 bits. 1000 Kilobits = 1 Megabit (Mbit)
+
+https://www.dataunitconverter.com/kibibit[Kibibit]
+
+One Kibibit is defined as *2^10^* or *1024 Bits*. Kibibit is a binary unit defined as per IEC standard. The unit symbol for Kibibit *Kibit*. Kibibit is not same as Kilobit (Kb) that contains 1000 bits. 1024 Kibibits = 1 Mebibit (Mibit)
+
+https://www.dataunitconverter.com/kilobyte[Kilobyte]
+
+One Kilobyte is defined as *10^3^* or *1000 Bytes*. Kilobyte is a decimal unit defined as per SI standard. The unit symbol for Kilobyte is *kB*. Kilobyte is not same as Kibibyte (KiB) that contains 1024 bytes. 1000 Kilobytes = 1 Megabyte (MB)
+
+https://www.dataunitconverter.com/kibibyte[Kibibyte]
+
+One Kibibyte is defined as *2^10^* or *1024 Bytes*. Kibibyte is a binary unit defined as per IEC standard. The unit symbol for Kibibyte is *KiB*. Kibibyte is not same as Kilobyte (KB) that contains 1000 bytes. 1024 Kibibyte = 1 Mebibyte (MiB)
+
+https://www.dataunitconverter.com/megabit[Megabit]
+
+One Megabit is defined as *10^6^* or *1000^2^ Bits*. Megabit is a decimal unit defined as per SI standard. 1 Megabit = 1000 Kilobits. The unit symbol for Megabit is *Mbit* or *Mb*. Megabit is not same as Mebibit (Mib) that contains 1024^2^ bits. 1000 Megabits = 1 Gigabit (Gbit)
+
+https://www.dataunitconverter.com/mebibit[Mebibit]
+
+One Mebibit is defined as *2^20^* or *1024^2^ Bits*. Mebibit is a binary unit defined as per IEC standard. 1 Mebibit = 1024 Kibibits. The unit symbol for Mebibit is *Mibit*. Mebibit is not same as Megabit (Mb) that contains 1000^2^ bits. 1024 Mebibits = 1 Gibibit (Gibit)
+
+https://www.dataunitconverter.com/megabyte[Megabyte]
+
+One Megabyte is defined as *10^6^* or *1000^2^ Bytes*. Megabyte is a decimal unit defined as per SI standard. 1 Megabyte = 1000 Kilobytes. The unit symbol for Megabyte is *MB*. Megabyte is not same as Mebibyte (MiB) that contains 1024^2^ bytes. 1000 Megabytes = 1 Gigabyte (GB)
+
+https://www.dataunitconverter.com/mebibyte[Mebibyte]
+
+One Mebibyte is defined as *2^20^* or *1024^2^ Bytes*. Mebibyte is a binary unit defined as per IEC standard. 1 Mebibyte = 1024 Kibibytes. The unit symbol for Mebibyte is *MiB*. Mebibyte is not same as Megabyte (MB) that contains 1000^2^ bytes. 1024 Mebibytes = 1 Gibibyte (GiB)
+
+https://www.dataunitconverter.com/gigabit[Gigabit]
+
+One Gigabit is defined as *10^9^* or *1000^3^ Bits*. Gigabit is a decimal unit defined as per SI standard. 1 Gigabit = 1000 Megabits. The unit symbol for Gigabit is *Gbit* or *Gb*. Gigabit is not same as Gibibit (Gib) that contains 1024^3^ bits. 1000 Gigabits = 1 Terabit (Tbit)
+
+https://www.dataunitconverter.com/gibibit[Gibibit]
+
+One Gibibit is defined as *2^30^* or *1024^3^ Bits*. Gibibit is a binary unit defined as per IEC standard. 1 Gibibit = 1024 Mebibits. The unit symbol for Gibibit is *Gibit*. Gibibit is not same as Gigabit (Gb) that contains 1000^3^ bits. 1024 Gibibits = 1 Tebibit (Tibit)
+
+https://www.dataunitconverter.com/gigabyte[Gigabyte]
+
+One Gigabyte is defined as *10^9^* or *1000^3^ Bytes*. Gigabyte is a decimal unit defined as per SI standard. 1 Gigabyte = 1000 Megabytes. The unit symbol for Gigabyte is *GB*. Gigabyte is not same as Gibibyte (GiB) that contains 1024^3^ bytes. 1000 Gigabytes = 1 Terabyte (TB)
+
+https://www.dataunitconverter.com/gibibyte[Gibibyte]
+
+One Gibibyte is defined as *2^30^* or *1024^3^ Bytes*. Gibibyte is a binary unit defined as per IEC standard. 1 Gibibyte = 1024 Mebibytes. The unit symbol for Gibibyte is *GiB*. Gibibyte is not same as Gigabyte (GB) that contains 1000^3^ bytes. 1024 Gibibytes = 1 Tebibyte (TiB)
+
+https://www.dataunitconverter.com/terabit[Terabit]
+
+One Terabit is defined as *10^12^* or *1000^4^ Bits*. Terabit is a decimal unit defined as per SI standard. 1000 Gigabits = 1 Terabit. The unit symbol for Terabit is *Tbit* or *Tb*. Terabit is not same as Tebibit (Tib) that contains 1024^4^ bits. 1000 Terabit = 1 Petabit (Pbit)
+
+https://www.dataunitconverter.com/tebibit[Tebibit]
+
+One Tebibit is defined as *2^40^* or *1024^4^ Bits*. Tebibit is a binary unit defined as per IEC standard. 1 Tebibit = 1024 Gibibits. The unit symbol for Tebibit is *Tibit*. Tebibit is not same as Terabit (Tb) that contains 1000^4^ bits. 1024 Tebibits = 1 Pebibit (Pibit)
+
+https://www.dataunitconverter.com/terabyte[Terabyte]
+
+One Terabyte is defined as *10^12^* or *1000^4^ Bytes*. Terabyte is a decimal unit defined as per SI standard. 1 Terabyte = 1000 Gigabytes. The unit symbol for Terabyte is *TB*. Terabyte is not same as Tebibyte (TiB) that contains 1024^4^ bytes. 1000 Terabytes = 1 Petabyte (PB)
+
+https://www.dataunitconverter.com/tebibyte[Tebibyte]
+
+One Tebibyte is defined as *2^40^* or *1024^4^ Bytes*. Tebibyte is a binary unit defined as per IEC standard. 1 Tebibyte = 1024 Gibibytes. The unit symbol for Tebibyte is *TiB*. Tebibyte is not same as Terabyte (TB) that contains 1000^4^ bytes. 1024 Tebibytes = 1 Pebibyte (PiB)
+
+https://www.dataunitconverter.com/petabit[Petabit]
+
+One Petabit is defined as *10^15^* or *1000^5^ Bits*. Petabit is a decimal unit defined as per SI standard. 1 Petabit = 1000 Terabits. The unit symbol for Petabit is *Pbit*. Petabit is not same as Pebibit (Pib) that contains 1024^5^ bits. 1000 Petabits = 1 Exabit (Ebit)
+
+https://www.dataunitconverter.com/pebibit[Pebibit]
+
+One Pebibit is defined as *2^50^* or *1024^5^ Bits*. Pebibit is a binary unit defined as per IEC standard. 1 Pebibit = 1024 Tebibits. The unit symbol for Pebibit is *Pibit*. Pebibit is not same as Petabit (Pb) that contains 1000^5^ bits. 1024 Pebibits = 1 Exbibit (Eibit)
+
+https://www.dataunitconverter.com/petabyte[Petabyte]
+
+One Petabyte is defined as *10^15^* or *1000^5^ Bytes*. Petabyte is a decimal unit defined as per SI standard. 1 Petabyte = 1000 Terabytes. The unit symbol for Petabyte is *PB*. Petabyte is not same as Pebibyte (PiB) that contains 1024^5^ bytes. 1000 Petabytes = 1 Exabyte (EB)
+
+https://www.dataunitconverter.com/pebibyte[Pebibyte]
+
+One Pebibyte is defined as or *1024^5^ Bytes*. 1 Pebibyte = 1024 Tebibytes. Pebibyte is a binary unit defined as per IEC standard. The unit symbol for Pebibyte is *PiB*. Pebibyte is not same as Petabyte (PB) that contains 1000^5^ bytes. 1024 Pebibytes = 1 Exbibyte (EiB)
+
+https://www.dataunitconverter.com/exabit[Exabit]
+
+One Exabit is defined as *10^18^* or *1000^6^ Bits*. Exabit is a decimal unit defined as per SI standard. 1 Exabit = 1000 Petabits. The unit symbol for Exabit is *Ebit*. Exabit is not same as Exbibit (Eib) that contains 1024^6^ bits. 1000 Exabits = 1 Zettabit (Zbit)
+
+https://www.dataunitconverter.com/exbibit[Exbibit]
+
+One Exbibit is defined as *2^60^* or *1024^6^ Bits*. Exbibit is a binary unit defined as per IEC standard. 1 Exbibit = 1024 Pebibits. The unit symbol for Exbibit is *Eibit*. Exbibit is not same as Exabit (Eb) that contains 1000^6^ bits. 1024 Exbibits = 1 Zebibit (Zibit)
+
+https://www.dataunitconverter.com/exabyte[Exabyte]
+
+One Exabyte is defined as **10^18^ **or *1000^6^ Bytes*. Exabyte is a decimal unit defined as per SI standard. 1 Exabyte = 1000 Petabytes. The unit symbol for Exabyte is *EB*. Exabyte is not same as Exbibyte (EiB) that contains 1024^6^ bytes. 1000 Exabytes = 1 Zettabyte (ZB)
+
+https://www.dataunitconverter.com/exbibyte[Exbibyte]
+
+One Exbibyte is defined as *2^60^* or *1024^6^ Bytes*. Exbibyte is a binary unit defined as per IEC standard. 1 Exbibyte = 1024 Pebibytes. The unit symbol for Exbibyte is *EiB*. Exbibyte is not same as Exabyte (EB) that contains 1000^6^ bytes. 1024 Exbibytes = 1 Zebibyte (ZiB)
+
+https://www.dataunitconverter.com/zettabit[Zettabit]
+
+One Zettabit is defined as *10^21^* or *1000^7^ Bits*. Zettabit is a decimal unit defined as per SI standard. 1 Zettabit = 1000 Exabits. The unit symbol for Zettabit is *Zbit*. Zettabit is not same as Zebibit (Zib) that contains 1024^7^ bits. 1000 Zettabits = 1 Yottabit (Tbit)
+
+https://www.dataunitconverter.com/zebibit[Zebibit]
+
+One Zebibit is defined as *2^70^* or *1024^7^ Bits*. Zebibit is a binary unit defined as per IEC standard. 1 Zebibit = 1024 Exbibits. The unit symbol for Zebibit is *Zibit*. Zebibit is not same as Zetabit (Zb) that contains 1000^7^ bits. 1024 Zebibits forms a Yobibit (Yibit)
+
+https://www.dataunitconverter.com/zettabyte[Zettabyte]
+
+One Zettabyte is defined as *10^21^* or *1000^7^ Bytes*. Zettabyte is a decimal unit defined as per SI standard. 1 Zettabyte = 1000 Exabytes. The unit symbol for Zettabyte is *ZB*. Zettabyte is not same as Zebibyte (ZiB) that contains 1024^7^ bytes. 1000 Zettabytes forms a Yottabyte (YB)
+
+https://www.dataunitconverter.com/zebibyte[Zebibyte]
+
+One Zebibyte is defined as *2^70^* or *1024^7^ Bytes*. Zebibyte is a binary unit defined as per IEC standard. 1 Zebibyte = 1024 Exbibytes. The unit symbol for Zebibyte is *ZiB*. Zebibyte is not same as Zettabyte (ZB) that contains 1000^7^ bytes. 1024 Zebibytes forms a Yobibyte (YiB)
+
+https://www.dataunitconverter.com/yottabit[Yottabit]
+
+One Yottabit is defined as *10^24^* or *1000^8^ Bits*. Yottabit is a decimal unit defined as per SI standard. 1 Yottabit = 1000 Zettabits. The unit symbol for Yottabit is *Ybit*. Yottabit is not same as Yobibit (Yib) that contains 1024^8^ bits
+
+https://www.dataunitconverter.com/yobibit[Yobibit]
+
+One Yobibit is defined as *2^80^* or *1024^8^ Bits*. Yobibit is a binary unit defined as per IEC standard. 1 Yobibit = 1024 Zebibits. The unit symbol for Yobibit is *Yibit*. Yobibit is not same as Yottabit (Mb) that contains 1000^8^ bits
+
+https://www.dataunitconverter.com/yottabyte[Yottabyte]
+
+One Yottabyte is defined as *10^24^* or *1000^8^ Bytes*. Yottabyte is a decimal unit defined as per SI standard. 1 Yottabyte = 1000 Zettabytes. The unit symbol for Yottabyte is *YB*. Yottabyte is not same as Yobibyte (ZiB) that contains 1024^8^ bytes
+
+https://www.dataunitconverter.com/yobibyte[Yobibyte]
+
+One Yobibyte is defined as *2^80^* or *1024^8^ Bytes*. Yobibyte is a binary unit defined as per IEC standard. 1 Yobibyte = 1024 Zebibytes. The unit symbol for Yobibyte is *YiB*. Yobibyte is not same as Yottabyte (YB) that contains 1000^8^ bytes
+
+== Units- Value in Bits and Bytes
+
+[cols=",,",]
+|===
+|Unit |Bits |Bytes
+|bit |1 |0.125
+|Nibble |4 |0.5
+|Byte |8 |1
+|Kilobit |1,000 |125
+|Kibibit |1,024 |128
+|Kilobyte |8,000 |1,000
+|Kibibyte |8,192 |1,024
+|Megabit |1,000,000 |125,000
+|Mebibit |1,048,576 |131,072
+|Megabyte |8,000,000 |1,000,000
+|Mebibyte |8,388,608 |1,048,576
+|Gigabit |1,000,000,000 |125,000,000
+|Gibibit |1,073,741,824 |134,217,728
+|Gigabyte |8,000,000,000 |1,000,000,000
+|Gibibyte |8,589,934,592 |1,073,741,824
+|Terabit |1,000,000,000,000 |125,000,000,000
+|Tebibit |1,099,511,627,776 |137,438,953,472
+|Terabyte |8,000,000,000,000 |1,000,000,000,000
+|Tebibyte |8,796,093,022,208 |1,099,511,627,776
+|Petabit |1,000,000,000,000,000 |125,000,000,000,000
+|Pebibit |1,125,899,906,842,624 |140,737,488,355,328
+|Petabyte |8,000,000,000,000,000 |1,000,000,000,000,000
+|Pebibyte |9,007,199,254,740,992 |1,125,899,906,842,624
+|Exabit |1,000,000,000,000,000,000 |125,000,000,000,000,000
+|Exbibit |1,152,921,504,606,846,976 |144,115,188,075,855,872
+|Exabyte |8,000,000,000,000,000,000 |1,000,000,000,000,000,000
+|Exbibyte |9,223,372,036,854,775,808 |1,152,921,504,606,846,976
+|Zettabit |1,000,000,000,000,000,000,000 |125,000,000,000,000,000,000
+|Zebibit |1,180,591,620,717,411,303,424 |147,573,952,589,676,412,928
+|Zettabyte |8,000,000,000,000,000,000,000 |1,000,000,000,000,000,000,000
+|Zebibyte |9,444,732,965,739,290,427,392 |1,180,591,620,717,411,303,424
+|Yottabit |1,000,000,000,000,000,000,000,000 |125,000,000,000,000,000,000,000
+|Yobibit |1,208,925,819,614,629,174,706,176 |151,115,727,451,828,646,838,272
+|Yottabyte |8,000,000,000,000,000,000,000,000 |1,000,000,000,000,000,000,000,000
+|Yobibyte |9,671,406,556,917,033,397,649,408 |1,208,925,819,614,62
+|===
+
+Digital storage units come in all shapes and sizes, from the smallest byte to the massive yottabyte. It is also essential to know about the difference between Decimal and Binary units and how those are related to each other. Understanding these units and their corresponding storage capacities is crucial for selecting the right storage device for your needs. Whether you're storing personal files or managing enterprise-level data, it's important to consider the amount of storage you'll require and choose a storage device that meets your needs.
+
+
+== Constraints
+
+The constraints for the problem could be as follows:
+
+1. The `size` parameter is an integer and can range from 0 to 10^18. This represents the size in bytes.
+
+2. The `notation` parameter is a string and can only be 'decimal', 'binary', 'bits', or 'nibbles'. This represents the notation to use for the size calculation.
+
+3. The function should raise a ValueError if the size is negative. This is to ensure that the size is always a positive value.
+
+4. The function should also raise a ValueError if the notation is not 'decimal', 'binary', 'bits', or 'nibbles'. This is to ensure that the notation is always one of the four valid options.
+
+5. The function should return a string representing the size in the appropriate notation. The string should be formatted as a number with 2 decimal places, followed by the appropriate suffix.
+
+For example, if the size is 1024 and the notation is 'decimal', the function should return '1.02 KB'. If the size is 1024 and the notation is 'binary', the function should return '1.00 KiB'.
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+calculate_data_size(1500, 'decimal')
+----
+
+.Output
+[source,python,linenums]
+----
+'1.50 KB'
+----
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+calculate_data_size(1500, 'binary')
+----
+
+.Output
+[source,python,linenums]
+----
+'1.46 KiB'
+----
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+calculate_data_size(1500, 'bits')
+----
+
+.Output
+[source,python,linenums]
+----
+'12.00 Kb'
+----
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+calculate_data_size(1500, 'nibbles')
+----
+
+.Output
+[source,python,linenums]
+----
+'6.00 Kn'
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+calculate_data_size(1024, 'binary')
+----
+
+.Output
+[source,python,linenums]
+----
+'1.00 KiB'
+----
+
+== Use-Cases
+
+The `calculate_data_size` function can be used in a variety of real-world scenarios where understanding and managing data size is crucial. Here are a few examples:
+
+1. **File Management Systems:** In file management systems, it's common to display the size of files or folders to the user. The `calculate_data_size` function can be used to convert the size from bytes (which is how it's typically stored in the system) to a more user-friendly format like kilobytes, megabytes, etc.
+
+2. **Storage Management:** In storage devices like hard drives or SSDs, the total space and the used space are often represented in larger units like GB or TB. This function can be used to calculate and display these sizes in a consistent manner.
+
+3. **Network Traffic Monitoring:** In network traffic monitoring, the amount of data sent and received is often tracked. This function can be used to convert the raw byte counts into a more understandable format.
+
+4. **System Performance Monitoring:** In system performance monitoring, various metrics like memory usage, disk usage, etc., are tracked. These metrics are often in bytes and can be converted to a more readable format using this function.
+
+5. **Data Transfer:** When transferring data over a network, it's often useful to know the size of the data being transferred. This function can be used to calculate and display the size of the data in a user-friendly format.
+
+6. **Cloud Storage Services:** Cloud storage services often provide users with a dashboard that displays their usage statistics, including how much storage they're using. This function can be used to calculate and display these statistics in a format that's easy for users to understand.
+
+== Common Mistakes
+
+When solving this problem, there are several common mistakes that developers often make:
+
+1. **Not Handling Negative Sizes:** One common mistake is not handling negative sizes. In this problem, the size should always be a positive integer. If a negative size is passed to the function, it should raise a ValueError.
+
+2. **Not Handling Invalid Notations:** Another common mistake is not handling invalid notations. The notation should always be one of 'decimal', 'binary', 'bits', or 'nibbles'. If an invalid notation is passed to the function, it should raise a ValueError.
+
+3. **Incorrect Conversion Between Units:** It's also common to make mistakes when converting between different units of measurement. For example, there are 8 bits in a byte and 2 nibbles in a byte, not the other way around. Make sure to use the correct conversion factors when converting between different units.
+
+4. **Not Formatting the Output Correctly:** The function should return a string representing the size in the appropriate notation, formatted as a number with 2 decimal places, followed by the appropriate suffix. It's easy to forget to format the output correctly, which can lead to incorrect results.
+
+5. **Not Considering Large Sizes:** When dealing with large sizes, it's important to ensure that the function can handle them correctly. For example, if the size is larger than the largest suffix in the list, the function should still be able to return a correct result.
+
+6. **Not Testing the Function Thoroughly:** Finally, it's important to test the function thoroughly with a variety of different inputs to ensure that it works correctly in all cases. This includes testing with different sizes, different notations, and edge cases like negative sizes and invalid notations.
+
+== Best Practices
+
+When solving this problem, you can follow these best practices:
+
+1. **Use Descriptive Variable and Function Names:** The names of your variables and functions should clearly describe what they represent or do. This makes your code easier to read and understand.
+
+2. **Handle Edge Cases:** Make sure to handle edge cases, such as negative sizes and invalid notations. This will make your function more robust and reliable.
+
+3. **Use Constants for Repeated Values:** If a value is used multiple times in your code (like the base values 1000 and 1024), consider defining it as a constant at the top of your code. This makes your code easier to maintain, as you only need to change the value in one place if it needs to be updated.
+
+4. **Use Docstrings:** Include a docstring at the beginning of your function to explain what the function does, its parameters, its return value, and any exceptions it raises. This is not only helpful for others reading your code, but also for you if you need to revisit your code in the future.
+
+5. **Keep Functions Small and Focused:** Each function should do one thing and do it well. If your function is doing multiple things, consider breaking it up into smaller, more focused functions. This makes your code easier to read, test, and debug.
+
+6. **Use Type Hints:** Type hints help make your code more readable and self-documenting. They also allow tools to provide better support when writing and refactoring code.
+
+7. **Test Your Code:** Write tests for your function to make sure it works as expected. This includes tests for normal cases, edge cases, and error cases. Testing helps you catch bugs and makes sure your code continues to work correctly as you make changes.
+
+8. **Follow PEP 8 Style Guide:** PEP 8 is the official style guide for Python code. Following it makes your code more readable and consistent with the majority of Python code out there. This includes things like using snake_case for variable and function names, and putting two blank lines between top-level functions and classes.
+
+9. **Use f-strings for Formatting:** In Python, f-strings are a great way to format strings. They are easy to read, concise, and less prone to errors compared to other string formatting methods.
+
+== Follow-up
+
+After solving this problem, here are some follow-up actions that could be beneficial:
+
+1. **Performance Optimization:** Analyze the performance of the `calculate_data_size` function. If it's not performing well for large inputs, consider ways to optimize it. This could involve using more efficient data structures or algorithms.
+
+2. **Extend the Functionality:** Consider extending the function to handle additional notations or units of measurement. For example, you could add support for 'hexadecimal' notation or 'words' unit.
+
+3. **Error Handling:** Review the error handling in the function. Are there any other error conditions that should be checked for? Are the error messages clear and helpful to the user?
+
+4. **Code Review:** Have another developer review your code. They might spot issues that you missed, or suggest improvements. This is a good practice for any code you write.
+
+5. **Unit Testing:** If you haven't already, write unit tests for the `calculate_data_size` function. Make sure to test all edge cases and error conditions. This will help ensure that the function works correctly and continues to work correctly as changes are made in the future.
+
+6. **Documentation:** Review the documentation for the `calculate_data_size` function. Is it clear and complete? Does it accurately describe what the function does, its parameters, its return value, and any exceptions it raises?
+
+7. **Integration:** Finally, consider how the `calculate_data_size` function will be used in the larger application. Are there any integration issues to consider? For example, how will the function interact with the rest of the application? Are there any potential side effects to be aware of?
+
+== Related Topics
+
+Related topics for the problem of calculating data size in different notations include:
+
+1. **Data Representation in Computers:** Understanding how data is represented in computers is fundamental to this problem. This topic covers how different types of data (like numbers, text, images, etc.) are represented in binary form. [Data Representation in Computer Systems](https://www.tutorialspoint.com/computer_logical_organization/data_representation.htm)
+
+2. **Binary and Decimal Number Systems:** This problem involves converting between binary and decimal number systems. Understanding these number systems and how to convert between them is crucial. [Binary and Decimal Number Systems](https://www.mathsisfun.com/binary-decimal-hexadecimal.html)
+
+3. **File Systems and Storage:** The problem is directly related to how data is stored and managed in file systems. Understanding file systems, how they work, and how they manage data can provide useful context for this problem. [File Systems and Storage](https://www.geeksforgeeks.org/file-systems-in-operating-system/)
+
+4. **Network Data Transfer:** The problem is also related to network data transfer, as data sizes often need to be calculated and displayed when transferring data over a network. Understanding how data is transferred over a network can provide additional context. [Network Data Transfer](https://www.sciencedirect.com/topics/computer-science/data-transfer)
+
+5. **Python Programming:** Since the problem is to be solved using Python, understanding Python programming, including its syntax, data types, and built-in functions, is important. [Python Programming](https://docs.python.org/3/tutorial/index.html)
+
+6. **Error Handling in Python:** The problem requires raising exceptions for certain error conditions, so understanding how to handle errors and exceptions in Python is relevant. [Error Handling in Python](https://docs.python.org/3/tutorial/errors.html)
+
+7. **Unit Testing in Python:** To ensure the function works correctly, it's important to write unit tests. Understanding how to write and run unit tests in Python is therefore relevant to this problem. [Unit Testing in Python](https://docs.python.org/3/library/unittest.html)
+
+== References

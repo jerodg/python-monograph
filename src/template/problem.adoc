@@ -17,7 +17,6 @@
 :stylesdir: ../../../styles
 :scriptsdir: ../../../js
 :stylesheet: styles.css
-
 :description: Problem
 :keywords: problem, python
 
