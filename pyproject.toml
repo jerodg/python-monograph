@@ -112,6 +112,6 @@ docstring-code-line-length = "dynamic"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q"
+addopts = "-rA  --verbose --assert=rewrite --benchmark-compare --benchmark-autosave --benchmark-save-data"
 testpaths = ["tests"]
 markers = ["random: marks tests as random (deselect with '-m \"not random\"')"]

@@ -17,11 +17,12 @@
 :stylesdir: ../../../styles
 :scriptsdir: ../../../js
 :stylesheet: styles.css
-
 :description: Solutions
 :keywords: solution, python
 
 = {description}
+
+[.lead]
 
 == Approaches
 
@@ -47,6 +48,8 @@ include::./solution_00.py[lines=21..]
 ==== Code Review
 
 == Tests
+
+[.lead]
 
 ===  Test Solution 00
 

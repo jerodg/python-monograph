@@ -360,6 +360,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,linux,macos,jetbrains+all,jupyternotebooks,venv
 
-.benchmark
+.benchmarks
 requirements.lock
 requirements-dev.lock
