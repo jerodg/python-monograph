@@ -70,15 +70,15 @@ class DecimalCommand(Command):
     Doctest:
         >>> decimal_command = DecimalCommand()
         >>> decimal_command.execute(1500)
-        '1.50 KB'
+        '1.5 KB'
         >>> decimal_command.execute(1024)
-        '1.02 KB'
+        '1.024 KB'
         >>> decimal_command.execute(1048576)
-        '1.05 MB'
+        '1.049 MB'
         >>> decimal_command.execute(1073741824)
-        '1.07 GB'
+        '1.074 GB'
         >>> decimal_command.execute(0)
-        '0.00 B'
+        '0 B'
     """
 
     def execute(self, size: int) -> str:
@@ -96,22 +96,23 @@ class DecimalCommand(Command):
         Doctest:
             >>> decimal_command = DecimalCommand()
             >>> decimal_command.execute(1500)
-            '1.50 KB'
+            '1.5 KB'
             >>> decimal_command.execute(1024)
-            '1.02 KB'
+            '1.024 KB'
             >>> decimal_command.execute(1048576)
-            '1.05 MB'
+            '1.049 MB'
             >>> decimal_command.execute(1073741824)
-            '1.07 GB'
+            '1.074 GB'
             >>> decimal_command.execute(0)
-            '0.00 B'
+            '0 B'
         """
         # Define the suffixes for decimal notation
         suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
         # Calculate the index of the appropriate suffix
         index = floor(log10(size) / 3) if size != 0 else 0
         # Calculate the size in the appropriate unit and format the result
-        return f'{size / (1000.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 class BinaryCommand(Command):
@@ -126,15 +127,15 @@ class BinaryCommand(Command):
     Doctest:
         >>> binary_command = BinaryCommand()
         >>> binary_command.execute(1500)
-        '1.46 KiB'
+        '1.465 KiB'
         >>> binary_command.execute(1024)
-        '1.00 KiB'
+        '1 KiB'
         >>> binary_command.execute(1048576)
-        '1.00 MiB'
+        '1 MiB'
         >>> binary_command.execute(1073741824)
-        '1.00 GiB'
+        '1 GiB'
         >>> binary_command.execute(0)
-        '0.00 B'
+        '0 B'
     """
 
     def execute(self, size: int) -> str:
@@ -152,22 +153,24 @@ class BinaryCommand(Command):
         Doctest:
             >>> binary_command = BinaryCommand()
             >>> binary_command.execute(1500)
-            '1.46 KiB'
+            '1.465 KiB'
             >>> binary_command.execute(1024)
-            '1.00 KiB'
+            '1 KiB'
             >>> binary_command.execute(1048576)
-            '1.00 MiB'
+            '1 MiB'
             >>> binary_command.execute(1073741824)
-            '1.00 GiB'
+            '1 GiB'
             >>> binary_command.execute(0)
-            '0.00 B'
+            '0 B'
         """
         # Define the suffixes for binary notation
         suffixes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
         # Calculate the index of the appropriate suffix
         index = floor(log2(size) / 10) if size != 0 else 0
         # Calculate the size in the appropriate unit and format the result
-        return f'{size / (1024.0 ** index):.2f} {suffixes[index]}'
+
+        size = f'{size / (1024.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 class BitsCommand(Command):
@@ -182,15 +185,15 @@ class BitsCommand(Command):
     Doctest:
         >>> bits_command = BitsCommand()
         >>> bits_command.execute(1500)
-        '12.00 Kb'
+        '12 Kb'
         >>> bits_command.execute(1024)
-        '8.19 Kb'
+        '8.192 Kb'
         >>> bits_command.execute(1048576)
-        '8.39 Mb'
+        '8.389 Mb'
         >>> bits_command.execute(1073741824)
         '8.59 Gb'
         >>> bits_command.execute(0)
-        '0.00 b'
+        '0 b'
     """
 
     def execute(self, size: int) -> str:
@@ -208,15 +211,15 @@ class BitsCommand(Command):
         Doctest:
             >>> bits_command = BitsCommand()
             >>> bits_command.execute(1500)
-            '12.00 Kb'
+            '12 Kb'
             >>> bits_command.execute(1024)
-            '8.19 Kb'
+            '8.192 Kb'
             >>> bits_command.execute(1048576)
-            '8.39 Mb'
+            '8.389 Mb'
             >>> bits_command.execute(1073741824)
             '8.59 Gb'
             >>> bits_command.execute(0)
-            '0.00 b'
+            '0 b'
         """
         # Define the suffixes for bits notation
         suffixes = ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb']
@@ -225,7 +228,8 @@ class BitsCommand(Command):
         # Calculate the index of the appropriate suffix
         index = floor(log2(size_bits) / 10) if size_bits != 0 else 0
         # Calculate the size in the appropriate unit and format the result
-        return f'{size_bits / (1000.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size_bits / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 class NibblesCommand(Command):
@@ -240,15 +244,15 @@ class NibblesCommand(Command):
     Doctest:
         >>> nibbles_command = NibblesCommand()
         >>> nibbles_command.execute(1500)
-        '3.00 Kn'
+        '3 Kn'
         >>> nibbles_command.execute(1024)
-        '2.05 Kn'
+        '2.048 Kn'
         >>> nibbles_command.execute(1048576)
-        '2.10 Mn'
+        '2.097 Mn'
         >>> nibbles_command.execute(1073741824)
-        '2.15 Gn'
+        '2.147 Gn'
         >>> nibbles_command.execute(0)
-        '0.00 n'
+        '0 n'
     """
 
     def execute(self, size: int) -> str:
@@ -266,15 +270,15 @@ class NibblesCommand(Command):
         Doctest:
             >>> nibbles_command = NibblesCommand()
             >>> nibbles_command.execute(1500)
-            '3.00 Kn'
+            '3 Kn'
             >>> nibbles_command.execute(1024)
-            '2.05 Kn'
+            '2.048 Kn'
             >>> nibbles_command.execute(1048576)
-            '2.10 Mn'
+            '2.097 Mn'
             >>> nibbles_command.execute(1073741824)
-            '2.15 Gn'
+            '2.147 Gn'
             >>> nibbles_command.execute(0)
-            '0.00 n'
+            '0 n'
         """
         # Define the suffixes for nibbles notation
         suffixes = ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']
@@ -283,7 +287,8 @@ class NibblesCommand(Command):
         # Calculate the index of the appropriate suffix
         index = floor(log2(size_nibbles) / 10) if size_nibbles != 0 else 0
         # Calculate the size in the appropriate unit and format the result
-        return f'{size_nibbles / (1000.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size_nibbles / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 def calculate_data_size(size: int, notation: str = 'decimal') -> str:
@@ -304,15 +309,15 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
     Doctest:
         >>> calculate_data_size(1500, 'decimal')
-        '1.50 KB'
+        '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
-        '12.00 Kb'
+        '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
-        '3.00 Kn'
+        '3 Kn'
         >>> calculate_data_size(1024, 'binary')
-        '1.00 KiB'
+        '1 KiB'
     """
     # Raise an error if the size is negative
     if size < 0:

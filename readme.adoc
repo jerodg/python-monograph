@@ -16,7 +16,7 @@
 :iconsdir: ./icons
 :stylesdir: ./styles
 :scriptsdir: ./js
-:stylesheet: ./styles.css
+:stylesheet: styles.css
 :description: Monograph: A learned treatise for Python
 :keywords: python, monograph, treatise, learned, book, documentation, guide, manual, reference, tutorial, how-to, explanation, exposition, instruction, interpretation, clarification, demonstration, illustration, presentation, description, explanation, exposition, interpretation, presentation, report, specification, statement, story, summary, version, account, commentary, details, information, narrative, picture, portrayal, recital, tale, version, chronicle, history, narration, record, report, story, description, explanation, exposition, interpretation, presentation, report, specification, statement, story, summary, version, account, commentary, details, information, narrative, picture, portrayal, recital, tale, version, chronicle, history, narration, record, report, story
 

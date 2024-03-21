@@ -58,7 +58,7 @@ def test_calculate_data_size_invalid_notation():
 
 
 def test_calculate_data_size_random():
-    assert calculate_data_size(123456789, 'decimal' ) == '123.457 MB'
+    assert calculate_data_size(123456789, 'decimal') == '123.457 MB'
 
 
 def test_calculate_data_size_special_case():

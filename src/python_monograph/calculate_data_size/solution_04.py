@@ -38,19 +38,19 @@ class DataSize:
     Doctest:
         >>> ds = DataSize(1500, 'decimal')
         >>> ds.calculate_data_size()
-        '1.50 KB'
+        '1.5 KB'
         >>> ds = DataSize(1500, 'binary')
         >>> ds.calculate_data_size()
-        '1.46 KiB'
+        '1.465 KiB'
         >>> ds = DataSize(1500, 'bits')
         >>> ds.calculate_data_size()
-        '12.00 Kb'
+        '12 Kb'
         >>> ds = DataSize(1500, 'nibbles')
         >>> ds.calculate_data_size()
-        '6.00 Kn'
+        '3 Kn'
         >>> ds = DataSize(1024, 'binary')
         >>> ds.calculate_data_size()
-        '1.00 KiB'
+        '1 KiB'
     """
 
     def __init__(self, size: int, notation: str = 'decimal'):
@@ -83,20 +83,55 @@ class DataSize:
         if notation not in self.suffixes:
             raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
 
-    def calculate_data_size(self):
+    def calculate_data_size(self) -> str:
         """
         Calculates the size in the appropriate notation and returns it as a string using an object-oriented approach.
 
+        This method first determines the base for the calculation based on the notation.
+        If the notation is 'bits', it converts the size from bytes to bits by multiplying by 8.
+        If the notation is 'nibbles', it converts the size from bytes to nibbles by multiplying by 2.
+        It then divides the size by the base until the size is less than the base or it has gone through all the suffixes for the notation.
+        Finally, it formats the size as a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the size with the appropriate suffix.
+
         Returns:
             str: A string representing the size in the appropriate notation.
+
+        Examples:
+            >>> calculator = DataSize(1500, 'decimal')
+            >>> calculator.calculate_data_size()
+            '1.5 KB'
+
+            >>> calculator = DataSize(1500, 'binary')
+            >>> calculator.calculate_data_size()
+            '1.465 KiB'
+
+            >>> calculator = DataSize(1500, 'bits')
+            >>> calculator.calculate_data_size()
+            '12 Kb'
+
+            >>> calculator = DataSize(1500, 'nibbles')
+            >>> calculator.calculate_data_size()
+            '3 Kn'
+
+            >>> calculator = DataSize(1024, 'binary')
+            >>> calculator.calculate_data_size()
+            '1 KiB'
         """
-        base = self.bases[self.notation]
+        base = self.bases[self.notation]  # Determine the base for the calculation
+
+        # Convert the size from bytes to bits or nibbles if necessary
         if self.notation == 'bits':
             self.size *= 8  # convert bytes to bits
         elif self.notation == 'nibbles':
             self.size *= 2  # convert bytes to nibbles
+
         index = 0
+        # Divide the size by the base until the size is less than the base or we've gone through all the suffixes
         while self.size >= base and index < len(self.suffixes[self.notation]) - 1:
             self.size /= base
             index += 1
-        return f'{self.size:3.2f} {self.suffixes[self.notation][index]}'
+
+        # Format the size as a string with 3 decimal places, remove trailing zeros and the decimal point if it's at the end
+        size = f'{self.size:.3f}'.rstrip('0').rstrip('.')
+        # Return the size with the appropriate suffix
+        return f'{size} {self.suffixes[self.notation][index]}'

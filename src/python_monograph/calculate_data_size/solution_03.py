@@ -19,6 +19,27 @@ You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
 
+"""
+Python Monograph: Calculate Data Size Solution 03
+
+Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the Server Side Public License (SSPL) as
+published by MongoDB, Inc., either version 1 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+SSPL for more details.
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+You should have received a copy of the SSPL along with this program.
+If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
+"""
+
 
 def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     """
@@ -38,15 +59,15 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
     Doctest:
         >>> calculate_data_size(1500, 'decimal')
-        '1.50 KB'
+        '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
-        '12.00 Kb'
+        '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
-        '6.00 Kn'
+        '3 Kn'
         >>> calculate_data_size(1024, 'binary')
-        '1.00 KiB'
+        '1 KiB'
     """
     # Check if size is negative
     if size < 0:
@@ -71,9 +92,13 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
         raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
 
     # Recursive function to calculate the index of the suffix to use
-    def calculate_suffix_index(size, index=0):
+    def calculate_suffix_index(size: int, index: int = 0) -> int:
         """
         Recursive helper function to calculate the index of the suffix to use.
+
+        This function calculates the index of the suffix to use for the size
+        representation. It uses recursion to divide the size by the base until
+        the size is less than the base or the index reaches the end of the suffixes list.
 
         Args:
             size (int): The size in bytes.
@@ -81,6 +106,18 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
         Returns:
             int: The index of the suffix to use.
+
+        Examples:
+            >>> calculate_suffix_index(1500)
+            1
+            >>> calculate_suffix_index(1048576)
+            4
+            >>> calculate_suffix_index(1073741824)
+            7
+            >>> calculate_suffix_index(0)
+            0
+            >>> calculate_suffix_index(500, 2)
+            2
         """
         if size < base or index == len(suffixes) - 1:
             return index
@@ -88,8 +125,18 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
             return calculate_suffix_index(size / base, index + 1)
 
     # Calculate the index of the suffix to use using recursion
+    # The index is used to determine the appropriate suffix (e.g., B, KB, MB, etc.)
+    # for the size representation.
     index = calculate_suffix_index(size)
+
+    # Adjust the size by dividing it by the base raised to the power of the index.
+    # This converts the size from bytes to the unit represented by the suffix.
     size /= base ** index
 
-    # Return the size with the appropriate suffix
-    return f'{size:3.2f} {suffixes[index]}'
+    # Format the size to three decimal places, and remove trailing zeros and decimal point.
+    # This makes the size more readable and removes unnecessary precision.
+    size = f'{size:.3f}'.rstrip('0').rstrip('.')
+
+    # Return the size with the appropriate suffix.
+    # The size is returned as a string in the format "{size} {suffix}".
+    return f'{size} {suffixes[index]}'

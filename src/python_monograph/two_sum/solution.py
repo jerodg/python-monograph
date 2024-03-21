@@ -36,7 +36,7 @@ def method_0(nums: list[int], target: int) -> list[int]:
         If no such pair of numbers is found, the function returns None.
     """
     for i, n in enumerate(nums):
-        for j, m in enumerate(nums[i + 1 :]):
+        for j, m in enumerate(nums[i + 1:]):
             if n + m == target:
                 return [i, j + i + 1]
 

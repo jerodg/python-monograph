@@ -12,6 +12,7 @@
 :keywords: solution, python
 
 == Solutions
+
 [.lead]
 === Solution 00
 

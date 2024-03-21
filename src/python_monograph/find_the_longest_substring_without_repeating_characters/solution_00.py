@@ -62,7 +62,7 @@ def solution_00(s: str) -> tuple[int, str]:
 
         used_chars[s[end]] = end
 
-    return max_length, s[start : start + max_length]
+    return max_length, s[start: start + max_length]
 
 
 if __name__ == '__main__':

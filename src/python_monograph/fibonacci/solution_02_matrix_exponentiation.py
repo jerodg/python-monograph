@@ -45,7 +45,7 @@ def method_02(n) -> int:
     F = np.matrix([[1, 1], [1, 0]], dtype='int64')
 
     # Return the nth Fibonacci number calculated using matrix exponentiation
-    return (F**n)[0, 1]
+    return (F ** n)[0, 1]
 
 
 if __name__ == '__main__':

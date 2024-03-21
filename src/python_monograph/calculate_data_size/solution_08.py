@@ -19,7 +19,7 @@ You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
 from abc import ABC, abstractmethod
-from math import floor, log2
+from math import floor, log10, log2
 
 
 class NotationStrategy(ABC):
@@ -80,15 +80,15 @@ class DecimalNotationStrategy(NotationStrategy):
     Doctest:
         >>> decimal_strategy = DecimalNotationStrategy()
         >>> decimal_strategy.calculate(1500)
-        '1.50 KB'
+        '1.5 KB'
         >>> decimal_strategy.calculate(1024)
-        '1.02 KB'
+        '1.024 KB'
         >>> decimal_strategy.calculate(0)
-        '0.00 B'
+        '0 B'
         >>> decimal_strategy.calculate(1)
-        '1.00 B'
+        '1 B'
         >>> decimal_strategy.calculate(999)
-        '999.00 B'
+        '999 B'
     """
 
     def calculate(self, size: int) -> str:
@@ -109,10 +109,11 @@ class DecimalNotationStrategy(NotationStrategy):
         suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
 
         # Calculate the index of the suffix to use
-        index = floor(log2(size) / 10) if size != 0 else 0
+        index = floor(log10(size) / 3) if size != 0 else 0
 
         # Convert the size to the appropriate unit and format the result
-        return f'{size / (1000.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 class BinaryNotationStrategy(NotationStrategy):
@@ -128,15 +129,15 @@ class BinaryNotationStrategy(NotationStrategy):
     Doctest:
         >>> binary_strategy = BinaryNotationStrategy()
         >>> binary_strategy.calculate(1500)
-        '1.46 KiB'
+        '1.465 KiB'
         >>> binary_strategy.calculate(1024)
-        '1.00 KiB'
+        '1 KiB'
         >>> binary_strategy.calculate(0)
-        '0.00 B'
+        '0 B'
         >>> binary_strategy.calculate(1)
-        '1.00 B'
+        '1 B'
         >>> binary_strategy.calculate(999)
-        '999.00 B'
+        '999 B'
     """
 
     def calculate(self, size: int) -> str:
@@ -160,7 +161,8 @@ class BinaryNotationStrategy(NotationStrategy):
         index = floor(log2(size) / 10) if size != 0 else 0
 
         # Convert the size to the appropriate unit and format the result
-        return f'{size / (1024.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size / (1024.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 class BitsNotationStrategy(NotationStrategy):
@@ -176,15 +178,15 @@ class BitsNotationStrategy(NotationStrategy):
     Doctest:
         >>> bits_strategy = BitsNotationStrategy()
         >>> bits_strategy.calculate(1500)
-        '12.00 Kb'
+        '12 Kb'
         >>> bits_strategy.calculate(1024)
-        '8.19 Kb'
+        '8.192 Kb'
         >>> bits_strategy.calculate(0)
-        '0.00 b'
+        '0 b'
         >>> bits_strategy.calculate(1)
-        '8.00 b'
+        '8 b'
         >>> bits_strategy.calculate(999)
-        '7.99 Kb'
+        '7.992 Kb'
     """
 
     def calculate(self, size: int) -> str:
@@ -211,7 +213,8 @@ class BitsNotationStrategy(NotationStrategy):
         index = floor(log2(size_bits) / 10) if size_bits != 0 else 0
 
         # Convert the size to the appropriate unit and format the result
-        return f'{size_bits / (1000.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size_bits / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 class NibblesNotationStrategy(NotationStrategy):
@@ -227,15 +230,15 @@ class NibblesNotationStrategy(NotationStrategy):
     Doctest:
         >>> nibbles_strategy = NibblesNotationStrategy()
         >>> nibbles_strategy.calculate(1500)
-        '3.00 Kn'
+        '3 Kn'
         >>> nibbles_strategy.calculate(1024)
-        '2.05 Kn'
+        '2.048 Kn'
         >>> nibbles_strategy.calculate(0)
-        '0.00 n'
+        '0 n'
         >>> nibbles_strategy.calculate(1)
-        '2.00 n'
+        '2 n'
         >>> nibbles_strategy.calculate(999)
-        '1.99 Kn'
+        '1.998 Kn'
     """
 
     def calculate(self, size: int) -> str:
@@ -262,7 +265,8 @@ class NibblesNotationStrategy(NotationStrategy):
         index = floor(log2(size_nibbles) / 10) if size_nibbles != 0 else 0
 
         # Convert the size to the appropriate unit and format the result
-        return f'{size_nibbles / (1000.0 ** index):.2f} {suffixes[index]}'
+        size = f'{size_nibbles / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
 
 
 def get_strategy(notation: str) -> NotationStrategy:
@@ -330,13 +334,13 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
     Doctest:
         >>> calculate_data_size(1500, 'decimal')
-        '1.50 KB'
+        '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
-        '12.00 Kb'
+        '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
-        '3.00 Kn'
+        '3 Kn'
         >>> calculate_data_size(-1, 'decimal')
         Traceback (most recent call last):
         ...

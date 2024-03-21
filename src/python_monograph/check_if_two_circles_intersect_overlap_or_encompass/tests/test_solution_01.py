@@ -71,7 +71,8 @@ def test_circles_with_large_coordinates(x1, y1, r1, x2, y2, r2):
 
 
 @pytest.mark.parametrize(
-    'x1,y1,r1,x2,y2,r2', [(0, 0, 0.000001, 0.000002, 0.000002, 0.000002), (0, 0, 0.000002, 0.000001, 0.000001, 0.000001)]
+    'x1,y1,r1,x2,y2,r2',
+    [(0, 0, 0.000001, 0.000002, 0.000002, 0.000002), (0, 0, 0.000002, 0.000001, 0.000001, 0.000001)]
 )
 def test_circles_with_small_coordinates(x1, y1, r1, x2, y2, r2):
     c1 = Circle((x1, y1), r1)
