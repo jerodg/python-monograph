@@ -45,7 +45,7 @@ def test_solution_03_with_empty_list():
 
 
 def test_solution_03_with_large_numbers():
-    assert solution_03([10**6, 10**6, 10**6], 2 * 10**6) == (2, [(1000000, 1000000), (1000000, 1000000)])
+    assert solution_03([10 ** 6, 10 ** 6, 10 ** 6], 2 * 10 ** 6) == (2, [(1000000, 1000000), (1000000, 1000000)])
 
 
 # fixme: benchmarking not working

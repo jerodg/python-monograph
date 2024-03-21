@@ -22,7 +22,7 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 
 def validate_inputs(func):
     """
-    Decorator to validate the inputs of a function.
+    This is a decorator function that validates the inputs of another function.
 
     This decorator checks if the size is negative or if the notation is not 'decimal', 'binary', 'bits', or 'nibbles',
     and raises a ValueError if so.
@@ -32,13 +32,35 @@ def validate_inputs(func):
 
     Returns:
         function: The decorated function.
+
+    Raises:
+        ValueError: If size is negative or notation is not 'decimal', 'binary', 'bits', or 'nibbles'.
+
+    Examples:
+        >>> @validate_inputs
+        ... def test_func(size, notation):
+        ...     return size, notation
+        ...
+        >>> test_func(1000, 'decimal')
+        (1000, 'decimal')
+        >>> test_func(-1000, 'decimal')
+        Traceback (most recent call last):
+        ...
+        ValueError: Size cannot be negative.
+        >>> test_func(1000, 'invalid')
+        Traceback (most recent call last):
+        ...
+        ValueError: Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.
     """
 
     def wrapper(size: int, notation: str = 'decimal') -> str:
+        # Check if size is negative
         if size < 0:
             raise ValueError('Size cannot be negative.')
+        # Check if notation is valid
         if notation not in ['decimal', 'binary', 'bits', 'nibbles']:
             raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
+        # If all checks pass, call the decorated function
         return func(size, notation)
 
     return wrapper
@@ -60,15 +82,15 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
     Doctest:
         >>> calculate_data_size(1500, 'decimal')
-        '1.50 KB'
+        '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
-        '12.00 Kb'
+        '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
-        '6.00 Kn'
+        '3 Kn'
         >>> calculate_data_size(1024, 'binary')
-        '1.00 KiB'
+        '1 KiB'
     """
     # Define the suffixes for each notation
     suffixes = {
@@ -135,4 +157,5 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     size /= base ** index
 
     # Return the size with the appropriate suffix
-    return f'{size:3.2f} {suffix_list[index]}'
+    size = f'{size:.3f}'.rstrip('0').rstrip('.')
+    return f'{size} {suffix_list[index]}'

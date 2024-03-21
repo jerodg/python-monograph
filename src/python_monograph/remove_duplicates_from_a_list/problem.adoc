@@ -12,12 +12,16 @@
 :keywords: problem, python
 
 == Problem
+
 [.lead]
-Given an integer array `+nums+` sorted in *non-decreasing order*, remove the duplicates https://en.wikipedia.org/wiki/In-place_algorithm[*in-place*] such that each unique element appears only *once*. The *relative order* of the elements should be kept the *same*. Then return _the number of unique elements in _`+nums+`.
+Given an integer array `+nums+` sorted in *non-decreasing order*, remove the duplicates https://en.wikipedia.org/wiki/In-place_algorithm[*in-place*] such that each unique element appears only *once*.
+The *relative order* of the elements should be kept the *same*.
+Then return _the number of unique elements in _`+nums+`.
 
 Consider the number of unique elements of `+nums+` to be `+k+`, to get accepted, you need to do the following things:
 
-* Change the array `+nums+` such that the first `+k+` elements of `+nums+` contain the unique elements in the order they were present in `+nums+` initially. The remaining elements of `+nums+` are not important as well as the size of `+nums+`.
+* Change the array `+nums+` such that the first `+k+` elements of `+nums+` contain the unique elements in the order they were present in `+nums+` initially.
+The remaining elements of `+nums+` are not important as well as the size of `+nums+`.
 * Return `+k+`.
 
 *Custom Judge:*
@@ -38,7 +42,6 @@ for (int i = 0; i < k; i++) {
 
 If all assertions pass, then your solution will be *accepted*.
 
-
 === Approaches
 
 To solve the problem of removing duplicates from a sorted array in-place, you can consider the following techniques:
@@ -58,6 +61,7 @@ Then, you can copy the elements from the set back into the array.
 Remember, the key to solving this problem efficiently is understanding the problem constraints (in this case, the in-place requirement and the fact that the array is already sorted) and choosing the right technique based on them.
 
 === Constraints
+
 * `+1 <= nums.length <= 3 * 10+`^`+4+`^
 * `+-100 <= nums[i] <= 100+`
 * `+nums+` is sorted in *non-decreasing* order.

@@ -52,7 +52,7 @@ def solution_02(arr: list[int]) -> list[list[int]]:
         current_sum = target_sum - item
 
         # Traverse the subarray arr[i+1:].
-        for other_item in arr[index + 1 :]:
+        for other_item in arr[index + 1:]:
             # required value for the second element
             required_value = current_sum - other_item
 

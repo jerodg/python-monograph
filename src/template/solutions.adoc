@@ -23,7 +23,6 @@
 = {description}
 
 [.lead]
-
 == Approaches
 
 == Performance Optimizations
@@ -50,7 +49,6 @@ include::./solution_00.py[lines=21..]
 == Tests
 
 [.lead]
-
 ===  Test Solution 00
 
 [source,python,linenums]

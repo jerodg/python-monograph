@@ -47,7 +47,7 @@ def solution_02(s: str) -> Tuple[int, str]:
 
         if max_length < i - start + 1:
             max_length = i - start + 1
-            max_str = s[start : i + 1]
+            max_str = s[start: i + 1]
 
         seen[c] = i
 

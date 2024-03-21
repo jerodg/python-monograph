@@ -53,7 +53,7 @@ def solution_05(nums: list[int]) -> list[list[int]]:
             for i in range(len(nums)):
                 # Enqueue a new list (with the current number removed) and a new permutation (with the current number added) to
                 # the queue.
-                queue.append((nums[:i] + nums[i + 1 :], perm + [nums[i]]))
+                queue.append((nums[:i] + nums[i + 1:], perm + [nums[i]]))
 
     # Return the output list of all permutations.
     return output

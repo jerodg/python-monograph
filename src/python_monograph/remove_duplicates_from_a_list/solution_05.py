@@ -41,7 +41,7 @@ def solution_05(ls: list) -> list:
     """
     # Use list comprehension and enumerate to remove duplicates
     # Only the last occurrence of each element is kept in the list
-    return [a for i, a in enumerate(ls) if a not in ls[i + 1 :]]
+    return [a for i, a in enumerate(ls) if a not in ls[i + 1:]]
 
 
 if __name__ == '__main__':

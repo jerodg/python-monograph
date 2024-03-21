@@ -62,10 +62,10 @@ def solution_00(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]
 
     # If there are remaining elements in nums1_copy or nums2, append them into nums1
     if p1 < m:
-        nums1[p1 + p2 :] = nums1_copy[p1:]
+        nums1[p1 + p2:] = nums1_copy[p1:]
 
     if p2 < n:
-        nums1[p1 + p2 :] = nums2[p2:]
+        nums1[p1 + p2:] = nums2[p2:]
 
     return nums1
 

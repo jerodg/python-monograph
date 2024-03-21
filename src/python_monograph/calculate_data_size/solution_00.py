@@ -20,14 +20,13 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
 
 
-def calculate_data_size(size: int, notation: str = 'decimal', precision: int = 3) -> str:
+def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     """
     Calculate the data size in different notations using an iterative approach.
 
     This function takes a size in bytes and a notation, and returns a string representing the size in the appropriate notation.
 
     Args:
-        precision ():
         size (int): The size in bytes.
         notation (str, optional): The notation to use for the size calculation. Defaults to 'decimal'.
 
@@ -41,7 +40,7 @@ def calculate_data_size(size: int, notation: str = 'decimal', precision: int = 3
         >>> calculate_data_size(1500, 'decimal')
         '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
         '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
@@ -78,5 +77,5 @@ def calculate_data_size(size: int, notation: str = 'decimal', precision: int = 3
         index += 1
 
     # Return the size with the appropriate suffix
-    size = f'{size:.{precision}f}'.rstrip('0').rstrip('.')
+    size = f'{size:.3f}'.rstrip('0').rstrip('.')
     return f'{size} {suffixes[index]}'

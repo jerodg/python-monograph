@@ -38,15 +38,15 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
     Doctest:
         >>> calculate_data_size(1500, 'decimal')
-        '1.50 KB'
+        '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
-        '12.00 Kb'
+        '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
-        '6.00 Kn'
+        '3 Kn'
         >>> calculate_data_size(1024, 'binary')
-        '1.00 KiB'
+        '1 KiB'
     """
     # Check if size is negative
     if size < 0:
@@ -77,6 +77,7 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     for i in reversed(range(len(thresholds))):
         if size >= thresholds[i]:
             size /= thresholds[i]
-            return f'{size:3.2f} {suffixes[i]}'
+            size = f'{size:.3f}'.rstrip('0').rstrip('.')
+            return f'{size} {suffixes[i]}'
 
-    return '0.00 B'
+    return '0 B'

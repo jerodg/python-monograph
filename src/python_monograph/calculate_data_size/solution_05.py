@@ -38,15 +38,15 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
 
     Doctest:
         >>> calculate_data_size(1500, 'decimal')
-        '1.50 KB'
+        '1.5 KB'
         >>> calculate_data_size(1500, 'binary')
-        '1.46 KiB'
+        '1.465 KiB'
         >>> calculate_data_size(1500, 'bits')
-        '12.00 Kb'
+        '12 Kb'
         >>> calculate_data_size(1500, 'nibbles')
-        '6.00 Kn'
+        '3 Kn'
         >>> calculate_data_size(1024, 'binary')
-        '1.00 KiB'
+        '1 KiB'
     """
     if size < 0:
         raise ValueError('Size cannot be negative.')
@@ -81,10 +81,41 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     suffix_list = suffixes[notation]
 
     # Recursive function to calculate the index of the suffix to use
-    def calculate_suffix_index(size, index=0):
+    def calculate_suffix_index(size: int, index: int = 0) -> int:
+        """
+        Recursive function to calculate the index of the suffix to use.
+
+        This function is used to determine the appropriate suffix (e.g., 'KB', 'MB', 'GB', etc.)
+        for a given size in bytes. It does this by recursively dividing the size by the base
+        (1024 for binary notation, 1000 for decimal notation) until the size is less than the base
+        or until the maximum suffix has been reached.
+
+        Args:
+            size (int): The size in bytes.
+            index (int, optional): The current index in the suffix list. Defaults to 0.
+
+        Returns:
+            int: The index of the suffix to use in the suffix list.
+
+        Examples:
+            >>> calculate_suffix_index(1500)
+            1
+            >>> calculate_suffix_index(1048576)
+            2
+            >>> calculate_suffix_index(1073741824)
+            3
+            >>> calculate_suffix_index(1099511627776)
+            4
+            >>> calculate_suffix_index(1125899906842624)
+            5
+        """
         if size < base or index == len(suffix_list) - 1:
+            # If the size is less than the base or the maximum suffix has been reached,
+            # return the current index.
             return index
         else:
+            # Otherwise, divide the size by the base and increment the index,
+            # then call the function again with the new values.
             return calculate_suffix_index(size / base, index + 1)
 
     # Calculate the index of the suffix to use using recursion
@@ -92,4 +123,5 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     size /= base ** index
 
     # Return the size with the appropriate suffix
-    return f'{size:3.2f} {suffix_list[index]}'
+    size = f'{size:.3f}'.rstrip('0').rstrip('.')
+    return f'{size} {suffix_list[index]}'
