@@ -66,7 +66,7 @@ The equilibrium index of an array is an index such that the sum of elements at l
 The function `method_0` takes a list `arr` as an argument.
 It initializes two variables `leftsum` and `rightsum` to 0 and calculates the length of the array `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_0(arr: list) -> int:
     leftsum = 0
@@ -77,7 +77,7 @@ def method_0(arr: list) -> int:
 The function then enters a loop that iterates over the array.
 For each index `i`, it resets `leftsum` and `rightsum` to 0.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(n):
     leftsum = 0
@@ -86,7 +86,7 @@ for i in range(n):
 
 Inside the loop, it calculates the sum of elements on the left of the index `i` by iterating from the start of the array to the index `i` and adds each element to `leftsum`.
 
-[source,python]
+[source,python,linenums]
 ----
 for j in range(i):
     leftsum += arr[j]
@@ -94,7 +94,7 @@ for j in range(i):
 
 Similarly, it calculates the sum of elements on the right of the index `i` by iterating from the index `i + 1` to the end of the array and adds each element to `rightsum`.
 
-[source,python]
+[source,python,linenums]
 ----
 for j in range(i + 1, n):
     rightsum += arr[j]
@@ -103,7 +103,7 @@ for j in range(i + 1, n):
 After calculating the sums, it checks if `leftsum` is equal to `rightsum`.
 If they are equal, it means that the current index `i` is an equilibrium index, and the function returns `i`.
 
-[source,python]
+[source,python,linenums]
 ----
 if leftsum == rightsum:
     return i
@@ -111,7 +111,7 @@ if leftsum == rightsum:
 
 If the function iterates over the entire array and doesn't find an equilibrium index, it returns -1.
 
-[source,python]
+[source,python,linenums]
 ----
 return -1
 ----
@@ -175,7 +175,7 @@ The equilibrium index of an array is an index such that the sum of elements at l
 The function `method_1` takes a list `arr` as an argument.
 It initializes two variables `total_sum` and `left_sum` to the sum of all elements in the array and 0, respectively.
 
-[source,python]
+[source,python,linenums]
 ----
 total_sum = sum(arr)
 left_sum = 0
@@ -184,7 +184,7 @@ left_sum = 0
 The function then enters a loop that iterates over the array.
 For each index `i` and corresponding element `num`, it subtracts `num` from `total_sum`.
 
-[source,python]
+[source,python,linenums]
 ----
 for i, num in enumerate(arr):
     total_sum -= num
@@ -193,7 +193,7 @@ for i, num in enumerate(arr):
 After subtracting `num` from `total_sum`, it checks if `left_sum` is equal to `total_sum`.
 If they are equal, it means that the current index `i` is an equilibrium index, and the function returns `i`.
 
-[source,python]
+[source,python,linenums]
 ----
 if left_sum == total_sum:
     return i
@@ -201,14 +201,14 @@ if left_sum == total_sum:
 
 If `left_sum` is not equal to `total_sum`, it adds `num` to `left_sum` and continues to the next iteration.
 
-[source,python]
+[source,python,linenums]
 ----
 left_sum += num
 ----
 
 If the function iterates over the entire array and doesn't find an equilibrium index, it returns -1.
 
-[source,python]
+[source,python,linenums]
 ----
 return -1
 ----

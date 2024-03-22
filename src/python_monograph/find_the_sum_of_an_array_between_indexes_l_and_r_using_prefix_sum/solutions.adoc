@@ -36,7 +36,7 @@ The class is initialized with an array of integers.
 In the `__init__` method, it first checks if the array is not empty, and if so, initializes the first element of `prefix_sum` with the first element of the array.
 Then, it calculates the prefix sum of the array and stores it in `prefix_sum`.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, array: list[int]) -> None:
     len_array = len(array)
@@ -51,7 +51,7 @@ The `get_sum` method returns the sum of array elements from the start to the end
 If the start index is 0, it directly returns the value at the end index from `prefix_sum`.
 Otherwise, it subtracts the prefix sum at `start - 1` from the prefix sum at `end` to get the sum of elements between the two indices.
 
-[source,python]
+[source,python,linenums]
 ----
 def get_sum(self, start: int, end: int) -> int:
     if start == 0:
@@ -65,7 +65,7 @@ For each sum, it checks if the difference between the current sum and the target
 If it is, it returns `True`, indicating that the array contains the target sum.
 If no matching sum is found after iterating over all elements, it returns `False`.
 
-[source,python]
+[source,python,linenums]
 ----
 def contains_sum(self, target_sum: int) -> bool:
     sums = {0}
@@ -157,7 +157,7 @@ In the `__init__` method, it first checks if the array is not empty and if all e
 Then, it initializes `n` with the length of the array and `tree` with a list of zeros of size `2n`.
 Finally, it calls the `build_tree` method to build the segment tree from the array.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, arr: list[int]) -> None:
     if not arr:
@@ -174,7 +174,7 @@ It first copies the array to the second half of `tree`.
 Then, it builds the segment tree in a bottom-up manner.
 For each node `i`, it calculates the sum of its two children and stores it in `tree[i]`.
 
-[source,python]
+[source,python,linenums]
 ----
 def build_tree(self, arr: list[int]) -> None:
     for i in range(self.n):
@@ -187,7 +187,7 @@ The `update` method updates the value at index `p` in the array.
 It first updates the value in `tree` at index `p + n`.
 Then, it updates the ancestors of the updated node in the segment tree.
 
-[source,python]
+[source,python,linenums]
 ----
 def update(self, p: int, value: int) -> None:
     p += self.n
@@ -200,7 +200,7 @@ def update(self, p: int, value: int) -> None:
 The `query` method returns the sum of elements in the array from index `l` to `r`.
 It performs a range sum query in the segment tree.
 
-[source,python]
+[source,python,linenums]
 ----
 def query(self, l: int, r: int) -> int:
     l += self.n
@@ -285,7 +285,7 @@ The class is initialized with the size of the array.
 In the `__init__` method, it first checks if the size is a positive integer.
 Then, it initializes `size` with the size of the array and `tree` with a list of zeros of size `size + 1`.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, size: int) -> None:
     if not isinstance(size, int):
@@ -300,7 +300,7 @@ The `update` method updates the value at index `i` in the array.
 It uses a while loop to add `val` to `tree[i]` and all its ancestors in the BIT.
 The operation `i += i & -i` is used to get the next index.
 
-[source,python]
+[source,python,linenums]
 ----
 def update(self, i: int, val: int) -> None:
     while i <= self.size:
@@ -312,7 +312,7 @@ The `query` method returns the prefix sum up to index `i` in the array.
 It uses a while loop to add `tree[i]` to the result and move to the parent index.
 The operation `i -= i & -i` is used to get the parent index.
 
-[source,python]
+[source,python,linenums]
 ----
 def query(self, i: int) -> int:
     res = 0
@@ -325,7 +325,7 @@ def query(self, i: int) -> int:
 The `range_query` method returns the sum of elements in the array from index `l` to `r`.
 It does this by returning the difference between the prefix sum up to index `r` and the prefix sum up to index `l - 1`.
 
-[source,python]
+[source,python,linenums]
 ----
 def range_query(self, l: int, r: int) -> int:
     return self.query(r) - self.query(l - 1)
@@ -400,7 +400,7 @@ The class is initialized with an array.
 In the `__init__` method, it first checks if the array is not empty and contains only integers.
 Then, it initializes `n` with the length of the array and `table` with the result of the `build_table` method.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, arr: list[int]) -> None:
     if not arr:
@@ -417,7 +417,7 @@ Then, it initializes `table` with a 2D list of zeros.
 After that, it fills the first column of `table` with the elements of the array.
 Finally, it fills the rest of `table` using the formula `min(table[i][j - 1], table[i + (1 << (j - 1))][j - 1])`, which ensures that each cell contains the minimum value in the corresponding subarray of the original array.
 
-[source,python]
+[source,python,linenums]
 ----
 def build_table(self, arr: list[int]) -> list[list[int]]:
     k = int(log2(self.n)) + 1
@@ -436,7 +436,7 @@ The `query` method returns the minimum value in the array from index `l` to `r`.
 It first calculates `j`, which is the largest power of 2 less than or equal to `r - l + 1`.
 Then, it returns the minimum of `table[l][j]` and `table[r - (1 << j) + 1][j]`, which are the minimum values in the two overlapping subarrays that cover the range from `l` to `r`.
 
-[source,python]
+[source,python,linenums]
 ----
 def query(self, l: int, r: int) -> int:
     j = int(log2(r - l + 1))
@@ -512,7 +512,7 @@ In the `__init__` method, it first checks if the array is not empty and contains
 Then, it initializes `n` with the length of the array, `block_size` with the square root of `n` plus one, `blocks` with a list of zeros, and `arr` with the input array.
 Finally, it calls the `preprocess` method to fill the block array.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, arr: list[int]) -> None:
     if not arr:
@@ -529,7 +529,7 @@ def __init__(self, arr: list[int]) -> None:
 The `preprocess` method fills the block array.
 It iterates over the array and adds each element to the corresponding block in the block array.
 
-[source,python]
+[source,python,linenums]
 ----
 def preprocess(self) -> None:
     for i in range(self.n):
@@ -539,7 +539,7 @@ def preprocess(self) -> None:
 The `update` method updates the value at a particular index in the array.
 It first calculates the block that contains the index, then updates the corresponding value in the block array and the array.
 
-[source,python]
+[source,python,linenums]
 ----
 def update(self, i: int, val: int) -> None:
     block = i // self.block_size
@@ -551,7 +551,7 @@ The `query` method calculates the sum of elements in the array between two index
 It first calculates the blocks that contain the start and end indexes.
 Then, it calculates the sum of elements in the array from the start index to the end of the start block, the sum of elements in the blocks between the start block and the end block, and the sum of elements in the array from the start of the end block to the end index.
 
-[source,python]
+[source,python,linenums]
 ----
 def query(self, l: int, r: int) -> int:
     start_block = l // self.block_size

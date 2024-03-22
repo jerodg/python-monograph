@@ -54,7 +54,7 @@ This effectively flattens any nested lists or tuples within the item.
 
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 for item in itr:
     if isinstance(item, (tuple, list)):
@@ -113,7 +113,7 @@ It takes several iterables as arguments and returns a single iterable that combi
 In this case, the `*` operator is used to unpack the input iterable `itr` into separate arguments for `itertools.chain()`.
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 itertools.chain(*itr)
 ----
@@ -160,7 +160,7 @@ The core of this function is a list comprehension, which is a concise way to cre
 The list comprehension in this function is a bit more complex than usual because it uses two `for` loops.
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 [item for sublist in itr for item in sublist]
 ----
@@ -207,7 +207,7 @@ The function takes one argument `itr`, which is expected to be a tuple or a list
 The core of this function is the use of the `numpy` library to convert the input iterable into a numpy array.
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 np.array(itr)
 ----
@@ -219,7 +219,7 @@ The next step is to flatten the numpy array.
 This is done using the `flatten()` method of the numpy array.
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 np.array(itr).flatten()
 ----
@@ -231,7 +231,7 @@ Finally, the flattened numpy array is converted back into a list using the `toli
 This is the final result that the function returns.
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 np.array(itr).flatten().tolist()
 ----
@@ -274,7 +274,7 @@ The function takes one argument `itr`, which is expected to be a tuple or a list
 The core of this function is the use of the `reduce` function.
 Here is the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 reduce(lambda x, y: x + y, itr)
 ----

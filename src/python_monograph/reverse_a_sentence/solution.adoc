@@ -43,7 +43,7 @@ This function takes an iterable object and returns a reverse iterator.
 In this case, the iterable is the string `sentence`.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 reversed(sentence)
 ----
@@ -53,7 +53,7 @@ To convert this back into a string, the `join()` function is used.
 This function takes an iterable of strings (in this case, single characters) and concatenates them into a single string.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 "".join(reversed(sentence))
 ----
@@ -108,7 +108,7 @@ The `sub()` function replaces all occurrences of a pattern in a string with a re
 In this case, the pattern is `r"(\w+)"`, which matches any word, and the replacement is a lambda function that reverses each matched word.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 re.sub(r"(\w+)", lambda x: x.group()[::-1], sentence)
 ----
@@ -152,7 +152,7 @@ def method_2(sentence: str) -> str:
 This function takes a single argument, `sentence`, which is expected to be a string.
 The purpose of this function is to reverse the order of characters in the provided string.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_2(sentence: str) -> str:
 ----
@@ -161,7 +161,7 @@ The function uses Python's built-in `slice` function to achieve this.
 The `slice` function is used to get a slice of the given string from a specified start to end index.
 In this case, it is used with three arguments: `None`, `None`, and `-1`.
 
-[source,python]
+[source,python,linenums]
 ----
 return sentence[slice(None, None, -1)]
 ----
@@ -206,7 +206,7 @@ def method_3(sentence: str) -> str:
 This function takes a single argument, `sentence`, which is expected to be a string.
 The purpose of this function is to reverse the order of characters in the provided string.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_3(sentence: str) -> str:
 ----
@@ -215,7 +215,7 @@ The function uses Python's built-in slicing syntax to achieve this.
 The slicing syntax is used to get a slice of the given string from a specified start to end index.
 In this case, it is used with three arguments: `None`, `None`, and `-1`.
 
-[source,python]
+[source,python,linenums]
 ----
 return sentence[::-1]
 ----
@@ -267,7 +267,7 @@ def method_4(sentence: str) -> str:
 This function takes a single argument, `sentence`, which is expected to be a string.
 The purpose of this function is to reverse the order of the words in the provided string.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_4(sentence: str) -> str:
 ----
@@ -275,14 +275,14 @@ def method_4(sentence: str) -> str:
 The function begins by splitting the input string into a list of words using the `split()` method.
 This method splits a string into a list where each word is a separate element.
 
-[source,python]
+[source,python,linenums]
 ----
 s = sentence.split()
 ----
 
 Next, it creates an empty list `l` and appends each word from the split sentence to this list.
 
-[source,python]
+[source,python,linenums]
 ----
 l = []
 for i in s:
@@ -293,7 +293,7 @@ Then, it creates a new list `res` using list comprehension.
 This list contains each word from `l` only once, preserving the order of their first occurrence.
 This is achieved by checking if the word is not in the part of the list before its current position.
 
-[source,python]
+[source,python,linenums]
 ----
 res = [ii for n, ii in enumerate(l) if ii not in l[:n]]
 ----
@@ -301,7 +301,7 @@ res = [ii for n, ii in enumerate(l) if ii not in l[:n]]
 Finally, it reverses the order of the words in `res` using slicing syntax and joins them into a string with spaces in between using the `join()` method.
 This reversed string is then returned as the result of the function.
 
-[source,python]
+[source,python,linenums]
 ----
 return " ".join(res[::-1])
 ----
@@ -346,7 +346,7 @@ def method_5(sentence: str) -> str:
 This function takes a single argument, `sentence`, which is expected to be a string.
 The purpose of this function is to reverse the order of the words in the provided string.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_5(sentence: str) -> str:
 ----
@@ -354,7 +354,7 @@ def method_5(sentence: str) -> str:
 The function begins by splitting the input string into a list of words using the `split()` method.
 This method splits a string into a list where each word is a separate element.
 
-[source,python]
+[source,python,linenums]
 ----
 words = sentence.split()
 ----
@@ -362,7 +362,7 @@ words = sentence.split()
 Next, it reverses the order of the words in the list using Python's built-in slicing syntax.
 The `[::-1]` slice reverses the order of the elements in the list.
 
-[source,python]
+[source,python,linenums]
 ----
 reversed_words = words[::-1]
 ----
@@ -371,7 +371,7 @@ Finally, it joins the reversed list of words back into a string using the `join(
 This method concatenates all the elements in the list into a single string, with each element separated by a space.
 This reversed string is then returned as the result of the function.
 
-[source,python]
+[source,python,linenums]
 ----
 reversed_sentence = ' '.join(reversed_words)
 return reversed_sentence
@@ -414,7 +414,7 @@ def method_6(sentence: str) -> str:
 This function takes a single argument, `sentence`, which is expected to be a string.
 The purpose of this function is to reverse the order of the words in the provided string.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_6(sentence: str) -> str:
 ----
@@ -422,7 +422,7 @@ def method_6(sentence: str) -> str:
 The function begins by splitting the input string into a list of words using the `split()` method.
 This method splits a string into a list where each word is a separate element.
 
-[source,python]
+[source,python,linenums]
 ----
 sentence.split()
 ----
@@ -430,14 +430,14 @@ sentence.split()
 Next, it uses Python's built-in slicing syntax to reverse the order of the words in the list.
 The `[::-1]` slice reverses the order of the elements in the list.
 
-[source,python]
+[source,python,linenums]
 ----
 sentence.split()[::-1]
 ----
 
 This reversed list of words is then passed to a list comprehension, which simply iterates over each word in the list.
 
-[source,python]
+[source,python,linenums]
 ----
 word for word in sentence.split()[::-1]
 ----
@@ -445,7 +445,7 @@ word for word in sentence.split()[::-1]
 Finally, it uses the `join()` method to concatenate all the elements in the list into a single string, with each element separated by a space.
 This reversed string is then returned as the result of the function.
 
-[source,python]
+[source,python,linenums]
 ----
 ' '.join(word for word in sentence.split()[::-1])
 ----
@@ -487,7 +487,7 @@ def method_7(sentence: str) -> str:
 This function takes a single argument, `sentence`, which is expected to be a string.
 The purpose of this function is to reverse the order of the words in the provided string.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_7(sentence: str) -> str:
 ----
@@ -495,7 +495,7 @@ def method_7(sentence: str) -> str:
 The function begins by splitting the input string into a list of words using the `split()` method.
 This method splits a string into a list where each word is a separate element.
 
-[source,python]
+[source,python,linenums]
 ----
 sentence.split()
 ----
@@ -503,7 +503,7 @@ sentence.split()
 Next, it uses the `reduce()` function from the `functools` module.
 The `reduce()` function applies a binary function (a function that takes two arguments) to all elements in an iterable in a cumulative way.
 
-[source,python]
+[source,python,linenums]
 ----
 reduce(lambda x, y: y + ' ' + x, sentence.split())
 ----

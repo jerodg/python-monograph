@@ -119,7 +119,7 @@ for i, n in enumerate(nums):
 In the second loop, the function checks if the complement of the current number (i.e., `target - n`) exists in the dictionary `d` and that it's not the same element.
 If it does, it means we have found two numbers that add up to `target`, and we return their indices.
 
-[source,python]
+[source,python,linenums]
 ----
 for i, n in enumerate(nums):
     if target - n in d and i != d[target - n]:

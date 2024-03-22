@@ -33,7 +33,7 @@ Here, `nums1` is the first sorted integer array with a size of `m+n`, where the 
 The function begins by creating a copy of the first `m` elements of `nums1` and then clears `nums1`.
 This is done using the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 nums1_copy = nums1[:m]
 nums1 = []
@@ -42,7 +42,7 @@ nums1 = []
 Next, the function initializes two pointers, `p1` and `p2`, each pointing to the start of `nums1_copy` and `nums2` respectively.
 This is achieved with:
 
-[source,python]
+[source,python,linenums]
 ----
 p1 = 0
 p2 = 0
@@ -53,7 +53,7 @@ Inside the loop, the function compares the elements pointed by the pointers and 
 The corresponding pointer is then incremented.
 This is done using the following code:
 
-[source,python]
+[source,python,linenums]
 ----
 if nums1_copy[p1] <= nums2[p2]:
     nums1.append(nums1_copy[p1])
@@ -66,7 +66,7 @@ else:
 After the loop, if there are remaining elements in `nums1_copy` or `nums2`, they are appended into `nums1`.
 This is done using the following code:
 
-[source,python]
+[source,python,linenums]
 ----
 if p1 < m:
     nums1[p1 + p2 :] = nums1_copy[p1:]
@@ -143,7 +143,7 @@ p2 = n - 1
 
 Next, the function initializes a third pointer `p` for the last unprocessed position in `nums1`:
 
-[source,python]
+[source,python,linenums]
 ----
 p = m + n - 1
 ----
@@ -153,7 +153,7 @@ Inside the loop, the function compares the elements pointed by the pointers and 
 The corresponding pointer is then decremented.
 This is done using the following code:
 
-[source,python]
+[source,python,linenums]
 ----
 if nums1[p1] <= nums2[p2]:
     nums1[p] = nums2[p2]
@@ -167,7 +167,7 @@ p -= 1
 After the loop, if there are remaining elements in `nums2`, they are appended into the unprocessed positions in `nums1`.
 This is done using the following code:
 
-[source,python]
+[source,python,linenums]
 ----
 if p2 >= 0:
     nums1[: p2 + 1] = nums2[: p2 + 1]
@@ -238,7 +238,7 @@ This is done using the `+` operator, which concatenates the two lists.
 The slice `nums1[:m]` is used to get the first `m` elements of `nums1`, and `nums2` is appended to this slice.
 The result is a new list that contains the initialized elements of `nums1` followed by all elements of `nums2`.
 
-[source,python]
+[source,python,linenums]
 ----
 nums1[:] = sorted(nums1[:m] + nums2)
 ----
@@ -251,7 +251,7 @@ The function ends with a `return` statement, which returns the sorted list.
 This is not necessary because the function is supposed to modify `nums1` in-place and does not need to return anything.
 However, it does not harm and can be useful for testing or debugging purposes.
 
-[source,python]
+[source,python,linenums]
 ----
 return nums1
 ----
@@ -317,7 +317,7 @@ The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
 The function starts by creating a new list, `nums3`.
 It then appends the first `m` elements from `nums1` and the first `n` elements from `nums2` to `nums3`.
 
-[source,python]
+[source,python,linenums]
 ----
 nums3 = []
 for i in range(m):
@@ -328,7 +328,7 @@ for i in range(n):
 
 Afterwards, it sorts `nums3` and replaces the first `m+n` elements in `nums1` with the sorted elements from `nums3`.
 
-[source,python]
+[source,python,linenums]
 ----
 for i, num in enumerate(sorted(nums3)):
     nums1[i] = num
@@ -336,7 +336,7 @@ for i, num in enumerate(sorted(nums3)):
 
 If `nums2` is empty (i.e., `n` equals 0), the function removes trailing zeros from `nums1`.
 
-[source,python]
+[source,python,linenums]
 ----
 if n == 0:
     nums1 = nums1[:m]
@@ -400,7 +400,7 @@ The provided Python code defines a function named `solution_04` that merges two 
 The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
 Here, `nums1` is the first sorted integer array with a size of `m+n`, where the first `m` elements are the elements to consider for merging, and the rest are zeros. `nums2` is the second sorted integer array, and `n` is the number of elements in `nums2` to consider for merging.
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_04(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]:
 ----
@@ -408,7 +408,7 @@ def solution_04(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]
 The function uses a two-pointer technique to merge the arrays.
 Two pointers, `p1` and `p2`, are initialized to point to the end of `nums1` and `nums2` respectively.
 
-[source,python]
+[source,python,linenums]
 ----
 p1, p2 = m - 1, n - 1
 ----
@@ -416,7 +416,7 @@ p1, p2 = m - 1, n - 1
 The function then enters a loop that iterates over each element in both arrays, starting from the end and moving towards the beginning.
 The loop index `i` ranges from `m + n - 1` to `0`.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(m + n - 1, -1, -1):
 ----
@@ -424,7 +424,7 @@ for i in range(m + n - 1, -1, -1):
 Inside the loop, the function checks if the pointer `p1` is still within the range and if the current element in `nums1` is greater or equal to the current element in `nums2`.
 If this condition is met, the current element in `nums1` is placed into the current position, and the pointer `p1` is moved backward.
 
-[source,python]
+[source,python,linenums]
 ----
 if p1 >= 0 and (p2 < 0 or nums1[p1] >= nums2[p2]):
     nums1[i] = nums1[p1]
@@ -433,7 +433,7 @@ if p1 >= 0 and (p2 < 0 or nums1[p1] >= nums2[p2]):
 
 Otherwise, if the pointer `p2` is still within the range, the current element in `nums2` is placed into the current position, and the pointer `p2` is moved backward.
 
-[source,python]
+[source,python,linenums]
 ----
 else:
     if p2 >= 0:
@@ -443,7 +443,7 @@ else:
 
 Finally, the function returns the first `m + n` elements of `nums1`, which now contains the merged sorted array.
 
-[source,python]
+[source,python,linenums]
 ----
 return nums1[: m + n]
 ----
@@ -501,14 +501,14 @@ The provided Python code defines a function named `solution_05` that merges two 
 The function takes four arguments: `nums1`, `m`, `nums2`, and `n`.
 Here, `nums1` is the first sorted integer array with a size of `m+n`, where the first `m` elements are the elements to consider for merging, and the rest are zeros. `nums2` is the second sorted integer array, and `n` is the number of elements in `nums2` to consider for merging.
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_05(nums1: list[int], m: int, nums2: list[int], n: int) -> list[int]:
 ----
 
 The function first slices `nums1` up to the `m`th index. This operation removes any placeholder zeros at the end of `nums1`.
 
-[source,python]
+[source,python,linenums]
 ----
 nums1[:] = nums1[:m]
 ----
@@ -516,7 +516,7 @@ nums1[:] = nums1[:m]
 Next, the function extends `nums1` with the elements of `nums2`.
 This operation appends all elements from `nums2` to the end of `nums1`.
 
-[source,python]
+[source,python,linenums]
 ----
 nums1.extend(nums2)
 ----
@@ -524,14 +524,14 @@ nums1.extend(nums2)
 After merging the arrays, the function sorts the combined array in-place.
 This operation rearranges the elements of `nums1` such that they are in ascending order.
 
-[source,python]
+[source,python,linenums]
 ----
 nums1.sort()
 ----
 
 Finally, the function returns `nums1`, which now contains the merged and sorted array.
 
-[source,python]
+[source,python,linenums]
 ----
 return nums1
 ----

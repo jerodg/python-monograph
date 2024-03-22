@@ -29,7 +29,7 @@ include::./solution_00.py[]
 The Python function `solution_00` is designed to find all pairs of numbers in a given list that add up to a specified sum.
 It accepts two parameters: `arr`, a list of integers, and `req_sum`, an integer representing the required sum.
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_00(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
 ----
@@ -40,7 +40,7 @@ The first element of the tuple is an integer representing the number of pairs fo
 The function utilizes the `combinations` function from Python's built-in `itertools` module to generate all possible pairs of numbers in `arr`.
 This is accomplished in the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 pairs = [(a, b) for a, b in combinations(arr, 2) if a + b == req_sum]
 ----
@@ -50,7 +50,7 @@ For each pair `(a, b)`, if the sum of `a` and `b` equals `req_sum`, the pair is 
 
 Finally, the function returns a tuple containing the number of pairs found (which is the length of the list `pairs`) and the list `pairs` itself:
 
-[source,python]
+[source,python,linenums]
 ----
 return len(pairs), pairs
 ----
@@ -105,7 +105,7 @@ include::./solution_01.py[]
 The provided Python code defines a function named `solution_01` that finds all pairs of numbers in a given list that add up to a specified sum.
 The function takes two arguments: a list of integers (`arr`) and an integer (`req_sum`).
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_01(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
 ----
@@ -116,7 +116,7 @@ The first element of the tuple is an integer representing the number of pairs fo
 The function uses a hash map (`freq`) to store the frequency of each number in the array.
 This is done in the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 freq = {}  # Initialize an empty hash map
 for num in arr:  # For each number in the array
@@ -130,7 +130,7 @@ Then, for each number in the array, it subtracts the target sum from it and chec
 If it is, it adds the frequency of that number to the count.
 This is done in the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 pairs = []  # Initialize an empty list for pairs
 for num in arr:  # For each number in the array
@@ -140,7 +140,7 @@ for num in arr:  # For each number in the array
 
 Finally, the function returns a tuple containing the number of pairs found (which is the length of the list `pairs`) and the list `pairs` itself:
 
-[source,python]
+[source,python,linenums]
 ----
 return len(pairs), pairs
 ----
@@ -198,7 +198,7 @@ include::./solution_02.py[]
 The provided Python code defines a function named `solution_02` that finds all pairs of numbers in a given list that add up to a specified sum.
 The function takes two arguments: a list of integers (`arr`) and an integer (`req_sum`).
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_02(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
 ----
@@ -209,7 +209,7 @@ The first element of the tuple is an integer representing the number of pairs fo
 The function uses a two-pointer approach.
 It first sorts the array, then initializes two pointers, one at the start of the array and one at the end.
 
-[source,python]
+[source,python,linenums]
 ----
 arr.sort()  # Sort the array
 left = 0  # Initialize the left pointer at the start of the array
@@ -221,7 +221,7 @@ If the sum is equal to the target sum, it increments the count, adds the pair to
 If the sum is less than the target sum, it moves the start pointer towards the end of the array.
 If the sum is greater than the target sum, it moves the end pointer towards the start of the array.
 
-[source,python]
+[source,python,linenums]
 ----
 while left < right:  # While the left pointer is less than the right pointer
     current_sum = arr[left] + arr[right]  # Calculate the sum of the elements at the two pointer positions
@@ -237,7 +237,7 @@ while left < right:  # While the left pointer is less than the right pointer
 
 Finally, the function returns a tuple containing the number of pairs found (which is the length of the list `pairs`) and the list `pairs` itself:
 
-[source,python]
+[source,python,linenums]
 ----
 return count, pairs
 ----
@@ -295,7 +295,7 @@ The provided Python code includes two functions: `binary_search` and `solution_0
 
 The `binary_search` function is a standard implementation of the binary search algorithm, which is used to find the index of a given element (`x`) in a sorted list (`arr`).
 
-[source,python]
+[source,python,linenums]
 ----
 def binary_search(arr: List[int], low: int, high: int, x: int) -> int:
 ----
@@ -305,7 +305,7 @@ It uses recursion to divide the list into smaller parts until it finds the eleme
 
 The `solution_03` function is designed to find all pairs of numbers in a given list (`arr`) that add up to a specified sum (`req_sum`).
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_03(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
 ----
@@ -315,7 +315,7 @@ The function returns a tuple, where the first element is the number of pairs fou
 The function starts by sorting the input list.
 It then initializes two variables: `count` to keep track of the number of pairs found, and `pairs` to store the pairs themselves.
 
-[source,python]
+[source,python,linenums]
 ----
 arr.sort()  # Sort the array
 count = 0  # Initialize count to 0
@@ -326,7 +326,7 @@ The function then iterates over the sorted list.
 For each element in the list, it performs a binary search to find a matching pair that, when added to the current element, equals the required sum.
 If a pair is found, it increments the count and adds the pair to the list of pairs.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(len(arr)):  # For each element in the array
     # Perform a binary search for the required sum minus the current element
@@ -338,7 +338,7 @@ for i in range(len(arr)):  # For each element in the array
 
 Finally, the function returns the count and the list of pairs.
 
-[source,python]
+[source,python,linenums]
 ----
 return count, pairs  # Return the count and the list of pairs
 ----
@@ -394,7 +394,7 @@ include::./solution_04.py[]
 
 The provided Python code defines a function named `solution_04` that finds all pairs of numbers in a given list (`arr`) that add up to a specified sum (`req_sum`).
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_04(arr: List[int], req_sum: int) -> Tuple[int, List[Tuple[int, int]]]:
 ----
@@ -403,7 +403,7 @@ The function returns a tuple, where the first element is the number of pairs fou
 
 The function starts by initializing two variables: `count` to keep track of the number of pairs found, and `pairs` to store the pairs themselves.
 
-[source,python]
+[source,python,linenums]
 ----
 count = 0  # Initialize count to 0
 pairs = []  # Initialize pairs to an empty list
@@ -412,7 +412,7 @@ pairs = []  # Initialize pairs to an empty list
 The function then uses a nested loop to iterate over the list.
 For each element in the list, it checks every subsequent element to see if the two numbers add up to the required sum.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(len(arr)):  # For each element in the array
     for j in range(i + 1, len(arr)):  # For each element in the array after the current element
@@ -425,7 +425,7 @@ If a pair is found, it increments the count and adds the pair to the list of pai
 
 Finally, the function returns the count and the list of pairs.
 
-[source,python]
+[source,python,linenums]
 ----
 return count, pairs  # Return the count and the list of pairs
 ----

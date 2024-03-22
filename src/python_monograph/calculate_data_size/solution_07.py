@@ -308,7 +308,7 @@ class DataSize:
             strategy (NotationStrategy): The strategy to use for the calculation.
         """
         if not isinstance(strategy, (
-        DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, NibblesNotationStrategy)):
+                DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, NibblesNotationStrategy)):
             raise ValueError(
                 "Strategy must be one of: DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, NibblesNotationStrategy.")
 

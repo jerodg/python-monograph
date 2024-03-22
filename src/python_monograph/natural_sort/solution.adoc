@@ -41,7 +41,7 @@ For example, if we have a list `['item1', 'item10', 'item2']`, a natural sort wo
 The function `method_0` takes two parameters: `x` which is the list to be sorted, and `rvrs` which is a boolean indicating whether the list should be sorted in reverse order.
 The default value of `rvrs` is `False`, meaning that the list will be sorted in ascending order by default.
 
-[source,python]
+[source,python,linenums]
 ----
 def method_0(x: list, rvrs: bool = False) -> list:
 ----
@@ -49,7 +49,7 @@ def method_0(x: list, rvrs: bool = False) -> list:
 The function first checks if the input `x` is a list.
 If it is not, the function does not proceed further.
 
-[source,python]
+[source,python,linenums]
 ----
 if isinstance(x, list):
 ----
@@ -59,7 +59,7 @@ The `key` argument of the `sorted` function is a lambda function that splits eac
 If a part is a digit, it is converted to an integer; otherwise, it is converted to lowercase.
 This ensures that the sorting is case-insensitive and that digits are sorted numerically.
 
-[source,python]
+[source,python,linenums]
 ----
 key=lambda _: [int(s) if s.isdigit() else s.lower() for s in split(DRE, _)]
 ----
@@ -69,7 +69,7 @@ The `reverse` argument of the `sorted` function is set to the value of `rvrs`, s
 Finally, the sorted list is returned.
 If the elements of the list are also lists, they are sorted recursively by calling `method_0` on each of them.
 
-[source,python]
+[source,python,linenums]
 ----
 return [
     method_0(y, rvrs=rvrs)

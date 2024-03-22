@@ -30,7 +30,7 @@ The function `solution_00` is a Python function that checks if a given list of i
 A list is considered monotonic if it is either entirely non-increasing or non-decreasing.
 The function takes one argument, `nums`, which is a list of integers.
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_00(nums: list[int]) -> bool:
 ----
@@ -40,7 +40,7 @@ This is known as the two-pass method.
 The `all()` function returns `True` if all elements in the passed iterable are true.
 Otherwise, it returns `False`.
 
-[source,python]
+[source,python,linenums]
 ----
 all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1))
 ----
@@ -51,7 +51,7 @@ If all pairs are in non-decreasing order, the `all()` function returns `True`.
 The function performs this check twice: once for non-decreasing order and once for non-increasing order.
 If either check returns `True`, the function returns `True`, indicating that the list is monotonic.
 
-[source,python]
+[source,python,linenums]
 ----
 return all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1)) or all(nums[i] >= nums[i + 1] for i in range(len(nums) - 1))
 ----
@@ -109,7 +109,7 @@ The function `solution_01` is a Python function that checks if a given list of i
 A list is considered monotonic if it is either entirely non-increasing or non-decreasing.
 The function takes one argument, `nums`, which is a list of integers.
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_01(nums: list[int]) -> bool:
 ----
@@ -117,7 +117,7 @@ def solution_01(nums: list[int]) -> bool:
 The function uses two boolean flags, `increasing` and `decreasing`, to keep track of whether the list is non-decreasing and non-increasing, respectively.
 Initially, both flags are set to `True`.
 
-[source,python]
+[source,python,linenums]
 ----
 increasing = decreasing = True
 ----
@@ -126,7 +126,7 @@ The function then iterates over the list, comparing each pair of consecutive ele
 If the current element is greater than the next element, the `increasing` flag is set to `False`.
 If the current element is less than the next element, the `decreasing` flag is set to `False`.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(len(nums) - 1):
     if nums[i] > nums[i + 1]:
@@ -137,7 +137,7 @@ for i in range(len(nums) - 1):
 
 Finally, the function returns `True` if either the `increasing` or `decreasing` flag is still `True`, indicating that the list is monotonic.
 
-[source,python]
+[source,python,linenums]
 ----
 return increasing or decreasing
 ----

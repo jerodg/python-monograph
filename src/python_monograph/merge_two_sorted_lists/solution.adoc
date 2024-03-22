@@ -180,7 +180,7 @@ The function starts by checking if either of the lists is empty (`None`).
 If `l1` is `None`, it returns `l2`, and if `l2` is `None`, it returns `l1`.
 This is because if one of the lists is empty, the result of the merge is simply the other list.
 
-[source,python]
+[source,python,linenums]
 ----
 if not l1:
     return l2

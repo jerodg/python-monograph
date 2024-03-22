@@ -34,7 +34,7 @@ The class has a single method `__iter__`, which is a generator function that yie
 This is achieved by using a nested loop where the outer loop iterates over each row in the matrix and the inner loop (implemented with `yield from`) iterates over each element in the row.
 Here's a snippet of the class definition and the `__iter__` method:
 
-[source,python]
+[source,python,linenums]
 ----
 @dataclass
 class Index2DArrayIterator:
@@ -51,7 +51,7 @@ The function first checks if the array is empty or if the index is out of range,
 Then, it calculates the row and column indices in the 2D array corresponding to the 1D index, and returns the value at that position.
 Here's a snippet of the function definition and the calculation of the row and column indices:
 
-[source,python]
+[source,python,linenums]
 ----
 def index_2d_array_in_1d(array: list[list[int]], index: int) -> int:
     rows = len(array)
