@@ -235,7 +235,7 @@ It has two attributes: `data` and `next`.
 The `data` attribute holds the value of the node, and `next` is a reference to the next node in the list.
 The `Node` class is initialized with `data` and sets `next` to `None`.
 
-[source,python]
+[source,python,linenums]
 ----
 class Node:
     def __init__(self, data=None):
@@ -247,7 +247,7 @@ The `LinkedList` class represents the actual linked list.
 It has a single attribute, `head`, which is a reference to the first node in the list.
 If the list is empty, `head` is `None`.
 
-[source,python]
+[source,python,linenums]
 ----
 class LinkedList:
     def __init__(self):
@@ -258,7 +258,7 @@ The `LinkedList` class also includes several methods for manipulating the list.
 For example, `insert_at_beginning` creates a new node with the provided data and inserts it at the beginning of the list.
 It does this by setting the `next` attribute of the new node to the current head of the list, and then updating the list's head to the new node.
 
-[source,python]
+[source,python,linenums]
 ----
 def insert_at_beginning(self, data):
     new_node = Node(data)
@@ -269,7 +269,7 @@ def insert_at_beginning(self, data):
 The `insert_at_end` method is similar, but it inserts the new node at the end of the list.
 It does this by iterating through the list to find the last node, and then setting the `next` attribute of the last node to the new node.
 
-[source,python]
+[source,python,linenums]
 ----
 def insert_at_end(self, data):
     new_node = Node(data)
@@ -285,7 +285,7 @@ def insert_at_end(self, data):
 The `delete_node` method removes the first node in the list that has a specific key.
 It does this by iterating through the list until it finds a node with the matching key, then updating the `next` attribute of the previous node to skip over the node to be deleted.
 
-[source,python]
+[source,python,linenums]
 ----
 def delete_node(self, key):
     temp = self.head
@@ -604,7 +604,7 @@ The `data` attribute stores the value of the node.
 The `next` and `prev` attributes are pointers to the next and previous nodes in the list, respectively.
 The `__init__` method is used to initialize these attributes.
 
-[source,python]
+[source,python,linenums]
 ----
 class Node:
     def __init__(self, data=None):
@@ -622,7 +622,7 @@ These include `insert_at_beginning`, `insert_at_end`, `delete_node`, `search`, `
 For example, the `insert_at_beginning` method creates a new node with the given data and inserts it at the beginning of the list.
 If the list is not empty, it adjusts the `prev` pointer of the old head node to point to the new node.
 
-[source,python]
+[source,python,linenums]
 ----
 def insert_at_beginning(self, data):
     new_node = Node(data)
@@ -634,7 +634,7 @@ def insert_at_beginning(self, data):
 
 The `search` method traverses the list and returns `True` if it finds a node with the given key, and `False` otherwise.
 
-[source,python]
+[source,python,linenums]
 ----
 def search(self, key):
     temp = self.head
@@ -647,7 +647,7 @@ def search(self, key):
 
 The `sort` method sorts the nodes in the list in ascending order using a simple bubble sort algorithm.
 
-[source,python]
+[source,python,linenums]
 ----
 def sort(self):
     if self.head is None:

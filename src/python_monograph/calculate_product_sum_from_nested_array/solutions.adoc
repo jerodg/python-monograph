@@ -32,7 +32,7 @@ If an element is a list, its product sum is calculated recursively by multiplyin
 
 The function `solution_00` takes two arguments: `arr` and `depth`. `arr` is a list that can contain integers or other nested lists. `depth` is an integer representing the current depth level.
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_00(arr: list[int | list], depth: int) -> int:
 ----
@@ -40,7 +40,7 @@ def solution_00(arr: list[int | list], depth: int) -> int:
 The function first checks if the `depth` argument is an integer.
 If it's not, it raises a `TypeError`.
 
-[source,python]
+[source,python,linenums]
 ----
 if not isinstance(depth, int):
     raise TypeError('depth must be an integer')
@@ -48,7 +48,7 @@ if not isinstance(depth, int):
 
 The function then initializes a variable `total_sum` to 0. This variable will hold the final product sum.
 
-[source,python]
+[source,python,linenums]
 ----
 total_sum = 0
 ----
@@ -57,7 +57,7 @@ Next, the function iterates over the elements in the `arr` list.
 If an element is a list, the function recursively calculates its product sum and adds it to `total_sum`.
 If the element is an integer, it simply adds it to `total_sum`.
 
-[source,python]
+[source,python,linenums]
 ----
 for ele in arr:
     total_sum += solution_00(ele, depth + 1) if isinstance(ele, list) else ele
@@ -66,7 +66,7 @@ for ele in arr:
 Finally, the function multiplies `total_sum` by the current `depth` and returns the result.
 This is the final product sum of the array.
 
-[source,python]
+[source,python,linenums]
 ----
 return total_sum * depth
 ----
@@ -293,7 +293,7 @@ If the element is a list, it recursively calls itself with the list and an incre
 If the element is an integer, it yields the integer along with its depth.
 This is shown in the following code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 for ele in arr:
     if isinstance(ele, list):
@@ -310,7 +310,7 @@ For each integer and its depth yielded by the `iterate` function, it adds the in
 Finally, it returns `total_sum`, which is the product sum of the array.
 This is shown in the following code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 total_sum = 0
 for value, depth in iterate(arr):

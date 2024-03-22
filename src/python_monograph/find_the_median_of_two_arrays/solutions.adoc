@@ -83,7 +83,7 @@ It takes two arguments, `nums` and `nums1`, which are both lists of integers.
 The function begins by checking if both input arrays are empty.
 If they are, it raises a `ValueError` with the message "Both input arrays are empty." This is done to prevent further processing on empty arrays, as shown in the following code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 if not nums and not nums1:
     raise ValueError("Both input arrays are empty.")
@@ -93,7 +93,7 @@ Next, the function ensures that `nums1` is the smaller array.
 If `nums` is larger, it swaps `nums` and `nums1`.
 This is done to optimize the binary search that will be performed later.
 
-[source,python]
+[source,python,linenums]
 ----
 if len(nums) > len(nums1):
     nums, nums1 = nums1, nums
@@ -102,7 +102,7 @@ if len(nums) > len(nums1):
 The function then performs a binary search on `nums1` and calculates the median based on the elements at the partition points.
 The binary search is performed in a while loop, which continues until the start index is greater than the end index.
 
-[source,python]
+[source,python,linenums]
 ----
 while start <= end:
     partitionX = (start + end) // 2
@@ -112,7 +112,7 @@ while start <= end:
 Inside the while loop, the function calculates the maximum and minimum elements on the left and right sides of the partition points in both arrays.
 These values are used to check if the correct partition points have been found.
 
-[source,python]
+[source,python,linenums]
 ----
 maxLeftX = float("-inf") if partitionX == 0 else nums[partitionX - 1]
 minRightX = float("inf") if partitionX == x else nums[partitionX]
@@ -124,7 +124,7 @@ If the correct partition points have been found, the function calculates and ret
 If the total number of elements in the two arrays is even, the median is the average of the maximum element on the left and the minimum element on the right.
 If the total number of elements is odd, the median is the maximum element on the left.
 
-[source,python]
+[source,python,linenums]
 ----
 if (x + y) % 2 == 0:
     return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2
@@ -189,7 +189,7 @@ It takes two arguments, `nums` and `nums1`, which are both lists of integers.
 
 The function starts by initializing an empty list `merged` and two pointers `i` and `j` at 0. These pointers are used to traverse the two input arrays.
 
-[source,python]
+[source,python,linenums]
 ----
 merged = []
 i = j = 0
@@ -200,7 +200,7 @@ Inside this loop, the function compares the elements at the current positions of
 If the element in `nums` is smaller, it is appended to `merged` and the pointer `i` is incremented.
 Otherwise, the element in `nums1` is appended to `merged` and the pointer `j` is incremented.
 
-[source,python]
+[source,python,linenums]
 ----
 while i < len(nums) and j < len(nums1):
     if nums[i] < nums1[j]:
@@ -214,7 +214,7 @@ while i < len(nums) and j < len(nums1):
 After the while loop, the function checks if there are any remaining elements in either of the input arrays.
 If there are, it appends these elements to `merged`.
 
-[source,python]
+[source,python,linenums]
 ----
 while i < len(nums):
     merged.append(nums[i])
@@ -229,7 +229,7 @@ Finally, the function calculates and returns the median of the merged array.
 If the length of `merged` is even, the median is the average of the two middle elements.
 Otherwise, the median is the middle element.
 
-[source,python]
+[source,python,linenums]
 ----
 if len(merged) % 2 == 0:
     return (merged[len(merged) // 2] + merged[len(merged) // 2 - 1]) / 2
@@ -293,7 +293,7 @@ It takes two arguments, `nums` and `nums1`, which are both lists of integers.
 The function begins by checking if both input arrays are empty.
 If they are, it raises a `ValueError`.
 
-[source,python]
+[source,python,linenums]
 ----
 if not nums and not nums1:
     raise ValueError("Both input arrays are empty.")
@@ -302,14 +302,14 @@ if not nums and not nums1:
 Next, the function merges the two input arrays into a single sorted array.
 This is done by concatenating the two arrays using the `+` operator and then sorting the result using the `sorted()` function.
 
-[source,python]
+[source,python,linenums]
 ----
 merged = sorted(nums + nums1)
 ----
 
 The function then calculates the total number of elements in the merged array and stores it in the variable `total`.
 
-[source,python]
+[source,python,linenums]
 ----
 total = len(merged)
 ----
@@ -317,7 +317,7 @@ total = len(merged)
 If the total number of elements is odd, the function returns the middle element of the merged array.
 This is done by using integer division (`//`) to find the index of the middle element and then accessing this element using square brackets (`[]`).
 
-[source,python]
+[source,python,linenums]
 ----
 if total % 2 == 1:
     return float(merged[total // 2])
@@ -326,7 +326,7 @@ if total % 2 == 1:
 If the total number of elements is even, the function calculates the average of the two middle elements as the median.
 This is done by accessing the two middle elements, converting them to floats, adding them together, and then dividing by 2.
 
-[source,python]
+[source,python,linenums]
 ----
 middle1 = merged[total // 2 - 1]
 middle2 = merged[total // 2]

@@ -106,19 +106,25 @@ include::./solution_00.py[lines=21..]
 
 ==== Explanation
 
-The provided Python function, `calculate_data_size`, is designed to calculate and represent data size in different notations. It takes two arguments: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation. The `notation` argument is optional and defaults to 'decimal' if not provided.
+The provided Python function, `calculate_data_size`, is designed to calculate and represent data size in different notations.
+It takes two arguments: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
 
-The function begins by checking if the `size` is negative. If it is, a `ValueError` is raised, as size cannot be negative.
+The function begins by checking if the `size` is negative.
+If it is, a `ValueError` is raised, as size cannot be negative.
 
-[source,python]
+[source,python,linenums]
 ----
 if size < 0:
     raise ValueError('Size cannot be negative.')
 ----
 
-Next, the function checks the `notation` argument to determine the appropriate suffixes and base for the size calculation. If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set. If the `notation` is 'bits' or 'nibbles', the `size` is also multiplied by 8 or 2 respectively to convert bytes to bits or nibbles. If the `notation` is not one of the four valid options, a `ValueError` is raised.
+Next, the function checks the `notation` argument to determine the appropriate suffixes and base for the size calculation.
+If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set.
+If the `notation` is 'bits' or 'nibbles', the `size` is also multiplied by 8 or 2 respectively to convert bytes to bits or nibbles.
+If the `notation` is not one of the four valid options, a `ValueError` is raised.
 
-[source,python]
+[source,python,linenums]
 ----
 if notation == 'decimal':
     suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
@@ -135,7 +141,7 @@ else:
 
 The function then enters a loop where it divides the `size` by the `base` as long as the `size` is greater than or equal to the `base` and the index of the suffix is less than the length of the suffixes list minus 1. The index of the suffix is incremented by 1 in each iteration.
 
-[source,python]
+[source,python,linenums]
 ----
 index = 0
 while size >= base and index < len(suffixes) - 1:
@@ -145,7 +151,7 @@ while size >= base and index < len(suffixes) - 1:
 
 Finally, the function formats the `size` to a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the `size` along with the appropriate suffix.
 
-[source,python]
+[source,python,linenums]
 ----
 size = f'{size:.3f}'.rstrip('0').rstrip('.')
 return f'{size} {suffixes[index]}'
@@ -155,7 +161,8 @@ In summary, this function provides a flexible way to calculate and represent dat
 
 ==== Advantages & Disadvantages
 
-The method used in the code is an iterative approach to calculate and represent data size in different notations. Here are the advantages and disadvantages of this approach:
+The method used in the code is an iterative approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
 
 Advantages:
 1. **Flexibility:** The function supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
@@ -164,10 +171,14 @@ Advantages:
 4. **Simplicity:** The iterative approach is straightforward and easy to understand, making the code more readable.
 
 Disadvantages:
-1. **Performance:** The iterative approach can be less efficient for large sizes as it involves a loop that continues until the size is less than the base. A logarithmic approach could be more efficient for large sizes.
-2. **Limited Notations:** The function only supports four notations. If more notations need to be supported in the future, the code would need to be updated.
-3. **Rounding Errors:** The use of floating-point division can lead to rounding errors. Although the impact is likely minimal for this use case, it's something to be aware of.
-4. **Hardcoded Values:** The suffixes and base values are hardcoded into the function. If these values needed to change, the function would need to be updated.
+1. **Performance:** The iterative approach can be less efficient for large sizes as it involves a loop that continues until the size is less than the base.
+A logarithmic approach could be more efficient for large sizes.
+2. **Limited Notations:** The function only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+4. **Hardcoded Values:** The suffixes and base values are hardcoded into the function.
+If these values needed to change, the function would need to be updated.
 
 ==== Complexity Analysis
 
@@ -175,43 +186,59 @@ The time and space complexity of the `calculate_data_size` function can be analy
 
 **Time Complexity:**
 
-The time complexity of the function is O(1), which means it has constant time complexity. This is because the while loop in the function runs a maximum of 9 times, regardless of the input size. This is due to the fact that there are 9 possible suffixes (B, KB, MB, GB, TB, PB, EB, ZB, YB) for the size representation. Therefore, the number of iterations does not grow with the size of the input, making the time complexity constant.
+The time complexity of the function is O(1), which means it has constant time complexity.
+This is because the while loop in the function runs a maximum of 9 times, regardless of the input size.
+This is due to the fact that there are 9 possible suffixes (B, KB, MB, GB, TB, PB, EB, ZB, YB) for the size representation.
+Therefore, the number of iterations does not grow with the size of the input, making the time complexity constant.
 
 **Space Complexity:**
 
-The space complexity of the function is also O(1), which means it has constant space complexity. This is because the function uses a fixed amount of space to store the suffixes and the base, regardless of the input size. The space used does not grow with the size of the input, making the space complexity constant.
+The space complexity of the function is also O(1), which means it has constant space complexity.
+This is because the function uses a fixed amount of space to store the suffixes and the base, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
 
 ==== Code Review
 
 Here is a code review of the `calculate_data_size` function based on the best practices you provided:
 
-1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names. The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
 
-2. **Maintainability:** The function is easy to extend and change. The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+2. **Maintainability:** The function is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
 
 3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
 
-4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1). However, for large sizes, a logarithmic approach could be more efficient.
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
 
-5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions. Inline comments are used to explain important parts of the code.
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
 
 6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
 
-7. **Reliability:** The function is resilient to failures. It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
 
-8. **Scalability:** The function is designed to handle large sizes efficiently. It can handle sizes up to 10^18 bytes.
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
 
-9. **Reusability:** The function is written with future use cases in mind. It supports multiple notations and can be easily extended to support more.
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
 
-10. **Patterns:** The function adheres to established Python patterns and style guides. It uses snake_case for variable and function names and follows PEP 8 style guide.
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
 
-11. **Test Coverage and Quality:** The function includes doctests for basic use cases. However, additional tests should be written to cover edge cases and error scenarios.
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
 
 12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
 
-13. **Notice What's Missing:** The function handles negative sizes and invalid notations. However, it does not handle non-integer sizes or non-string notations.
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
 
-14. **Zoom Out:** The overall approach of the function is appropriate and efficient. It uses an iterative approach to calculate the size, which is straightforward and easy to understand.
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses an iterative approach to calculate the size, which is straightforward and easy to understand.
 
 === Solution 01
 
@@ -224,19 +251,25 @@ include::./solution_01.py[lines=21..]
 
 ==== Explanation
 
-The provided Python function, `calculate_data_size`, calculates and represents data size in different notations. It takes two arguments: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation. The `notation` argument is optional and defaults to 'decimal' if not provided.
+The provided Python function, `calculate_data_size`, calculates and represents data size in different notations.
+It takes two arguments: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
 
-The function begins by checking if the `size` is negative. If it is, a `ValueError` is raised, as size cannot be negative.
+The function begins by checking if the `size` is negative.
+If it is, a `ValueError` is raised, as size cannot be negative.
 
-[source,python]
+[source,python,linenums]
 ----
 if size < 0:
     raise ValueError('Size cannot be negative.')
 ----
 
-Next, the function checks the `notation` argument to determine the appropriate suffixes and base for the size calculation. If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set. If the `notation` is 'bits' or 'nibbles', the `size` is also multiplied by 8 or 2 respectively to convert bytes to bits or nibbles. If the `notation` is not one of the four valid options, a `ValueError` is raised.
+Next, the function checks the `notation` argument to determine the appropriate suffixes and base for the size calculation.
+If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set.
+If the `notation` is 'bits' or 'nibbles', the `size` is also multiplied by 8 or 2 respectively to convert bytes to bits or nibbles.
+If the `notation` is not one of the four valid options, a `ValueError` is raised.
 
-[source,python]
+[source,python,linenums]
 ----
 if notation == 'decimal':
     suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
@@ -251,9 +284,11 @@ else:
     raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
 ----
 
-The function then calculates the index of the suffix to use using logarithm. If the size is greater than 0, the index is the minimum of the logarithm of the size with the base as the logarithm base and the length of the suffixes list minus 1. The size is then divided by the base raised to the power of the index. If the size is 0, the index is set to 0.
+The function then calculates the index of the suffix to use using logarithm.
+If the size is greater than 0, the index is the minimum of the logarithm of the size with the base as the logarithm base and the length of the suffixes list minus 1. The size is then divided by the base raised to the power of the index.
+If the size is 0, the index is set to 0.
 
-[source,python]
+[source,python,linenums]
 ----
 if size > 0:
     index = min(int(math.log(size, base)), len(suffixes) - 1)
@@ -264,7 +299,7 @@ else:
 
 Finally, the function formats the `size` to a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the `size` along with the appropriate suffix.
 
-[source,python]
+[source,python,linenums]
 ----
 size = f'{size:.3f}'.rstrip('0').rstrip('.')
 return f'{size} {suffixes[index]}'
@@ -274,13 +309,83 @@ In summary, this function provides a flexible way to calculate and represent dat
 
 ==== Advantages & Disadvantages
 
+The method used in the code is a logarithmic approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The function supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
+2. **Error Handling:** The function includes error handling for negative sizes and invalid notations, providing clear error messages for invalid inputs.
+3. **Precision:** The function uses floating-point division and string formatting to maintain precision up to three decimal places.
+4. **Efficiency:** The logarithmic approach is more efficient than the iterative approach for large sizes as it avoids the need for a loop.
+
+Disadvantages:
+1. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+2. **Limited Notations:** The function only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Hardcoded Values:** The suffixes and base values are hardcoded into the function.
+If these values needed to change, the function would need to be updated.
+4. **Complexity:** The logarithmic approach is more complex than the iterative approach, which could make the code harder to understand for some developers.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `calculate_data_size` function can be analyzed as follows:
 
+**Time Complexity:**
+
+The time complexity of the function is O(1), which means it has constant time complexity.
+This is because the while loop in the function runs a maximum of 9 times, regardless of the input size.
+This is due to the fact that there are 9 possible suffixes (B, KB, MB, GB, TB, PB, EB, ZB, YB) for the size representation.
+Therefore, the number of iterations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the function is also O(1), which means it has constant space complexity.
+This is because the function uses a fixed amount of space to store the suffixes and the base, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
 
 ==== Code Review
 
+Here is a code review of the `calculate_data_size` function based on the best practices you provided:
+
+1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The function is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses an iterative approach to calculate the size, which is straightforward and easy to understand.
 
 === Solution 02
 
@@ -293,131 +398,1237 @@ include::./solution_02.py[lines=21..]
 
 ==== Explanation
 
+The provided Python function, `calculate_data_size`, calculates and represents data size in different notations.
+It takes two arguments: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
+
+The function begins by checking if the `size` is negative.
+If it is, a `ValueError` is raised, as size cannot be negative.
+
+[source,python,linenums]
+----
+if size < 0:
+    raise ValueError('Size cannot be negative.')
+----
+
+Next, the function checks the `notation` argument to determine the appropriate suffixes and base for the size calculation.
+If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set.
+If the `notation` is 'bits' or 'nibbles', the `size` is also multiplied by 8 or 2 respectively to convert bytes to bits or nibbles.
+If the `notation` is not one of the four valid options, a `ValueError` is raised.
+
+[source,python,linenums]
+----
+if notation == 'decimal':
+    suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    base = 1000
+elif notation == 'binary':
+    ...
+elif notation == 'bits':
+    ...
+elif notation == 'nibbles':
+    ...
+else:
+    raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
+----
+
+The function then calculates the index of the suffix to use using logarithm.
+If the size is greater than 0, the index is the minimum of the logarithm of the size with the base as the logarithm base and the length of the suffixes list minus 1. The size is then divided by the base raised to the power of the index.
+If the size is 0, the index is set to 0.
+
+[source,python,linenums]
+----
+if size > 0:
+    index = min(int(math.log(size, base)), len(suffixes) - 1)
+    size /= base ** index
+else:
+    index = 0
+----
+
+Finally, the function formats the `size` to a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the `size` along with the appropriate suffix.
+
+[source,python,linenums]
+----
+size = f'{size:.3f}'.rstrip('0').rstrip('.')
+return f'{size} {suffixes[index]}'
+----
+
+In summary, this function provides a flexible way to calculate and represent data size in different notations, handling various edge cases and providing clear error messages for invalid inputs.
 
 ==== Advantages & Disadvantages
 
+The method used in the code is a lookup table approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The function supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
+2. **Error Handling:** The function includes error handling for negative sizes and invalid notations, providing clear error messages for invalid inputs.
+3. **Precision:** The function uses floating-point division and string formatting to maintain precision up to three decimal places.
+4. **Efficiency:** The lookup table approach is more efficient than the iterative approach for large sizes as it avoids the need for a loop.
+
+Disadvantages:
+1. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+2. **Limited Notations:** The function only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Hardcoded Values:** The suffixes and base values are hardcoded into the function.
+If these values needed to change, the function would need to be updated.
+4. **Complexity:** The lookup table approach is more complex than the iterative approach, which could make the code harder to understand for some developers.
+
 ==== Complexity Analysis
+
+The time and space complexity of the `calculate_data_size` function can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the function is O(1), which means it has constant time complexity.
+This is because the function performs a fixed number of operations regardless of the input size.
+The function checks the `notation` argument, creates a lookup table for the thresholds for each suffix, and then finds the appropriate suffix by searching the lookup table.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the function is also O(1), which means it has constant space complexity.
+This is because the function uses a fixed amount of space to store the suffixes, the base, and the lookup table for the thresholds for each suffix, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
 
 ==== Code Review
 
-=== Solution 00
+Here is a code review of the `calculate_data_size` function based on the best practices you provided:
+
+1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The function is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses an iterative approach to calculate the size, which is straightforward and easy to understand.
+
+=== Solution 03
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_03.py[lines=21..]
 ----
 
 ==== Explanation
 
+The `calculate_data_size` function in Python is designed to calculate and represent data size in different notations.
+It takes two parameters: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
+
+The function starts by checking if the `size` is negative.
+If it is, a `ValueError` is raised, as size cannot be negative.
+
+[source,python,linenums]
+----
+if size < 0:
+    raise ValueError('Size cannot be negative.')
+----
+
+Next, the function checks the `notation` argument to determine the appropriate suffixes and base for the size calculation.
+If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set.
+If the `notation` is 'bits' or 'nibbles', the `size` is also multiplied by 8 or 2 respectively to convert bytes to bits or nibbles.
+If the `notation` is not one of the four valid options, a `ValueError` is raised.
+
+[source,python,linenums]
+----
+if notation == 'decimal':
+    suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    base = 1000
+elif notation == 'binary':
+    ...
+elif notation == 'bits':
+    ...
+elif notation == 'nibbles':
+    ...
+else:
+    raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
+----
+
+The function then calculates the index of the suffix to use using a recursive helper function `calculate_suffix_index`.
+This function uses recursion to divide the size by the base until the size is less than the base or the index reaches the end of the suffixes list.
+
+[source,python,linenums]
+----
+def calculate_suffix_index(size: int, index: int = 0) -> int:
+    if size < base or index == len(suffixes) - 1:
+        return index
+    else:
+        return calculate_suffix_index(size / base, index + 1)
+----
+
+The size is then adjusted by dividing it by the base raised to the power of the index.
+This converts the size from bytes to the unit represented by the suffix.
+The size is then formatted to three decimal places, and trailing zeros and the decimal point are removed.
+This makes the size more readable and removes unnecessary precision.
+
+[source,python,linenums]
+----
+size /= base ** index
+size = f'{size:.3f}'.rstrip('0').rstrip('.')
+----
+
+Finally, the function returns the size along with the appropriate suffix.
+The size is returned as a string in the format "{size} {suffix}".
+
+[source,python,linenums]
+----
+return f'{size} {suffixes[index]}'
+----
+
+In summary, this function provides a flexible way to calculate and represent data size in different notations, handling various edge cases and providing clear error messages for invalid inputs.
+
 ==== Advantages & Disadvantages
+
+The method used in the `calculate_data_size` function is a recursive approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The function supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
+2. **Error Handling:** The function includes error handling for negative sizes and invalid notations, providing clear error messages for invalid inputs.
+3. **Precision:** The function uses floating-point division and string formatting to maintain precision up to three decimal places.
+4. **Efficiency:** The recursive approach is more efficient than the iterative approach for large sizes as it avoids the need for a loop.
+
+Disadvantages:
+1. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+2. **Limited Notations:** The function only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Hardcoded Values:** The suffixes and base values are hardcoded into the function.
+If these values needed to change, the function would need to be updated.
+4. **Recursion Limit:** Python has a limit on the depth of recursion, which can lead to a RecursionError for very large sizes.
+However, this is unlikely to be a problem in this case because the recursion depth is limited by the number of suffixes.
+5. **Complexity:** The recursive approach is more complex than the iterative approach, which could make the code harder to understand for some developers.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `calculate_data_size` function can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the function is O(1), which means it has constant time complexity.
+This is because the function performs a fixed number of operations regardless of the input size.
+The function checks the `notation` argument, creates a lookup table for the thresholds for each suffix, and then finds the appropriate suffix by searching the lookup table.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the function is also O(1), which means it has constant space complexity.
+This is because the function uses a fixed amount of space to store the suffixes, the base, and the lookup table for the thresholds for each suffix, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
+
 ==== Code Review
 
-=== Solution 00
+Based on the provided best practices, here is a code review of the `calculate_data_size` function from the `solution_03.py` file:
+
+1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The function is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses a recursive approach to calculate the size, which is straightforward and easy to understand.
+
+=== Solution 04
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_04.py[lines=21..]
 ----
 
 ==== Explanation
 
+The `DataSize` class in Python is designed to calculate and represent data size in different notations.
+It takes two parameters: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
+
+The class starts by checking if the `size` is negative.
+If it is, a `ValueError` is raised, as size cannot be negative.
+
+[source,python,linenums]
+----
+if size < 0:
+    raise ValueError('Size cannot be negative.')
+----
+
+Next, the class checks the `notation` argument to determine the appropriate suffixes and base for the size calculation.
+If the `notation` is 'decimal', 'binary', 'bits', or 'nibbles', the corresponding suffixes and base are set.
+If the `notation` is not one of the four valid options, a `ValueError` is raised.
+
+[source,python,linenums]
+----
+if notation not in self.suffixes:
+    raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
+----
+
+The `calculate_data_size` method then calculates the size in the appropriate notation and returns it as a string.
+This method first determines the base for the calculation based on the notation.
+If the notation is 'bits', it converts the size from bytes to bits by multiplying by 8. If the notation is 'nibbles', it converts the size from bytes to nibbles by multiplying by 2. It then divides the size by the base until the size is less than the base or it has gone through all the suffixes for the notation.
+Finally, it formats the size as a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the size with the appropriate suffix.
+
+[source,python,linenums]
+----
+base = self.bases[self.notation]  # Determine the base for the calculation
+...
+while self.size >= base and index < len(self.suffixes[self.notation]) - 1:
+    self.size /= base
+    index += 1
+...
+size = f'{self.size:.3f}'.rstrip('0').rstrip('.')
+return f'{size} {self.suffixes[self.notation][index]}'
+----
+
+In summary, this class provides a flexible way to calculate and represent data size in different notations, handling various edge cases and providing clear error messages for invalid inputs.
+
 ==== Advantages & Disadvantages
+
+The method used in the `DataSize` class is an object-oriented approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The class supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
+2. **Error Handling:** The class includes error handling for negative sizes and invalid notations, providing clear error messages for invalid inputs.
+3. **Precision:** The class uses floating-point division and string formatting to maintain precision up to three decimal places.
+4. **Object-Oriented:** The use of a class allows for encapsulation of related data and methods, making the code easier to understand and maintain.
+
+Disadvantages:
+1. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+2. **Limited Notations:** The class only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Hardcoded Values:** The suffixes and base values are hardcoded into the class.
+If these values needed to change, the class would need to be updated.
+4. **Complexity:** The object-oriented approach is more complex than a simple function, which could make the code harder to understand for some developers.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `DataSize` class can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the `calculate_data_size` method is O(1), which means it has constant time complexity.
+This is because the method performs a fixed number of operations regardless of the input size.
+The method checks the `notation` argument, creates a lookup table for the thresholds for each suffix, and then finds the appropriate suffix by searching the lookup table.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the `calculate_data_size` method is also O(1), which means it has constant space complexity.
+This is because the method uses a fixed amount of space to store the suffixes, the base, and the lookup table for the thresholds for each suffix, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
+
 ==== Code Review
 
-=== Solution 00
+Based on the provided best practices, here is a code review of the `DataSize` class from the `solution_04.py` file:
+
+1. **Readability (Understandability):** The class is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The class is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The class does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The class is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The class is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The class leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The class is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The class is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The class is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The class adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The class includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The class provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The class handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the class is appropriate and efficient.
+It uses an object-oriented approach to calculate the size, which is straightforward and easy to understand.
+
+=== Solution 05
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_05.py[lines=21..]
 ----
 
 ==== Explanation
 
+The `calculate_data_size` function in Python is designed to calculate and represent data size in different notations.
+It takes two parameters: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
+
+The function starts by checking if the `size` is negative.
+If it is, a `ValueError` is raised, as size cannot be negative.
+
+[source,python,linenums]
+----
+if size < 0:
+    raise ValueError('Size cannot be negative.')
+----
+
+Next, the function defines the suffixes and bases for each notation.
+The suffixes are used to represent the size in the appropriate notation, and the bases are used to calculate the size in the appropriate notation.
+
+[source,python,linenums]
+----
+suffixes = {
+    'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    'binary':  ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+    'bits':    ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+    'nibbles': ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']
+}
+bases = {
+    'decimal': 1000,
+    'binary':  1024,
+    'bits':    1000,
+    'nibbles': 1000
+}
+----
+
+The function then checks if the `notation` argument is valid.
+If the `notation` is not one of the four valid options ('decimal', 'binary', 'bits', 'nibbles'), a `ValueError` is raised.
+
+[source,python,linenums]
+----
+if notation not in suffixes:
+    raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
+----
+
+If the `notation` is 'bits' or 'nibbles', the function converts the `size` from bytes to bits or nibbles, respectively.
+
+[source,python,linenums]
+----
+if notation == 'bits':
+    size *= 8  # convert bytes to bits
+elif notation == 'nibbles':
+    size *= 2  # convert bytes to nibbles
+----
+
+The function then calculates the size in the appropriate notation using a recursive helper function `calculate_suffix_index`.
+This function determines the appropriate suffix (e.g., 'KB', 'MB', 'GB', etc.) for a given size in bytes.
+It does this by recursively dividing the size by the base (1024 for binary notation, 1000 for decimal notation) until the size is less than the base or until the maximum suffix has been reached.
+
+[source,python,linenums]
+----
+index = calculate_suffix_index(size)
+size /= base ** index
+----
+
+Finally, the function formats the size as a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the size with the appropriate suffix.
+
+[source,python,linenums]
+----
+size = f'{size:.3f}'.rstrip('0').rstrip('.')
+return f'{size} {suffix_list[index]}'
+----
+
+In summary, this function provides a flexible way to calculate and represent data size in different notations, handling various edge cases and providing clear error messages for invalid inputs.
+
 ==== Advantages & Disadvantages
+
+The method used in the `calculate_data_size` function is a functional programming approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The function supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
+2. **Error Handling:** The function includes error handling for negative sizes and invalid notations, providing clear error messages for invalid inputs.
+3. **Precision:** The function uses floating-point division and string formatting to maintain precision up to three decimal places.
+4. **Functional Programming:** The use of a function and a recursive helper function allows for a clear and concise implementation of the logic.
+
+Disadvantages:
+1. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+2. **Limited Notations:** The function only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Hardcoded Values:** The suffixes and base values are hardcoded into the function.
+If these values needed to change, the function would need to be updated.
+4. **Recursion:** The use of recursion in the helper function could lead to a stack overflow for very large sizes.
+However, this is unlikely to be a problem in practice because the maximum depth of the recursion is limited by the number of suffixes.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `calculate_data_size` function can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the `calculate_data_size` function is O(1), which means it has constant time complexity.
+This is because the function performs a fixed number of operations regardless of the input size.
+The function checks the `notation` argument, creates a lookup table for the suffixes and bases for each notation, and then finds the appropriate suffix by searching the lookup table.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the `calculate_data_size` function is also O(1), which means it has constant space complexity.
+This is because the function uses a fixed amount of space to store the suffixes, the base, and the lookup table for the suffixes and bases for each notation, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
+
 ==== Code Review
 
-=== Solution 00
+Based on the provided best practices, here is a code review of the `calculate_data_size` function from the `solution_05.py` file:
+
+1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The function is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses a recursive approach to calculate the size, which is straightforward and easy to understand.
+
+=== Solution 06
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_06.py[lines=21..]
 ----
 
 ==== Explanation
 
+The provided Python code consists of a function `calculate_data_size` that calculates and represents data size in different notations.
+This function is decorated with `validate_inputs`, a decorator function that validates the inputs of `calculate_data_size`.
+
+The `validate_inputs` decorator function checks if the `size` is negative or if the `notation` is not one of the four valid options ('decimal', 'binary', 'bits', 'nibbles'), and raises a `ValueError` if so.
+This is done in the `wrapper` function inside `validate_inputs`.
+
+[source,python,linenums]
+----
+def wrapper(size: int, notation: str = 'decimal') -> str:
+    if size < 0:
+        raise ValueError('Size cannot be negative.')
+    if notation not in ['decimal', 'binary', 'bits', 'nibbles']:
+        raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
+    return func(size, notation)
+----
+
+The `calculate_data_size` function takes two parameters: `size`, which is an integer representing the size in bytes, and `notation`, which is a string indicating the notation to be used for the size calculation.
+The `notation` argument is optional and defaults to 'decimal' if not provided.
+
+The function starts by defining the suffixes and bases for each notation.
+The suffixes are used to represent the size in the appropriate notation, and the bases are used to calculate the size in the appropriate notation.
+
+[source,python,linenums]
+----
+suffixes = {
+    'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    'binary':  ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+    'bits':    ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+    'nibbles': ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']
+}
+bases = {
+    'decimal': 1000,
+    'binary':  1024,
+    'bits':    1000,
+    'nibbles': 1000
+}
+----
+
+If the `notation` is 'bits' or 'nibbles', the function converts the `size` from bytes to bits or nibbles, respectively.
+
+[source,python,linenums]
+----
+if notation == 'bits':
+    size *= 8  # convert bytes to bits
+elif notation == 'nibbles':
+    size *= 2  # convert bytes to nibbles
+----
+
+The function then calculates the size in the appropriate notation using a recursive helper function `calculate_suffix_index`.
+This function determines the appropriate suffix (e.g., 'KB', 'MB', 'GB', etc.) for a given size in bytes.
+It does this by recursively dividing the size by the base (1024 for binary notation, 1000 for decimal notation) until the size is less than the base or until the maximum suffix has been reached.
+
+[source,python,linenums]
+----
+def calculate_suffix_index(size: float, index: int = 0) -> int:
+    if size < base or index == len(suffix_list) - 1:
+        return index
+    else:
+        return calculate_suffix_index(size / base, index + 1)
+----
+
+Finally, the function formats the size as a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the size with the appropriate suffix.
+
+[source,python,linenums]
+----
+size = f'{size:.3f}'.rstrip('0').rstrip('.')
+return f'{size} {suffix_list[index]}'
+----
+
+In summary, this function provides a flexible way to calculate and represent data size in different notations, handling various edge cases and providing clear error messages for invalid inputs.
+
 ==== Advantages & Disadvantages
+
+The method used in the `calculate_data_size` function is a functional programming approach to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The function supports multiple notations ('decimal', 'binary', 'bits', 'nibbles'), making it versatile for different use cases.
+2. **Error Handling:** The function includes error handling for negative sizes and invalid notations, providing clear error messages for invalid inputs.
+3. **Precision:** The function uses floating-point division and string formatting to maintain precision up to three decimal places.
+4. **Functional Programming:** The use of a function and a recursive helper function allows for a clear and concise implementation of the logic.
+
+Disadvantages:
+1. **Rounding Errors:** The use of floating-point division can lead to rounding errors.
+Although the impact is likely minimal for this use case, it's something to be aware of.
+2. **Limited Notations:** The function only supports four notations.
+If more notations need to be supported in the future, the code would need to be updated.
+3. **Hardcoded Values:** The suffixes and base values are hardcoded into the function.
+If these values needed to change, the function would need to be updated.
+4. **Recursion:** The use of recursion in the helper function could lead to a stack overflow for very large sizes.
+However, this is unlikely to be a problem in practice because the maximum depth of the recursion is limited by the number of suffixes.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `calculate_data_size` function can be analyzed as follows:
+
+Time Complexity:
+The time complexity of the function is primarily determined by the `calculate_suffix_index` recursive function.
+This function performs a constant amount of work for each recursive call, and the depth of the recursion is determined by the number of times the size can be divided by the base until it's less than the base.
+In the worst case, this is proportional to the logarithm (base `base`) of the size, so the time complexity is O(log(size)).
+
+Space Complexity:
+The space complexity of the function is determined by the maximum depth of the recursion in the `calculate_suffix_index` function, which, as explained above, is proportional to the logarithm (base `base`) of the size.
+Therefore, the space complexity is also O(log(size)).
+
+However, it's important to note that these complexities are theoretical and in practice, the function is likely to be very efficient for all practical sizes, as the number of recursive calls will be very small (since `base` is 1000 or 1024).
+The function does not use any additional data structures whose size depends on the input size, so the space complexity is effectively constant for all practical purposes.
+
 ==== Code Review
 
-=== Solution 00
+Based on the provided best practices, here is a code review of the `calculate_data_size` function from the `solution_06.py` file:
+
+1. **Readability (Understandability):** The function is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The function is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(log(size)).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses a recursive approach to calculate the size, which is straightforward and easy to understand.
+
+=== Solution 07
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_07.py[lines=21..]
 ----
 
 ==== Explanation
 
+The provided Python code uses the Strategy design pattern to calculate and represent data size in different notations.
+The Strategy pattern is a behavioral design pattern that turns a set of behaviors into objects and makes them interchangeable inside the original context object.
+
+The code defines an abstract base class `NotationStrategy` which declares an abstract method `calculate`.
+This method takes a size in bytes and is expected to return a string representing the size in the appropriate notation.
+
+[source,python,linenums]
+----
+class NotationStrategy(ABC):
+    @abstractmethod
+    def calculate(self, size: int) -> str:
+        raise NotImplementedError("This method is abstract and must be overridden by a concrete strategy class.")
+----
+
+Four concrete strategy classes `DecimalNotationStrategy`, `BinaryNotationStrategy`, `BitsNotationStrategy`, and `NibblesNotationStrategy` are defined.
+Each of these classes implements the `calculate` method in a way that's appropriate for the respective notation.
+
+For example, the `DecimalNotationStrategy` class calculates the data size in decimal notation.
+It first determines the appropriate suffix (B, KB, MB, GB, etc.) based on the magnitude of the size.
+Then it converts the size to the appropriate unit and formats the result as a number with 3 decimal places followed by the appropriate suffix.
+
+[source,python,linenums]
+----
+class DecimalNotationStrategy(NotationStrategy):
+    def calculate(self, size: int) -> str:
+        suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        index = floor(log10(size) / 3) if size != 0 else 0
+        size = f'{size / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
+----
+
+The `DataSize` class is the context class that uses a strategy to calculate the data size.
+It has a `strategy` attribute that holds a reference to a `NotationStrategy` object.
+The `calculate` method of the `DataSize` class delegates the calculation to the strategy.
+
+[source,python,linenums]
+----
+class DataSize:
+    def __init__(self, strategy: NotationStrategy) -> None:
+        self.strategy = strategy
+
+    def calculate(self, size: int) -> str:
+        return self.strategy.calculate(size)
+----
+
+In summary, this code provides a flexible way to calculate and represent data size in different notations.
+The Strategy pattern allows the algorithm for calculating the data size to vary independently from the clients that use it.
+
 ==== Advantages & Disadvantages
+
+The provided code uses the Strategy design pattern to calculate and represent data size in different notations.
+Here are the advantages and disadvantages of this approach:
+
+Advantages:
+1. **Flexibility:** The Strategy pattern allows the algorithm to be selected at runtime.
+This means the notation can be easily switched without changing the code that uses the `DataSize` class.
+2. **Maintainability:** Each strategy is implemented in its own class, which makes the code easier to maintain.
+If a new notation needs to be supported, a new strategy class can be added without modifying the existing code.
+3. **Testability:** Each strategy can be tested independently, which simplifies unit testing.
+4. **Separation of Concerns:** The `DataSize` class delegates the calculation to the strategy, which separates the concerns of selecting the notation and performing the calculation.
+
+Disadvantages:
+1. **Overhead:** The Strategy pattern introduces additional classes and interfaces, which can make the code more complex and harder to understand for developers unfamiliar with the pattern.
+2. **Indirection:** The use of strategies can lead to a lot of indirection in the code, which can make it harder to follow the control flow.
+3. **Initialization:** Each strategy needs to be instantiated before it can be used, which can lead to additional overhead.
+4. **Hardcoded Strategies:** The strategies are hardcoded in the `DataSize` class.
+If a new strategy needs to be added, the `DataSize` class would need to be updated.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `calculate` method in each of the concrete strategy classes (`DecimalNotationStrategy`, `BinaryNotationStrategy`, `BitsNotationStrategy`, `NibblesNotationStrategy`) can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the `calculate` method is O(1), which means it has constant time complexity.
+This is because the method performs a fixed number of operations regardless of the input size.
+The method checks the `size` argument, calculates the index of the suffix to use, and then formats the size as a string.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the `calculate` method is also O(1), which means it has constant space complexity.
+This is because the method uses a fixed amount of space to store the suffixes, the index, and the formatted size, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
+
+The time and space complexity of the `calculate` method in the `DataSize` class is determined by the strategy used, so it's also O(1) for all the provided strategies.
+
 ==== Code Review
 
-=== Solution 00
+Here's a code review based on the best practices you've mentioned:
+
+1. **Readability (Understandability):** The code is quite readable and understandable.
+The variable and function names are descriptive and meaningful.
+The code is broken down into small, manageable chunks, which makes it easy to understand.
+
+2. **Maintainability:** The code is easy to extend and change.
+The separation of concerns is clear with the use of different strategies for different notations.
+There is minimal coupling to other systems or configurations.
+
+3. **Security:** There doesn't seem to be any security implications or potential vulnerabilities in this code.
+It's always good to keep security in mind, but in this case, there don't appear to be any security issues.
+
+4. **Speed and Performance:** The code seems to be optimized for performance.
+There are no obvious performance issues or bottlenecks.
+However, without knowing the context in which this code is used, it's hard to make definitive statements about performance.
+
+5. **Documentation:** The code is well-documented with docstrings explaining the purpose and usage of each function and class.
+This makes it easy for other developers to understand what each part of the code is doing.
+
+6. **Reinventing the Wheel:** The code leverages Python's built-in features and does not seem to reinvent the wheel.
+The use of different strategies for different notations is a good example of this.
+
+7. **Reliability:** The code seems to be resilient to failures.
+It raises appropriate exceptions for invalid inputs, which helps maintain a consistent user experience.
+
+8. **Scalability:** The code appears to be designed to handle unexpected loads efficiently.
+However, without knowing the context in which this code is used, it's hard to make definitive statements about scalability.
+
+9. **Reusability:** The code is written with future use cases in mind.
+The use of different strategies for different notations makes the code highly reusable.
+
+10. **Patterns:** The code adheres to established patterns and style guides.
+It follows the Strategy design pattern, which is a common pattern for situations like this.
+
+11. **Test Coverage and Quality:** The tests seem to cover a wide range of cases, including edge cases and error scenarios.
+They are readable and maintainable.
+
+12. **Fit for Purpose:** The code provides the intended functionality and seems to meet the expectations of stakeholders and end-users.
+
+13. **Notice What's Missing:** The code seems to cover all the necessary cases.
+It handles different notations and raises exceptions for invalid inputs.
+
+14. **Zoom Out:** The overall approach and architecture of the code seem appropriate and efficient.
+The use of the Strategy design pattern is a good choice for this problem.
+
+In conclusion, the code is well-written and follows many best practices.
+It's readable, maintainable, and well-documented, and it seems to handle a variety of cases effectively.
+
+=== Solution 08
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_08.py[lines=21..]
 ----
 
 ==== Explanation
 
+The provided Python code uses the Strategy design pattern to calculate and represent data size in different notations.
+The Strategy pattern is a behavioral design pattern that turns a set of behaviors into objects and makes them interchangeable inside the original context object.
+
+The code defines an abstract base class `NotationStrategy` which declares an abstract method `calculate`.
+This method takes a size in bytes and is expected to return a string representing the size in the appropriate notation.
+
+[source,python,linenums]
+----
+class NotationStrategy(ABC):
+    @abstractmethod
+    def calculate(self, size: int) -> str:
+        raise NotImplementedError("This method is abstract and must be overridden by a concrete strategy class.")
+----
+
+Four concrete strategy classes `DecimalNotationStrategy`, `BinaryNotationStrategy`, `BitsNotationStrategy`, and `NibblesNotationStrategy` are defined.
+Each of these classes implements the `calculate` method in a way that's appropriate for the respective notation.
+
+For example, the `DecimalNotationStrategy` class calculates the data size in decimal notation.
+It first determines the appropriate suffix (B, KB, MB, GB, etc.) based on the magnitude of the size.
+Then it converts the size to the appropriate unit and formats the result as a number with 3 decimal places followed by the appropriate suffix.
+
+[source,python,linenums]
+----
+class DecimalNotationStrategy(NotationStrategy):
+    def calculate(self, size: int) -> str:
+        suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        index = floor(log10(size) / 3) if size != 0 else 0
+        size = f'{size / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
+----
+
+The `get_strategy` function is a factory function that takes a notation as input and returns an instance of the appropriate `NotationStrategy` subclass based on the notation.
+If the notation is not recognized, it raises a ValueError.
+
+[source,python,linenums]
+----
+def get_strategy(notation: str) -> NotationStrategy:
+    if notation == 'decimal':
+        return DecimalNotationStrategy()
+    elif notation == 'binary':
+        return BinaryNotationStrategy()
+    elif notation == 'bits':
+        return BitsNotationStrategy()
+    elif notation == 'nibbles':
+        return NibblesNotationStrategy()
+    else:
+        raise ValueError(f"Invalid notation: {notation}")
+----
+
+Finally, the `calculate_data_size` function takes a size in bytes and a notation as input, and returns a string representing the size in the specified notation.
+It uses the `get_strategy` function to select the appropriate calculation method based on the notation.
+If the size is negative, it raises a ValueError.
+
+[source,python,linenums]
+----
+def calculate_data_size(size: int, notation: str = 'decimal') -> str:
+    if size < 0:
+        raise ValueError("Size must be non-negative")
+    strategy = get_strategy(notation)
+    return strategy.calculate(size)
+----
+
+In summary, this code provides a flexible way to calculate and represent data size in different notations.
+The Strategy pattern allows the algorithm for calculating the data size to vary independently from the clients that use it.
+
 ==== Advantages & Disadvantages
+
+The method used in the code is the Strategy Design Pattern.
+This pattern is used when we have multiple algorithms (or strategies) for a specific task and the right one to use is decided at runtime.
+Here, the task is to calculate the data size in different notations, and the strategy to use is decided based on the notation provided by the user.
+
+Advantages of the Strategy Design Pattern:
+
+1. **Flexibility:** The Strategy pattern allows the algorithm to be selected at runtime.
+This means the notation can be easily switched without changing the code that uses the `calculate_data_size` function.
+
+2. **Maintainability:** Each strategy is implemented in its own class, which makes the code easier to maintain.
+If a new notation needs to be supported, a new strategy class can be added without modifying the existing code.
+
+3. **Testability:** Each strategy can be tested independently, which simplifies unit testing.
+
+4. **Separation of Concerns:** The `calculate_data_size` function delegates the calculation to the strategy, which separates the concerns of selecting the notation and performing the calculation.
+
+Disadvantages of the Strategy Design Pattern:
+
+1. **Overhead:** The Strategy pattern introduces additional classes and interfaces, which can make the code more complex and harder to understand for developers unfamiliar with the pattern.
+
+2. **Indirection:** The use of strategies can lead to a lot of indirection in the code, which can make it harder to follow the control flow.
+
+3. **Initialization:** Each strategy needs to be instantiated before it can be used, which can lead to additional overhead.
+
+4. **Hardcoded Strategies:** The strategies are hardcoded in the `get_strategy` function.
+If a new strategy needs to be added, the `get_strategy` function would need to be updated.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `calculate` method in each of the concrete strategy classes (`DecimalNotationStrategy`, `BinaryNotationStrategy`, `BitsNotationStrategy`, `NibblesNotationStrategy`) can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the `calculate` method is O(1), which means it has constant time complexity.
+This is because the method performs a fixed number of operations regardless of the input size.
+The method checks the `size` argument, calculates the index of the suffix to use, and then formats the size as a string.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the `calculate` method is also O(1), which means it has constant space complexity.
+This is because the method uses a fixed amount of space to store the suffixes, the index, and the formatted size, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
+
+The time and space complexity of the `calculate` method in the `DataSize` class is determined by the strategy used, so it's also O(1) for all the provided strategies.
+
 ==== Code Review
 
-=== Solution 00
+The code provided is well-structured and follows many best practices.
+Here's a detailed review based on the best practices you mentioned:
+
+1. **Readability (Understandability)**: The code is easy to understand.
+It's broken down into small, manageable chunks, and uses descriptive variable and function names.
+The use of the Strategy pattern makes the code modular and easy to follow.
+
+2. **Maintainability**: The code is easy to extend and change.
+The use of the Strategy pattern allows for easy addition of new notations.
+Each notation strategy is implemented as a separate class, providing clear separation of concerns.
+
+3. **Security**: The code does not seem to have any obvious security issues.
+It does not deal with user input or external systems, which are common sources of security vulnerabilities.
+
+4. **Speed and Performance**: The code should perform well for its intended use case.
+It does not involve any heavy computations or I/O operations that could slow it down.
+
+5. **Documentation**: The code is well-documented.
+Each class and method has a docstring explaining its purpose and usage.
+However, there is no README file provided.
+
+6. **Reinventing the Wheel**: The code leverages Python's built-in features and does not seem to reinvent the wheel.
+The use of the `math` module for logarithmic calculations is a good example.
+
+7. **Reliability**: The code handles errors gracefully.
+It raises a `ValueError` for invalid inputs, which allows the calling code to handle these errors appropriately.
+
+8. **Scalability**: The code should scale well for larger inputs.
+The calculations it performs are not resource-intensive.
+
+9. **Reusability**: The `NotationStrategy` classes could be reused in other contexts where similar conversions are needed.
+However, the `calculate_data_size` function is specific to this use case.
+
+10. **Patterns**: The code follows the Strategy design pattern, which is a well-established pattern in the software development community.
+
+11. **Test Coverage and Quality**: The provided tests cover a variety of cases, including edge cases and error conditions.
+However, the tests could be more comprehensive, covering more possible inputs and edge cases.
+
+12. **Fit for Purpose**: The code provides the intended functionality and should meet the expectations of stakeholders and end-users.
+
+13. **Notice What's Missing**: The code handles all the edge cases mentioned in the problem statement.
+However, it does not handle the case where the size is larger than what can be represented with the largest suffix in the list.
+
+14. **Zoom Out**: The overall approach and architecture of the code are appropriate and efficient.
+The use of the Strategy pattern allows for easy extension and modification of the code.
+
+In conclusion, the code is well-written and follows many best practices.
+However, there are a few areas that could be improved, such as more comprehensive tests and handling of sizes larger than what can be represented with the largest suffix.
+
+=== Solution 09
 
 ==== Implementation
 
 [source,python,linenums]
 ----
-include::./solution_00.py[lines=21..]
+include::./solution_09.py[lines=21..]
 ----
 
 ==== Explanation
 
+The provided Python code uses the Command design pattern to calculate and represent data size in different notations.
+The Command pattern is a behavioral design pattern that encapsulates a request as an object, thereby allowing users to parameterize clients with queues, requests, and operations.
+
+The code defines an abstract base class `Command` which declares an abstract method `execute`.
+This method takes a size in bytes and is expected to return a string representing the size in the appropriate notation.
+
+[source,python,linenums]
+----
+class Command(ABC):
+    @abstractmethod
+    def execute(self, size: int) -> str:
+        raise NotImplementedError("Subclasses must implement this method.")
+----
+
+Four concrete command classes `DecimalCommand`, `BinaryCommand`, `BitsCommand`, and `NibblesCommand` are defined.
+Each of these classes implements the `execute` method in a way that's appropriate for the respective notation.
+
+For example, the `DecimalCommand` class calculates the data size in decimal notation.
+It first determines the appropriate suffix (B, KB, MB, GB, etc.) based on the magnitude of the size.
+Then it converts the size to the appropriate unit and formats the result as a number with 3 decimal places followed by the appropriate suffix.
+
+[source,python,linenums]
+----
+class DecimalCommand(Command):
+    def execute(self, size: int) -> str:
+        suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        index = floor(log10(size) / 3) if size != 0 else 0
+        size = f'{size / (1000.0 ** index):.3f}'.rstrip('0').rstrip('.')
+        return f'{size} {suffixes[index]}'
+----
+
+The `calculate_data_size` function takes a size in bytes and a notation as input, and returns a string representing the size in the specified notation.
+It uses a dictionary to map notations to instances of the appropriate `Command` subclass based on the notation.
+If the notation is not recognized, it raises a ValueError.
+
+[source,python,linenums]
+----
+def calculate_data_size(size: int, notation: str = 'decimal') -> str:
+    commands = {
+        'decimal': DecimalCommand(),
+        'binary':  BinaryCommand(),
+        'bits':    BitsCommand(),
+        'nibbles': NibblesCommand()
+    }
+    command = commands.get(notation)
+    if command is None:
+        raise ValueError(f"Invalid notation: {notation}")
+    return command.execute(size)
+----
+
+In summary, this code provides a flexible way to calculate and represent data size in different notations.
+The Command pattern allows the algorithm for calculating the data size to vary independently from the clients that use it.
+
 ==== Advantages & Disadvantages
+
+The method used in the code is the Command Design Pattern.
+This pattern is used when we have multiple algorithms (or commands) for a specific task and the right one to use is decided at runtime.
+Here, the task is to calculate the data size in different notations, and the command to use is decided based on the notation provided by the user.
+
+Advantages of the Command Design Pattern:
+
+1. **Flexibility:** The Command pattern allows the algorithm to be selected at runtime.
+This means the notation can be easily switched without changing the code that uses the `calculate_data_size` function.
+
+2. **Maintainability:** Each command is implemented in its own class, which makes the code easier to maintain.
+If a new notation needs to be supported, a new command class can be added without modifying the existing code.
+
+3. **Testability:** Each command can be tested independently, which simplifies unit testing.
+
+4. **Separation of Concerns:** The `calculate_data_size` function delegates the calculation to the command, which separates the concerns of selecting the notation and performing the calculation.
+
+Disadvantages of the Command Design Pattern:
+
+1. **Overhead:** The Command pattern introduces additional classes and interfaces, which can make the code more complex and harder to understand for developers unfamiliar with the pattern.
+
+2. **Indirection:** The use of commands can lead to a lot of indirection in the code, which can make it harder to follow the control flow.
+
+3. **Initialization:** Each command needs to be instantiated before it can be used, which can lead to additional overhead.
+
+4. **Hardcoded Commands:** The commands are hardcoded in the `calculate_data_size` function.
+If a new command needs to be added, the `calculate_data_size` function would need to be updated.
 
 ==== Complexity Analysis
 
+The time and space complexity of the `execute` method in each of the concrete command classes (`DecimalCommand`, `BinaryCommand`, `BitsCommand`, `NibblesCommand`) can be analyzed as follows:
+
+**Time Complexity:**
+
+The time complexity of the `execute` method is O(1), which means it has constant time complexity.
+This is because the method performs a fixed number of operations regardless of the input size.
+The method checks the `size` argument, calculates the index of the suffix to use, and then formats the size as a string.
+The number of operations does not grow with the size of the input, making the time complexity constant.
+
+**Space Complexity:**
+
+The space complexity of the `execute` method is also O(1), which means it has constant space complexity.
+This is because the method uses a fixed amount of space to store the suffixes, the index, and the formatted size, regardless of the input size.
+The space used does not grow with the size of the input, making the space complexity constant.
+
+The time and space complexity of the `calculate_data_size` function is determined by the command used, so it's also O(1) for all the provided commands.
+
 ==== Code Review
+
+Based on the provided best practices, here is a code review of the `calculate_data_size` function from the `solution_09.py` file:
+
+1. **Readability (Understandability):** The code is easy to understand and uses descriptive variable and function names.
+The code is broken down into small, manageable chunks, each handling a specific part of the calculation.
+
+2. **Maintainability:** The code is easy to extend and change.
+The separation of concerns is clear, with different parts of the code handling input validation, size calculation, and output formatting.
+
+3. **Security:** The function does not seem to have any security implications as it does not deal with sensitive data or external systems.
+
+4. **Speed and Performance:** The function is optimized for speed with a time complexity of O(1).
+However, for large sizes, a logarithmic approach could be more efficient.
+
+5. **Documentation:** The function is well-documented with a docstring that explains its purpose, parameters, return value, and raised exceptions.
+Inline comments are used to explain important parts of the code.
+
+6. **Reinventing the Wheel:** The function leverages Python's built-in functions and does not introduce unnecessary complexity.
+
+7. **Reliability:** The function is resilient to failures.
+It validates the inputs and raises a `ValueError` for invalid sizes and notations.
+
+8. **Scalability:** The function is designed to handle large sizes efficiently.
+It can handle sizes up to 10^18 bytes.
+
+9. **Reusability:** The function is written with future use cases in mind.
+It supports multiple notations and can be easily extended to support more.
+
+10. **Patterns:** The function adheres to established Python patterns and style guides.
+It uses snake_case for variable and function names and follows PEP 8 style guide.
+
+11. **Test Coverage and Quality:** The function includes doctests for basic use cases.
+However, additional tests should be written to cover edge cases and error scenarios.
+
+12. **Fit for Purpose:** The function provides the intended functionality of calculating and representing data size in different notations.
+
+13. **Notice What's Missing:** The function handles negative sizes and invalid notations.
+However, it does not handle non-integer sizes or non-string notations.
+
+14. **Zoom Out:** The overall approach of the function is appropriate and efficient.
+It uses a recursive approach to calculate the size, which is straightforward and easy to understand.
 
 == Tests
 

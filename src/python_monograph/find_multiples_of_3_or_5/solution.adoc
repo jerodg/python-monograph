@@ -42,7 +42,7 @@ This function is designed to calculate and return the sum of all multiples of 3 
 
 The function begins by initializing a variable `sum` to 0. This variable is used to accumulate the sum of the multiples of 3 or 5.
 
-[source,python]
+[source,python,linenums]
 ----
 sum = 0
 ----
@@ -50,14 +50,14 @@ sum = 0
 Next, the function enters a loop that iterates over all numbers from 1 to 999. The `range` function in Python generates a sequence of numbers starting from the first argument (inclusive) and ending at the second argument (exclusive).
 Therefore, `range(1, 1000)` generates all numbers from 1 to 999.
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(1, 1000):
 ----
 
 Inside the loop, the function checks if the current number `i` is a multiple of 3 or 5. This is done using the modulus operator `%`, which returns the remainder of the division of the number by 3 or 5. If the remainder is 0, it means that the number is a multiple of 3 or 5. If `i` is a multiple of either 3 or 5, it is added to the `sum`.
 
-[source,python]
+[source,python,linenums]
 ----
 if i % 3 == 0 or i % 5 == 0:
     sum += i
@@ -66,7 +66,7 @@ if i % 3 == 0 or i % 5 == 0:
 After the loop has iterated over all numbers from 1 to 999, the function returns the accumulated sum.
 This sum is the total of all multiples of 3 or 5 below 1000.
 
-[source,python]
+[source,python,linenums]
 ----
 return sum
 ----
@@ -130,7 +130,7 @@ List comprehension is a concise way to create lists based on existing lists.
 In Python, you can use list comprehension to generate a list of results in a single line of code.
 Here, it's used to generate a list of all numbers from 1 to 999 that are multiples of 3 or 5.
 
-[source,python]
+[source,python,linenums]
 ----
 (i for i in range(1, 1000) if i % 3 == 0 or i % 5 == 0)
 ----
@@ -140,7 +140,7 @@ The `range(1, 1000)` function generates a sequence of numbers from 1 to 999. The
 The `sum` function is then used to calculate the sum of all numbers in the list.
 The `sum` function in Python returns the sum of all elements in an iterable (like a list or a tuple).
 
-[source,python]
+[source,python,linenums]
 ----
 sum(i for i in range(1, 1000) if i % 3 == 0 or i % 5 == 0)
 ----
@@ -198,7 +198,7 @@ This function calculates the sum of all multiples of 3 or 5 that are less than 1
 The function `method_2` contains a nested function `sum_divisible_by`.
 This nested function calculates the sum of all numbers less than 1000 that are divisible by a given number `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 def sum_divisible_by(n: int) -> int:
     p = 999 // n
@@ -210,7 +210,7 @@ This gives the number of multiples of `n` that are less than 1000. The sum of al
 
 The `method_2` function then uses the `sum_divisible_by` function to calculate the sum of all multiples of 3 or 5 that are less than 1000. It does this by adding the sum of multiples of 3 and the sum of multiples of 5, and then subtracting the sum of multiples of 15. This is to avoid counting numbers that are multiples of both 3 and 5 twice.
 
-[source,python]
+[source,python,linenums]
 ----
 return sum_divisible_by(3) + sum_divisible_by(5) - sum_divisible_by(15)
 ----
@@ -267,7 +267,7 @@ The provided Python code defines a function named `method_3` that calculates and
 
 The function starts by initializing a variable `total` to 0. This variable will be used to accumulate the sum of the multiples of 3, 5, and 15.
 
-[source,python]
+[source,python,linenums]
 ----
 total = 0
 ----
@@ -275,7 +275,7 @@ total = 0
 The function then calculates the number of terms that are multiples of 3 below `n` using integer division.
 It uses this to calculate the sum of these multiples using the formula for the sum of an arithmetic progression and adds this to `total`.
 
-[source,python]
+[source,python,linenums]
 ----
 terms = (n - 1) // 3
 total += (terms * (6 + (terms - 1) * 3)) // 2  # total of an A.P.
@@ -283,7 +283,7 @@ total += (terms * (6 + (terms - 1) * 3)) // 2  # total of an A.P.
 
 The function repeats this process for multiples of 5.
 
-[source,python]
+[source,python,linenums]
 ----
 terms = (n - 1) // 5
 total += (terms * (10 + (terms - 1) * 5)) // 2
@@ -292,7 +292,7 @@ total += (terms * (10 + (terms - 1) * 5)) // 2
 Finally, the function subtracts the sum of multiples of 15 from `total`.
 This is necessary because multiples of 15 are counted twice in the previous steps (as they are multiples of both 3 and 5), so we need to remove one occurrence to avoid double-counting.
 
-[source,python]
+[source,python,linenums]
 ----
 terms = (n - 1) // 15
 total -= (terms * (30 + (terms - 1) * 15)) // 2
@@ -300,7 +300,7 @@ total -= (terms * (30 + (terms - 1) * 15)) // 2
 
 The function then returns the final value of `total`, which is the sum of all multiples of 3 or 5 below `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 return total
 ----
@@ -360,7 +360,7 @@ The selected Python function, `method_4`, calculates the sum of all multiples of
 The function starts by creating two sets: one for multiples of 3 and one for multiples of 5. This is done using the `range` function with a step parameter.
 The `range(3, n, 3)` generates multiples of 3 up to `n`, and `range(5, n, 5)` generates multiples of 5 up to `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 set(range(3, n, 3))
 set(range(5, n, 5))
@@ -369,7 +369,7 @@ set(range(5, n, 5))
 The function then combines these two sets using the union operator (`|`).
 This operation returns a new set that contains all the elements from both sets, effectively giving us a set of all multiples of 3 or 5 below `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 set(range(3, n, 3)) | set(range(5, n, 5))
 ----
@@ -377,7 +377,7 @@ set(range(3, n, 3)) | set(range(5, n, 5))
 Finally, the function returns the sum of all the elements in this set using the `sum` function.
 This gives us the sum of all multiples of 3 or 5 below `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 return sum(set(range(3, n, 3)) | set(range(5, n, 5)))
 ----
@@ -439,7 +439,7 @@ The selected Python function, `method_5`, calculates the sum of all multiples of
 The function begins by creating two sets: one for multiples of 3 and one for multiples of 5. This is achieved using the `range` function with a step parameter.
 The `range(3, n, 3)` generates multiples of 3 up to `n`, and `range(5, n, 5)` generates multiples of 5 up to `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 set(range(3, n, 3))
 set(range(5, n, 5))
@@ -448,7 +448,7 @@ set(range(5, n, 5))
 The function then merges these two sets using the `union` method.
 This operation returns a new set that contains all the elements from both sets, effectively giving us a set of all multiples of 3 or 5 below `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 set(range(3, n, 3)).union(set(range(5, n, 5)))
 ----
@@ -456,7 +456,7 @@ set(range(3, n, 3)).union(set(range(5, n, 5)))
 Finally, the function returns the sum of all the elements in this set using the `sum` function.
 This gives us the sum of all multiples of 3 or 5 below `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 return sum(set(range(3, n, 3)).union(set(range(5, n, 5)))
 ----

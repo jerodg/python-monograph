@@ -30,7 +30,7 @@ Repeat this step until the duplicate character is removed from the set.
 
 Here is the Python code that implements this plan:
 
-[source,python]
+[source,python,linenums]
 ----
 
 ----

@@ -36,7 +36,7 @@ If it is, the function returns a list containing an empty list.
 This is the base case for the recursion.
 This is done with the lines:
 
-[source,python]
+[source,python,linenums]
 ----
 if len(nums) == 0:
     return [[]]
@@ -46,7 +46,7 @@ The function then enters a loop where it iterates over the input list.
 In each iteration, it removes the first element from the list, recursively generates all permutations of the remaining list, and then appends the removed element to each of these permutations.
 This is done with the lines:
 
-[source,python]
+[source,python,linenums]
 ----
 for _ in range(len(nums)):
     n = nums.pop(0)
@@ -129,7 +129,7 @@ If it is, it appends a copy of the list to the `output` list.
 This is the base case for the recursion.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 if start == len(nums) - 1:
     output.append(nums[:])
@@ -139,7 +139,7 @@ If the `start` index is not the last index, the function iterates over the list 
 For each element, it swaps the `start` element with the current element, recursively generates all permutations of the remaining list, and then swaps the elements back to backtrack.
 This is done using the following code:
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(start, len(nums)):
     nums[start], nums[i] = nums[i], nums[start]
@@ -152,7 +152,7 @@ It takes one argument, `nums`, which is the input list of integers.
 It initializes an empty list, `output`, to store the permutations and then calls the `backtrack` function to start generating permutations from the first index of the list.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 output: list[list[int]] = []
 output = backtrack(output, nums, 0)
@@ -213,7 +213,7 @@ The function takes one argument, `nums`, which is expected to be a list of integ
 The type hint `list[int]` is used to indicate this.
 Here's the function signature:
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_02(nums: list[int]) -> list[list[int]]:
 ----
@@ -223,7 +223,7 @@ This function returns an iterable of tuples, where each tuple is a permutation o
 The list comprehension converts each tuple to a list, as the requirement is to return a list of lists.
 Here's the relevant line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 return [list(permutation) for permutation in permutations(nums)]
 ----
@@ -287,7 +287,7 @@ The function takes one argument, `nums`, which is expected to be a list of integ
 The type hint `list[int]` is used to indicate this.
 Here's the function signature:
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_03(nums: list[int]) -> list[list[int]]:
 ----
@@ -295,7 +295,7 @@ def solution_03(nums: list[int]) -> list[list[int]]:
 The function begins by initializing the `output` list with the input list as the first permutation.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 output = [nums]
 ----
@@ -304,7 +304,7 @@ Then, the function enters a loop that iterates over the length of the input list
 Inside this loop, a new `output` list is initialized for each iteration.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 new_output = []
 ----
@@ -315,7 +315,7 @@ For each index, a new permutation is created by inserting the last element of th
 This new permutation is then added to the `new_output` list.
 This is done using the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(len(perm)):
     new_perm = perm[:i] + [perm[-1]] + perm[i:-1]
@@ -325,7 +325,7 @@ for i in range(len(perm)):
 After all permutations have been generated for the current iteration, the `output` list is updated with the `new_output` list.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 output = new_output
 ----
@@ -392,7 +392,7 @@ The function takes one argument, `nums`, which is expected to be a list of integ
 The type hint `list[int]` is used to indicate this.
 Here's the function signature:
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_04(nums: list[int]) -> list[list[int]]:
 ----
@@ -400,7 +400,7 @@ def solution_04(nums: list[int]) -> list[list[int]]:
 The function begins by initializing a stack with the input list and an empty permutation.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 stack = [(nums, [])]
 ----
@@ -408,7 +408,7 @@ stack = [(nums, [])]
 Then, the function initializes the `output` list, which will store all the permutations.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 output = []
 ----
@@ -418,7 +418,7 @@ Inside this loop, a list and a permutation are popped from the stack.
 If the list is empty, the permutation is added to the `output` list.
 This is done using the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 nums, perm = stack.pop()
 if not nums:
@@ -429,7 +429,7 @@ If the list is not empty, the function enters a loop that iterates over each num
 Inside this loop, a new list (with the current number removed) and a new permutation (with the current number added) are pushed to the stack.
 This is done using the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(len(nums)):
     stack.append((nums[:i] + nums[i + 1 :], perm + [nums[i]]))
@@ -497,7 +497,7 @@ The function takes one argument, `nums`, which is expected to be a list of integ
 The type hint `list[int]` is used to indicate this.
 Here's the function signature:
 
-[source,python]
+[source,python,linenums]
 ----
 def solution_05(nums: list[int]) -> list[list[int]]:
 ----
@@ -505,7 +505,7 @@ def solution_05(nums: list[int]) -> list[list[int]]:
 The function begins by initializing a queue with the input list and an empty permutation.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 queue = deque([(nums, [])])
 ----
@@ -513,7 +513,7 @@ queue = deque([(nums, [])])
 Then, the function initializes the `output` list, which will store all the permutations.
 This is done using the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 output = []
 ----
@@ -523,7 +523,7 @@ Inside this loop, a list and a permutation are dequeued from the queue.
 If the list is empty, the permutation is added to the `output` list.
 This is done using the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 nums, perm = queue.popleft()
 if not nums:
@@ -534,7 +534,7 @@ If the list is not empty, the function enters a loop that iterates over each num
 Inside this loop, a new list (with the current number removed) and a new permutation (with the current number added) are enqueued to the queue.
 This is done using the following lines of code:
 
-[source,python]
+[source,python,linenums]
 ----
 for i in range(len(nums)):
     queue.append((nums[:i] + nums[i + 1 :], perm + [nums[i]]))

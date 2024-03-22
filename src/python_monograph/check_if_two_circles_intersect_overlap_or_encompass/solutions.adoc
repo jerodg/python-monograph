@@ -36,7 +36,7 @@ It takes three arguments: `x`, `y`, and `r`.
 This method initializes a `Circle` instance with the provided center coordinates and radius.
 If the provided radius is negative, the method raises a `ValueError`.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, x: [int | float], y: [int | float], r: [int | float]):
     if r < 0:
@@ -49,7 +49,7 @@ def __init__(self, x: [int | float], y: [int | float], r: [int | float]):
 The `check_relation` method takes another `Circle` instance as an argument and determines the relationship between the two circles.
 The relationship can be one of the following: the other circle is inside this circle, this circle is inside the other circle, the circles intersect, the circles touch, or the circles do not overlap, intersect, or touch.
 
-[source,python]
+[source,python,linenums]
 ----
 def check_relation(self, other_circle) -> str:
     d = math.sqrt((self.x - other_circle.x) ** 2 + (self.y - other_circle.y) ** 2)
@@ -127,7 +127,7 @@ The `Circle` class is initialized with a tuple representing the center of the ci
 The center is converted to a complex number where the real part is the x-coordinate and the imaginary part is the y-coordinate.
 If the provided radius is negative, a `ValueError` is raised.
 
-[source,python]
+[source,python,linenums]
 ----
 def __init__(self, center: tuple, radius: float):
     if radius < 0:
@@ -140,7 +140,7 @@ The `Circle` class has a method named `relation` that determines the relationshi
 The relationship can be one of the following: "Separate", "Touch", "Encompass", or "Intersect".
 This is determined by calculating the Euclidean distance between the centers of the two circles and comparing it with the sum, difference, and individual values of their radii.
 
-[source,python]
+[source,python,linenums]
 ----
 def relation(self, other: 'Circle') -> str:
     distance = abs(self.center - other.center)

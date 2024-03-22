@@ -42,7 +42,7 @@ The sorted tuples are then converted into a set.
 This is done using the `set()` function.
 The same process is repeated for the list `ls1`.
 
-[source,python]
+[source,python,linenums]
 ----
 set([tuple(sorted(x)) for x in ls0])
 set([tuple(sorted(y)) for y in ls1])
@@ -52,7 +52,7 @@ The intersection of these two sets is then found using the `&` operator.
 The `&` operator in Python is used for set intersection.
 It returns a set which is the intersection of two sets.
 
-[source,python]
+[source,python,linenums]
 ----
 set([tuple(sorted(x)) for x in ls0]) & set([tuple(sorted(y)) for y in ls1])
 ----
@@ -117,7 +117,7 @@ The `frozenset()` function is used to create an immutable set from the tuples.
 This is necessary because sets in Python cannot contain mutable elements, and tuples are mutable.
 By converting the tuples to frozensets, they can be included in a set.
 
-[source,python]
+[source,python,linenums]
 ----
 set(map(frozenset, ls0))
 set(map(frozenset, ls1))
@@ -127,7 +127,7 @@ The intersection of these two sets is then found using the `&` operator.
 The `&` operator in Python is used for set intersection.
 It returns a set which is the intersection of two sets.
 
-[source,python]
+[source,python,linenums]
 ----
 set(map(frozenset, ls0)) & set(map(frozenset, ls1))
 ----
@@ -190,14 +190,14 @@ The list comprehension iterates over each tuple `x` in the first list `ls0` and 
 If `x` is equal to `y`, it adds `x` to the result list.
 Here's the core part of the function:
 
-[source,python]
+[source,python,linenums]
 ----
 [x for x in ls0 for y in ls1 if x == y]
 ----
 
 This line of code is equivalent to the following nested for loop:
 
-[source,python]
+[source,python,linenums]
 ----
 result = []
 for x in ls0:
@@ -254,14 +254,14 @@ The core of this function is the use of Python's built-in `set` and `intersectio
 It converts the input lists into sets and then uses the `intersection` function to find the common elements.
 Here's the core part of the function:
 
-[source,python]
+[source,python,linenums]
 ----
 set(ls0).intersection(set(ls1))
 ----
 
 This line of code is equivalent to using the `&` operator between two sets:
 
-[source,python]
+[source,python,linenums]
 ----
 set(ls0) & set(ls1)
 ----
@@ -320,7 +320,7 @@ It iterates over each tuple in the first list and checks if it exists in the sec
 If it does, it adds the tuple to the result.
 Here's the core part of the function:
 
-[source,python]
+[source,python,linenums]
 ----
 [x for x in ls0 if x in ls1]
 ----
@@ -373,7 +373,7 @@ The core of this function is the use of Python's `filter()` function and the `in
 It uses a lambda function to check if each tuple from the first list exists in the second list and filters out the tuples that do not.
 Here's the core part of the function:
 
-[source,python]
+[source,python,linenums]
 ----
 filter(lambda x: x in ls1, ls0)
 ----
@@ -427,7 +427,7 @@ The core of this function is the use of Python's set comprehension and the `inte
 It creates a set from the first list `ls0` and then uses the `intersection()` method to find common tuples in the second list `ls1`.
 Here's the core part of the function:
 
-[source,python]
+[source,python,linenums]
 ----
 {x for x in ls0}.intersection(ls1)
 ----

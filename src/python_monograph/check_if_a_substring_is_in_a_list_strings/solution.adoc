@@ -36,7 +36,7 @@ The first condition checks if the `substr` parameter is `None`.
 If it is, a `TypeError` is raised with the message "NoneType found in substr".
 This is to ensure that the function does not attempt to search for a `None` value, which would not make sense in this context.
 
-[source,python]
+[source,python,linenums]
 ----
 if substr is None:
     raise TypeError("NoneType found in substr")
@@ -46,7 +46,7 @@ The second condition checks if any element in the `data` list is `None`.
 If it is, a `TypeError` is raised with the message "NoneType found in list".
 This is to ensure that the function does not attempt to search within a `None` value, which would result in an error.
 
-[source,python]
+[source,python,linenums]
 ----
 if None in data:
     raise TypeError("NoneType found in list")
@@ -58,7 +58,7 @@ The 'for' loop iterates over each string in the list.
 If the substring is found in any string, the function returns `True`.
 Otherwise, it returns `False`.
 
-[source,python]
+[source,python,linenums]
 ----
 return any(substr in x for x in data)
 ----
@@ -117,7 +117,7 @@ The function takes two parameters: `data` and `substr`. `data` is a list of stri
 
 The function signature is as follows:
 
-[source,python]
+[source,python,linenums]
 ----
 def method_01(data: List[str], substr: str) -> bool:
 ----
@@ -131,7 +131,7 @@ If the substring is not found, the `find()` method returns -1. In this case, the
 
 The relevant lines of code are:
 
-[source,python]
+[source,python,linenums]
 ----
 for row in data:
     if row.find(substr) != -1:  # Returns -1 if not found
@@ -201,7 +201,7 @@ The function begins by checking if `None` is present in the `data` list.
 If `None` is found, it raises an `AttributeError`.
 This is done to ensure that the list does not contain any `None` values, which could cause issues when the `find()` method is called on them.
 
-[source,python]
+[source,python,linenums]
 ----
 if None in data:
     raise AttributeError('NoneType found in list')
@@ -211,7 +211,7 @@ The main logic of the function uses a list comprehension to iterate over each st
 The `find()` method is a built-in Python method that returns the lowest index in the string where the substring is found.
 If the substring is not found, `find()` returns -1.
 
-[source,python]
+[source,python,linenums]
 ----
 [x for x in data if x.find(substr) != -1]
 ----
@@ -221,7 +221,7 @@ If the substring is not found in any string, the list comprehension will return 
 
 Finally, the function returns `True` if the list comprehension returns a non-empty list (i.e., the substring was found in at least one string in the list), and `False` otherwise.
 
-[source,python]
+[source,python,linenums]
 ----
 return True if [x for x in data if x.find(substr) != -1] else False
 ----
@@ -284,7 +284,7 @@ The function begins by checking if `substr` or any element in `data` is `None`.
 If `None` is found, it raises a `TypeError`.
 This is done to ensure that the substring and the list do not contain any `None` values, which could cause issues when the `join()` method is called on them.
 
-[source,python]
+[source,python,linenums]
 ----
 if substr is None:
     raise TypeError('NoneType found in substr')
@@ -296,7 +296,7 @@ if None in data:
 The main logic of the function uses the `join()` method to concatenate all the strings in the `data` list into a single string with a specified delimiter.
 In this case, the delimiter is a tab character ("\t").
 
-[source,python]
+[source,python,linenums]
 ----
 "\t".join(data)
 ----
@@ -304,7 +304,7 @@ In this case, the delimiter is a tab character ("\t").
 After joining the strings, the function checks if the substring is found in the resulting string using the `in` keyword.
 The `in` keyword in Python is used to check if a value exists in a sequence (like a list, tuple, string etc.).
 
-[source,python]
+[source,python,linenums]
 ----
 return substr in "\t".join(data)
 ----
@@ -371,7 +371,7 @@ The function begins by checking if `substr` is `None`.
 If `None` is found, it raises a `TypeError`.
 This is done to ensure that the substring does not contain any `None` values, which could cause issues when the `in` operator is used on it.
 
-[source,python]
+[source,python,linenums]
 ----
 if substr is None:
     raise TypeError('NoneType found in substr')
@@ -381,7 +381,7 @@ The main logic of the function uses a for-loop to iterate over each string in th
 For each string, it checks if the substring is found in the string using the `in` operator.
 The `in` keyword in Python is used to check if a value exists in a sequence (like a list, tuple, string etc.).
 
-[source,python]
+[source,python,linenums]
 ----
 for row in data:
     if substr in row:
@@ -391,7 +391,7 @@ for row in data:
 If the substring is found in any string, the function immediately returns `True`.
 If the substring is not found in any string after iterating over the entire list, the function returns `False`.
 
-[source,python]
+[source,python,linenums]
 ----
 return False
 ----
@@ -453,7 +453,7 @@ The function begins by checking if `None` is found in the `data` list or in the 
 If `None` is found, it raises a `TypeError`.
 This is done to ensure that the list and the substring do not contain any `None` values, which could cause issues when the `in` operator is used on them.
 
-[source,python]
+[source,python,linenums]
 ----
 if None in data:
     raise TypeError('NoneType found in list')
@@ -465,7 +465,7 @@ The main logic of the function uses a list comprehension to iterate over each st
 For each string, it checks if the substring is found in the string using the `in` operator.
 The `in` keyword in Python is used to check if a value exists in a sequence (like a list, tuple, string etc.).
 
-[source,python]
+[source,python,linenums]
 ----
 [x for x in data if substr in x]
 ----
@@ -473,7 +473,7 @@ The `in` keyword in Python is used to check if a value exists in a sequence (lik
 If the substring is found in any string, the list comprehension will return a list with at least one element, and the function will return `True`.
 If the substring is not found in any string, the list comprehension will return an empty list, and the function will return `False`.
 
-[source,python]
+[source,python,linenums]
 ----
 return True if [x for x in data if substr in x] else False
 ----

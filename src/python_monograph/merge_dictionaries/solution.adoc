@@ -44,7 +44,7 @@ The function begins by creating a copy of the first dictionary `x` using the `co
 This is done to avoid modifying the original dictionary.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 temp = x.copy()
 ----
@@ -54,7 +54,7 @@ The `update` method adds elements to the dictionary if the key is not in the dic
 If the key is in the dictionary, it updates the key with the new value.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 temp.update(y)
 ----
@@ -62,7 +62,7 @@ temp.update(y)
 Finally, the function returns the updated dictionary `temp`, which now contains the merged contents of both input dictionaries.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 return temp
 ----
@@ -123,7 +123,7 @@ The function begins by converting each dictionary into a list of its items using
 This method returns a view object that displays a list of a dictionary's key-value tuple pairs.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 list(x.items()) + list(y.items())
 ----
@@ -135,7 +135,7 @@ Finally, this list of items is converted back into a dictionary using the `dict`
 This function creates a new dictionary from an iterable of key-value pairs.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 return dict(...)
 ----
@@ -197,7 +197,7 @@ The function uses a feature introduced in Python 3.5, known as dictionary unpack
 This feature allows you to merge dictionaries by unpacking the key-value pairs from each dictionary into a new dictionary.
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 {**x, **y}
 ----
@@ -257,7 +257,7 @@ In the context of this function, the `ChainMap` class is used to link the dictio
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 ChainMap({}, y, x)
 ----
@@ -323,7 +323,7 @@ In the context of this function, `chain` is used to combine the items of the dic
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 chain(x.items(), y.items())
 ----
@@ -389,7 +389,7 @@ If there are duplicate keys, the values from the second dictionary will overwrit
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 return x | y
 ----
@@ -447,7 +447,7 @@ In a generator expression, the output is not stored in memory, but is generated 
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 next(z.update(y) or z for z in [x.copy()])
 ----
@@ -514,7 +514,7 @@ It can take any number of arguments, but can only have one expression.
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 (lambda z: z.update(y) or z)(x.copy())
 ----
@@ -581,7 +581,7 @@ It follows the format `{key: value for (key, value) in iterable}`.
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 {k: v for d in [x, y] for k, v in d.items()}
 ----
@@ -645,7 +645,7 @@ If a key already exists in the original dictionary, its value is updated with th
 
 Here's the relevant code snippet:
 
-[source,python]
+[source,python,linenums]
 ----
 x.update(y)
 ----
@@ -656,7 +656,7 @@ If a key from `y` already exists in `x`, the value in `x` is replaced with the v
 
 The function then returns the updated dictionary `x`:
 
-[source,python]
+[source,python,linenums]
 ----
 return x
 ----
@@ -716,7 +716,7 @@ A `defaultdict` is a dictionary subclass that calls a factory function to supply
 
 The function starts by creating a `defaultdict` named `merged`:
 
-[source,python]
+[source,python,linenums]
 ----
 merged = defaultdict(list)
 ----
@@ -726,21 +726,21 @@ This means that if a key is not found in the dictionary, it will be added with t
 
 Next, the function iterates over the input dictionaries `x` and `y`:
 
-[source,python]
+[source,python,linenums]
 ----
 for d in (x, y):
 ----
 
 For each dictionary `d`, the function iterates over its key-value pairs:
 
-[source,python]
+[source,python,linenums]
 ----
 for key, value in d.items():
 ----
 
 For each key-value pair, the function appends the value to the list of values for the corresponding key in the `merged` dictionary:
 
-[source,python]
+[source,python,linenums]
 ----
 merged[key].append(value)
 ----
@@ -749,7 +749,7 @@ This means that if a key is present in both input dictionaries, its correspondin
 
 Finally, the function returns the `merged` dictionary:
 
-[source,python]
+[source,python,linenums]
 ----
 return merged
 ----

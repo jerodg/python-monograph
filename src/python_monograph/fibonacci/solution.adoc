@@ -33,7 +33,7 @@ The first position is considered as 0.
 The function starts by initializing a list `fib` with the first two numbers of the Fibonacci sequence, which are 0 and 1. The rest of the list is filled with zeros, and its length is determined by the input `n`.
 This is done with the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 fib = [0, 1] + [0] * (n - 1)
 ----
@@ -42,14 +42,14 @@ Next, the function enters a loop that starts from the 2nd index and goes up to `
 For each iteration, it calculates the current Fibonacci number by adding the two preceding numbers in the sequence.
 This is achieved with the following line of code:
 
-[source,python]
+[source,python,linenums]
 ----
 fib[i] = fib[i - 1] + fib[i - 2]
 ----
 
 Finally, the function returns the nth number in the Fibonacci sequence, which is the last element in the `fib` list:
 
-[source,python]
+[source,python,linenums]
 ----
 return fib[n]
 ----
@@ -120,7 +120,7 @@ The function starts by checking if `n` is a negative number.
 If `n` is less than 0, it raises a `ValueError` with the message "`n` must be a non-negative integer".
 This is done to ensure that the function only works with non-negative integers, as the Fibonacci sequence is not defined for negative numbers.
 
-[source,python]
+[source,python,linenums]
 ----
 if n < 0:
     raise ValueError("`n` must be a non-negative integer")
@@ -130,7 +130,7 @@ Next, the function checks if `n` is an integer.
 If `n` is not an integer, it raises a `TypeError` with the message "`n` must be a non-negative integer".
 This is done to ensure that the function only works with integers, as the Fibonacci sequence is not defined for non-integer numbers.
 
-[source,python]
+[source,python,linenums]
 ----
 if not isinstance(n, int):
     raise TypeError("`n` must be a non-negative integer")
@@ -140,7 +140,7 @@ After these checks, the function calculates the nth number in the Fibonacci sequ
 If `n` is less than or equal to 1, it returns `n` directly.
 This is because the 0th and 1st numbers in the Fibonacci sequence are 0 and 1, respectively.
 
-[source,python]
+[source,python,linenums]
 ----
 if n <= 1:
     return n
@@ -149,7 +149,7 @@ if n <= 1:
 If `n` is greater than 1, the function calculates the nth number in the Fibonacci sequence by recursively calling itself with `n - 1` and `n - 2` and adding the results.
 This is based on the definition of the Fibonacci sequence, where each number is the sum of the two preceding ones.
 
-[source,python]
+[source,python,linenums]
 ----
 else:
     return method_01(n - 1) + method_01(n - 2)
@@ -216,7 +216,7 @@ The function starts by checking if `n` is a negative number.
 If `n` is less than 0, it raises a `ValueError` with the message "`n` must be a non-negative integer".
 This is done to ensure that the function only works with non-negative integers, as the Fibonacci sequence is not defined for negative numbers.
 
-[source,python]
+[source,python,linenums]
 ----
 if n < 0:
     raise ValueError("`n` must be a non-negative integer")
@@ -226,7 +226,7 @@ Next, the function checks if `n` is an integer.
 If `n` is not an integer, it raises a `TypeError` with the message "`n` must be a non-negative integer".
 This is done to ensure that the function only works with integers, as the Fibonacci sequence is not defined for non-integer numbers.
 
-[source,python]
+[source,python,linenums]
 ----
 if not isinstance(n, int):
     raise TypeError("`n` must be a non-negative integer")
@@ -235,7 +235,7 @@ if not isinstance(n, int):
 After these checks, the function defines the Fibonacci matrix `F` as a 2x2 matrix with the values [[1, 1], [1, 0]].
 This matrix is used to calculate the nth number in the Fibonacci sequence using matrix exponentiation.
 
-[source,python]
+[source,python,linenums]
 ----
 F = np.matrix([[1, 1], [1, 0]], dtype="int64")
 ----
@@ -243,7 +243,7 @@ F = np.matrix([[1, 1], [1, 0]], dtype="int64")
 Finally, the function calculates the nth number in the Fibonacci sequence by raising the Fibonacci matrix `F` to the power of `n` and returning the value at the position [0, 1] in the resulting matrix.
 This is based on the property of the Fibonacci sequence that it can be expressed as a matrix that is raised to the power of `n`.
 
-[source,python]
+[source,python,linenums]
 ----
 return (F**n)[0, 1]
 ----
