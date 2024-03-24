@@ -1,5 +1,5 @@
 """
-Python Monograph -> Calculate Data Size -> Init
+Python Monograph:
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 

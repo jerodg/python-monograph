@@ -1,5 +1,5 @@
 """
-Python Monograph -> Calculate Data Size -> Init
+Python Monograph -> Find a Substring Within a List of Strings -> Solution 00 -> Tests
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 

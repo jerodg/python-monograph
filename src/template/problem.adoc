@@ -22,6 +22,8 @@
 
 = {description}
 
+[.lead]
+
 == Constraints
 
 == Examples

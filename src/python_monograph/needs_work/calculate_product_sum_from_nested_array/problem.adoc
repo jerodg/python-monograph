@@ -1,0 +1,230 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Calculate Product Sum from Nested Array Problem
+:keywords: problem, python
+
+= {description}
+// fixme: The solutions for this problem need more work; they are not correct.
+
+[.lead]
+In this problem, we are given a nested array (a list of lists) where each sub-list can either be a number or another nested list. The goal is to calculate the product sum of this nested array. The product sum of a nested list is the sum of its elements, where lists inside the main list contribute their sum multiplied by their level of depth. The depth of a list is defined as 1 plus the maximum depth of the list's elements, where the maximum depth of an element that is not a list is zero.
+
+The task is to write a Python function `calculate_product_sum(nested_list: List[Union[int, List]]) -> int:` that takes a nested list as input and returns its product sum. The input list will not be empty and will only contain integers or other nested lists. The depth of the nested lists will not exceed 10.
+
+The `Calculate Product Sum from Nested Array Problem` is a common problem that tests your understanding of recursion and your ability to work with complex data structures. It is a useful problem for learning how to break down complex problems into simpler, more manageable parts. The problem can be solved using a depth-first search approach, where you recursively calculate the product sum of each nested list and add it to the running total. The key to solving this problem is understanding how to calculate the depth of each nested list and how to multiply the sum of a nested list by its depth.
+
+== Constraints
+
+The constraints for the problem could be as follows:
+
+1. The input list will not be empty.
+2. The input list will only contain integers or other nested lists.
+3. The depth of the nested lists will not exceed 10.
+4. The absolute value of the integers in the list will not exceed 10^6.
+5. The total number of elements in the list (including elements in the nested lists) will not exceed 10^4.
+
+== Examples
+
+=== Example 0
+
+Consider the nested list `[5, 2, [7, -1], 3, [6, [-13, 8], 4]]`.
+
+- The first level sum is `5 + 2 + 3 = 10`.
+- The second level list `[7, -1]` contributes its sum `7 - 1 = 6` multiplied by its depth `2`, so it contributes `6 * 2 = 12`.
+- The second level list `[6, [-13, 8], 4]` has a sum of `6 + 4 = 10` and a third level list `[-13, 8]` with a sum of `-13 + 8 = -5`. So, it contributes `10 * 2 + -5 * 3 = 20 - 15 = 5`.
+- Therefore, the total product sum is `10 + 12 + 5 = 27`.
+
+.Input
+[source,python,linenums]
+----
+[5, 2, [7, -1], 3, [6, [-13, 8], 4]]
+----
+
+.Output
+[source,python,linenums]
+----
+27
+----
+
+=== Example 1
+
+Consider the nested list `[1, [2, [3, [4, [5]]]]]`.
+
+. The first level sum is 1 * 1 = 1.
+. The second level list [2, [3, [4, [5]]]] has a sum of 2 * 2 = 4 and a third level list [3, [4, [5]]] with a sum of 3 * 3 = 9.
+. The fourth level list [4, [5]] has a sum of 4 * 4 = 16 and a fifth level list [5] with a sum of 5 * 5 = 25.
+. Therefore, the total product sum is 1 + 4 + 9 + 16 + 25 = 55.
+
+.Input
+[source,python,linenums]
+----
+[1, [2, [3, [4, [5]]]]]
+----
+
+.Output
+[source,python,linenums]
+----
+105
+----
+
+=== Example 2
+
+Consider the list `[1, 2, 3, 4, 5]`.
+
+.Input
+[source,python,linenums]
+----
+[1, 2, 3, 4, 5]
+----
+
+.Output
+[source,python,linenums]
+----
+15
+----
+
+=== Example 3
+
+Consider the nested list `[[1, 2], [3, 4], [5, 6]]`.
+
+. The first nested list [1, 2] has a sum of 1 + 2 = 3. Since it's at depth 1, it contributes 3 * 1 = 3 to the product sum.
+. The second nested list [3, 4] has a sum of 3 + 4 = 7. Since it's at depth 1, it contributes 7 * 1 = 7 to the product sum.
+. The third nested list [5, 6] has a sum of 5 + 6 = 11. Since it's at depth 1, it contributes 11 * 1 = 11 to the product sum.
+. Adding up all these contributions, the total product sum is 3 + 7 + 11 = 21.
+. However, the depth of the outermost list is also considered.
+ - Since the outermost list is at depth 1, the final product sum is 21 * 1 = 21.
+
+.Input
+[source,python,linenums]
+----
+[[1, 2], [3, 4], [5, 6]]
+----
+
+.Output
+[source,python,linenums]
+----
+42
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+[1, [2, 3, [4, 5], 6, 7], 8]
+----
+
+.Output
+[source,python,linenums]
+----
+102
+----
+
+== Use-Cases
+
+The solutions to the "Calculate Product Sum from Nested Array" problem can be applied in various real-world scenarios, including:
+
+1. **Data Analysis**: In data analysis, nested lists can represent complex hierarchical data structures. The product sum calculation can be used to aggregate or summarize data in these structures.
+
+2. **File System Analysis**: In file systems, directories can be represented as nested lists where each sub-list is a sub-directory. The product sum can be used to calculate the total size of a directory, where the size of each file is multiplied by its depth in the directory structure.
+
+3. **Graph Theory**: In graph theory, nested lists can represent trees or other hierarchical structures. The product sum can be used to calculate various metrics related to the structure of the graph.
+
+4. **Machine Learning**: In machine learning, nested lists can represent decision trees or other hierarchical models. The product sum can be used to calculate the importance of different features or decisions in the model.
+
+5. **Game Development**: In game development, nested lists can represent game states or other hierarchical structures. The product sum can be used to calculate scores or other metrics related to the game state.
+
+== Common Mistakes
+
+Here are some common mistakes to avoid when solving the "Calculate Product Sum from Nested Array" problem:
+
+1. **Not Handling Nested Lists Properly**: One of the most common mistakes is not handling the nested lists properly. This problem requires a recursive approach, and forgetting to implement this can lead to incorrect results.
+
+2. **Forgetting to Multiply by Depth**: Another common mistake is forgetting to multiply the sum of a nested list by its depth. This is a key part of the problem, and forgetting to do this will lead to incorrect results.
+
+3. **Not Considering Edge Cases**: It's important to consider edge cases, such as empty lists or lists with only one element. Failing to handle these cases can lead to errors or incorrect results.
+
+4. **Not Using the Correct Data Types**: This problem involves working with integers and lists. Using the wrong data types can lead to type errors.
+
+5. **Not Testing Enough**: It's important to test your solution with a variety of test cases to ensure it works correctly in all situations. Not doing enough testing can lead to bugs going unnoticed.
+
+6. **Not Following PEP 8 Style Guide and PEP 257 Docstring Conventions**: As per the instructions in the `base_gpt_instructions.md` file, it's important to follow the PEP 8 Style Guide and PEP 257 Docstring Conventions when writing Python code. Not doing so can make the code harder to read and understand.
+
+== Best Practices
+
+Here are some best practices to apply when solving the "Calculate Product Sum from Nested Array" problem:
+
+1. **Understand the Problem**: Before you start coding, make sure you fully understand the problem. This includes understanding the problem statement, the input and output formats, and any constraints.
+
+2. **Plan Your Solution**: Don't jump straight into coding. Instead, take some time to plan your solution. This could involve drawing diagrams, writing pseudocode, or discussing your approach with others.
+
+3. **Use Recursion**: This problem involves dealing with nested lists, which makes it a good candidate for a recursive solution. Make sure you understand how recursion works and how to implement it in Python.
+
+4. **Handle Edge Cases**: Don't forget to handle edge cases in your solution. This could include cases where the input list is empty, or where the list contains only one element.
+
+5. **Write Clean Code**: Follow the PEP 8 Style Guide and PEP 257 Docstring Conventions when writing your Python code. This will make your code easier to read and understand.
+
+6. **Test Your Solution**: After you've implemented your solution, make sure to test it with a variety of test cases to ensure it works correctly in all situations. This should include both the provided test cases and any additional cases you can think of.
+
+7. **Optimize Your Solution**: Once you have a working solution, consider whether there are any ways to optimize it. This could involve reducing the time complexity, reducing the space complexity, or simply making the code cleaner and easier to understand.
+
+8. **Document Your Code**: Make sure to include comments in your code explaining what each part of the code does. This will make it easier for others (and for you) to understand what your code is doing.
+
+9. **Use Type Hints**: Use type hints in your Python code to indicate the expected type of each function's arguments and return value. This can help catch potential errors and make your code easier to understand.
+
+10. **Use List Comprehensions**: Prefer list comprehensions over unrolled for-loops in Python, but don't write list comprehensions that are more than two levels deep or wide -- use loops for that.
+
+== Follow-up
+
+For follow-up, I would recommend the following:
+
+1. **Implement Iterative Solution**: Try to solve the problem iteratively using a stack or queue. This can be a good exercise in understanding the differences between iterative and recursive solutions.
+
+2. **Benchmark Performance**: Compare the performance of the recursive solution with the iterative solution. This can help you understand the trade-offs between the two approaches.
+
+3. **Handle Larger Inputs**: Test your solution with larger inputs to see how it performs. This can help you identify any potential performance bottlenecks.
+
+4. **Explore Other Data Structures**: Try solving the problem using other data structures, such as trees or graphs. This can help you gain a deeper understanding of these data structures and how they can be used to solve problems.
+
+5. **Code Review**: Have someone else review your code. They might spot potential issues or areas for improvement that you missed.
+
+6. **Write More Tests**: Write additional test cases to cover more edge cases and ensure your solution works in all scenarios.
+
+7. **Refactor Your Code**: Look for opportunities to refactor your code and make it cleaner and more efficient. This could involve removing unnecessary code, simplifying complex logic, or improving the naming of variables and functions.
+
+== Related Topics
+
+Here are some related topics for the "Calculate Product Sum from Nested Array" problem:
+
+1. **Recursion**: This is a fundamental concept in computer science where a function calls itself in its definition. Understanding recursion is key to solving this problem. You can learn more about recursion from the [Python Documentation](https://docs.python.org/3/tutorial/introduction.html#recursion).
+
+2. **Data Structures**: Understanding different data structures, especially lists and trees, is crucial for this problem. You can learn more about data structures in Python from the [Python Documentation](https://docs.python.org/3/tutorial/datastructures.html).
+
+3. **Depth-First Search (DFS)**: DFS is a common algorithm used in tree and graph traversal. It is used in this problem to traverse the nested lists. You can learn more about DFS from [Geeks for Geeks](https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/).
+
+4. **Complexity Analysis**: Understanding time and space complexity is important for analyzing the efficiency of your solution. You can learn more about complexity analysis from [Khan Academy](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation).
+
+5. **Python List Comprehensions**: List comprehensions provide a concise way to create lists based on existing lists. In this problem, they can be used to simplify the code. You can learn more about list comprehensions from the [Python Documentation](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions).
+
+6. **Python Type Hints**: Type hints in Python are a way of indicating the expected type of a function's arguments and return value. You can learn more about type hints from the [Python Documentation](https://docs.python.org/3/library/typing.html).
+
+7. **PEP 8 Style Guide and PEP 257 Docstring Conventions**: Following these conventions makes your Python code more readable and maintainable. You can learn more about them from the [PEP 8 Style Guide](https://pep8.org/) and the [PEP 257 Docstring Conventions](https://www.python.org/dev/peps/pep-0257/).
+
+== References

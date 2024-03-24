@@ -1,0 +1,100 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Find a Substring Within a List of Strings Solutions
+:keywords: solution, python
+
+= {description}
+
+[.lead]
+
+== Approaches
+
+There are several techniques, approaches, or methodologies that can be used to solve the problem of finding a substring within a list of strings:
+
+1. **Brute Force**: The simplest approach is to iterate over each string in the list and check if the target string is a substring of the current string. This can be done using the built-in substring search functionality in many programming languages. However, this approach can be inefficient for large lists or long strings.
+
+2. **String Matching Algorithms**: There are several string matching algorithms that can be used to solve this problem more efficiently. These include Knuth-Morris-Pratt (KMP), Boyer-Moore, and Rabin-Karp. These algorithms preprocess the target string to allow for faster searching.
+
+3. **Trie Data Structure**: A Trie is a tree-like data structure that stores strings in a way that allows for efficient substring searching. Each node in the Trie represents a character, and each path from the root to a node represents a string. This can be used to check if the target string is a substring of any string in the list.
+
+4. **Suffix Tree Data Structure**: A Suffix Tree is a compressed Trie that contains all the suffixes of the given text as their keys and positions in the text as their values. It can be used to solve this problem in linear time.
+
+5. **Suffix Array Data Structure**: A Suffix Array is a sorted array of all suffixes of a given string. It is a simpler and more space-efficient alternative to a Suffix Tree, and can also be used to solve this problem in linear time.
+
+6. **Binary Search**: If the list of strings is sorted, a binary search can be used to find the target string. This approach is more efficient than a brute force search, but requires the list to be sorted.
+
+7. **Hashing**: Hashing can be used to store the strings in the list in a hash table, allowing for constant time searching. However, this approach requires additional space to store the hash table.
+
+8. **Regular Expressions**: Regular expressions can be used to find substrings within strings. They are a powerful tool for string manipulation and can be used to solve this problem.
+
+9. **Dynamic Programming**: Dynamic programming can be used to solve this problem by breaking it down into smaller subproblems and solving each subproblem only once.
+
+10. **Parallel Computing**: If the list of strings is very large, the problem can be divided into smaller parts and solved in parallel. This can significantly reduce the time required to find the substring.
+
+11. **Using Knuth-Morris-Pratt Algorithm**:
+
+12. **Using Boyer-Moore Algorithm**:
+
+13. **Using the any() Method**:
+
+14. **Using the find() Method**:
+
+15. **Using the find() Method With a List-Comprehension**:
+
+16. **Using the join() Method**:
+
+17. **Using a for-loop**:
+
+18. **Using a list-comprehension**:
+
+19. **Using the Rabin-Karp Algorithm**:
+
+Each of these techniques has its own advantages and disadvantages, and the best one to use depends on the specific requirements and constraints of the problem.
+
+== Performance Optimizations
+
+== Solutions
+
+=== Solution 00
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[lines=21..]
+----
+
+==== Explanation
+
+==== Advantages & Disadvantages
+
+==== Complexity Analysis
+
+==== Code Review
+
+== Tests
+
+[.lead]
+===  Test Solution 00
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[lines=21..]
+----

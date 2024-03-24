@@ -1,5 +1,5 @@
 """
-Python Monograph -> Calculate Data Size -> Init
+Python Monograph -> Calculate Product Sum from Nested Array -> Solution 01 -> Tests
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 

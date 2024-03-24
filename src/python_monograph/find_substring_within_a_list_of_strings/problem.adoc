@@ -1,0 +1,235 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Find a Substring Within a List of Strings Problem
+:keywords: problem, python
+
+= {description}
+
+[.lead]
+The problem is to find a substring within a list of strings.
+
+You are given a list of strings and a target string.
+
+Your task is to determine if the target string is a substring of any string in the list.
+
+The list of strings can contain any number of strings, and the strings can be of any length.
+
+The target string is a single string of any length.
+
+The function should return an index with the location of the substring if the target string is a substring of any string in the list, and None otherwise.
+
+NOTE: A substring is a contiguous sequence of characters within a string. For example, 'abc' is a substring of 'abcdef', but 'ace' is not.
+
+== Constraints
+
+The constraints for the problem "Find a Substring Within a List" could be as follows:
+
+1. The list of strings, `lst`, contains `n` strings (1 <= n <= 10^5). This means the list can contain anywhere from 1 to 100,000 strings.
+
+2. Each string in the list is of length `m` (1 <= m <= 10^5). This means each string can contain anywhere from 1 to 100,000 characters.
+
+3. The target string is a single string of length `p` (1 <= p <= m). This means the target string can contain anywhere from 1 to the length of the longest string in the list.
+
+4. The strings can contain any printable ASCII characters.
+
+5. The problem requires case sensitivity, i.e., 'abc' and 'ABC' are considered different strings.
+
+6. The function should return an index with the location of the substring if the target string is a substring of any string in the list, and `None` otherwise. This means the function should return the first occurrence of the target string in the list.
+
+These constraints are important to understand the boundaries of the problem and to design an efficient solution.
+
+== Examples
+
+=== Example 0
+
+The target string is a substring of one of the strings in the list.
+
+.Input
+[source,python,linenums]
+----
+lst = ["hello", "world", "python", "programming"]
+target = "pyt"
+----
+
+.Output
+[source,python,linenums]
+----
+2
+----
+
+=== Example 1
+
+The target string is not a substring of any string in the list.
+
+.Input
+[source,python,linenums]
+----
+lst = ["hello", "world", "python", "programming"]
+target = "java"
+----
+
+.Output
+[source,python,linenums]
+----
+None
+----
+
+=== Example 2
+
+The target string is a substring of multiple strings in the list. The function should return the index of the first occurrence.
+
+.Input
+[source,python,linenums]
+----
+lst = ["hello", "world", "python", "programming"]
+target = "o"
+----
+
+.Output
+[source,python,linenums]
+----
+0
+----
+
+=== Example 3
+
+The target string is an empty string. According to the definition of substring, an empty string is a substring of any string, so the function should return 0.
+
+.Input
+[source,python,linenums]
+----
+lst = ["hello", "world", "python", "programming"]
+target = ""
+----
+
+.Output
+[source,python,linenums]
+----
+0
+----
+
+=== Example 4
+
+The list of strings is empty. In this case, the function should return None as there are no strings for the target string to be a substring of.
+
+.Input
+[source,python,linenums]
+----
+lst = []
+target = "hello"
+----
+
+.Output
+[source,python,linenums]
+----
+None
+----
+
+== Use-Cases
+
+The problem of finding a substring within a list of strings has several real-world applications. Here are a few examples:
+
+1. **Search Engines**: Search engines like Google, Bing, etc., need to find a user's query (substring) within a vast amount of data (list of strings). The solution to this problem can be used to build the core functionality of a search engine.
+
+2. **Text Editors/IDEs**: Text editors or Integrated Development Environments (IDEs) often have a 'Find' or 'Search' feature that allows users to find a specific string within the document or code. This problem is essentially the same as implementing that feature.
+
+3. **Plagiarism Detection**: In academia or journalism, it's important to detect if a piece of text has been copied from another source. The solution to this problem can be used to find instances of a specific string (potential plagiarism) within a list of documents.
+
+4. **DNA Sequencing**: In bioinformatics, scientists often need to find a specific sequence of DNA (substring) within a larger DNA sequence (string). The solution to this problem can be used to build the core functionality of a DNA sequencing software.
+
+5. **Data Mining**: In data mining, it's often necessary to find specific patterns or sequences within a larger dataset. The solution to this problem can be used to build the core functionality of a data mining algorithm.
+
+== Common Mistakes
+
+When solving the problem of finding a substring within a list of strings, there are several common mistakes that developers often make:
+
+1. **Ignoring Case Sensitivity**: As per the problem statement, the problem requires case sensitivity. This means 'abc' and 'ABC' are considered different strings. Ignoring case sensitivity can lead to incorrect results.
+
+2. **Not Handling Empty Strings**: According to the definition of substring, an empty string is a substring of any string. Therefore, if the target string is an empty string, the function should return 0. Not handling this case can lead to incorrect results.
+
+3. **Not Handling Empty List**: If the list of strings is empty, the function should return `None` as there are no strings for the target string to be a substring of. Not handling this case can lead to errors or incorrect results.
+
+4. **Returning the Wrong Index**: The function should return the index of the first occurrence of the target string in the list. A common mistake is to return the index of the string in which the target string is found, rather than the index of the target string within that string.
+
+5. **Inefficient Solution**: A naive solution might involve checking each string in the list one by one until the target string is found. This could be very inefficient for large lists. A more efficient solution would involve using a data structure like a Trie or a string matching algorithm like KMP (Knuth-Morris-Pratt) or Boyer-Moore.
+
+6. **Not Considering All Printable ASCII Characters**: The strings can contain any printable ASCII characters. Not considering all printable ASCII characters can lead to incorrect results.
+
+Avoiding these common mistakes can help in correctly solving the problem and creating an efficient solution.
+
+== Best Practices
+
+When solving the problem of finding a substring within a list of strings, here are some best practices to consider:
+
+1. **Understand the Problem**: Make sure you understand the problem statement and constraints thoroughly before starting to code. This includes understanding what a substring is and how it differs from a subsequence.
+
+2. **Plan Your Approach**: Before you start coding, plan your approach. Consider the constraints and think about the best data structures or algorithms to use. For this problem, a string matching algorithm like KMP (Knuth-Morris-Pratt) or Boyer-Moore could be useful.
+
+3. **Handle Edge Cases**: Make sure to handle edge cases, such as when the list of strings is empty or when the target string is an empty string.
+
+4. **Write Clean Code**: Write your code in a clean and organized manner. Use meaningful variable names, keep your functions small and focused on a single task, and comment your code to explain what it does.
+
+5. **Optimize Your Solution**: Once you have a working solution, think about how you can optimize it. For example, you could use a Trie data structure to store the strings and perform the search operation more efficiently.
+
+6. **Test Your Code**: Test your code with different test cases to make sure it works as expected. This includes both normal cases and edge cases.
+
+7. **Analyze Time and Space Complexity**: Analyze the time and space complexity of your solution. This will help you understand the efficiency of your code and whether it can handle the maximum constraints.
+
+8. **Follow Python Best Practices**: If you're coding in Python, follow Python best practices. This includes using list comprehensions where appropriate, using the `in` keyword to check for membership, and using built-in functions and libraries where possible.
+
+9. **Document Your Code**: Finally, document your code. This includes writing a docstring for your function explaining what it does, its parameters, its return value, and any exceptions it raises.
+
+== Follow-up
+
+After solving the problem of finding a substring within a list of strings, here are some follow-up steps that you could consider:
+
+1. **Optimize Your Solution**: If you haven't already, consider optimizing your solution. For example, if your current solution is a brute force approach, you could consider using a more efficient string matching algorithm like KMP (Knuth-Morris-Pratt) or Boyer-Moore.
+
+2. **Handle Larger Inputs**: Test your solution with larger inputs to ensure it can handle the maximum constraints. This will help you understand if your solution is efficient enough.
+
+3. **Additional Test Cases**: Write additional test cases to cover edge cases that you might not have considered initially. This will help ensure your solution is robust.
+
+4. **Code Review**: Consider having your code reviewed by peers. They might be able to spot potential issues or suggest improvements.
+
+5. **Document Your Code**: If you haven't already, document your code. This includes writing comments explaining what your code does, its inputs, outputs, and any edge cases or assumptions it makes.
+
+6. **Explore Related Problems**: Once you're comfortable with this problem, you could explore related problems. For example, you could look at problems involving string manipulation, pattern matching, or other types of search problems.
+
+Remember, problem-solving is a continuous learning process. Each problem you solve helps you build skills and knowledge for future problems.
+
+== Related Topics
+
+The problem of finding a substring within a list of strings is related to several topics in computer science and programming. Here are some of them:
+
+1. **String Manipulation**: This is a fundamental topic in programming and involves various operations that can be performed on strings, such as finding substrings, concatenation, replacement, etc. You can learn more about it [here](https://www.hackerearth.com/practice/algorithms/string-algorithm/basics-of-string-manipulation/tutorial/).
+
+2. **Search Algorithms**: The problem involves searching for a substring within a list of strings, which is a common task in many applications. There are various search algorithms, such as linear search, binary search, etc. You can learn more about them [here](https://www.hackerearth.com/practice/algorithms/searching/linear-search/tutorial/).
+
+3. **Data Structures**: Certain data structures, like Trie, can be used to solve this problem more efficiently. You can learn more about data structures [here](https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/).
+
+4. **String Matching Algorithms**: There are several string matching algorithms, such as Knuth-Morris-Pratt (KMP) and Boyer-Moore, which can be used to solve this problem efficiently. You can learn more about them [here](https://www.geeksforgeeks.org/pattern-searching/).
+
+5. **Regular Expressions**: Regular expressions can be used to find substrings within strings. They are a powerful tool for string manipulation. You can learn more about them [here](https://www.regular-expressions.info/).
+
+6. **Python Programming**: If you're solving this problem in Python, it would be beneficial to have a good understanding of Python programming, including its syntax, data types, and built-in functions. You can learn more about Python programming [here](https://docs.python.org/3/tutorial/index.html).
+
+Remember, understanding these related topics can help you gain a deeper understanding of the problem and develop more efficient solutions.
+
+== References

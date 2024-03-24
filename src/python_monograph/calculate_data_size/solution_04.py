@@ -37,19 +37,19 @@ class DataSize:
 
     Doctest:
         >>> ds = DataSize(1500, 'decimal')
-        >>> ds.calculate_data_size()
+        >>> ds.calculate_product_sum()
         '1.5 KB'
         >>> ds = DataSize(1500, 'binary')
-        >>> ds.calculate_data_size()
+        >>> ds.calculate_product_sum()
         '1.465 KiB'
         >>> ds = DataSize(1500, 'bits')
-        >>> ds.calculate_data_size()
+        >>> ds.calculate_product_sum()
         '12 Kb'
         >>> ds = DataSize(1500, 'nibbles')
-        >>> ds.calculate_data_size()
+        >>> ds.calculate_product_sum()
         '3 Kn'
         >>> ds = DataSize(1024, 'binary')
-        >>> ds.calculate_data_size()
+        >>> ds.calculate_product_sum()
         '1 KiB'
     """
 
@@ -98,23 +98,23 @@ class DataSize:
 
         Examples:
             >>> calculator = DataSize(1500, 'decimal')
-            >>> calculator.calculate_data_size()
+            >>> calculator.calculate_product_sum()
             '1.5 KB'
 
             >>> calculator = DataSize(1500, 'binary')
-            >>> calculator.calculate_data_size()
+            >>> calculator.calculate_product_sum()
             '1.465 KiB'
 
             >>> calculator = DataSize(1500, 'bits')
-            >>> calculator.calculate_data_size()
+            >>> calculator.calculate_product_sum()
             '12 Kb'
 
             >>> calculator = DataSize(1500, 'nibbles')
-            >>> calculator.calculate_data_size()
+            >>> calculator.calculate_product_sum()
             '3 Kn'
 
             >>> calculator = DataSize(1024, 'binary')
-            >>> calculator.calculate_data_size()
+            >>> calculator.calculate_product_sum()
             '1 KiB'
         """
         base = self.bases[self.notation]  # Determine the base for the calculation
