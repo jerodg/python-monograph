@@ -40,8 +40,7 @@ def solution_00(nums: list[int]) -> bool:
         >>> solution_00([1, 3, 2])
         False
     """
-    return all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1)) or all(
-        nums[i] >= nums[i + 1] for i in range(len(nums) - 1))
+    return all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1)) or all(nums[i] >= nums[i + 1] for i in range(len(nums) - 1))
 
 
 if __name__ == '__main__':

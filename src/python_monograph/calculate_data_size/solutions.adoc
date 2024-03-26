@@ -1251,7 +1251,7 @@ The time and space complexity of the `calculate` method in the `DataSize` class 
 
 ==== Code Review
 
-Here's a code review based on the best practices you've mentioned:
+
 
 1. **Readability (Understandability):** The code is quite readable and understandable.
 The variable and function names are descriptive and meaningful.

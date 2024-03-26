@@ -56,20 +56,20 @@ def print_list_prints_all_node_data():
 def search_returns_true_if_key_found():
     linked_list = LinkedList()
     linked_list.insert_at_end('data')
-    assert linked_list.search('data') == True
+    assert linked_list.find_substring('data') == True
 
 
 def search_returns_false_if_key_not_found():
     linked_list = LinkedList()
     linked_list.insert_at_end('data')
-    assert linked_list.search('non_existent_data') == False
+    assert linked_list.find_substring('non_existent_data') == False
 
 
 def test_update_node_when_node_exists():
     linked_list = LinkedList()
     linked_list.insert_at_end('old_value')
     assert linked_list.update('old_value', 'new_value') == True
-    assert linked_list.search('new_value') == True
+    assert linked_list.find_substring('new_value') == True
 
 
 def test_update_node_when_node_does_not_exist():

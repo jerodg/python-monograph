@@ -556,14 +556,20 @@ Understanding how to write and run unit tests in Python is therefore relevant to
 
 Here are some references to the official Python documentation that are relevant to the methods used in the code:
 
-1. [`math.log2`](https://docs.python.org/3/library/math.html#math.log2): This function is used to calculate the base-2 logarithm of a number. It's used in the code to calculate the index of the appropriate suffix for the size in bytes.
+1. [`math.log2`](https://docs.python.org/3/library/math.html#math.log2): This function is used to calculate the base-2 logarithm of a number.
+It's used in the code to calculate the index of the appropriate suffix for the size in bytes.
 
-2. [`math.floor`](https://docs.python.org/3/library/math.html#math.floor): This function is used to round a number down to the nearest integer. It's used in the code to ensure that the index of the suffix is an integer.
+2. [`math.floor`](https://docs.python.org/3/library/math.html#math.floor): This function is used to round a number down to the nearest integer.
+It's used in the code to ensure that the index of the suffix is an integer.
 
-3. [String Formatting (f-strings)](https://docs.python.org/3/reference/lexical_analysis.html#f-strings): This feature is used to create a string with embedded expressions, which are replaced with their values when the string is created. It's used in the code to format the size in the appropriate unit.
+3. [String Formatting (f-strings)](https://docs.python.org/3/reference/lexical_analysis.html#f-strings): This feature is used to create a string with embedded expressions, which are replaced with their values when the string is created.
+It's used in the code to format the size in the appropriate unit.
 
-4. [Dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries): This data structure is used to map keys to values. It's used in the code to map notations to their corresponding command objects.
+4. [Dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries): This data structure is used to map keys to values.
+It's used in the code to map notations to their corresponding command objects.
 
-5. [Classes](https://docs.python.org/3/tutorial/classes.html): This feature is used to define the structure and behavior of objects. It's used in the code to define the `Command` interface and the concrete command classes.
+5. [Classes](https://docs.python.org/3/tutorial/classes.html): This feature is used to define the structure and behavior of objects.
+It's used in the code to define the `Command` interface and the concrete command classes.
 
-6. [Exceptions](https://docs.python.org/3/tutorial/errors.html): This feature is used to handle errors that occur during program execution. It's used in the code to raise a `ValueError` when the size is negative or the notation is invalid.
+6. [Exceptions](https://docs.python.org/3/tutorial/errors.html): This feature is used to handle errors that occur during program execution.
+It's used in the code to raise a `ValueError` when the size is negative or the notation is invalid.

@@ -20,27 +20,31 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
 
 
-def find_substring(strings: list, pattern: str) -> [int | None]:
+def find_substring(strings: list[str], target: str) -> int | None:
     """
-    Finds the first occurrence of a pattern in a list of strings using a brute force approach.
+    This function finds the first occurrence of a pattern in a list of strings using a brute force approach.
 
     Args:
-        strings (list): The list of strings to search in.
-        pattern (str): The pattern to search for.
+        strings (list[str]): The list of strings to search in.
+        target (str): The pattern to search for.
 
     Returns:
         int | None: The index of the first string in the list where the pattern is found as a substring.
                      If the pattern is not found in any string, it returns None.
 
+    Raises:
+        ValueError: If the list of strings is empty or the target string is empty.
+
     Doctest:
         >>> find_substring(["hello", "world", "python", "programming"], "pyt")
         2
         >>> find_substring(["hello", "world", "python", "programming"], "java")
-        None
         >>> find_substring(["hello", "world", "python", "programming"], "o")
         0
         >>> find_substring(["hello", "world", "python", "programming"], "")
-        0
+        Traceback (most recent call last):
+        ...
+        ValueError: The target string cannot be empty.
         >>> find_substring([], "hello")
         Traceback (most recent call last):
         ...
@@ -49,8 +53,16 @@ def find_substring(strings: list, pattern: str) -> [int | None]:
     if not strings:
         raise ValueError("The list of strings cannot be empty.")
 
-    for index, string in enumerate(strings):  # Iterate over each string in the list
-        if pattern in string:  # If the pattern is found in the current string
-            return index  # Return the index of the string in the list
+    # Check if the target string is empty
+    if not target:
+        raise ValueError("The target string cannot be empty.")
 
-    return None  # If the pattern is not found in any string, return None
+    # Iterate over each string in the list
+    for index, string in enumerate(strings):
+        # If the pattern is found in the current string
+        if target in string:
+            # Return the index of the string in the list
+            return index
+
+    # If the pattern is not found in any string, return None
+    return None

@@ -70,10 +70,8 @@ def test_circles_with_large_coordinates(x1, y1, r1, x2, y2, r2):
     assert c1.relation(c2) == 'Separate'
 
 
-@pytest.mark.parametrize(
-    'x1,y1,r1,x2,y2,r2',
-    [(0, 0, 0.000001, 0.000002, 0.000002, 0.000002), (0, 0, 0.000002, 0.000001, 0.000001, 0.000001)]
-)
+@pytest.mark.parametrize('x1,y1,r1,x2,y2,r2',
+        [(0, 0, 0.000001, 0.000002, 0.000002, 0.000002), (0, 0, 0.000002, 0.000001, 0.000001, 0.000001)])
 def test_circles_with_small_coordinates(x1, y1, r1, x2, y2, r2):
     c1 = Circle((x1, y1), r1)
     c2 = Circle((x2, y2), r2)

@@ -22,7 +22,6 @@ import random
 import string
 
 import pytest
-
 from python_monograph.remove_duplicates_from_an_array.solution_07 import remove_duplicates
 
 
@@ -58,8 +57,7 @@ def test_remove_duplicates_with_random_input():
 
 
 def test_remove_duplicates_with_special_characters():
-    assert sorted(remove_duplicates(['!', '@', '@', '#', '$', '$', '%', '^', '^'])) == sorted(
-        ['!', '@', '#', '$', '%', '^'])
+    assert sorted(remove_duplicates(['!', '@', '@', '#', '$', '$', '%', '^', '^'])) == sorted(['!', '@', '#', '$', '%', '^'])
 
 
 # This test is not valid for this implementation as it does preserve order

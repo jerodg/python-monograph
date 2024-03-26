@@ -18,25 +18,49 @@ copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 """
-def compute_bad_char_table(pattern: str) -> dict:
-    bad_char_table = {}
-    for i in range(len(pattern)):
-        bad_char_table[pattern[i]] = i
-    return bad_char_table
 
-def find_substring(strings: list, pattern: str) -> [int | None]:
-    bad_char_table = compute_bad_char_table(pattern)
 
-    for index, string in enumerate(strings):
-        s = p = len(pattern) - 1
-        while s < len(string):
-            if string[s] == pattern[p]:
-                if p == 0:
-                    return index
-                else:
-                    s -= 1
-                    p -= 1
-            else:
-                s += len(pattern) - min(p, 1 + bad_char_table.get(string[s], -1))
-                p = len(pattern) - 1
-    return None
+def find_substring(strings: list[str], target: str) -> int | None:
+    """
+    Find the index of the string that contains the target substring within a list of strings using the `find()` method.
+
+    This function takes a list of strings and a target string as input. It iterates over each string in the list, and
+    uses the `find()` method to check if the target string is a substring of the current string. If the target string is
+    found, it returns the index of the current string. If the target string is not found in any string, it returns None.
+
+    Args:
+        strings (list[str]): The list of strings to be searched.
+        target (str): The target string to be searched for.
+
+    Returns:
+        int | None: The index of the string that contains the target substring if found, None otherwise.
+
+    Doctest:
+        >>> find_substring(["hello", "world", "python", "programming"], "hell")
+        0
+        >>> find_substring(["hello", "world", "python", "programming"], "java") is None
+        True
+        >>> find_substring(["hello", "world", "python", "programming"], "o")
+        0
+        >>> find_substring(["hello", "world", "python", "programming"], "")
+        Traceback (most recent call last):
+        ...
+        ValueError: The target string cannot be empty.
+        >>> find_substring([], "hello")
+        Traceback (most recent call last):
+        ...
+        ValueError: The list of strings cannot be empty.
+    """
+    # Check if the list of strings is empty
+    if not strings:
+        raise ValueError("The list of strings cannot be empty.")
+
+    # Check if the target string is empty
+    if not target:
+        raise ValueError("The target string cannot be empty.")
+
+    for i, string in enumerate(strings):  # Iterate over each string in the list
+        if string.find(target) != -1:  # If the target string is a substring of the current string
+            return i  # Return the index of the current string
+
+    return None  # If the target string is not found in any string, return None

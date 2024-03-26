@@ -34,17 +34,8 @@ def test_two_elements_list():
 
 
 def test_three_elements_list():
-    assert sorted(solution_03([1, 2, 3])) == [
-        [1, 2, 3],
-        [1, 2, 3],
-        [1, 3, 2],
-        [1, 3, 2],
-        [2, 1, 3],
-        [2, 3, 1],
-        [3, 1, 2],
-        [3, 1, 2],
-        [3, 2, 1],
-    ]
+    assert sorted(solution_03([1, 2, 3])) == [[1, 2, 3], [1, 2, 3], [1, 3, 2], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2],
+            [3, 1, 2], [3, 2, 1], ]
 
 
 def test_list_with_duplicate_elements():

@@ -21,7 +21,6 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 # This is a test file to check the correctness of the solution for the problem of calculating the data size of a
 # nested array. It compares the output of the solution with the expected output for different test cases.
 
-import ast
 
 
 # def calculate_product_sum(arr: list[int | list]) -> int:

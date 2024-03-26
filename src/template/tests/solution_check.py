@@ -17,6 +17,5 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
-"""
-# This is a test file to check the correctness of the solution for the problem of calculating the data size of a nested array.
+"""  # This is a test file to check the correctness of the solution for the problem of calculating the data size of a nested array.
 # It compares the output of the solution with the expected output for different test cases.

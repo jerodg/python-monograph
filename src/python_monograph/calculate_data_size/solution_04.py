@@ -24,7 +24,8 @@ class DataSize:
     """
     A class used to represent a Data Size.
 
-    This class takes a size in bytes and a notation, and provides a method to calculate and return a string representing the size in the appropriate notation.
+    This class takes a size in bytes and a notation, and provides a method to calculate and return a string representing the size
+    in the appropriate notation.
 
     Attributes:
         size (int): The size in bytes.
@@ -68,18 +69,11 @@ class DataSize:
             raise ValueError('Size cannot be negative.')
         self.size = size
         self.notation = notation
-        self.suffixes = {
-            'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-            'binary':  ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-            'bits':    ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
-            'nibbles': ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']
-        }
-        self.bases = {
-            'decimal': 1000,
-            'binary':  1024,
-            'bits':    1000,
-            'nibbles': 1000
-        }
+        self.suffixes = {'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                'binary'          : ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+                'bits'            : ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+                'nibbles'         : ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']}
+        self.bases = {'decimal': 1000, 'binary': 1024, 'bits': 1000, 'nibbles': 1000}
         if notation not in self.suffixes:
             raise ValueError("Invalid notation. Please choose 'decimal', 'binary', 'bits', or 'nibbles'.")
 
@@ -90,8 +84,10 @@ class DataSize:
         This method first determines the base for the calculation based on the notation.
         If the notation is 'bits', it converts the size from bytes to bits by multiplying by 8.
         If the notation is 'nibbles', it converts the size from bytes to nibbles by multiplying by 2.
-        It then divides the size by the base until the size is less than the base or it has gone through all the suffixes for the notation.
-        Finally, it formats the size as a string with 3 decimal places, removes trailing zeros and the decimal point if it's at the end, and returns the size with the appropriate suffix.
+        It then divides the size by the base until the size is less than the base or it has gone through all the suffixes for the
+        notation.
+        Finally, it formats the size as a string with 3 decimal places, removes trailing zeros and the decimal point if it's at
+        the end, and returns the size with the appropriate suffix.
 
         Returns:
             str: A string representing the size in the appropriate notation.
