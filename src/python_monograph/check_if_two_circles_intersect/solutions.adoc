@@ -1,0 +1,1104 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:hide-uri-scheme:
+
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Check if Two Circles Intersect Solutions
+:keywords: solution, python
+
+= {description}
+
+[.lead]
+== Approaches
+
+There are several approaches to solve the "Check if Circles Intersect" problem:
+
+1. **Euclidean Distance Approach:** This is the most straightforward approach. Calculate the Euclidean distance between the centers of the two circles. If the distance is less than or equal to the sum of the radii of the two circles, then the circles intersect.
+
+2. **Squared Distance Approach:** This approach is similar to the Euclidean distance approach, but instead of taking the square root to get the actual distance, we compare the square of the distance with the square of the sum of the radii. This can be more efficient as it avoids the relatively expensive square root operation.
+
+3. **Vector Mathematics Approach:** This approach involves treating the centers of the circles as vectors and using
+vector operations to calculate the distance between them. This can be particularly useful in languages or libraries that support vector operations.
+
+4. **Complex Number Approach:** In this approach, the centers of the circles are treated as complex numbers. The modulus of the difference between the two complex numbers gives the distance between the centers of the circles. This approach can be useful in languages that support complex number operations.
+
+5. **Geometric Approach:** This approach involves using geometric properties and theorems to determine if the circles intersect. For example, one could use the triangle inequality theorem, which states that the sum of the lengths of any two sides of a triangle is greater than the length of the remaining side.
+
+6. **Matrix Approach w/ Numpy:** In this approach, the problem is transformed into a matrix problem. The centers and radii of the
+circles
+are represented as matrices, and matrix operations are used to determine if the circles intersect.
+
+7. **Graphical Approach:** In this approach, the circles are drawn on a graphical plane, and graphical methods are used to determine if they intersect. This approach can be useful for visualizing the problem, but may not be practical for large inputs or for use in a program.
+
+8. **Analytical Geometry Approach:** This approach involves using the equations of the circles to solve the problem. The equations of the circles are solved simultaneously to find the points of intersection. If the system of equations has a solution, then the circles intersect.
+
+9. **Bounding Box Approach:** In this approach, a bounding box (the smallest rectangle that completely encloses a geometric shape) is calculated for each circle. If the bounding boxes intersect, then the circles might intersect, and a more precise check (like the Euclidean distance check) is performed.
+
+10. **Monte Carlo Approach:** This is a probabilistic approach where random points are generated within a certain range, and the proportion of points that fall within both circles is used to estimate if the circles intersect. This approach can be computationally expensive and is not guaranteed to give the correct answer, but it can be useful in certain scenarios.
+
+== Performance Optimizations
+
+When optimizing a Python function that solves the "Check if Circles Intersect" problem, consider the following tips:
+
+1. **Avoid Unnecessary Calculations:** If you're using the Euclidean distance formula to calculate the distance between the centers of the circles, you can avoid the square root operation by comparing the square of the distance with the square of the sum of the radii. This can be more efficient as the square root operation is relatively expensive.
+
+2. **Use Efficient Data Structures:** If you're dealing with a large number of circles, using efficient data structures can significantly improve performance. For example, using a spatial data structure like a quadtree or a k-d tree can help you quickly find pairs of circles that are close to each other and potentially intersecting.
+
+3. **Leverage Built-in Functions:** Python's built-in functions are usually optimized for performance. For example, use the built-in `math.hypot` function to calculate the Euclidean distance between two points.
+
+4. **Use NumPy for Vectorized Operations:** If you're dealing with a large number of circles, consider using NumPy, which provides support for vectorized operations. This can be much faster than using Python's built-in data structures and operations.
+
+5. **Avoid Unnecessary Memory Allocation:** Try to avoid unnecessary memory allocation. For example, instead of creating new lists or arrays, try to update the existing ones in-place.
+
+6. **Use Local Variables:** Accessing local variables is faster than accessing global variables in Python. So, try to use local variables as much as possible.
+
+7. **Use Profiling Tools:** Use Python's built-in profiling tools like `cProfile` or external tools like `line_profiler` to identify bottlenecks in your code. Once you've identified the slow parts of your code, you can focus your optimization efforts there.
+
+8. **Use Just-In-Time Compilation:** Consider using a just-in-time compiler like Numba or PyPy to speed up the execution of your Python code.
+
+9. **Parallelize Your Code:** If you're dealing with a large number of circles and have a multi-core processor, consider parallelizing your code to take advantage of all cores.
+
+10. **Use Appropriate Algorithms:** The choice of algorithm can significantly impact the performance of your code. Make sure you're using the most efficient algorithm for the problem at hand.
+
+== Solutions
+
+=== Solution 00
+Euclidean Distance
+
+Sure, here's the explanation of Euclidean distance formatted using AsciiDoc:
+
+*Euclidean Distance*
+
+Euclidean distance is a fundamental concept in mathematics, specifically in the field of geometry and linear algebra. It is a measure of the straight-line distance between two points in Euclidean space. Here's a detailed explanation:
+
+. *Definition*: Euclidean distance, often denoted as `d`, between two points `P` and `Q` in `n`-dimensional Euclidean space (commonly denoted as `R^n`) is given by the formula:
+
+stem:[d(P, Q) = sqrt(sum_{i=1}^{n} (q_i - p_i)^2)]
+
+where stem:[P = (p_1, p_2, ..., p_n)] and stem:[Q = (q_1, q_2, ..., q_n)] are the coordinates of the points in `n` dimensions.
+
+. *Interpretation*: The formula calculates the straight-line distance between the two points `P` and `Q` in the `n`-dimensional space. It's analogous to the Pythagorean theorem in two dimensions. In higher dimensions, it's an extension of the Pythagorean theorem.
+
+. *Example*: Consider two points in a 2-dimensional plane: `P(3, 4)` and `Q(6, 8)`. The Euclidean distance between them is calculated as follows:
+
+stem:[d(P, Q) = sqrt((6 - 3)^2 + (8 - 4)^2) = sqrt(3^2 + 4^2) = sqrt(9 + 16) = sqrt(25) = 5]
+
+So, the Euclidean distance between `P` and `Q` is 5 units.
+
+. *Properties*:
+   - *Non-negativity*: The Euclidean distance is always non-negative.
+   - *Symmetry*: `d(P, Q) = d(Q, P)`. That is, the distance between two points is the same regardless of the order in which they are considered.
+   - *Identity of Indiscernibles*: `d(P, Q) = 0` if and only if `P = Q`.
+   - *Triangle Inequality*: `d(P, Q) + d(Q, R) >= d(P, R)`. In other words, the shortest distance between two points is a straight line.
+
+. *Applications*:
+   - *Data Analysis*: Euclidean distance is commonly used in clustering algorithms such as k-means.
+   - *Machine Learning*: It's used in various algorithms like k-nearest neighbors (k-NN) for classification and regression.
+   - *Image Processing*: Used in image similarity calculations and object detection.
+   - *Optimization*: Used in optimization problems to find the closest solution to a given point.
+
+In summary, Euclidean distance provides a straightforward measure of distance between points in Euclidean space, essential in various mathematical, scientific, and engineering applications.
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_00.py[lines=21..]
+----
+
+==== Explanation
+
+The selected code is a Python function named `do_circles_intersect`. This function is designed to determine whether two circles intersect each other. It takes two arguments, `circle1` and `circle2`, which are instances of the `Circle` class. The `Circle` class is not shown in the selected code, but it is assumed to have attributes `x`, `y`, and `r`, representing the x-coordinate, y-coordinate, and radius of a circle, respectively.
+
+The function begins by calculating the Euclidean distance between the centers of the two circles. This is done using the formula `sqrt((x2 - x1)^2 + (y2 - y1)^2)`, where `(x1, y1)` are the coordinates of the center of `circle1` and `(x2, y2)` are the coordinates of the center of `circle2`. This calculation is performed in the line:
+
+[source,python]
+----
+distance = math.sqrt((circle2.x - circle1.x) ** 2 + (circle2.y - circle1.y) ** 2)
+----
+
+After calculating the distance, the function checks if this distance is less than or equal to the sum of the radii of the two circles. If it is, the function returns `True`, indicating that the circles intersect. If not, it returns `False`, indicating that the circles do not intersect. This check is performed in the line:
+
+[source,python]
+----
+return distance <= circle1.r + circle2.r
+----
+
+The function also includes doctests, which are a form of Python documentation that allows for testing of the function directly within the docstring. These tests provide examples of how the function should behave with certain inputs.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a geometric approach to determine if two circles intersect. It calculates the Euclidean distance between the centers of the two circles and checks if this distance is less than or equal to the sum of the radii of the two circles.
+
+Advantages:
+1. **Simplicity:** The method is straightforward and easy to understand. It directly applies the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii.
+2. **Efficiency:** The method is computationally efficient. It involves only a few arithmetic operations and a square root operation, which can be computed quickly.
+3. **Accuracy:** The method is exact. It does not involve any approximations or probabilistic estimates.
+
+Disadvantages:
+1. **Limited to Two Dimensions:** The method works for circles in a two-dimensional plane. It cannot be directly applied to spheres in three dimensions or to more complex shapes.
+2. **Does Not Provide Intersection Points:** The method only determines whether two circles intersect, but it does not provide the points of intersection. Additional calculations would be needed to find these points.
+3. **Does Not Handle Edge Cases:** The method does not handle edge cases where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+
+==== Complexity Analysis
+
+The time complexity of the function `do_circles_intersect` is O(1), which means it operates in constant time. This is because the function performs a fixed number of operations (calculating the Euclidean distance and comparing it with the sum of the radii of the two circles) that do not depend on the size of the input.
+
+The space complexity of the function is also O(1), which means it uses a constant amount of space. The function only uses a few variables (to store the circles and the calculated distance), and this does not change with the size of the input.
+
+==== Code Review
+
+Let's conduct a code review based on the best practices you've mentioned. We'll focus on the `do_circles_intersect` function from the `solution_09.py` file and the corresponding tests from the `test_solution_09.py` file.
+
+1. **Readability (Understandability):** The function `do_circles_intersect` is quite readable. It uses descriptive variable names like `circle1`, `circle2`, and `num_samples`. The logic of the function is also straightforward and easy to understand.
+
+2. **Maintainability:** The function is simple and does not seem to have any dependencies that would hinder maintainability. However, the function could be broken down into smaller functions to improve maintainability and readability. For example, the code for generating a random point within the bounding box of the two circles could be extracted into a separate function.
+
+3. **Security:** There don't appear to be any security concerns with this code. It doesn't deal with user input or external systems.
+
+4. **Speed and Performance:** The function uses a Monte Carlo method to determine if the circles intersect, which can be computationally expensive for a large number of samples. An optimization could be to use a more direct geometric approach to determine if the circles intersect.
+
+5. **Documentation:** The function has a docstring that explains what it does, its parameters, and its return value. However, it could be improved by explaining the Monte Carlo method used in the function.
+
+6. **Reinventing the Wheel:** The function uses built-in Python features and does not seem to reinvent the wheel.
+
+7. **Reliability:** The function does not have any error handling. It assumes that the input will always be valid Circle objects. It would be more reliable if it checked the validity of its inputs.
+
+8. **Scalability:** The function's performance will degrade as the number of samples increases due to the Monte Carlo method used. A more efficient algorithm could improve scalability.
+
+9. **Reusability:** The function is quite specific to its task, but it is written in a way that it could be reused in other contexts where a Monte Carlo method is appropriate.
+
+10. **Patterns:** The function follows Python's conventions and does not seem to violate any established patterns in the codebase.
+
+11. **Test Coverage and Quality:** The tests in `test_solution_09.py` cover a variety of scenarios, including edge cases. However, they do not test the function with a large number of samples, which would be a good stress test for the function.
+
+12. **Fit for Purpose:** The function appears to fulfill its intended purpose of determining whether two circles intersect.
+
+13. **Notice What's Missing:** The function does not handle the case where the circles are the same (i.e., they have the same center and radius). This is an edge case that should be addressed.
+
+14. **Zoom Out:** The overall approach of using a Monte Carlo method to determine if two circles intersect is interesting, but it may not be the most efficient or direct solution to the problem. A geometric approach could be more appropriate and efficient.
+
+=== Solution 01
+
+Certainly, here's a detailed explanation of the squared distance approach to finding the intersection of two circles formatted using AsciiDoc and stem:[] notation:
+
+*Squared Distance Approach to Finding Circle Intersections*
+
+The squared distance approach is a method used to determine the intersection points of two circles in a two-dimensional space. It involves manipulating the equations of the circles to find the points where their distances squared are equal. Here's how it works:
+
+. *Equation of Circles*: Suppose we have two circles with centers `(x1, y1)` and `(x2, y2)` and radii `r1` and `r2` respectively. +
+The equations of the circles are: +
+stem:[(x - x1)^2 + (y - y1)^2 = r1^2] +
+stem:[(x - x2)^2 + (y - y2)^2 = r2^2]
+
+. *Squared Distance*: Instead of finding the exact intersection points, we can find the squared distances between the centers of the circles. This helps simplify the calculations.
+
+. *Squared Distance Equation*: Subtracting equation (2) from equation (1) gives: +
+stem:[(x - x1)^2 - (x - x2)^2 + (y - y1)^2 - (y - y2)^2 = r1^2 - r2^2] +
+Expanding and simplifying this equation yields: +
+stem:[(x^2 - 2*x*x1 + x1^2) - (x^2 - 2*x*x2 + x2^2) + (y^2 - 2*y*y1 + y1^2) - (y^2 - 2*y*y2 + y2^2) = r1^2 - r2^2] +
+which further simplifies to: +
+stem:[-2*(x1 - x2)*x + 2*(x1^2 - x2^2) - 2*(y1 - y2)*y + 2*(y1^2 - y2^2) = r1^2 - r2^2]
+
+. *Intersection Points*: The squared distance approach involves solving the equation obtained in step 3 for `x` and `y`. Once `x` and `y` are determined, the intersection points can be found.
+
+- For a detailed explanation and derivation of the squared distance approach, refer to this https://math.stackexchange.com/questions/256100/how-can-i-find-the-points-at-which-two-circles-intersect
+- Additional insights and examples can be found in textbooks on analytic geometry and computational geometry, such as "Computational Geometry: Algorithms and Applications" by Mark de Berg et al.
+
+This approach provides a computationally efficient way to find the intersection points of two circles without explicitly solving for each point individually. It's commonly used in computer graphics, geometric modeling, and various engineering applications.
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_01.py[lines=21..]
+----
+
+==== Explanation
+
+The selected code is a Python function named `do_circles_intersect`. This function is designed to determine whether two circles intersect each other. It takes two arguments, `circle1` and `circle2`, which are instances of the `Circle` class. The `Circle` class is not shown in the selected code, but it is assumed to have attributes `x`, `y`, and `r`, representing the x-coordinate, y-coordinate, and radius of a circle, respectively.
+
+The function begins by calculating the squared distance between the centers of the two circles. This is done using the formula `(x2 - x1)^2 + (y2 - y1)^2`, where `(x1, y1)` are the coordinates of the center of `circle1` and `(x2, y2)` are the coordinates of the center of `circle2`. This calculation is performed in the line:
+
+[source,python]
+----
+distance_squared = (circle2.x - circle1.x) ** 2 + (circle2.y - circle1.y) ** 2
+----
+
+After calculating the squared distance, the function checks if this squared distance is less than or equal to the square of the sum of the radii of the two circles. If it is, the function returns `True`, indicating that the circles intersect. If not, it returns `False`, indicating that the circles do not intersect. This check is performed in the line:
+
+[source,python]
+----
+return distance_squared <= (circle1.r + circle2.r) ** 2
+----
+
+The function also includes doctests, which are a form of Python documentation that allows for testing of the function directly within the docstring. These tests provide examples of how the function should behave with certain inputs.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a geometric approach to determine if two circles intersect. It calculates the squared distance between the centers of the two circles and compares it with the square of the sum of the radii of the two circles. If the squared distance is less than or equal to the square of the sum of the radii, the circles intersect.
+
+Advantages:
+1. **Efficiency:** The method is computationally efficient as it involves only a few arithmetic operations, which are generally fast in most programming languages.
+2. **Simplicity:** The method is straightforward and easy to understand. It directly applies the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii.
+3. **Accuracy:** The method provides an exact answer. It does not rely on approximations or probabilistic methods, so it always gives the correct result.
+
+Disadvantages:
+1. **Limited to Two Dimensions:** The method works for circles in a two-dimensional plane. It cannot be directly applied to spheres in three dimensions or to more complex shapes.
+2. **No Intersection Points:** The method only determines whether the circles intersect, but it does not provide the points of intersection if they do intersect.
+3. **No Edge Case Handling:** The method does not handle edge cases where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function is O(1), which means it operates in constant time. This is because the function performs a fixed number of operations (calculating the squared distance between the centers of the two circles and comparing it with the square of the sum of their radii) that does not depend on the size of the input.
+
+The space complexity of the function is also O(1), which means it uses a constant amount of space. The function only uses a few variables to store the intermediate results of its calculations, and this does not change with the size of the input.
+
+==== Code Review
+
+Based on the provided code and the best practices for code review, here is the analysis:
+
+1. **Readability (Understandability):** The function `do_circles_intersect` is quite readable. It uses descriptive variable names like `circle1`, `circle2`, and `distance_squared`. The logic of the function is also straightforward and easy to understand.
+
+2. **Maintainability:** The function is simple and does not seem to have any dependencies that would hinder maintainability. It is a standalone function that does not rely on any external state or configuration.
+
+3. **Security:** There don't appear to be any security concerns with this code. It doesn't deal with user input or external systems.
+
+4. **Speed and Performance:** The function is efficient as it involves only a few arithmetic operations. It does not involve any complex computations or resource-intensive tasks.
+
+5. **Documentation:** The function has a docstring that explains what it does, its parameters, and its return value. However, it could be improved by explaining the geometric principle used in the function.
+
+6. **Reinventing the Wheel:** The function uses built-in Python features and does not seem to reinvent the wheel.
+
+7. **Reliability:** The function does not have any error handling. It assumes that the input will always be valid Circle objects. It would be more reliable if it checked the validity of its inputs.
+
+8. **Scalability:** The function's performance will not degrade as the size of the input increases, as it performs a fixed number of operations regardless of the input size.
+
+9. **Reusability:** The function is quite specific to its task, but it is written in a way that it could be reused in other contexts where a geometric approach to determine if two circles intersect is appropriate.
+
+10. **Patterns:** The function follows Python's conventions and does not seem to violate any established patterns in the codebase.
+
+11. **Test Coverage and Quality:** The tests in `test_solution_01.py` cover a variety of scenarios, including edge cases. However, they do not test the function with a large number of circles, which would be a good stress test for the function.
+
+12. **Fit for Purpose:** The function appears to fulfill its intended purpose of determining whether two circles intersect.
+
+13. **Notice What's Missing:** The function does not handle the case where the circles are the same (i.e., they have the same center and radius). This is an edge case that should be addressed.
+
+14. **Zoom Out:** The overall approach of using a geometric approach to determine if two circles intersect is appropriate and efficient for the problem at hand.
+
+=== Solution 02
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_02.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect` that determines whether two circles intersect. The function takes two arguments, `circle1` and `circle2`, which are expected to be instances of a `Circle` class. The `Circle` class is not shown in the provided code, but it is assumed to have attributes `x`, `y`, and `r`, representing the x-coordinate, y-coordinate, and radius of a circle, respectively.
+
+The function starts by calculating the difference in x and y coordinates of the two circles' centers:
+
+[source,python]
+----
+dx = circle2.x - circle1.x
+dy = circle2.y - circle1.y
+----
+
+These differences are then squared and summed to calculate the squared distance between the centers of the two circles:
+
+[source,python]
+----
+distance_squared = dx * dx + dy * dy
+----
+
+The function then checks if this squared distance is less than or equal to the square of the sum of the radii of the two circles:
+
+[source,python]
+----
+return distance_squared <= (circle1.r + circle2.r) ** 2
+----
+
+If the condition is true, the function returns `True`, indicating that the circles intersect. If the condition is false, it returns `False`, indicating that the circles do not intersect.
+
+The function also includes doctests, which are a form of Python documentation that allows for testing of the function directly within the docstring. These tests provide examples of how the function should behave with certain inputs.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a geometric approach to determine if two circles intersect. It calculates the squared distance between the centers of the two circles and compares it with the square of the sum of the radii of the two circles. If the squared distance is less than or equal to the square of the sum of the radii, the circles intersect.
+
+Advantages:
+1. **Efficiency:** The method is computationally efficient as it involves only a few arithmetic operations, which are generally fast in most programming languages.
+2. **Simplicity:** The method is straightforward and easy to understand. It directly applies the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii.
+3. **Accuracy:** The method provides an exact answer. It does not rely on approximations or probabilistic methods, so it always gives the correct result.
+
+Disadvantages:
+1. **Limited to Two Dimensions:** The method works for circles in a two-dimensional plane. It cannot be directly applied to spheres in three dimensions or to more complex shapes.
+2. **No Intersection Points:** The method only determines whether the circles intersect, but it does not provide the points of intersection if they do intersect.
+3. **No Edge Case Handling:** The method does not handle edge cases where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function is O(1), which means it is constant. This is because the function performs a fixed number of operations that do not depend on the size of the input.
+
+The space complexity of the function is also O(1), which means it is constant. The function uses a fixed amount of space to store the input circles and the calculated distances, which does not change with the size of the input.
+
+==== Code Review
+
+. *Readability* (Understandability)
+The code is generally easy to understand. The function and variable names are descriptive and the code is broken down into small, manageable chunks. The use of doctests in the code also helps in understanding the functionality of the code.
+
+. *Maintainability*
+The code is easy to extend and change. The separation of concerns is clear with the `Circle` class handling the representation of a circle and the `do_circles_intersect` function handling the logic of checking if two circles intersect.
+
+. *Security*
+The code does not seem to have any security implications as it does not deal with any sensitive data or system resources.
+
+. *Speed and Performance*
+The code is optimized for speed and performance. The calculation of whether two circles intersect is done in constant time and does not depend on the size of the input.
+
+. *Documentation*
+The code is well-documented with docstrings for the classes and functions. The docstrings provide a clear explanation of the purpose and usage of the classes and functions. The use of doctests in the docstrings also provides examples of how the functions should behave with certain inputs.
+
+. *Reinventing the Wheel*
+The code does not reinvent the wheel. It uses built-in Python features and does not introduce unnecessary complexity.
+
+. *Reliability*
+The code is reliable and handles errors gracefully. If the input is not a `Circle` instance, the code will raise an `AttributeError`, which is an appropriate response.
+
+. *Scalability*
+The code is scalable as it does not depend on the size of the input.
+
+. *Reusability*
+The `Circle` class and the `do_circles_intersect` function are reusable and can be used in other parts of the codebase or in other projects.
+
+. *Patterns*
+The code adheres to established Python patterns and style guides. It follows PEP 8 style guide and PEP 257 docstring conventions.
+
+. *Test Coverage and Quality*
+The test coverage is comprehensive and covers various scenarios including edge cases. The tests are readable and maintainable.
+
+. *Fit for Purpose*
+The code provides the intended functionality of checking if two circles intersect and meets the expectations of stakeholders and end-users.
+
+. *Notice What's Missing*
+The code does not handle the case where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+
+. *Zoom Out*
+The overall approach and architecture of the code is appropriate and efficient. The chosen solution of calculating the distance between the centers of the two circles and comparing it with the sum of their radii is a standard solution to the problem of checking if two circles intersect.
+
+=== Solution 03
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_03.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect` that determines whether two circles intersect. This function uses a complex number approach to solve the problem.
+
+The function takes two arguments, `circle1` and `circle2`, which are expected to be instances of a `Circle` class. The `Circle` class is not shown in the provided code, but it is assumed to have attributes `x`, `y`, and `r`, representing the x-coordinate, y-coordinate, and radius of a circle, respectively.
+
+[source,python]
+----
+def do_circles_intersect(circle1: Circle, circle2: Circle) -> bool:
+----
+
+The function starts by converting the centers of the circles to complex numbers. This is done by treating the x and y coordinates of the centers as the real and imaginary parts of the complex numbers, respectively.
+
+[source,python]
+----
+center1 = complex(circle1.x, circle1.y)
+center2 = complex(circle2.x, circle2.y)
+----
+
+Next, the function calculates the distance between the centers of the two circles. This is done by subtracting the complex number representing the center of `circle1` from the complex number representing the center of `circle2`, and taking the absolute value of the result.
+
+[source,python]
+----
+distance = abs(center1 - center2)
+----
+
+Finally, the function checks if this distance is less than or equal to the sum of the radii of the two circles. If it is, the function returns `True`, indicating that the circles intersect. If not, it returns `False`, indicating that the circles do not intersect.
+
+[source,python]
+----
+return distance <= (circle1.r + circle2.r)
+----
+
+The function also includes doctests, which are a form of Python documentation that allows for testing of the function directly within the docstring. These tests provide examples of how the function should behave with certain inputs.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a complex number approach to determine if two circles intersect. It converts the centers of the circles to complex numbers and calculates the distance between them. If the distance is less than or equal to the sum of the radii of the two circles, the circles intersect.
+
+Advantages:
+1. **Simplicity:** The method is straightforward and easy to understand. It directly applies the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii.
+2. **Efficiency:** The method is computationally efficient as it involves only a few arithmetic operations, which are generally fast in most programming languages.
+3. **Built-in Support:** Python has built-in support for complex numbers, which makes this approach convenient to implement.
+
+Disadvantages:
+1. **Limited to Two Dimensions:** The method works for circles in a two-dimensional plane. It cannot be directly applied to spheres in three dimensions or to more complex shapes.
+2. **No Intersection Points:** The method only determines whether the circles intersect, but it does not provide the points of intersection if they do intersect.
+3. **No Edge Case Handling:** The method does not handle edge cases where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function is O(1), which means it has constant time complexity. This is because the function performs a fixed number of operations that do not depend on the size of the input.
+
+The space complexity of the function is also O(1), which means it has constant space complexity. The function uses a fixed amount of space to store the complex numbers and the distance, and this does not change with the size of the input.
+
+==== Code Review
+
+Based on the provided code and the best practices for code review, here is the analysis:
+
+1. **Readability (Understandability):** The function `do_circles_intersect` is quite readable. It uses descriptive variable names like `circle1`, `circle2`, and `distance`. The logic of the function is also straightforward and easy to understand.
+
+2. **Maintainability:** The function is simple and does not seem to have any dependencies that would hinder maintainability. It is a standalone function that does not rely on any external state or configuration.
+
+3. **Security:** There don't appear to be any security concerns with this code. It doesn't deal with user input or external systems.
+
+4. **Speed and Performance:** The function is efficient as it involves only a few arithmetic operations. It does not involve any complex computations or resource-intensive tasks.
+
+5. **Documentation:** The function has a docstring that explains what it does, its parameters, and its return value. However, it could be improved by explaining the complex number approach used in the function.
+
+6. **Reinventing the Wheel:** The function uses built-in Python features and does not seem to reinvent the wheel.
+
+7. **Reliability:** The function does not have any error handling. It assumes that the input will always be valid Circle objects. It would be more reliable if it checked the validity of its inputs.
+
+8. **Scalability:** The function's performance will not degrade as the size of the input increases, as it performs a fixed number of operations regardless of the input size.
+
+9. **Reusability:** The function is quite specific to its task, but it is written in a way that it could be reused in other contexts where a complex number approach to determine if two circles intersect is appropriate.
+
+10. **Patterns:** The function follows Python's conventions and does not seem to violate any established patterns in the codebase.
+
+11. **Test Coverage and Quality:** The tests in `test_solution_03.py` cover a variety of scenarios, including edge cases. However, they do not test the function with a large number of circles, which would be a good stress test for the function.
+
+12. **Fit for Purpose:** The function appears to fulfill its intended purpose of determining whether two circles intersect.
+
+13. **Notice What's Missing:** The function does not handle the case where the circles have the same center or one circle is entirely within the other. This is an edge case that should be addressed.
+
+14. **Zoom Out:** The overall approach of using a complex number approach to determine if two circles intersect is appropriate and efficient for the problem at hand.
+
+=== Solution 04
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_04.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect` that determines whether two circles intersect. This function uses a geometric approach to solve the problem.
+
+The function takes two arguments, `circle1` and `circle2`, which are expected to be instances of a `Circle` class. The `Circle` class is not shown in the provided code, but it is assumed to have attributes `x`, `y`, and `r`, representing the x-coordinate, y-coordinate, and radius of a circle, respectively.
+
+[source,python]
+----
+def do_circles_intersect(circle1: Circle, circle2: Circle) -> bool:
+----
+
+The function starts by calculating the difference in x and y coordinates of the two circles' centers:
+
+[source,python]
+----
+dx = circle2.x - circle1.x
+dy = circle2.y - circle1.y
+----
+
+These differences are then squared and summed to calculate the distance between the centers of the two circles:
+
+[source,python]
+----
+distance = (dx * dx + dy * dy) ** 0.5
+----
+
+Finally, the function checks if this distance is less than or equal to the sum of the radii of the two circles. If it is, the function returns `True`, indicating that the circles intersect. If not, it returns `False`, indicating that the circles do not intersect.
+
+[source,python]
+----
+return distance <= circle1.r + circle2.r
+----
+
+The function also includes doctests, which are a form of Python documentation that allows for testing of the function directly within the docstring. These tests provide examples of how the function should behave with certain inputs.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a geometric approach to determine if two circles intersect. It calculates the Euclidean distance between the centers of the two circles and checks if this distance is less than or equal to the sum of the radii of the two circles.
+
+Advantages:
+1. **Simplicity:** The method is straightforward and easy to understand. It directly applies the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii.
+2. **Efficiency:** The method is computationally efficient. It involves only a few arithmetic operations and a square root operation, which can be computed quickly.
+3. **Accuracy:** The method is exact. It does not involve any approximations or probabilistic estimates.
+
+Disadvantages:
+1. **Limited to Two Dimensions:** The method works for circles in a two-dimensional plane. It cannot be directly applied to spheres in three dimensions or to more complex shapes.
+2. **Does Not Provide Intersection Points:** The method only determines whether two circles intersect, but it does not provide the points of intersection. Additional calculations would be needed to find these points.
+3. **Does Not Handle Edge Cases:** The method does not handle edge cases where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function is O(1), which means it has constant time complexity. This is because the function performs a fixed number of operations that do not depend on the size of the input.
+
+The space complexity of the function is also O(1), or constant. This is because the function uses a fixed amount of space to store the input circles and the calculated distance, regardless of the size of the input.
+
+==== Code Review
+
+Based on the provided code and the best practices for code review, here is the analysis:
+
+1. **Readability (Understandability):** The function `do_circles_intersect` is quite readable. It uses descriptive variable names like `circle1`, `circle2`, and `distance`. The logic of the function is also straightforward and easy to understand.
+
+2. **Maintainability:** The function is simple and does not seem to have any dependencies that would hinder maintainability. It is a standalone function that does not rely on any external state or configuration.
+
+3. **Security:** There don't appear to be any security concerns with this code. It doesn't deal with user input or external systems.
+
+4. **Speed and Performance:** The function is efficient as it involves only a few arithmetic operations. It does not involve any complex computations or resource-intensive tasks.
+
+5. **Documentation:** The function has a docstring that explains what it does, its parameters, and its return value. However, it could be improved by explaining the geometric principle used in the function.
+
+6. **Reinventing the Wheel:** The function uses built-in Python features and does not seem to reinvent the wheel.
+
+7. **Reliability:** The function does not have any error handling. It assumes that the input will always be valid Circle objects. It would be more reliable if it checked the validity of its inputs.
+
+8. **Scalability:** The function's performance will not degrade as the size of the input increases, as it performs a fixed number of operations regardless of the input size.
+
+9. **Reusability:** The function is quite specific to its task, but it is written in a way that it could be reused in other contexts where a geometric approach to determine if two circles intersect is appropriate.
+
+10. **Patterns:** The function follows Python's conventions and does not seem to violate any established patterns in the codebase.
+
+11. **Test Coverage and Quality:** The tests in `test_solution_04.py` cover a variety of scenarios, including edge cases. However, they do not test the function with a large number of circles, which would be a good stress test for the function.
+
+12. **Fit for Purpose:** The function appears to fulfill its intended purpose of determining whether two circles intersect.
+
+13. **Notice What's Missing:** The function does not handle the case where the circles have the same center or one circle is entirely within the other. This is an edge case that should be addressed.
+
+14. **Zoom Out:** The overall approach of using a geometric approach to determine if two circles intersect is appropriate and efficient for the problem at hand.
+
+=== Solution 05
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_05.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect` that determines whether two circles intersect. This function uses a matrix approach with numpy to solve the problem.
+
+The function takes two arguments, `circle1` and `circle2`, which are expected to be instances of a `CircleNP` class. The `CircleNP` class is not shown in the provided code, but it is assumed to have attributes `x`, `y`, and `r`, representing the x-coordinate, y-coordinate, and radius of a circle, respectively.
+
+[source,python]
+----
+def do_circles_intersect(circle1: CircleNP, circle2: CircleNP) -> bool:
+----
+
+The function starts by converting the centers of the circles to numpy arrays. This is done by creating a numpy array with the x and y coordinates of the centers.
+
+[source,python]
+----
+center1 = np.array([circle1.x, circle1.y])
+center2 = np.array([circle2.x, circle2.y])
+----
+
+Next, the function calculates the norm (distance) between the two centers. This is done by subtracting the numpy array representing the center of `circle1` from the numpy array representing the center of `circle2`, and taking the norm of the result using `np.linalg.norm`.
+
+[source,python]
+----
+distance_matrix = np.linalg.norm(center1 - center2)
+----
+
+Finally, the function checks if this distance is less than or equal to the sum of the radii of the two circles. If it is, the function returns `True`, indicating that the circles intersect. If not, it returns `False`, indicating that the circles do not intersect.
+
+[source,python]
+----
+return distance_matrix <= (circle1.r + circle2.r)
+----
+
+The function also includes doctests, which are a form of Python documentation that allows for testing of the function directly within the docstring. These tests provide examples of how the function should behave with certain inputs.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a matrix approach using numpy to determine if two circles intersect. It calculates the Euclidean distance between the centers of the two circles and checks if this distance is less than or equal to the sum of the radii of the two circles.
+
+Advantages:
+1. **Efficiency:** The method is computationally efficient. It involves only a few arithmetic operations and a square root operation, which can be computed quickly. Numpy operations are usually faster than pure Python due to underlying optimizations.
+2. **Simplicity:** The method is straightforward and easy to understand. It directly applies the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii.
+3. **Built-in Support:** Python's numpy library has built-in support for arrays and vectorized operations, which makes this approach convenient to implement.
+
+Disadvantages:
+1. **Limited to Two Dimensions:** The method works for circles in a two-dimensional plane. It cannot be directly applied to spheres in three dimensions or to more complex shapes.
+2. **Does Not Provide Intersection Points:** The method only determines whether two circles intersect, but it does not provide the points of intersection. Additional calculations would be needed to find these points.
+3. **Does Not Handle Edge Cases:** The method does not handle edge cases where the circles have the same center or one circle is entirely within the other. These cases would need to be handled separately.
+4. **Dependency on Numpy:** This method relies on the numpy library. While numpy is a common library in Python, this does add an external dependency to your code.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function is O(1), which means it has constant time complexity. This is because the function performs a fixed number of operations that do not depend on the size of the input.
+
+The space complexity of the function is also O(1), or constant. This is because the function uses a fixed amount of space to store the numpy arrays and the calculated distance, regardless of the size of the input.
+
+==== Code Review
+
+Based on the provided code excerpts and the best practices for code review, here is the analysis:
+
+1. **Readability (Understandability):** The code is well-structured and easy to understand. The function and class names are descriptive and reflect their purpose. The code is broken down into small, manageable chunks which improves readability.
+
+2. **Maintainability:** The code is easy to extend and change. The separation of concerns is clear with different classes for different purposes (Circle, CircleNP, CircleBB).
+
+3. **Security:** The provided code does not seem to have any security implications as it does not deal with user input, network connections, or file operations.
+
+4. **Speed and Performance:** The code uses numpy for mathematical operations which is a highly optimized library for numerical operations in Python. This should provide good performance.
+
+5. **Documentation:** The code is well-documented with docstrings for classes and functions. The docstrings provide a clear explanation of the purpose and usage of the classes and functions.
+
+6. **Reinventing the Wheel:** The code leverages existing Python and numpy features and does not seem to reinvent the wheel.
+
+7. **Reliability:** The code does not have explicit error handling. However, the provided code does not seem to have operations that could raise exceptions, apart from potential numpy errors.
+
+8. **Scalability:** The provided code does not have scalability concerns as it operates on individual instances of circles.
+
+9. **Reusability:** The code is written in a reusable manner. The Circle, CircleNP, and CircleBB classes can be used in other parts of the program or in other programs.
+
+10. **Patterns:** The code adheres to Python's PEP 8 style guide and uses appropriate patterns such as class inheritance.
+
+11. **Test Coverage and Quality:** The tests cover various scenarios including edge cases. However, the tests could be improved by adding assertions to check the type of the returned value to ensure it's a boolean.
+
+12. **Fit for Purpose:** The code provides the intended functionality of checking if two circles intersect.
+
+13. **Notice What's Missing:** The code does not handle the case where the inputs are not valid (e.g., the radius of a circle is negative or the center coordinates are not numbers). Adding input validation could improve the code.
+
+14. **Zoom Out:** The overall approach of using classes to represent circles and a function to check if they intersect is appropriate and efficient. The use of numpy for mathematical operations is a good choice for performance.
+
+=== Solution 06
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_06.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect(circle1: Circle, circle2: Circle) -> bool:` that determines whether two circles intersect. The circles are represented by instances of the `Circle` class, which is defined in another module. Each `Circle` instance has attributes for the x and y coordinates of the circle's center and its radius.
+
+The function uses the matplotlib library to create a graphical representation of the two circles. It starts by creating a subplot using `fig, ax = plt.subplots()`. The x and y axes limits are then set to -25 and 25 respectively using `ax.set_xlim(-25, 25)` and `ax.set_ylim(-25, 25)`.
+
+The circles are added to the plot using the `ax.add_patch(pltCircle((circle1.x, circle1.y), circle1.r))` and `ax.add_patch(pltCircle((circle2.x, circle2.y), circle2.r))` commands. Here, `pltCircle` is a class from matplotlib that represents a circle on a plot.
+
+The function then checks if any point on the perimeter of the first circle lies within the second circle. This is done by iterating over the vertices of the path of the first circle with `for path in ax.patches[0].get_path().vertices:`. For each vertex, it checks if the second circle contains that point using `if ax.patches[1].contains_point(path):`. If such a point is found, the function sets a flag `intersect` to `True` and breaks the loop.
+
+After the check, the function displays the plot using `plt.show()`. Finally, it returns the `intersect` flag, which indicates whether the circles intersect (`True`) or not (`False`).
+
+==== Advantages & Disadvantages
+
+The method used in the code to determine if two circles intersect is a graphical approach using matplotlib. It involves plotting the two circles and checking if any point on the perimeter of the first circle lies within the second circle.
+
+Advantages:
+1. **Visual Representation:** The method provides a visual representation of the circles, which can be helpful for understanding the problem and the solution.
+2. **Intuitive:** The approach is intuitive as it mimics the way one might solve the problem visually.
+3. **Versatility:** The method can be extended to handle more complex shapes and scenarios, not just circles.
+
+Disadvantages:
+1. **Performance:** The method might not be the most efficient for large inputs or for use in performance-critical applications. The process of plotting the circles and checking each point can be computationally expensive.
+2. **Dependency on matplotlib:** The method relies on matplotlib, which is a large library and might not be available or desirable in all environments.
+3. **Accuracy:** The accuracy of the method depends on the number of points on the perimeter of the circle used in the calculation. If the number of points is too small, the method might not detect an intersection.
+4. **Not Purely Mathematical:** The solution is not purely mathematical and relies on the graphical representation to determine the intersection. Other methods using mathematical formulas might be more straightforward and efficient.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function in the `solution_06.py` file is O(1), which means it has constant time complexity. This is because the function performs a fixed number of operations that do not depend on the size of the input.
+
+The space complexity of the function is also O(1), or constant. This is because the function uses a fixed amount of space to store the matplotlib patches and the calculated distance, regardless of the size of the input.
+
+==== Code Review
+
+Based on the provided code excerpts and the best practices for code review, here is the analysis:
+
+1. **Readability (Understandability):** The code is generally easy to understand. It is broken down into small, manageable chunks, and uses descriptive variable and function names. The use of the `Circle` class makes the code more readable and easier to understand.
+
+2. **Maintainability:** The code is easy to extend and change. The separation of concerns is clear, with different classes and functions handling different parts of the problem.
+
+3. **Security:** The code does not seem to have any security implications or potential vulnerabilities. It does not handle sensitive data or interact with external systems.
+
+4. **Speed and Performance:** The code could be optimized for performance. The current approach of checking every point on the perimeter of the first circle for containment in the second circle can be computationally expensive. A mathematical approach could be more efficient.
+
+5. **Documentation:** The code is well-documented with docstrings explaining the purpose and usage of classes and functions. However, inline comments explaining the logic within the `do_circles_intersect` function could be improved.
+
+6. **Reinventing the Wheel:** The code leverages existing libraries like matplotlib and numpy effectively. There is no unnecessary complexity or duplication.
+
+7. **Reliability:** The code seems to be resilient to failures and handles errors gracefully. However, it does not explicitly handle potential errors such as invalid inputs.
+
+8. **Scalability:** The code should scale efficiently as it does not rely on any resources that would limit scalability.
+
+9. **Reusability:** The `Circle` class is reusable for other problems involving circles. The `do_circles_intersect` function is specific to this problem but is written in a way that it could be adapted for similar problems.
+
+10. **Patterns:** The code adheres to established Python patterns and style guides.
+
+11. **Test Coverage and Quality:** The tests cover a variety of scenarios, including edge cases. However, they could be improved by adding tests for invalid inputs and other error scenarios.
+
+12. **Fit for Purpose:** The code provides the intended functionality of determining whether two circles intersect.
+
+13. **Notice What's Missing:** The code does not handle potential errors such as invalid inputs (e.g., negative radii, non-integer inputs).
+
+14. **Zoom Out:** The overall approach of using a graphical method to determine circle intersection is appropriate for this problem. However, a mathematical approach could be more efficient and would not require the matplotlib library.
+
+=== Solution 07
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_07.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect(circle1: Circle, circle2: Circle) -> bool:` that determines whether two circles intersect. The circles are represented as instances of the `Circle` class, which is defined in the `python_monograph.helpers.circle` module. Each `Circle` instance has `x` and `y` attributes representing the coordinates of the circle's center, and an `r` attribute representing the circle's radius.
+
+The function begins by calculating the differences in the `x` and `y` coordinates of the two circles' centers: `dx, dy = circle2.x - circle1.x, circle2.y - circle1.y`. These differences are then used to calculate the Euclidean distance `d` between the centers of the two circles using the formula `d = math.sqrt(dx ** 2 + dy ** 2)`.
+
+The function then checks whether the circles intersect based on the calculated distance and the radii of the circles. If the distance `d` is greater than the sum of the radii (`circle1.r + circle2.r`), the function returns `False`, indicating that the circles do not intersect because they are too far apart. If the distance `d` is less than the absolute difference of the radii (`abs(circle1.r - circle2.r)`), the function also returns `False`, indicating that one circle is completely inside the other and they do not intersect. If the distance `d` is zero and the radii are equal, the function again returns `False`, indicating that the circles are identical and do not intersect in the conventional sense.
+
+If none of these conditions are met, the function returns `True`, indicating that the circles intersect. This is based on the geometric principle that two circles intersect if and only if the distance between their centers is less than or equal to the sum of their radii, and more than or equal to the absolute difference of their radii.
+
+==== Advantages & Disadvantages
+
+The method used in the code to determine if two circles intersect has both advantages and disadvantages.
+
+Advantages:
+1. **Simplicity**: The method is straightforward and easy to understand. It uses basic geometric principles and mathematical operations, making it accessible even to those with a basic understanding of geometry and programming.
+2. **Efficiency**: The method is computationally efficient. It involves a few arithmetic operations and a square root operation, all of which have constant time complexity. This makes the method suitable for applications where performance is a concern.
+3. **Versatility**: The method works for any two circles, regardless of their size, position, or whether one is inside the other. It also works for circles that are identical (i.e., have the same center and radius).
+
+Disadvantages:
+1. **Limited Scope**: The method only determines whether two circles intersect. It does not provide additional information such as the points of intersection or the area of intersection. If such information is required, additional computations would be necessary.
+2. **Floating Point Precision**: The method involves the calculation of a square root and the comparison of floating point numbers. Due to the way floating point numbers are represented in computers, this could lead to precision errors in some cases. However, such errors are usually negligible for practical purposes.
+3. **No Validation**: The method does not validate its inputs. If the inputs are not instances of the `Circle` class, or if they do not have the expected attributes (`x`, `y`, `r`), the method will raise an error. It would be more robust if it included some form of input validation.
+
+==== Complexity Analysis
+
+The time complexity of the provided code is O(1), which means it operates in constant time. This is because the operations performed by the function (calculations and comparisons) do not depend on the size of the input. They are executed a fixed number of times regardless of the input size.
+
+The space complexity of the code is also O(1), which means it uses a constant amount of space. The function only uses a few variables that store integers and floats, and this does not change with the size of the input.
+
+==== Code Review
+
+Let's conduct a code review of the provided code `src/python_monograph/check_if_two_circles_intersect/solution_07.py` using the best practices you've mentioned:
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand. It uses descriptive variable names (`dx`, `dy`, `d`) and a clear function name (`do_circles_intersect`). The logic is broken down into small, manageable chunks with clear comments explaining each step.
+
+2. **Maintainability**: The code is easy to extend and change. The function `do_circles_intersect` is independent and doesn't rely on any external state or configuration.
+
+3. **Security**: As this is a mathematical function with no external dependencies or data handling, there are no apparent security concerns.
+
+4. **Speed and Performance**: The function is efficient, with a time complexity of O(1). It performs a fixed number of mathematical operations, which are generally fast.
+
+5. **Documentation**: The function is well-documented with a docstring that explains its purpose, parameters, and return value. There are also inline comments that explain the logic of the function.
+
+6. **Reinventing the Wheel**: The function uses built-in Python functions and doesn't reinvent any existing functionality.
+
+7. **Reliability**: The function handles different scenarios of circle intersection, including edge cases. However, it doesn't validate its inputs, which could lead to errors if the inputs are not instances of the `Circle` class or if they don't have the expected attributes (`x`, `y`, `r`).
+
+8. **Scalability**: As a mathematical function, scalability is not a concern here.
+
+9. **Reusability**: The function is general and can be reused in different contexts where circle intersection needs to be determined.
+
+10. **Patterns**: The code adheres to Python's PEP 8 style guide and doesn't seem to violate any common Python patterns.
+
+11. **Test Coverage and Quality**: The test coverage seems to be comprehensive, covering various scenarios of circle intersection. However, the tests are in a separate file (`src/python_monograph/check_if_two_circles_intersect/tests/test_solution_07.py`), and it would be necessary to review that file to fully assess the test coverage and quality.
+
+12. **Fit for Purpose**: The function provides the intended functionality of determining whether two circles intersect.
+
+13. **Notice What's Missing**: As mentioned earlier, the function doesn't validate its inputs. It could be improved by adding input validation or error handling.
+
+14. **Zoom Out**: The overall approach of the function, which is based on the geometric principle of circle intersection, is appropriate and efficient.
+
+In conclusion, the code is generally well-written and adheres to many best practices. The main area for improvement is input validation and error handling.
+
+=== Solution 08
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_08.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect(circle1: CircleBB, circle2: CircleBB) -> bool:` that determines whether two circles intersect. The circles are represented by instances of the `CircleBB` class, which is not defined in the provided code but is assumed to have attributes for the center coordinates (`x`, `y`), radius (`r`), and a bounding box (`bounding_box`).
+
+The function first retrieves the bounding boxes of the two circles with `x1, y1, x2, y2 = circle1.bounding_box` and `x3, y3, x4, y4 = circle2.bounding_box`. The bounding box of a circle is the smallest rectangle that can enclose the circle, and it is represented by a tuple of four integers indicating the coordinates of the top-left and bottom-right corners of the rectangle.
+
+The function then checks if the bounding boxes of the two circles intersect. If they do not intersect, the function immediately returns `False`, as the circles cannot intersect if their bounding boxes do not.
+
+If the bounding boxes do intersect, the function calculates the Euclidean distance between the centers of the two circles with `dx, dy = circle2.x - circle1.x, circle2.y - circle1.y` and `d = math.sqrt(dx ** 2 + dy ** 2)`.
+
+Finally, the function checks if the distance `d` is less than or equal to the sum of the radii of the two circles. If it is, the function returns `True`, indicating that the circles intersect. If the distance is greater than the sum of the radii, the function returns `False`, indicating that the circles do not intersect. There are also checks for the edge cases where one circle is completely inside the other, and where the two circles have the same center and radius.
+
+==== Advantages & Disadvantages
+
+The method used in the code to determine if two circles intersect has several advantages and disadvantages:
+
+Advantages:
+1. **Efficiency**: The method first checks if the bounding boxes of the two circles intersect. This is a quick operation that can immediately determine that the circles do not intersect if their bounding boxes do not intersect. This can save the more computationally expensive calculation of the distance between the centers of the circles.
+2. **Accuracy**: The method accurately determines if two circles intersect by calculating the distance between their centers and comparing it to the sum of their radii. This is a mathematically sound approach that works for all cases, including when one circle is completely inside the other or when the circles touch at a single point.
+3. **Simplicity**: The method is straightforward and easy to understand. It does not require any advanced mathematical concepts beyond basic geometry and the Pythagorean theorem.
+
+Disadvantages:
+1. **Assumption of CircleBB Class**: The method assumes that the circles are instances of the `CircleBB` class, which has a `bounding_box` attribute. This may not always be the case, and the method would need to be modified to work with other representations of circles.
+2. **Limited to 2D**: The method only works for circles in a 2D plane. It would need to be extended to handle spheres in 3D space.
+3. **No Handling of Edge Cases**: The method does not handle the edge case where the two circles have the same center and radius. In this case, the circles do intersect, but the method would return `False`.
+
+==== Complexity Analysis
+
+The time complexity of the provided code is O(1), which means it operates in constant time. This is because the operations performed by the function (calculating the bounding boxes, checking if they intersect, calculating the distance between the centers of the circles, and checking if the circles intersect) do not depend on the size of the input. They are performed a fixed number of times regardless of the input size.
+
+The space complexity of the function is also O(1), which means it uses a constant amount of space. The function only uses a fixed number of variables and does not use any data structures that grow with the size of the input.
+
+==== Code Review
+
+Based on the provided code snippets and the best practices for code review, here's the analysis:
+
+1. **Readability (Understandability)**: The code is well-structured and easy to understand. The variable and function names are descriptive, which makes the code self-explanatory. The use of classes to represent circles and their properties is a good practice.
+
+2. **Maintainability**: The code is modular and each function has a single responsibility, which makes it easy to maintain and extend. The use of classes also allows for easy addition of new properties or methods if needed.
+
+3. **Security**: The provided code does not seem to have any security implications as it does not deal with user input, file operations, or network operations.
+
+4. **Speed and Performance**: The algorithm used to determine if two circles intersect is efficient. It first checks if the bounding boxes of the circles intersect, which is a quick operation, before calculating the distance between the centers of the circles.
+
+5. **Documentation**: The code is well-documented with docstrings for classes and functions. The docstrings provide a clear explanation of what each class and function does, their parameters, and return values.
+
+6. **Reinventing the Wheel**: The code makes good use of Python's built-in features and does not reinvent the wheel. The use of the `math` library for square root calculation is a good practice.
+
+7. **Reliability**: The code seems to handle edge cases well, such as when the circles have the same center or when one circle is entirely within the other. However, it's important to ensure that these edge cases are covered in the tests.
+
+8. **Scalability**: The provided code is not related to scalability as it deals with a computational geometry problem that operates on a fixed number of inputs.
+
+9. **Reusability**: The `CircleBB` class can be reused in other parts of the code that deal with circles and their properties.
+
+10. **Patterns**: The code adheres to Python's PEP 8 style guide and uses appropriate patterns such as classes for representing complex data.
+
+11. **Test Coverage and Quality**: The tests cover various scenarios including edge cases. However, it's important to ensure that all possible edge cases are covered in the tests.
+
+12. **Fit for Purpose**: The code provides the intended functionality of checking if two circles intersect.
+
+13. **Notice What's Missing**: The code does not handle the case where the circles have the same center and radius. In this case, the circles do intersect, but the function would return `False`.
+
+14. **Zoom Out**: The overall approach of first checking if the bounding boxes of the circles intersect before calculating the distance between the centers of the circles is efficient and appropriate for this problem.
+
+=== Solution 09
+
+==== Implementation
+
+[source,python,linenums]
+----
+include::./solution_09.py[lines=21..]
+----
+
+==== Explanation
+
+The provided Python code defines a function `do_circles_intersect` that determines whether two circles intersect using a Monte Carlo approach. The function takes three arguments: `circle1`, `circle2`, and `num_samples`. The first two arguments are instances of the `Circle` class, each representing a circle with its center coordinates (x, y) and radius. The third argument, `num_samples`, is an optional integer that defaults to 10000 and represents the number of random points to sample.
+
+The function begins by initializing a counter `count` to zero. This counter will keep track of the number of random points that fall within both circles.
+
+[source,python]
+----
+count = 0
+----
+
+Next, the function enters a loop that runs `num_samples` times. In each iteration of the loop, a random point within the bounding box of the two circles is generated. The bounding box is the smallest rectangle that can enclose both circles, and its dimensions are determined by the minimum and maximum x and y coordinates of the two circles.
+
+[source,python]
+----
+x = random.uniform(min(circle1.x - circle1.r, circle2.x - circle2.r), max(circle1.x + circle1.r, circle2.x + circle2.r))
+y = random.uniform(min(circle1.y - circle1.r, circle2.y - circle2.r), max(circle1.y + circle1.r, circle2.y + circle2.r))
+----
+
+The function then checks if the generated point is within both circles. This is done by calculating the Euclidean distance from the point to the center of each circle and checking if it is less than or equal to the radius of the circle. If the point is within both circles, the counter `count` is incremented by one.
+
+[source,python]
+----
+if math.sqrt((x - circle1.x) ** 2 + (y - circle1.y) ** 2) <= circle1.r and math.sqrt(
+        (x - circle2.x) ** 2 + (y - circle2.y) ** 2) <= circle2.r:
+    count += 1
+----
+
+Finally, after all `num_samples` points have been generated and checked, the function returns `True` if the proportion of points within both circles is greater than 0, and `False` otherwise. This is based on the principle that if two circles intersect, a certain proportion of randomly generated points within their bounding box should fall within both circles.
+
+[source,python]
+----
+return count / num_samples > 0
+----
+
+In summary, this function uses a Monte Carlo method to estimate whether two circles intersect by generating a large number of random points and checking what proportion of them fall within both circles.
+
+==== Advantages & Disadvantages
+
+The method used in the code is a Monte Carlo approach to determine if two circles intersect. This approach involves generating a large number of random points within the bounding box of the two circles and checking what proportion of them fall within both circles.
+
+Advantages:
+1. **Simplicity**: The Monte Carlo method is relatively simple to understand and implement. It doesn't require complex mathematical calculations or advanced data structures.
+2. **Flexibility**: The Monte Carlo method can be applied to a wide range of problems, not just geometric ones. It's a general-purpose method that works by simulating random processes and observing the outcomes.
+3. **Scalability**: The accuracy of the Monte Carlo method improves as the number of samples increases. This means that if you need a more accurate result, you can simply increase the number of random points generated.
+
+Disadvantages:
+1. **Accuracy**: The accuracy of the Monte Carlo method is dependent on the number of samples. With a small number of samples, the result may not be accurate. This method provides an approximation, not an exact answer.
+2. **Efficiency**: Generating a large number of random points and checking if they fall within the circles can be computationally expensive, especially for large numbers of samples or for very large circles.
+3. **Determinism**: The Monte Carlo method is non-deterministic, meaning it can produce different results each time it's run due to the randomness involved in generating points. This might not be desirable in some cases where consistent results are required.
+
+==== Complexity Analysis
+
+The time complexity of the `do_circles_intersect` function in the `solution_09.py` file is O(n), where n is the number of samples (`num_samples`). This is because the function runs a loop `num_samples` times, and within each iteration, it performs a constant amount of work (generating a random point and checking if it falls within both circles).
+
+The space complexity of the function is O(1), which means it uses a constant amount of space. The function only uses a fixed number of variables (`count`, `x`, `y`) and does not use any data structures that grow with the size of the input.
+
+==== Code Review
+
+Based on the provided code and the best practices for code review, here is the analysis:
+
+1. **Readability (Understandability)**: The code is quite readable and easy to understand. The variable and function names are descriptive and meaningful. The logic is broken down into small, manageable chunks.
+
+2. **Maintainability**: The code is easy to maintain. The function `do_circles_intersect` is independent and doesn't rely on external state or configurations. The separation of concerns is clear.
+
+3. **Security**: The code doesn't seem to have any security implications as it doesn't deal with user input, file operations, or network operations.
+
+4. **Speed and Performance**: The code uses a Monte Carlo method which can be computationally expensive for large numbers of samples. However, this is inherent to the method itself and not a result of inefficient coding.
+
+5. **Documentation**: The code is well-documented with docstrings explaining the purpose and usage of the function. However, inline comments explaining the logic within the function could be added for better clarity.
+
+6. **Reinventing the Wheel**: The code makes good use of Python's built-in libraries and doesn't reinvent the wheel.
+
+7. **Reliability**: The code seems to be reliable and doesn't have any apparent error scenarios that aren't handled.
+
+8. **Scalability**: The code should scale well for larger inputs as the time complexity is linear with respect to the number of samples.
+
+9. **Reusability**: The function `do_circles_intersect` is reusable and can be used in any context where it's necessary to determine if two circles intersect.
+
+10. **Patterns**: The code adheres to common Python patterns and style guides.
+
+11. **Test Coverage and Quality**: The tests cover a variety of scenarios including edge cases. However, one test case is marked as failing and needs to be fixed or removed.
+
+12. **Fit for Purpose**: The code provides the intended functionality of determining if two circles intersect.
+
+13. **Notice What's Missing**: The code doesn't validate the inputs to the `do_circles_intersect` function. It assumes that the inputs are valid Circle objects. It might be a good idea to add some input validation.
+
+14. **Zoom Out**: The overall approach of using a Monte Carlo method to determine if two circles intersect is appropriate and efficient for this problem.
+
+In conclusion, the code is well-written and adheres to most of the best practices. The main areas for improvement are adding inline comments and input validation, and fixing or removing the failing test case.
+
+== Tests
+
+[.lead]
+When developing test strategies for the "Check if Circles Intersect" problem, consider the following:
+
+1. **Positive Test Cases:** These are test cases where the circles do intersect. You can create test cases where the circles intersect at one point (touching), at two points, or one circle is entirely within the other.
+
+2. **Negative Test Cases:** These are test cases where the circles do not intersect. You can create test cases where the circles are far apart, or they are close but do not touch or intersect.
+
+3. **Edge Cases:** These are test cases that test the boundaries of the problem constraints. For example, you can create test cases where the circles have the same center (they intersect regardless of their radii), or when one circle is entirely within the other (they intersect if the distance between the centers plus the radius of the smaller circle is greater than or equal to the radius of the larger circle).
+
+4. **Large Input Test Cases:** These are test cases with a large number of circles. This can help test the efficiency and performance of your solution.
+
+5. **Random Test Cases:** These are test cases where the centers and radii of the circles are randomly generated. This can help ensure that your solution works for a wide range of inputs.
+
+6. **Invalid Input Test Cases:** These are test cases where the inputs do not meet the problem constraints. For example, you can create test cases where the coordinates or the radius are outside the given range. Your solution should be able to handle such inputs gracefully.
+
+Remember, the goal of testing is to ensure that your solution works correctly under a variety of scenarios and edge cases. It's important to have a comprehensive set of test cases that cover all possible scenarios.
+
+===  Test Solution 00
+
+[source,python,linenums]
+----
+include::./tests/test_solution_00.py[lines=21..]
+----
+
+
+===  Test Solution 01
+
+[source,python,linenums]
+----
+include::./tests/test_solution_01.py[lines=21..]
+----
+
+===  Test Solution 02
+
+[source,python,linenums]
+----
+include::./tests/test_solution_02.py[lines=21..]
+----
+
+===  Test Solution 03
+
+[source,python,linenums]
+----
+include::./tests/test_solution_03.py[lines=21..]
+----
+
+===  Test Solution 04
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[lines=21..]
+----
+
+===  Test Solution 05
+
+[source,python,linenums]
+----
+include::./tests/test_solution_04.py[lines=21..]
+----
+
+===  Test Solution 06
+
+[source,python,linenums]
+----
+include::./tests/test_solution_06.py[lines=21..]
+----
+
+===  Test Solution 07
+
+[source,python,linenums]
+----
+include::./tests/test_solution_07.py[lines=21..]
+----
+
+===  Test Solution 08
+
+[source,python,linenums]
+----
+include::./tests/test_solution_08.py[lines=21..]
+----
+
+===  Test Solution 09
+
+[source,python,linenums]
+----
+include::./tests/test_solution_09.py[lines=21..]
+----

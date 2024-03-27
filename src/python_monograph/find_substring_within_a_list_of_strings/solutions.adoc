@@ -18,7 +18,7 @@
 :scriptsdir: ../../../js
 :stylesheet: styles.css
 :description: Find a Substring Within a List of Strings Solutions
-:keywords: solution, python
+:keywords: solution, python, substring, list of strings, trie, suffix tree, suffix array, string matching, algorithms, data structures, performance optimization
 
 = {description}
 

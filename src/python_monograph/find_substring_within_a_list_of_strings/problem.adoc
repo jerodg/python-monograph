@@ -18,7 +18,7 @@
 :scriptsdir: ../../../js
 :stylesheet: styles.css
 :description: Find a Substring Within a List of Strings Problem
-:keywords: problem, python
+:keywords: problem, python, substring, list, strings, search, find, index, algorithm, programming, coding, interview, practice, solution, examples, constraints, best practices, common mistakes, follow-up, related topics, references
 
 = {description}
 

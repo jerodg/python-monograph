@@ -1,0 +1,226 @@
+:author: Jerod Gawne
+:email: jerodg@pm.me
+:docdate: 21 July 2022
+:revdate: {docdatetime}
+:doctype: book
+:experimental:
+:sectanchors: true
+:sectlinks: true
+:sectnumlevels: 5
+:sectids:
+:sectnums: all
+:toc: left
+:toclevels: 5
+:icons: font
+:imagesdir: ../../../images
+:iconsdir: ../../../icons
+:stylesdir: ../../../styles
+:scriptsdir: ../../../js
+:stylesheet: styles.css
+:description: Check if Two Circles Intersect Problem
+:keywords: problem, python
+
+= {description}
+
+[.lead]
+In the field of computational geometry, one common problem is determining whether two circles intersect each other. This problem is known as the "Check if Circles Intersect" problem.
+
+Given two circles, each defined by its center coordinates (x, y) and its radius, the task is to determine whether these two circles intersect each other or not.
+
+The problem can be solved by calculating the distance between the centers of the two circles. If the distance is less than or equal to the sum of the radii of the two circles, then the circles intersect. If the distance is greater than the sum of the radii, then the circles do not intersect.
+
+The distance between two points (x1, y1) and (x2, y2) can be calculated using the Euclidean distance formula:
+
+[source,python,linenums]
+----
+distance = sqrt((x2 - x1)^2 + (y2 - y1)^2)
+----
+
+The circles are defined by their center coordinates and radius as follows:
+
+- Circle 1: Center (x1, y1), Radius r1
+- Circle 2: Center (x2, y2), Radius r2
+
+The circles intersect if the following condition is true:
+
+[source,python,linenums]
+----
+distance <= r1 + r2
+----
+
+This problem is a fundamental concept in computational geometry and has applications in various fields such as computer graphics, physics simulations, and geographical information systems.
+
+== Constraints
+
+Here are some constraints that could be applicable to the "Check if Circles Intersect" problem:
+
+1. The coordinates of the center of the circles (x, y) are integers where -10^3 <= x, y <= 10^3.
+2. The radius of the circles (r) is an integer where 1 <= r <= 10^3.
+3. The circles are not necessarily distinct. They could have the same center and radius.
+4. The circles are in a 2D plane.
+5. The output should be a boolean value indicating whether the circles intersect or not.
+
+== Examples
+
+=== Example 0
+
+.Input
+[source,python,linenums]
+----
+circle1 = {"x": 0, "y": 0, "r": 5}
+circle2 = {"x": 0, "y": 0, "r": 5}
+----
+
+.Output
+[source,python,linenums]
+----
+True
+----
+
+=== Example 1
+
+.Input
+[source,python,linenums]
+----
+circle1 = {"x": 0, "y": 0, "r": 5}
+circle2 = {"x": 4, "y": 0, "r": 3}
+----
+
+.Output
+[source,python,linenums]
+----
+True
+----
+
+=== Example 2
+
+.Input
+[source,python,linenums]
+----
+circle1 = {"x": 0, "y": 0, "r": 5}
+circle2 = {"x": 10, "y": 0, "r": 3}
+----
+
+.Output
+[source,python,linenums]
+----
+False
+----
+
+=== Example 3
+
+.Input
+[source,python,linenums]
+----
+circle1 = {"x": 0, "y": 0, "r": 5}
+circle2 = {"x": 4, "y": 4, "r": 5}
+----
+
+.Output
+[source,python,linenums]
+----
+True
+----
+
+=== Example 4
+
+.Input
+[source,python,linenums]
+----
+circle1 = {"x": 0, "y": 0, "r": 5}
+circle2 = {"x": 10, "y": 10, "r": 5}
+----
+
+.Output
+[source,python,linenums]
+----
+False
+----
+
+== Use-Cases
+
+The "Check if Circles Intersect" problem has several real-world applications across various fields. Here are a few examples:
+
+1. **Computer Graphics and Game Development:** In computer graphics and game development, collision detection is a crucial aspect. Determining whether two objects (represented as circles) intersect can help in managing interactions or collisions between game elements.
+
+2. **Geographical Information Systems (GIS):** In GIS, this problem can be used to determine if two geographical areas (represented as circles) overlap. This can be useful in various scenarios, such as planning the coverage area of cellular networks or determining the impact area of natural disasters.
+
+3. **Physics Simulations:** In physics simulations, the intersection of circles can be used to simulate the behavior of particles or objects in motion. When two particles collide, they can either merge, bounce off each other, or exert forces on each other, depending on the physics rules applied.
+
+4. **Robotics:** In robotics, this problem can be used in path planning and obstacle avoidance. By treating robots and obstacles as circles, one can determine if a given path will result in a collision.
+
+5. **Astronomy:** In astronomy, this problem can be used to determine whether two celestial bodies (like stars or planets) will intersect or collide based on their projected paths.
+
+6. **Medical Imaging:** In medical imaging, determining the intersection of circles can be used in techniques like tomography where the intersection of scanning paths can help construct a 3D image of the body.
+
+These are just a few examples, and the applications can extend to any field where spatial relationships and interactions between objects are important.
+
+== Common Mistakes
+
+When solving the "Check if Circles Intersect" problem, there are several common mistakes that developers often make:
+
+1. **Incorrect Distance Calculation:** The most common mistake is incorrectly calculating the distance between the centers of the two circles. It's important to use the correct formula for Euclidean distance, which is `sqrt((x2 - x1)^2 + (y2 - y1)^2)`.
+
+2. **Misunderstanding the Condition for Intersection:** Another common mistake is misunderstanding the condition for when two circles intersect. Two circles intersect if the distance between their centers is less than or equal to the sum of their radii. Some developers mistakenly believe that the circles intersect only when the distance is less than the sum of the radii, forgetting the case where the distance is equal to the sum of the radii (i.e., the circles are touching at one point).
+
+3. **Not Considering Edge Cases:** It's important to consider edge cases, such as when the two circles have the same center (they intersect regardless of their radii) or when one circle is entirely within the other (they intersect if the distance between the centers plus the radius of the smaller circle is greater than or equal to the radius of the larger circle).
+
+4. **Ignoring the Constraints:** The constraints of the problem specify the range of the coordinates and the radii of the circles. Ignoring these constraints can lead to incorrect solutions or runtime errors.
+
+5. **Incorrect Data Types:** The problem specifies that the output should be a boolean value indicating whether the circles intersect or not. Returning other data types, such as strings or integers, would be incorrect.
+
+6. **Not Handling Negative Values:** The coordinates of the center of the circles can be negative. Not handling negative values correctly can lead to incorrect results.
+
+== Best Practices
+
+When solving the "Check if Circles Intersect" problem, here are some best practices to consider:
+
+1. **Use Appropriate Data Structures:** Represent the circles using appropriate data structures. A dictionary or a custom class can be used to store the center coordinates and radius of each circle.
+
+2. **Use Math Libraries:** Use built-in math libraries for operations like square root and power. In Python, you can use the `math` library.
+
+3. **Write Modular Code:** Encapsulate the logic for calculating the distance between two points and checking if two circles intersect into separate functions. This makes the code more modular, readable, and reusable.
+
+4. **Validate Inputs:** Always validate the inputs before processing. Check if the coordinates and radius are within the given constraints.
+
+5. **Use Precise Data Types:** Since the problem involves mathematical calculations, use data types that can handle decimal values precisely, such as `float` in Python.
+
+6. **Handle Edge Cases:** Ensure your solution handles edge cases, such as when the circles have the same center or when one circle is entirely within the other.
+
+7. **Write Clear Comments:** Write clear and concise comments explaining the key steps, especially the mathematical calculations involved. This will make your code easier to understand and maintain.
+
+8. **Test Your Code:** Test your code with various test cases, including edge cases, to ensure it works correctly in all scenarios.
+
+== Follow-up
+
+After solving the "Check if Circles Intersect" problem, you might want to consider the following follow-up activities:
+
+1. **Optimize the Solution:** Try to optimize your solution further. Although the problem is relatively simple and doesn't have much room for optimization, it's always a good practice to consider the efficiency of your code.
+
+2. **Extend the Problem:** Extend the problem to three dimensions and solve the problem for spheres. This will involve a bit more complexity as you'll need to work with three coordinates (x, y, z) instead of two.
+
+3. **Implement in Different Programming Languages:** Try implementing the solution in different programming languages. This will help you understand the nuances of each language.
+
+4. **Write More Test Cases:** Write additional test cases to cover more scenarios. This will help ensure your solution works for all edge cases.
+
+5. **Research Related Problems:** Look for and try to solve related problems. For example, you could work on problems that involve determining the points of intersection, or calculating the area of intersection.
+
+6. **Understand Real-world Applications:** As discussed, this problem has many real-world applications. Try to understand how this problem and its solution can be applied in fields like computer graphics, geographical information systems (GIS), and physics simulations.
+
+== Related Topics
+
+Related topics to the "Check if Circles Intersect" problem include:
+
+1. **Computational Geometry:** This is the study of algorithms which can be stated in terms of geometry. The problem of checking if two circles intersect is a fundamental problem in this field. You can learn more about it on [Wikipedia](https://en.wikipedia.org/wiki/Computational_geometry).
+
+2. **Collision Detection:** This is the computational problem of detecting the intersection of two or more objects. It is a key problem in fields like computer graphics, game development, robotics, etc. More details can be found on [Wikipedia](https://en.wikipedia.org/wiki/Collision_detection).
+
+3. **Euclidean Distance:** This is a measure of the true straight line distance between two points in Euclidean space. It is used in the solution of this problem to calculate the distance between the centers of the two circles. More information can be found on [Wikipedia](https://en.wikipedia.org/wiki/Euclidean_distance).
+
+4. **Circle Geometry:** Understanding the properties of circles and their equations is crucial to solving this problem. You can learn more about circle geometry on [Wikipedia](https://en.wikipedia.org/wiki/Circle#Equations).
+
+5. **Python Programming:** The problem is solved using Python programming. If you're not familiar with Python or need to brush up your skills, you can refer to the [Python documentation](https://docs.python.org/3/).
+
+6. **Mathematics Libraries in Python:** The solution to this problem makes use of mathematical functions like square root which are available in Python's math library. You can learn more about it in the [Python documentation](https://docs.python.org/3/library/math.html).
+
+== References

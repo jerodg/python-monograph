@@ -9,6 +9,7 @@ dependencies = [
     "more-itertools>=10.2.0",
     "toolz>=0.12.1",
     "cytoolz>=0.12.3",
+    "matplotlib>=3.8.3",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
