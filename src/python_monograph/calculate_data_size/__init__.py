@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Python Monograph:
+"""
+Python Monograph -> Calculate Data Size -> Init
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 
@@ -16,4 +16,5 @@ SSPL for more details.
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 You should have received a copy of the SSPL along with this program.
-If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
+If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
+"""

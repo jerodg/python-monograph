@@ -93,20 +93,13 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
         '1 KiB'
     """
     # Define the suffixes for each notation
-    suffixes = {
-        'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-        'binary':  ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-        'bits':    ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
-        'nibbles': ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']
-    }
+    suffixes = {'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+            'binary'     : ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+            'bits'       : ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+            'nibbles'    : ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']}
 
     # Define the base for each notation
-    bases = {
-        'decimal': 1000,
-        'binary':  1024,
-        'bits':    1000,
-        'nibbles': 1000
-    }
+    bases = {'decimal': 1000, 'binary': 1024, 'bits': 1000, 'nibbles': 1000}
 
     # Convert bytes to bits or nibbles if necessary
     if notation == 'bits':
@@ -124,7 +117,8 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
         Recursive function to calculate the index of the suffix to use.
 
         This function takes a size and an index, and returns the index of the suffix to use in the appropriate notation.
-        The function uses recursion to divide the size by the base until it's less than the base, incrementing the index at each step.
+        The function uses recursion to divide the size by the base until it's less than the base, incrementing the index at each 
+        step.
 
         Args:
             size (float): The size in the appropriate unit (bytes, bits, or nibbles).
@@ -149,7 +143,8 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
         if size < base or index == len(suffix_list) - 1:
             return index
         else:
-            # Otherwise, divide the size by the base and increment the index, and call the function again with the new size and index
+            # Otherwise, divide the size by the base and increment the index, and call the function again with the new size and
+            # index
             return calculate_suffix_index(size / base, index + 1)
 
     # Calculate the index of the suffix to use using recursion

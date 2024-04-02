@@ -26,7 +26,8 @@ class Command(ABC):
     """
     The Command interface declares a method for executing a command.
 
-    This class is an abstract base class (ABC) that defines a common interface for all commands. It declares an abstract method `execute` that all concrete command classes must implement.
+    This class is an abstract base class (ABC) that defines a common interface for all commands. It declares an abstract method
+    `execute` that all concrete command classes must implement.
 
     Methods:
         execute: Execute the command.
@@ -44,7 +45,8 @@ class Command(ABC):
         """
         Execute the command.
 
-        This is an abstract method that must be implemented by all concrete command classes. It takes a size in bytes and returns a string representing the size in the appropriate notation.
+        This is an abstract method that must be implemented by all concrete command classes. It takes a size in bytes and returns
+        a string representing the size in the appropriate notation.
 
         Args:
             size (int): The size in bytes.
@@ -62,7 +64,8 @@ class DecimalCommand(Command):
     """
     The DecimalCommand class for calculating data size in decimal notation.
 
-    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data size in decimal notation.
+    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data
+    size in decimal notation.
 
     Methods:
         execute: Calculate the data size in decimal notation.
@@ -85,7 +88,10 @@ class DecimalCommand(Command):
         """
         Calculate the data size in decimal notation.
 
-        This method takes a size in bytes and returns a string representing the size in decimal notation. It uses a list of suffixes and the base-10 logarithm of the size to calculate the index of the appropriate suffix. The size is then divided by 1000 to the power of the index to convert it to the appropriate unit, and the result is formatted as a number with 2 decimal places, followed by the suffix.
+        This method takes a size in bytes and returns a string representing the size in decimal notation. It uses a list of
+        suffixes and the base-10 logarithm of the size to calculate the index of the appropriate suffix. The size is then divided
+        by 1000 to the power of the index to convert it to the appropriate unit, and the result is formatted as a number with 2
+        decimal places, followed by the suffix.
 
         Args:
             size (int): The size in bytes.
@@ -119,7 +125,8 @@ class BinaryCommand(Command):
     """
     The BinaryCommand class for calculating data size in binary notation.
 
-    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data size in binary notation.
+    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data
+    size in binary notation.
 
     Methods:
         execute: Calculate the data size in binary notation.
@@ -142,7 +149,10 @@ class BinaryCommand(Command):
         """
         Calculate the data size in binary notation.
 
-        This method takes a size in bytes and returns a string representing the size in binary notation. It uses a list of suffixes and the base-2 logarithm of the size to calculate the index of the appropriate suffix. The size is then divided by 1024 to the power of the index to convert it to the appropriate unit, and the result is formatted as a number with 2 decimal places, followed by the suffix.
+        This method takes a size in bytes and returns a string representing the size in binary notation. It uses a list of
+        suffixes and the base-2 logarithm of the size to calculate the index of the appropriate suffix. The size is then divided
+        by 1024 to the power of the index to convert it to the appropriate unit, and the result is formatted as a number with 2
+        decimal places, followed by the suffix.
 
         Args:
             size (int): The size in bytes.
@@ -177,7 +187,8 @@ class BitsCommand(Command):
     """
     The BitsCommand class for calculating data size in bits notation.
 
-    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data size in bits notation.
+    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data
+    size in bits notation.
 
     Methods:
         execute: Calculate the data size in bits notation.
@@ -200,7 +211,10 @@ class BitsCommand(Command):
         """
         Calculate the data size in bits notation.
 
-        This method takes a size in bytes and returns a string representing the size in bits notation. It first converts the size from bytes to bits by multiplying by 8. It then uses a list of suffixes and the base-2 logarithm of the size in bits to calculate the index of the appropriate suffix. The size in bits is then divided by 1000 to the power of the index to convert it to the appropriate unit, and the result is formatted as a number with 2 decimal places, followed by the suffix.
+        This method takes a size in bytes and returns a string representing the size in bits notation. It first converts the size
+        from bytes to bits by multiplying by 8. It then uses a list of suffixes and the base-2 logarithm of the size in bits to
+        calculate the index of the appropriate suffix. The size in bits is then divided by 1000 to the power of the index to
+        convert it to the appropriate unit, and the result is formatted as a number with 2 decimal places, followed by the suffix.
 
         Args:
             size (int): The size in bytes.
@@ -236,7 +250,8 @@ class NibblesCommand(Command):
     """
     The NibblesCommand class for calculating data size in nibbles notation.
 
-    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data size in nibbles notation.
+    This class is a concrete command class that implements the `execute` method of the Command interface. It calculates the data
+    size in nibbles notation.
 
     Methods:
         execute: Calculate the data size in nibbles notation.
@@ -259,7 +274,11 @@ class NibblesCommand(Command):
         """
         Calculate the data size in nibbles notation.
 
-        This method takes a size in bytes and returns a string representing the size in nibbles notation. It first converts the size from bytes to nibbles by multiplying by 2. It then uses a list of suffixes and the base-2 logarithm of the size in nibbles to calculate the index of the appropriate suffix. The size in nibbles is then divided by 1000 to the power of the index to convert it to the appropriate unit, and the result is formatted as a number with 2 decimal places, followed by the suffix.
+        This method takes a size in bytes and returns a string representing the size in nibbles notation. It first converts the
+        size from bytes to nibbles by multiplying by 2. It then uses a list of suffixes and the base-2 logarithm of the size in
+        nibbles to calculate the index of the appropriate suffix. The size in nibbles is then divided by 1000 to the power of the
+        index to convert it to the appropriate unit, and the result is formatted as a number with 2 decimal places, followed by
+        the suffix.
 
         Args:
             size (int): The size in bytes.
@@ -295,11 +314,14 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     """
     Calculate the data size in the specified notation using a command pattern approach.
 
-    This function takes a size in bytes and a notation as input, and returns a string representing the size in the specified notation. It uses a command pattern to select the appropriate calculation method based on the notation. If the size is negative, it raises a ValueError.
+    This function takes a size in bytes and a notation as input, and returns a string representing the size in the specified
+    notation. It uses a command pattern to select the appropriate calculation method based on the notation. If the size is
+    negative, it raises a ValueError.
 
     Args:
         size (int): The size in bytes.
-        notation (str): The notation to use for the size calculation. It can be 'decimal', 'binary', 'bits', or 'nibbles'. Defaults to 'decimal'.
+        notation (str): The notation to use for the size calculation. It can be 'decimal', 'binary', 'bits', or 'nibbles'.
+        Defaults to 'decimal'.
 
     Returns:
         str: A string representing the size in the specified notation.
@@ -324,12 +346,7 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
         raise ValueError("Size must be non-negative")
 
     # Define the commands for each notation
-    commands = {
-        'decimal': DecimalCommand(),
-        'binary':  BinaryCommand(),
-        'bits':    BitsCommand(),
-        'nibbles': NibblesCommand()
-    }
+    commands = {'decimal': DecimalCommand(), 'binary': BinaryCommand(), 'bits': BitsCommand(), 'nibbles': NibblesCommand()}
 
     # Get the command for the specified notation
     command = commands.get(notation)

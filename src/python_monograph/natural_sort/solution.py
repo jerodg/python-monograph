@@ -39,14 +39,8 @@ def method_0(x: list, rvrs: bool = False) -> list:
         A new list that contains all the elements from the input list, sorted in natural order.
     """
     if isinstance(x, list):
-        return [
-            method_0(y, rvrs=rvrs)
-            for y in sorted(
-                x,
-                key=lambda _: [int(s) if s.isdigit() else s.lower() for s in split(DRE, _)],
-                reverse=rvrs,
-            )
-        ]
+        return [method_0(y, rvrs=rvrs) for y in
+                sorted(x, key=lambda _: [int(s) if s.isdigit() else s.lower() for s in split(DRE, _)], reverse=rvrs, )]
 
 
 if __name__ == '__main__':

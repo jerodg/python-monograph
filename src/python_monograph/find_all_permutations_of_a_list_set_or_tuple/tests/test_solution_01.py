@@ -40,8 +40,8 @@ def test_input_with_empty_lists():
 
 
 def test_input_with_different_data_types():
-    assert find_all_permutations([['a', 'b'], [1, 2]]) == [['a', 1], [1, 'a'], ['a', 2], [2, 'a'], ['b', 1], [1, 'b'],
-                                                           ['b', 2], [2, 'b']]
+    assert find_all_permutations([['a', 'b'], [1, 2]]) == [['a', 1], [1, 'a'], ['a', 2], [2, 'a'], ['b', 1], [1, 'b'], ['b', 2],
+                                                           [2, 'b']]
 
 
 @pytest.mark.benchmark

@@ -21,7 +21,6 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 from itertools import permutations
 
 import pytest
-
 from python_monograph.find_all_permutations_of_a_list_set_or_tuple.solution_00 import find_all_permutations
 
 
@@ -30,8 +29,7 @@ def test_empty_input():
 
 
 def test_single_list_input():
-    assert find_all_permutations([[1, 3, 4], [6, 7, 9], [8, 10, 5]]) == list(
-        permutations([[1, 3, 4], [6, 7, 9], [8, 10, 5]]))
+    assert find_all_permutations([[1, 3, 4], [6, 7, 9], [8, 10, 5]]) == list(permutations([[1, 3, 4], [6, 7, 9], [8, 10, 5]]))
 
 
 # def test_single_list_input_():
@@ -53,8 +51,8 @@ def test_input_with_empty_lists():
 
 
 def test_input_with_different_data_types():
-    assert find_all_permutations([['a', 'b'], [1, 2]]) == [['a', 1], [1, 'a'], ['a', 2], [2, 'a'], ['b', 1], [1, 'b'],
-                                                           ['b', 2], [2, 'b']]
+    assert find_all_permutations([['a', 'b'], [1, 2]]) == [['a', 1], [1, 'a'], ['a', 2], [2, 'a'], ['b', 1], [1, 'b'], ['b', 2],
+                                                           [2, 'b']]
 
 
 @pytest.mark.benchmark

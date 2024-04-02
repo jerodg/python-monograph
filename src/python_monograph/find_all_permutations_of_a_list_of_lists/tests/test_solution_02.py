@@ -26,11 +26,7 @@ def test_empty_list():
 
 
 def test_single_element_list():
-    assert solution_02([1]) == [
-        [
-            1,
-        ]
-    ]
+    assert solution_02([1]) == [[1, ]]
 
 
 def test_two_elements_list():

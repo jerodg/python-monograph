@@ -26,7 +26,8 @@ class NotationStrategy(ABC):
     """
     Abstract base class for notation strategies.
 
-    This class defines the interface for notation strategies. It declares an abstract method `calculate` that all concrete notation strategies must implement.
+    This class defines the interface for notation strategies. It declares an abstract method `calculate` that all concrete
+    notation strategies must implement.
 
     Methods:
         calculate: Calculate the data size in a specific notation.
@@ -53,7 +54,8 @@ class NotationStrategy(ABC):
         """
         Abstract method to calculate the data size in a specific notation.
 
-        This method takes a size in bytes and returns a string representing the size in a specific notation. The specific notation is determined by the concrete class that implements this method.
+        This method takes a size in bytes and returns a string representing the size in a specific notation. The specific
+        notation is determined by the concrete class that implements this method.
 
         Args:
             size (int): The size in bytes.
@@ -273,7 +275,8 @@ def get_strategy(notation: str) -> NotationStrategy:
     """
     Factory function to get the appropriate notation strategy.
 
-    This function takes a notation as input and returns an instance of the appropriate NotationStrategy subclass based on the notation. If the notation is not recognized, it raises a ValueError.
+    This function takes a notation as input and returns an instance of the appropriate NotationStrategy subclass based on the
+    notation. If the notation is not recognized, it raises a ValueError.
 
     Args:
         notation (str): The notation to use for the size calculation. It can be 'decimal', 'binary', 'bits', or 'nibbles'.
@@ -320,11 +323,14 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
     """
     Calculate the data size in the specified notation using a factory pattern approach.
 
-    This function takes a size in bytes and a notation as input, and returns a string representing the size in the specified notation. It uses a strategy pattern to select the appropriate calculation method based on the notation. If the size is negative, it raises a ValueError.
+    This function takes a size in bytes and a notation as input, and returns a string representing the size in the specified
+    notation. It uses a strategy pattern to select the appropriate calculation method based on the notation. If the size is
+    negative, it raises a ValueError.
 
     Args:
         size (int): The size in bytes.
-        notation (str): The notation to use for the size calculation. It can be 'decimal', 'binary', 'bits', or 'nibbles'. Defaults to 'decimal'.
+        notation (str): The notation to use for the size calculation. It can be 'decimal', 'binary', 'bits', or 'nibbles'.
+        Defaults to 'decimal'.
 
     Returns:
         str: A string representing the size in the specified notation.

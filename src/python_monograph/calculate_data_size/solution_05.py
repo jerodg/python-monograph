@@ -52,20 +52,13 @@ def calculate_data_size(size: int, notation: str = 'decimal') -> str:
         raise ValueError('Size cannot be negative.')
 
     # Define the suffixes for each notation
-    suffixes = {
-        'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-        'binary':  ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
-        'bits':    ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
-        'nibbles': ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']
-    }
+    suffixes = {'decimal': ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+            'binary'     : ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'],
+            'bits'       : ['b', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'],
+            'nibbles'    : ['n', 'Kn', 'Mn', 'Gn', 'Tn', 'Pn', 'En', 'Zn', 'Yn']}
 
     # Define the base for each notation
-    bases = {
-        'decimal': 1000,
-        'binary':  1024,
-        'bits':    1000,
-        'nibbles': 1000
-    }
+    bases = {'decimal': 1000, 'binary': 1024, 'bits': 1000, 'nibbles': 1000}
 
     # Check if the notation is valid
     if notation not in suffixes:

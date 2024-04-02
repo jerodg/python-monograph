@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Python Monograph: Calculate Product Sum of a Nested Array Solution 01
+"""
+Python Monograph: Calculate Product Sum of a Nested Array Solution 01
 
 Copyright ©2024 Jerod Gawne <https://github.com/jerodg/>
 
@@ -19,7 +19,7 @@ You should have received a copy of the SSPL along with this program.
 If not, see <https://www.mongodb.com/licensing/server-side-public-license>."""
 
 
-def solution_01(arr: list[int | list]) -> int:
+def calculate_product_sum(arr: list[int | list]) -> int:
     """
     Calculates the product sum of a nested array using an iterative method with a stack.
 
@@ -34,17 +34,17 @@ def solution_01(arr: list[int | list]) -> int:
         int: The product sum of the array.
 
     Examples:
-        >>> solution_01([1, 2, 3])
+        >>> calculate_product_sum([1, 2, 3])
         6
-        >>> solution_01([-1, 2, [-3, 4]])
+        >>> calculate_product_sum([-1, 2, [-3, 4]])
         8
-        >>> solution_01([1, 2, 3, [4, 5]])
+        >>> calculate_product_sum([1, 2, 3, [4, 5]])
         23
-        >>> solution_01([1, -1])
+        >>> calculate_product_sum([1, -1])
         0
-        >>> solution_01([1, -2])
+        >>> calculate_product_sum([1, -2])
         -1
-        >>> solution_01([-3.5, [1, [0.5]]])
+        >>> calculate_product_sum([-3.5, [1, [0.5]]])
         1.5
     """
     # Initialize a stack and push the input array and its depth (which is 1) into the stack.
@@ -67,7 +67,3 @@ def solution_01(arr: list[int | list]) -> int:
 
     # Return `total_sum`.
     return total_sum
-
-
-if __name__ == '__main__':
-    print(__doc__)

@@ -21,8 +21,6 @@ If not, see <https://www.mongodb.com/licensing/server-side-public-license>.
 import random
 
 import pytest
-from pytest_benchmark.plugin import benchmark
-
 from python_monograph.natural_sort.solution_00 import natural_sort
 
 

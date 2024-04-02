@@ -27,7 +27,8 @@ class NotationStrategy(ABC):
     Abstract class that defines the interface for all concrete strategies.
 
     This class is used as a base for all strategies that calculate the data size in different notations.
-    It defines a single method, `calculate`, that takes a size in bytes and returns a string representing the size in the appropriate notation.
+    It defines a single method, `calculate`, that takes a size in bytes and returns a string representing the size in the
+    appropriate notation.
     The specific implementation of the `calculate` method is provided by the concrete strategy classes.
 
     Methods:
@@ -197,7 +198,8 @@ class BitsNotationStrategy(NotationStrategy):
         Calculate the data size in bits notation.
 
         This method takes a size in bytes and returns a string representing the size in bits notation.
-        The size is converted to bits by multiplying by 8, then converted to the appropriate unit (b, Kb, Mb, Gb, etc.) based on its magnitude,
+        The size is converted to bits by multiplying by 8, then converted to the appropriate unit (b, Kb, Mb, Gb, etc.) based on
+        its magnitude,
         and the result is formatted as a number with 2 decimal places followed by the appropriate suffix.
 
         Args:
@@ -247,7 +249,8 @@ class NibblesNotationStrategy(NotationStrategy):
         Calculate the data size in nibbles notation.
 
         This method takes a size in bytes and returns a string representing the size in nibbles notation.
-        The size is converted to nibbles by multiplying by 2, then converted to the appropriate unit (n, Kn, Mn, Gn, etc.) based on its magnitude,
+        The size is converted to nibbles by multiplying by 2, then converted to the appropriate unit (n, Kn, Mn, Gn, etc.) based
+        on its magnitude,
         and the result is formatted as a number with 2 decimal places followed by the appropriate suffix.
 
         Args:
@@ -307,10 +310,11 @@ class DataSize:
         Args:
             strategy (NotationStrategy): The strategy to use for the calculation.
         """
-        if not isinstance(strategy, (
-                DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, NibblesNotationStrategy)):
+        if not isinstance(strategy,
+                          (DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, NibblesNotationStrategy)):
             raise ValueError(
-                "Strategy must be one of: DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, NibblesNotationStrategy.")
+                    "Strategy must be one of: DecimalNotationStrategy, BinaryNotationStrategy, BitsNotationStrategy, "
+                    "NibblesNotationStrategy.")
 
         # Store the strategy
         self.strategy = strategy
