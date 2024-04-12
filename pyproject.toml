@@ -10,6 +10,18 @@ dependencies = [
     "toolz>=0.12.1",
     "cytoolz>=0.12.3",
     "matplotlib>=3.8.3",
+    "scikit-learn>=1.4.2",
+    "textblob>=0.18.0.post0",
+    "nltk>=3.8.1",
+    "torch>=2.2.2",
+    "numba>=0.59.1",
+    "cuda-python>=12.4.0",
+    "torchtext>=0.17.2",
+    "scipy>=1.13.0",
+    "optuna>=3.6.1",
+    "langchain>=0.1.16",
+    "spacy[cuda11x,transformers,lookups]>=3.7.4",
+    "cupy-cuda11x<=13.0.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
@@ -68,7 +80,6 @@ exclude = [
 
 line-length = 132
 indent-width = 4
-
 target-version = "py312"
 
 [tool.ruff.lint]
@@ -77,39 +88,18 @@ target-version = "py312"
 # McCabe complexity (`C901`) by default.
 select = ["E4", "E7", "E9", "F", "W", "C901"]
 ignore = []
-
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
 unfixable = []
-
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.format]
-# Like Black, use double quotes for strings.
 quote-style = "single"
-
-# Like Black, indent with spaces, rather than tabs.
 indent-style = "space"
-
-# Like Black, respect magic trailing commas.
 skip-magic-trailing-comma = false
-
-# Like Black, automatically detect the appropriate line ending.
 line-ending = "lf"
-
-# Enable auto-formatting of code examples in docstrings. Markdown,
-# reStructuredText code/literal blocks and doctests are all supported.
-#
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
 docstring-code-format = true
-
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
 docstring-code-line-length = "dynamic"
 
 [tool.pytest.ini_options]
