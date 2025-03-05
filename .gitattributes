@@ -29,7 +29,7 @@
 *.DOCX     diff=astextplain
 *.dot      diff=astextplain
 *.DOT      diff=astextplain
-*.{[pdf]],[pP][dD][fF]} filter=lfs diff=lfs merge=lfs -text
+*.{[pdf]],[pP][dD][fF]} -text
 *.rtf      diff=astextplain
 *.RTF      diff=astextplain
 *.md       text diff=markdown
@@ -47,12 +47,12 @@
 
 
 # Graphics
-*.gif filter=lfs diff=lfs merge=lfs -text
-*.ico filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.psd filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
+*.gif    -text
+*.ico    -text
+*.jpg    -text
+*.png    -text
+*.psd    -text
+*.webp    -text
 # SVG treated as an asset (binary) by default.
 *.svg      text
 *.eps      binary
@@ -82,50 +82,50 @@
 *.eot             binary
 *.otf             binary
 *.woff            binary
-*.woff2 filter=lfs diff=lfs merge=lfs -text
+*.woff2    -text
 
 
 # Other
-*.exe filter=lfs diff=lfs merge=lfs -text
+*.exe    -text
 
 
 # Archives
-*.7z binary filter=lfs diff=lfs merge=lfs -text
-*.br binary filter=lfs diff=lfs merge=lfs -text
-*.gz binary filter=lfs diff=lfs merge=lfs -text
-*.tar binary filter=lfs diff=lfs merge=lfs -text
-*.zip binaryfilter=lfs diff=lfs merge=lfs -text
-*.rar binary filter=lfs diff=lfs merge=lfs -text
-*.tgz binary filter=lfs diff=lfs merge=lfs -text
-*.xz binary filter=lfs diff=lfs merge=lfs -text
-*.bz2 binary filter=lfs diff=lfs merge=lfs -text
-*.Z binary filter=lfs diff=lfs merge=lfs -text
-*.lz binary filter=lfs diff=lfs merge=lfs -text
-*.lz4 binary filter=lfs diff=lfs merge=lfs -text
-*.lzo binary filter=lfs diff=lfs merge=lfs -text
-*.lzip binary filter=lfs diff=lfs merge=lfs -text
-*.lzma binary filter=lfs diff=lfs merge=lfs -text
-*.lzf binary filter=lfs diff=lfs merge=lfs -text
-*.lha binary filter=lfs diff=lfs merge=lfs -text
-*.arj binary filter=lfs diff=lfs merge=lfs -text
-*.cab binary filter=lfs diff=lfs merge=lfs -text
-*.chm binary filter=lfs diff=lfs merge=lfs -text
-*.iso binary filter=lfs diff=lfs merge=lfs -text
-*.tar binary filter=lfs diff=lfs merge=lfs -text
-*.vhd binary filter=lfs diff=lfs merge=lfs -text
-*.vmdk binary filter=lfs diff=lfs merge=lfs -text
-*.wim binary filter=lfs diff=lfs merge=lfs -text
-*.zpaq binary filter=lfs diff=lfs merge=lfs -text
-*.zst binary filter=lfs diff=lfs merge=lfs -text
-*.bzip2 binary filter=lfs diff=lfs merge=lfs -text
-*.tar binary filter=lfs diff=lfs merge=lfs -text
-*.taz binary filter=lfs diff=lfs merge=lfs -text
-*.tbz2 binary filter=lfs diff=lfs merge=lfs -text
-*.tbz binary filter=lfs diff=lfs merge=lfs -text
-*.tlz binary filter=lfs diff=lfs merge=lfs -text
-*.txz binary filter=lfs diff=lfs merge=lfs -text
-*.tzst binary filter=lfs diff=lfs merge=lfs -text
-*.zst binary filter=lfs diff=lfs merge=lfs -text
+*.7z binary    -text
+*.br binary    -text
+*.gz binary    -text
+*.tar binary    -text
+*.zip    -text
+*.rar binary    -text
+*.tgz binary    -text
+*.xz binary    -text
+*.bz2 binary    -text
+*.Z binary    -text
+*.lz binary    -text
+*.lz4 binary    -text
+*.lzo binary    -text
+*.lzip binary    -text
+*.lzma binary    -text
+*.lzf binary    -text
+*.lha binary    -text
+*.arj binary    -text
+*.cab binary    -text
+*.chm binary    -text
+*.iso binary    -text
+*.tar binary    -text
+*.vhd binary    -text
+*.vmdk binary    -text
+*.wim binary    -text
+*.zpaq binary    -text
+*.zst binary    -text
+*.bzip2 binary    -text
+*.tar binary    -text
+*.taz binary    -text
+*.tbz2 binary    -text
+*.tbz binary    -text
+*.tlz binary    -text
+*.txz binary    -text
+*.tzst binary    -text
+*.zst binary    -text
 
 # Text files where line endings should be preserved
 *.patch    -text
